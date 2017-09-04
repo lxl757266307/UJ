@@ -88,7 +88,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        PermissionRegisterUtils.registerPermission(this);
+//        PermissionRegisterUtils.registerPermission(this);
 
 
         /* 初始化个推*/
