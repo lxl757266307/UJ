@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_base" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_height_50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edit_sousuo_fragment_kinds"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/layout_height_30dp"
+            android:layout_marginLeft="@dimen/layout_marginLeft_10dp"
+            android:layout_marginRight="@dimen/layout_marginRight_10dp"
+            android:layout_weight="1"
+            android:background="@drawable/circle_box_grey2"
+            android:drawableLeft="@mipmap/sousuo"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:hint="搜索服务快速发布需求"
+            android:paddingLeft="10dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:id="@+id/img_tianjia_fragment_kinds"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="@dimen/layout_marginRight_10dp"
+            android:src="@mipmap/tianjia" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_width_0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <ScrollView
+            android:layout_width="@dimen/layout_width_100dp"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="@dimen/layout_width_100dp"
+                android:layout_height="match_parent"
+                android:background="@color/navpage"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_jiadianweixiu_fragment_kinds"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/text_view_bg"
+                    android:gravity="center"
+                    android:text="家电维修"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/view_bg" />
+
+                <TextView
+                    android:id="@+id/txt_dianluweihu_fragment_kinds"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/text_view_bg"
+                    android:gravity="center"
+                    android:text="电路维护"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/view_bg" />
+
+                <TextView
+                    android:id="@+id/txt_shuiluguanlu_fragment_kinds"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/text_view_bg"
+                    android:gravity="center"
+                    android:text="水路管路"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/view_bg" />
+
+                <TextView
+                    android:id="@+id/txt_jiadianqingxi_fragment_kinds"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/text_view_bg"
+                    android:gravity="center"
+                    android:text="家电清洗"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/view_bg" />
+
+                <TextView
+                    android:id="@+id/txt_menchuangweihu_fragment_kinds"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/text_view_bg"
+                    android:gravity="center"
+                    android:text="门窗维护"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/view_bg" />
+
+                <TextView
+                    android:id="@+id/txt_qiangmiandimian_fragment_kinds"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/text_view_bg"
+                    android:gravity="center"
+                    android:text="墙面地面"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/view_bg" />
+
+                <TextView
+                    android:id="@+id/txt_fangwujiance_fragment_kinds"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/text_view_bg"
+                    android:gravity="center"
+                    android:text="房屋检测"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/view_bg" />
+
+                <TextView
+                    android:id="@+id/txt_dengjuanzhuang_fragment_kinds"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/text_view_bg"
+                    android:gravity="center"
+                    android:text="灯具安装"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/view_bg" />
+
+                <TextView
+                    android:id="@+id/txt_chuweijieju_fragment_kinds"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/text_view_bg"
+                    android:gravity="center"
+                    android:text="厨卫洁具"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/view_bg" />
+
+                <TextView
+                    android:id="@+id/txt_jiazhengbaojie_fragment_kinds"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/text_view_bg"
+                    android:gravity="center"
+                    android:text="家政保洁"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/view_bg" />
+
+
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@mipmap/banner" />
+
+            <TextView
+                android:id="@+id/txt_listname_fragment_kinds"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="家电维修"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_recycle_fragment_kinds"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_width_0dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

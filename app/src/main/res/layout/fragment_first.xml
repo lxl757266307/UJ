@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:gravity="center">
+
+    <ScrollView
+        android:id="@+id/slv_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/layout_main_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_main_test"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@color/grey" />
+
+                <LinearLayout
+                    android:id="@+id/layout_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent"
+                    android:orientation="vertical">
+
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/layout_main_header"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@android:color/transparent"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="@dimen/layout_marginLeft_50dp"
+            android:layout_marginRight="@dimen/layout_marginRight_50dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/circle_box"
+            android:gravity="center"
+            android:text="测试"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+
+</RelativeLayout>

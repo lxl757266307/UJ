@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_base" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_height_50dp"
+        android:orientation="horizontal">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/txt_order_all_fragment_order"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/border_bottom"
+                android:gravity="center"
+                android:text="全部订单"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/txt_order_all_fragment_order"
+                android:layout_toRightOf="@+id/txt_order_all_fragment_order"
+                android:background="@drawable/circle_bg90"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/txt_commit_fragment_order"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="全部订单"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/txt_commit_fragment_order"
+                android:layout_toRightOf="@+id/txt_commit_fragment_order"
+                android:background="@drawable/circle_bg90"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/txt_wait_pay_fragment_order"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="全部订单"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/txt_wait_pay_fragment_order"
+                android:layout_toRightOf="@+id/txt_wait_pay_fragment_order"
+                android:background="@drawable/circle_bg90"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/txt_wait_evaluation_fragment_order"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="全部订单"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/txt_wait_evaluation_fragment_order"
+                android:layout_toRightOf="@+id/txt_wait_evaluation_fragment_order"
+                android:background="@drawable/circle_bg90"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/txt_cancled_fragment_order"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="全部订单"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/txt_cancled_fragment_order"
+                android:layout_toRightOf="@+id/txt_cancled_fragment_order"
+                android:background="@drawable/circle_bg90"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/view_bg" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vip_fragment_order"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1" />
+
+
+</LinearLayout>
