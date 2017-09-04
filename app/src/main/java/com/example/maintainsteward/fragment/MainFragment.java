@@ -1,5 +1,6 @@
 package com.example.maintainsteward.fragment;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -132,7 +133,6 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_first, container, false);
 
         unbinder = ButterKnife.bind(this, view);
