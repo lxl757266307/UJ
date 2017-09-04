@@ -42,7 +42,7 @@ import com.example.maintainsteward.fragment.CityFragment;
 import com.example.maintainsteward.fragment.DistrictFragment;
 import com.example.maintainsteward.fragment.MyDialogFragment;
 import com.example.maintainsteward.fragment.ProvinceFragment;
-import com.example.maintainsteward.uj.R;
+import com.example.maintainsteward.R;
 import com.example.maintainsteward.utils.LocationUtils;
 import com.example.maintainsteward.utils.PermissionRegisterUtils;
 import com.example.maintainsteward.utils.ToolUitls;

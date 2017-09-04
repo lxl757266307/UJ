@@ -10,7 +10,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import com.example.maintainsteward.uj.R;
+
+import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.DialogFragmentListViewAdapter;
 import com.example.maintainsteward.inter.OnLocationItemClickListener;
 import com.example.maintainsteward.utils.LocationUtils;

@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.maintainsteward.uj.R;
+import com.example.maintainsteward.R;
 import com.example.maintainsteward.view.StrokeCircleImageView;
 
 import butterknife.BindView;

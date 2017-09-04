@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.example.maintainsteward.uj.R;
+import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.MainFragmentPagerAdapter;
 import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;

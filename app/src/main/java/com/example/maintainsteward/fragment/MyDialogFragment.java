@@ -22,7 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.example.maintainsteward.uj.R;
+import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.DialogFragmentPagerAdapter;
 import com.example.maintainsteward.inter.OnLocationItemClickListener;
 

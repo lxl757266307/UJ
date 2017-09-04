@@ -3,8 +3,8 @@ package com.example.maintainsteward.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.example.maintainsteward.R;
 import com.example.maintainsteward.base.BaseActivity;
-import com.example.maintainsteward.uj.R;
 
 /**
  * Created by Administrator on 2017/8/10.

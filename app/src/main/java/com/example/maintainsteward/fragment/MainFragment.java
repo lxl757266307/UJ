@@ -13,12 +13,13 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.maintainsteward.R;
 import com.example.maintainsteward.utils.ScreenUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import com.example.maintainsteward.uj.R;
+
 /**
  * Created by Administrator on 2017/8/15.
  */

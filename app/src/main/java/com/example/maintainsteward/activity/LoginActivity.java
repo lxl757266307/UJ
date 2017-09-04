@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.maintainsteward.R;
 import com.example.maintainsteward.base.BaseActivity;
-import com.example.maintainsteward.uj.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
