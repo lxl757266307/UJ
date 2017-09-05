@@ -129,7 +129,7 @@ public class MyDialogFragment extends DialogFragment implements ViewPager.OnPage
         vipDialogBottomPager.setAdapter(pagerAdapter);
 
         pstDialogBottom.setViewPager(vipDialogBottomPager);
-        pstDialogBottom.setTextSize(30);
+        pstDialogBottom.setTextSize(50);
 
 
     }
@@ -160,10 +160,14 @@ public class MyDialogFragment extends DialogFragment implements ViewPager.OnPage
     @OnClick(R.id.img_dilaog_dismiss)
     public void dismiss() {
         getDialog().dismiss();
+        if (onAddressChoosedListener != null) {
+            onAddressChoosedListener.onAddressChoosed(titleArray);
+        }
     }
 
     @Override
     public void provinceClickListener(String province) {
+        titleArray[1] = "请选择";
         vipDialogBottomPager.setCurrentItem(1);
         setTitleText(province, 0);
 
@@ -171,6 +175,7 @@ public class MyDialogFragment extends DialogFragment implements ViewPager.OnPage
 
     @Override
     public void cityClickListener(String city) {
+        titleArray[2] = "请选择";
         vipDialogBottomPager.setCurrentItem(2);
         setTitleText(city, 1);
 
@@ -186,6 +191,22 @@ public class MyDialogFragment extends DialogFragment implements ViewPager.OnPage
         titleArray[index] = location;
         pagerAdapter.setArray(titleArray);
         pstDialogBottom.notifyDataSetChanged();
+
+    }
+
+    OnAddressChoosedListener onAddressChoosedListener;
+
+    public OnAddressChoosedListener getOnAddressChoosedListener() {
+        return onAddressChoosedListener;
+    }
+
+    public void setOnAddressChoosedListener(OnAddressChoosedListener onAddressChoosedListener) {
+        this.onAddressChoosedListener = onAddressChoosedListener;
+    }
+
+    public interface OnAddressChoosedListener {
+
+        void onAddressChoosed(String[] str);
 
     }
 }

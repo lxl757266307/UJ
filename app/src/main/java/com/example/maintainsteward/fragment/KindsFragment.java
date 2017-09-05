@@ -27,12 +27,7 @@ import butterknife.Unbinder;
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public class KindsFragment extends Fragment {
-    @BindView(R.id.txt_base_back)
-    ImageView txtBaseBack;
-    @BindView(R.id.txt_base_title)
-    TextView txtBaseTitle;
-    @BindView(R.id.base_layout)
-    LinearLayout baseLayout;
+
     @BindView(R.id.edit_sousuo_fragment_kinds)
     EditText editSousuoFragmentKinds;
     @BindView(R.id.img_tianjia_fragment_kinds)

@@ -1,16 +1,13 @@
 package com.example.maintainsteward.main;
 
-import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -19,11 +16,11 @@ import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.MainFragmentPagerAdapter;
 import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
+import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.fragment.KindsFragment;
 import com.example.maintainsteward.fragment.MainFragment;
 import com.example.maintainsteward.fragment.OrerFragment;
 import com.example.maintainsteward.fragment.UserInfoFragment;
-import com.example.maintainsteward.utils.Constants;
 import com.example.maintainsteward.utils.PermissionRegisterUtils;
 import com.example.maintainsteward.utils.ToolUitls;
 import com.tencent.mm.opensdk.modelpay.PayReq;
@@ -36,7 +33,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnPageChange;
 import pub.devrel.easypermissions.EasyPermissions;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
@@ -109,7 +105,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     public void pay() {
         ToolUitls.print(TAG, "ssss");
         PayReq payReq = new PayReq();
-        payReq.appId = Constants.APP_ID;
+        payReq.appId = Contacts.APP_ID;
         payReq.partnerId = "1364879302";
         payReq.prepayId = "2165161061456121325136";
         payReq.packageValue = "Sign=2165161061456121325136";
@@ -125,8 +121,8 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     IWXAPI wxapi;
 
     private void initWX() {
-        wxapi = WXAPIFactory.createWXAPI(this, Constants.APP_ID, false);
-        wxapi.registerApp(Constants.APP_ID);
+        wxapi = WXAPIFactory.createWXAPI(this, Contacts.APP_ID, false);
+        wxapi.registerApp(Contacts.APP_ID);
     }
 
 

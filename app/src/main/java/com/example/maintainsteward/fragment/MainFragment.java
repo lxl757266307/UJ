@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +16,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.bumptech.glide.Glide;
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.base.Contacts;
+import com.example.maintainsteward.bean.BannerBean;
+import com.example.maintainsteward.mvp_presonter.main_fragment.MainFragmentPresonter;
+import com.example.maintainsteward.mvp_view.main_fragement.OnLoadBannerListener;
+import com.example.maintainsteward.utils.ToolUitls;
 import com.example.maintainsteward.view.BannerViewPager;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.TreeMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,7 +43,7 @@ import butterknife.Unbinder;
  */
 
 @RequiresApi(api = Build.VERSION_CODES.M)
-public class MainFragment extends Fragment implements View.OnScrollChangeListener, BannerViewPager.OnBannerClick {
+public class MainFragment extends Fragment implements View.OnScrollChangeListener, BannerViewPager.OnBannerClick, OnLoadBannerListener {
 
     Unbinder unbinder;
     /*定位图标*/
@@ -139,43 +151,53 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
         return view;
     }
 
+    MainFragmentPresonter presonter;
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        presonter = new MainFragmentPresonter();
+        presonter.setOnLoadBannerListener(this);
+        sign();
 
-        setViewPager();
-        setVfMainfragment();
+        vfMainfragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e(TAG, "vfMainfragment.getDisplayedChild()" + vfMainfragment.getDisplayedChild()
+                );
+            }
+        });
+
+
     }
 
     ArrayList<ImageView> imageViews;
 
-    public void setViewPager() {
+    public void setViewPager(List<BannerBean.DataBean.SlidePostsBean> slide_posts) {
         imageViews = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < slide_posts.size(); i++) {
             ImageView imageView = new ImageView(getActivity());
-            imageView.setImageResource(R.mipmap.banner2);
+            imageView.setScaleType(ImageView.ScaleType. CENTER_CROP);
+            Glide.with(getActivity()).load(slide_posts.get(i).getSlide_pic()).into(imageView);
             imageViews.add(imageView);
         }
         vipMainFragment.setCanAUTO(true);
         vipMainFragment.setMarkerLocal(BannerViewPager.CENTER_MARKER);
         vipMainFragment.setOnBannerClick(this);
-        vipMainFragment.setViews(imageViews, false);
+        vipMainFragment.setViews(imageViews, true);
 
     }
 
 
-    public void setVfMainfragment() {
+    public void setVfMainfragment(List<BannerBean.DataBean.InformationListsBean> informationListsBeen) {
 
-        LinearLayout linearLayout1 = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.vf_item, null);
-        LinearLayout linearLayout2 = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.vf_item, null);
-        LinearLayout linearLayout3 = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.vf_item, null);
-        LinearLayout linearLayout4 = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.vf_item, null);
+        for (int i = 0; i < informationListsBeen.size(); i++) {
+            LinearLayout linearLayout = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.vf_item, null);
+            TextView content = (TextView) linearLayout.findViewById(R.id.txt_vf);
+            content.setText(informationListsBeen.get(i).getTitle());
+            vfMainfragment.addView(linearLayout);
+        }
 
-
-        vfMainfragment.addView(linearLayout1);
-        vfMainfragment.addView(linearLayout2);
-        vfMainfragment.addView(linearLayout3);
-        vfMainfragment.addView(linearLayout4);
     }
 
 
@@ -193,6 +215,45 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
     @Override
     public void bannerClick(int realPosition) {
 
+    }
+
+
+    public static final String TAG = "MainFragment";
+
+    public void sign() {
+
+        String timestamp = System.currentTimeMillis() + "";
+        Log.e(TAG, "timestamp====" + timestamp);
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("timestamp", timestamp);
+//        map.put("key", Contacts.KEY);
+        String sign = ToolUitls.getSign(map);
+        Log.e(TAG, "sign====" + sign);
+
+        presonter.getBanner(timestamp, sign, Contacts.KEY);
+
+
+    }
+
+    List<BannerBean.DataBean.InformationListsBean> information_lists;
+    List<BannerBean.DataBean.SlidePostsBean> slide_posts;
+
+    @Override
+    public void onLoadBanner(BannerBean body) {
+        switch (body.getStatus()) {
+            case "1":
+                BannerBean.DataBean data = body.getData();
+                information_lists = data.getInformation_lists();
+                slide_posts = data.getSlide_posts();
+                Log.e(TAG, "slide_posts===" + slide_posts.size());
+                Log.e(TAG, "information_lists===" + information_lists.size());
+
+
+                setViewPager(slide_posts);
+                setVfMainfragment(information_lists);
+
+                break;
+        }
     }
 //
 //    @Override
@@ -241,5 +302,6 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
 //            slvMain.setOnScrollChangeListener(this);
 //        }
 //    }
+
 
 }

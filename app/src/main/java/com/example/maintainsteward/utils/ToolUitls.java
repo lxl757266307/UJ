@@ -4,9 +4,12 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.maintainsteward.base.Contacts;
+
 import java.util.LinkedHashMap;
 import java.util.Random;
 import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * Created by Administrator on 2017/8/2.
@@ -36,6 +39,7 @@ public class ToolUitls {
 
     /**
      * 生成随机字符串
+     *
      * @param length
      * @return
      */
@@ -52,20 +56,21 @@ public class ToolUitls {
     }
 
 
-
-
     /**
      * RSA加密
      */
-    public static String getSign (LinkedHashMap<String, String> map){
-        String jsonStr ="";
+    public static String getSign(TreeMap<String, String> map) {
+        String jsonStr = "";
         Set<String> keySet = map.keySet();
         for (String key : keySet) {
-            if(map.get(key)!=null&&!map.get(key).isEmpty()){
-                jsonStr += key+"="+map.get(key)+"&";
+            if (map.get(key) != null && !map.get(key).isEmpty()) {
+                jsonStr += key + "=" + map.get(key) + "&";
             }
         }
-        jsonStr = jsonStr.substring(0,jsonStr.length()-1);
+        jsonStr = Contacts.SIGN + jsonStr.substring(0, jsonStr.length()) +
+                "key=" + Contacts.KEY + Contacts.SIGN;
+        Log.e("-----------", "jsonStr====" + jsonStr);
+
         //return jsonStr;
         return MD5.getMessageDigest(jsonStr.getBytes()).toUpperCase();
     }

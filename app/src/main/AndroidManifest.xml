@@ -79,10 +79,10 @@
             android:name=".wxapi.WXEntryActivity"
             android:exported="true" />
         <!--登录-->
-        <!--<activity android:name=".activity.LoginActivity" />-->
+        <activity android:name=".activity.LoginActivity" />
 
         <!--添加地址-->
-        <!--<activity android:name=".activity.AddAddressActivity"/>-->
+        <activity android:name=".activity.AddAddressActivity"/>
         <!--地址管理-->
         <activity android:name=".activity.AddressManagerActivity" />
 

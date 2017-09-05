@@ -9,20 +9,25 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#fff">
 
 
         <LinearLayout
-            android:id="@+id/layout_add_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_address_manager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 
 
         <LinearLayout
+            android:id="@+id/layout_addaddress_addressmanager"
             android:layout_width="match_parent"
             android:layout_height="@dimen/layout_height_40dp"
             android:layout_alignParentBottom="true"
@@ -31,20 +36,19 @@
             android:layout_marginRight="@dimen/layout_marginRight_20dp"
             android:background="@color/red_btn_bg_pressed_color"
             android:gravity="center"
-            android:orientation="horizontal"
-          >
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:src="@mipmap/back"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
-                android:layout_height="wrap_content" />
+                android:src="@mipmap/back" />
 
             <TextView
-                android:textSize="@dimen/textSize_18sp"
-                android:text="新建地址"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="新建地址"
+                android:textSize="@dimen/textSize_18sp" />
 
         </LinearLayout>
     </RelativeLayout>

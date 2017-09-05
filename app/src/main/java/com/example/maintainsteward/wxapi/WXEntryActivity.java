@@ -4,14 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
 
 
-import com.example.maintainsteward.utils.Constants;
+import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.utils.ToolUitls;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
@@ -40,7 +39,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pay_result);
-        api = WXAPIFactory.createWXAPI(this, Constants.APP_ID);
+        api = WXAPIFactory.createWXAPI(this, Contacts.APP_ID);
         api.handleIntent(getIntent(), this);
     }
 

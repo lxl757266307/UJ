@@ -2,42 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@android:color/white"
     android:orientation="vertical">
-
-    <include layout="@layout/activity_base" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/layout_height_50dp"
-        android:gravity="center_vertical"
+        android:layout_height="75dp"
+        android:background="@mipmap/red_bg"
         android:orientation="horizontal">
 
         <EditText
             android:id="@+id/edit_sousuo_fragment_kinds"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/layout_height_30dp"
-            android:layout_marginLeft="@dimen/layout_marginLeft_10dp"
-            android:layout_marginRight="@dimen/layout_marginRight_10dp"
+            android:layout_width="@dimen/layout_width_0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="13dp"
+            android:layout_marginTop="25dp"
             android:layout_weight="1"
-            android:background="@drawable/circle_box_grey2"
+            android:background="@drawable/circle_box_3r"
             android:drawableLeft="@mipmap/sousuo"
             android:drawablePadding="10dp"
-            android:gravity="center_vertical"
             android:hint="搜索服务快速发布需求"
             android:paddingLeft="10dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/grey"
-            android:textSize="13sp" />
+            android:textColorHint="#bbbbbb" />
 
         <ImageView
             android:id="@+id/img_tianjia_fragment_kinds"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="@dimen/layout_marginRight_10dp"
-            android:src="@mipmap/tianjia" />
+            android:layout_width="@dimen/layout_height_30dp"
+            android:layout_height="@dimen/layout_height_30dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="30dp"
+            android:src="@mipmap/tianjia2" />
 
     </LinearLayout>
+
 
     <View
         android:layout_width="match_parent"
@@ -215,16 +213,19 @@
         </ScrollView>
 
         <LinearLayout
+            android:background="#F4F4F4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_marginTop="5dp"
+            <LinearLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:src="@mipmap/banner2" />
+                android:layout_height="79dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:background="@mipmap/banner2" />
 
             <TextView
                 android:id="@+id/txt_listname_fragment_kinds"

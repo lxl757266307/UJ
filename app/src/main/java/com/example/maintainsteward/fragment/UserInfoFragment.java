@@ -1,5 +1,6 @@
 package com.example.maintainsteward.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,10 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.activity.AddressManagerActivity;
 import com.example.maintainsteward.view.StrokeCircleImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -67,5 +70,38 @@ public class UserInfoFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @OnClick({R.id.txt_order_infofragment,
+            R.id.txt_address_infofragment,
+            R.id.txt_walert_infofragment,
+            R.id.txt_ka_juan_infofragment,
+            R.id.txt_evelution_infofragment,
+            R.id.txt_service_infofragment,
+            R.id.txt_message_infofragment,
+            R.id.txt_setting_infofragment
+    })
+    public void click(View view) {
+        switch (view.getId()) {
+            case R.id.txt_order_infofragment:
+                break;
+            case R.id.txt_address_infofragment:
+                startActivity(new Intent(getActivity(), AddressManagerActivity.class));
+                break;
+            case R.id.txt_walert_infofragment:
+                break;
+            case R.id.txt_ka_juan_infofragment:
+                break;
+            case R.id.txt_evelution_infofragment:
+                break;
+            case R.id.txt_service_infofragment:
+                break;
+            case R.id.txt_message_infofragment:
+                break;
+            case R.id.txt_setting_infofragment:
+                break;
+
+
+        }
     }
 }

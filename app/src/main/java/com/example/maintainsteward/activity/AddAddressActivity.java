@@ -1,65 +1,38 @@
 package com.example.maintainsteward.activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Display;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
-import com.astuetz.PagerSlidingTabStrip;
-import com.example.maintainsteward.base.BaseActivity;
-import com.example.maintainsteward.base.FragmentBaseActivity;
-import com.example.maintainsteward.dialog.BaseDialog;
-import com.example.maintainsteward.fragment.CityFragment;
-import com.example.maintainsteward.fragment.DistrictFragment;
-import com.example.maintainsteward.fragment.MyDialogFragment;
-import com.example.maintainsteward.fragment.ProvinceFragment;
 import com.example.maintainsteward.R;
-import com.example.maintainsteward.utils.LocationUtils;
-import com.example.maintainsteward.utils.PermissionRegisterUtils;
+import com.example.maintainsteward.base.Contacts;
+import com.example.maintainsteward.bean.AddressBean;
+import com.example.maintainsteward.fragment.MyDialogFragment;
+import com.example.maintainsteward.mvp_presonter.address_manager.AddAddressPresonter;
 import com.example.maintainsteward.utils.ToolUitls;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
+import java.util.TreeMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * Created by Administrator on 2017/8/5.
  */
 
-public class AddAddressActivity extends FragmentActivity {
+public class AddAddressActivity extends FragmentActivity implements MyDialogFragment.OnAddressChoosedListener, AddAddressPresonter.OnAddAddressListener {
 
     public static final String TAG = "AddAddressActivity";
 
@@ -89,24 +62,17 @@ public class AddAddressActivity extends FragmentActivity {
 
     /* 查询通讯录 请求码*/
     public static final int PICK_CONTACT = 0;
+    @BindView(R.id.layout_add_address)
+    LinearLayout layoutAddAddress;
 
-
-    View mRootView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mRootView = View.inflate(this, R.layout.activity_add_address, null);
-        setContentView(mRootView);
-
-
+        setContentView(R.layout.activity_add_address);
         ButterKnife.bind(this);
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
 
     @OnClick(R.id.txt_user_district_add_address)
     public void chooseDistrict() {
@@ -119,16 +85,12 @@ public class AddAddressActivity extends FragmentActivity {
     /*必须设置在Activity中否则不显示*/
     public void setDialog() {
         MyDialogFragment dialogFragment = new MyDialogFragment();
-        dialogFragment.show(getSupportFragmentManager(),"");
+        dialogFragment.setOnAddressChoosedListener(this);
+        dialogFragment.show(getSupportFragmentManager(), "");
     }
 
 
-    @OnClick(R.id.btn_submit_add_address)
-    public void submit() {
-
-    }
-
-    @OnClick(R.id.img_add_address)
+    @OnClick(R.id.layout_add_address)
     public void getUserPhoneFromLoacl() {
         /*声明意图方式一*/
         Intent intent1 = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
@@ -212,4 +174,66 @@ public class AddAddressActivity extends FragmentActivity {
     }
 
 
+    String location = "";
+    String province = "";
+    String city = "";
+    String district = "";
+    int userId;
+
+    @Override
+    public void onAddressChoosed(String[] str) {
+
+        province = str[0];
+        city = str[1];
+        district = str[2];
+        for (int i = 0; i < str.length; i++) {
+            if (str[i].equals("请选择") || str[i].equals("")) {
+                return;
+            } else {
+                location += str[i];
+            }
+        }
+
+
+        mTxtUserDistrictAddAddress.setText(location);
+
+    }
+
+
+    @OnClick(R.id.btn_submit_add_address)
+    public void submit() {
+
+        String timeStamp = new Date() + "";
+        String userName = mEditUserNameAddAddress.getText().toString();
+        String userPhone = mEditUserPhoneAddAddress.getText().toString();
+
+
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("address", location);
+        map.put("city", city);
+        map.put("community", "");
+        map.put("district", district);
+        map.put("timestamp", timeStamp);
+        map.put("user_id", userId + "");
+        map.put("user_name", userName);
+        map.put("user_phone", userPhone);
+        map.put("key", Contacts.KEY);
+
+
+        String sigin = ToolUitls.getSign(map);
+
+
+        AddAddressPresonter addAddressPresonter = new AddAddressPresonter();
+        addAddressPresonter.setOnAddAddressListener(this);
+        addAddressPresonter.addAddress(location, city, "", district, timeStamp, userId + "", userName, userPhone, sigin, Contacts.KEY);
+
+
+    }
+
+    @Override
+    public void addAddressSucess(AddressBean body) {
+        Intent intent = new Intent(this, AddressManagerActivity.class);
+
+        setResult(RESULT_OK, intent);
+    }
 }
