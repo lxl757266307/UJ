@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,11 +18,13 @@ import android.widget.TextView;
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.AddressBean;
+import com.example.maintainsteward.bean.CityListBean;
 import com.example.maintainsteward.fragment.MyDialogFragment;
 import com.example.maintainsteward.mvp_presonter.address_manager.AddAddressPresonter;
 import com.example.maintainsteward.utils.ToolUitls;
 
 import java.util.Date;
+import java.util.List;
 import java.util.TreeMap;
 
 import butterknife.BindView;
@@ -65,6 +68,17 @@ public class AddAddressActivity extends FragmentActivity implements MyDialogFrag
     @BindView(R.id.layout_add_address)
     LinearLayout layoutAddAddress;
 
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -235,5 +249,18 @@ public class AddAddressActivity extends FragmentActivity implements MyDialogFrag
         Intent intent = new Intent(this, AddressManagerActivity.class);
 
         setResult(RESULT_OK, intent);
+    }
+
+    @Override
+    public void getCityList(CityListBean body) {
+
+        switch (body.getStatus()) {
+            case "1":
+                List<CityListBean.DataBean> data = body.getData();
+
+
+                break;
+        }
+
     }
 }

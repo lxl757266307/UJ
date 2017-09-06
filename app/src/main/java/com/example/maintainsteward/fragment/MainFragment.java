@@ -1,5 +1,8 @@
 package com.example.maintainsteward.fragment;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -7,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +20,10 @@ import android.widget.ViewFlipper;
 
 import com.bumptech.glide.Glide;
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.activity.SearchActivity;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.Contacts;
+import com.example.maintainsteward.bean.AppIndexCategoryBean;
 import com.example.maintainsteward.bean.BannerBean;
 import com.example.maintainsteward.mvp_presonter.main_fragment.MainFragmentPresonter;
 import com.example.maintainsteward.mvp_view.main_fragement.OnLoadBannerListener;
@@ -26,10 +31,7 @@ import com.example.maintainsteward.utils.ToolUitls;
 import com.example.maintainsteward.view.BannerViewPager;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -95,6 +97,34 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
     /*上啦加载下拉刷新的 scrollview*/
     @BindView(R.id.scrollview_main_fragment)
     PullToRefreshScrollView scrollviewMainFragment;
+    @BindView(R.id.txt_title1)
+    TextView txtTitle1;
+    @BindView(R.id.layout_item1)
+    LinearLayout layoutItem1;
+    @BindView(R.id.txt_title2)
+    TextView txtTitle2;
+    @BindView(R.id.layout_item2)
+    LinearLayout layoutItem2;
+    @BindView(R.id.txt_title3)
+    TextView txtTitle3;
+    @BindView(R.id.layout_item3)
+    LinearLayout layoutItem3;
+    @BindView(R.id.txt_title4)
+    TextView txtTitle4;
+    @BindView(R.id.layout_item4)
+    LinearLayout layoutItem4;
+    @BindView(R.id.img_item1)
+    ImageView imgItem1;
+    @BindView(R.id.img_item2)
+    ImageView imgItem2;
+    @BindView(R.id.img_item3)
+    ImageView imgItem3;
+    @BindView(R.id.img_item4)
+    ImageView imgItem4;
+    @BindView(R.id.txt_city_mainfragment)
+    TextView txtCityMainfragment;
+    @BindView(R.id.txt_district_mainfragment)
+    TextView txtDistrictMainfragment;
 
 
     @OnClick({R.id.img_dingwei_mainfragment,
@@ -119,6 +149,7 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
             case R.id.img_tianjia_mainfragment:
                 break;
             case R.id.layout_sousuo_mainfragment:
+                startActivity(new Intent(getActivity(), SearchActivity.class));
                 break;
             case R.id.layout_service_mainfragment:
                 break;
@@ -156,9 +187,11 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initLocation();
         presonter = new MainFragmentPresonter();
         presonter.setOnLoadBannerListener(this);
-        sign();
+        sign1();
+        sign2();
 
         vfMainfragment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,13 +204,27 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
 
     }
 
+    private void initLocation() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(MyApplication.LOCATION, Context.MODE_PRIVATE);
+        String city = sharedPreferences.getString("city", "null");
+        String district = sharedPreferences.getString("district", "null");
+
+        ToolUitls.print(TAG, "CITY=" + city + "district=" + district);
+
+        if (!"null".equals(city))
+            txtCityMainfragment.setText(city);
+        if (!"null".equals(district))
+            txtDistrictMainfragment.setText(district);
+
+    }
+
     ArrayList<ImageView> imageViews;
 
     public void setViewPager(List<BannerBean.DataBean.SlidePostsBean> slide_posts) {
         imageViews = new ArrayList<>();
         for (int i = 0; i < slide_posts.size(); i++) {
             ImageView imageView = new ImageView(getActivity());
-            imageView.setScaleType(ImageView.ScaleType. CENTER_CROP);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             Glide.with(getActivity()).load(slide_posts.get(i).getSlide_pic()).into(imageView);
             imageViews.add(imageView);
         }
@@ -220,17 +267,29 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
 
     public static final String TAG = "MainFragment";
 
-    public void sign() {
+    public void sign1() {
 
         String timestamp = System.currentTimeMillis() + "";
-        Log.e(TAG, "timestamp====" + timestamp);
         TreeMap<String, String> map = new TreeMap<>();
         map.put("timestamp", timestamp);
-//        map.put("key", Contacts.KEY);
         String sign = ToolUitls.getSign(map);
-        Log.e(TAG, "sign====" + sign);
 
         presonter.getBanner(timestamp, sign, Contacts.KEY);
+
+
+    }
+
+    int page = 1;
+
+    public void sign2() {
+
+        String timestamp = System.currentTimeMillis() + "";
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("page", page + "");
+        map.put("timestamp", timestamp);
+        String sign = ToolUitls.getSign(map);
+
+        presonter.getAppIndexCategory(timestamp, Contacts.KEY, sign, 1);
 
 
     }
@@ -253,6 +312,67 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
                 setVfMainfragment(information_lists);
 
                 break;
+        }
+    }
+
+    @Override
+    public void onLoadAppIndexCategory(AppIndexCategoryBean bean) {
+
+        switch (bean.getStatus()) {
+            case "1":
+
+                List<AppIndexCategoryBean.DataBean> data = bean.getData();
+
+
+                if (data != null && data.size() > 0) {
+                    for (int i = 0; i < data.size(); i++) {
+                        switch (i) {
+                            case 0:
+                                txtTitle1.setText(data.get(0).getName());
+                                Glide.with(getActivity()).load(data.get(0).getLogourl()).into(imgItem1);
+                                setThird(data, 0, layoutItem1);
+                                break;
+                            case 1:
+                                txtTitle2.setText(data.get(1).getName());
+                                Glide.with(getActivity()).load(data.get(1).getLogourl()).into(imgItem2);
+                                setThird(data, 1, layoutItem2);
+                                break;
+                            case 2:
+                                txtTitle3.setText(data.get(2).getName());
+                                Glide.with(getActivity()).load(data.get(2).getLogourl()).into(imgItem3);
+                                setThird(data, 2, layoutItem3);
+                                break;
+                            case 3:
+                                txtTitle4.setText(data.get(3).getName());
+                                Glide.with(getActivity()).load(data.get(3).getLogourl()).into(imgItem3);
+                                setThird(data, 3, layoutItem4);
+                                break;
+                        }
+
+                    }
+                }
+
+
+                break;
+        }
+
+    }
+
+    private void setThird(List<AppIndexCategoryBean.DataBean> data, int index, LinearLayout linearLayout) {
+        List<AppIndexCategoryBean.ThirdBean> third = data.get(index).getThird();
+        if (third != null && third.size() > 0) {
+
+            for (int x = 0; x < third.size(); x++) {
+                AppIndexCategoryBean.ThirdBean thirdBean = third.get(x);
+                TextView textView = new TextView(getActivity());
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                layoutParams.setMargins(5, 0, 0, 0);
+                textView.setLayoutParams(layoutParams);
+                textView.setTextColor(Color.parseColor("#D74040"));
+                textView.setText(thirdBean.getName());
+                linearLayout.addView(textView);
+            }
+
         }
     }
 //

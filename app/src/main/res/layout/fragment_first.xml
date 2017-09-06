@@ -39,15 +39,17 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/txt_city_mainfragment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="西安市"
+                        android:text=""
                         android:textColor="#fff" />
 
                     <TextView
+                        android:id="@+id/txt_district_mainfragment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="西安市"
+                        android:text=""
                         android:textColor="#fff" />
 
                 </LinearLayout>
@@ -107,7 +109,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="110dp"
+                    android:layout_height="130dp"
+                    android:gravity="bottom"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -282,45 +285,44 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                android:gravity="left"
+                                android:orientation="vertical"
+                                android:paddingLeft="5dp"
+                                android:paddingTop="20dp">
 
                                 <TextView
+                                    android:id="@+id/txt_title1"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center"
+                                    android:layout_marginLeft="5dp"
+                                    android:gravity="left"
                                     android:text="空调清洗"
                                     android:textColor="#000"
-                                    android:textSize="20sp" />
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="20dp"
-                                    android:gravity="center"
-                                    android:text="挂式109元/台"
-                                    android:textColor="#000"
-                                    android:textSize="14sp" />
-
-                                <TextView
+                                <LinearLayout
+                                    android:id="@+id/layout_item1"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="柜式129元/台"
-                                    android:textColor="#000"
-                                    android:textSize="14sp" />
+                                    android:orientation="vertical"
+                                    android:paddingTop="20dp"></LinearLayout>
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                android:gravity="bottom"
+                                android:orientation="vertical"
+                                android:paddingBottom="5dp"
+                                android:paddingRight="5dp">
 
                                 <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:id="@+id/img_item1"
+                                    android:layout_width="90dp"
+                                    android:layout_height="90dp"
                                     android:src="@mipmap/chouyouyanji" />
 
                             </LinearLayout>
@@ -343,45 +345,44 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                android:gravity="left"
+                                android:orientation="vertical"
+                                android:paddingLeft="5dp"
+                                android:paddingTop="20dp">
 
                                 <TextView
+                                    android:id="@+id/txt_title2"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center"
+                                    android:layout_marginLeft="5dp"
+                                    android:gravity="left"
                                     android:text="空调清洗"
                                     android:textColor="#000"
-                                    android:textSize="20sp" />
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="20dp"
-                                    android:gravity="center"
-                                    android:text="挂式109元/台"
-                                    android:textColor="#000"
-                                    android:textSize="14sp" />
-
-                                <TextView
+                                <LinearLayout
+                                    android:id="@+id/layout_item2"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="柜式129元/台"
-                                    android:textColor="#000"
-                                    android:textSize="14sp" />
+                                    android:orientation="vertical"
+                                    android:paddingTop="20dp"></LinearLayout>
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                android:gravity="bottom"
+                                android:orientation="vertical"
+                                android:paddingBottom="5dp"
+                                android:paddingRight="5dp">
 
                                 <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:id="@+id/img_item2"
+                                    android:layout_width="90dp"
+                                    android:layout_height="90dp"
                                     android:src="@mipmap/chouyouyanji" />
 
                             </LinearLayout>
@@ -411,45 +412,44 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                android:gravity="left"
+                                android:orientation="vertical"
+                                android:paddingLeft="5dp"
+                                android:paddingTop="20dp">
 
                                 <TextView
+                                    android:id="@+id/txt_title3"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center"
+                                    android:layout_marginLeft="5dp"
+                                    android:gravity="left"
                                     android:text="空调清洗"
                                     android:textColor="#000"
-                                    android:textSize="20sp" />
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="20dp"
-                                    android:gravity="center"
-                                    android:text="挂式109元/台"
-                                    android:textColor="#000"
-                                    android:textSize="14sp" />
-
-                                <TextView
+                                <LinearLayout
+                                    android:id="@+id/layout_item3"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="柜式129元/台"
-                                    android:textColor="#000"
-                                    android:textSize="14sp" />
+                                    android:orientation="vertical"
+                                    android:paddingTop="20dp"></LinearLayout>
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                android:gravity="bottom"
+                                android:orientation="vertical"
+                                android:paddingBottom="5dp"
+                                android:paddingRight="5dp">
 
                                 <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:id="@+id/img_item3"
+                                    android:layout_width="90dp"
+                                    android:layout_height="90dp"
                                     android:src="@mipmap/chouyouyanji" />
 
                             </LinearLayout>
@@ -472,45 +472,44 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                android:gravity="left"
+                                android:orientation="vertical"
+                                android:paddingLeft="5dp"
+                                android:paddingTop="20dp">
 
                                 <TextView
+                                    android:id="@+id/txt_title4"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center"
+                                    android:layout_marginLeft="5dp"
+                                    android:gravity="left"
                                     android:text="空调清洗"
                                     android:textColor="#000"
-                                    android:textSize="20sp" />
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="20dp"
-                                    android:gravity="center"
-                                    android:text="挂式109元/台"
-                                    android:textColor="#000"
-                                    android:textSize="14sp" />
-
-                                <TextView
+                                <LinearLayout
+                                    android:id="@+id/layout_item4"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="柜式129元/台"
-                                    android:textColor="#000"
-                                    android:textSize="14sp" />
+                                    android:orientation="vertical"
+                                    android:paddingTop="20dp"></LinearLayout>
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                android:gravity="bottom"
+                                android:orientation="vertical"
+                                android:paddingBottom="5dp"
+                                android:paddingRight="5dp">
 
                                 <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:id="@+id/img_item4"
+                                    android:layout_width="90dp"
+                                    android:layout_height="90dp"
                                     android:src="@mipmap/chouyouyanji" />
 
                             </LinearLayout>

@@ -129,7 +129,7 @@ public class MyDialogFragment extends DialogFragment implements ViewPager.OnPage
         vipDialogBottomPager.setAdapter(pagerAdapter);
 
         pstDialogBottom.setViewPager(vipDialogBottomPager);
-        pstDialogBottom.setTextSize(50);
+        pstDialogBottom.setTextSize(30);
 
 
     }

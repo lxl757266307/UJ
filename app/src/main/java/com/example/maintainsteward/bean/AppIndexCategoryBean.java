@@ -14,11 +14,11 @@ import java.util.List;
  * Created by Administrator on 2017/9/5.
  */
 
-public class KindsBean {
+public class AppIndexCategoryBean {
 
     @Override
     public String toString() {
-        return "KindsBean{" +
+        return "AppIndexCategoryBean{" +
                 "status='" + status + '\'' +
                 ", data=" + data +
                 '}';
@@ -32,17 +32,17 @@ public class KindsBean {
     private String status;
     private List<DataBean> data;
 
-    public static KindsBean objectFromData(String str) {
+    public static AppIndexCategoryBean objectFromData(String str) {
 
-        return new Gson().fromJson(str, KindsBean.class);
+        return new Gson().fromJson(str, AppIndexCategoryBean.class);
     }
 
-    public static KindsBean objectFromData(String str, String key) {
+    public static AppIndexCategoryBean objectFromData(String str, String key) {
 
         try {
             JSONObject jsonObject = new JSONObject(str);
 
-            return new Gson().fromJson(jsonObject.getString(str), KindsBean.class);
+            return new Gson().fromJson(jsonObject.getString(str), AppIndexCategoryBean.class);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -50,19 +50,19 @@ public class KindsBean {
         return null;
     }
 
-    public static List<KindsBean> arrayKindsBeanFromData(String str) {
+    public static List<AppIndexCategoryBean> arrayAppIndexCategoryBeanFromData(String str) {
 
-        Type listType = new TypeToken<ArrayList<KindsBean>>() {
+        Type listType = new TypeToken<ArrayList<AppIndexCategoryBean>>() {
         }.getType();
 
         return new Gson().fromJson(str, listType);
     }
 
-    public static List<KindsBean> arrayKindsBeanFromData(String str, String key) {
+    public static List<AppIndexCategoryBean> arrayAppIndexCategoryBeanFromData(String str, String key) {
 
         try {
             JSONObject jsonObject = new JSONObject(str);
-            Type listType = new TypeToken<ArrayList<KindsBean>>() {
+            Type listType = new TypeToken<ArrayList<AppIndexCategoryBean>>() {
             }.getType();
 
             return new Gson().fromJson(jsonObject.getString(str), listType);
@@ -94,6 +94,7 @@ public class KindsBean {
 
     public static class DataBean {
 
+
         @Override
         public String toString() {
             return "DataBean{" +
@@ -114,7 +115,7 @@ public class KindsBean {
         private String id;
         private String name;
         private String logourl;
-        private List<?> third;
+        private ArrayList<ThirdBean> third;
 
         public static DataBean objectFromData(String str) {
 
@@ -184,12 +185,90 @@ public class KindsBean {
             this.logourl = logourl;
         }
 
-        public List<?> getThird() {
+        public ArrayList<ThirdBean> getThird() {
             return third;
         }
 
-        public void setThird(List<?> third) {
+        public void setThird(ArrayList<ThirdBean> third) {
             this.third = third;
+        }
+    }
+
+    public static class ThirdBean {
+        String id;
+        String name;
+
+        public static ThirdBean objectFromThird(String str) {
+
+            return new Gson().fromJson(str, ThirdBean.class);
+        }
+
+        public static ThirdBean objectFromThird(String str, String key) {
+
+            try {
+                JSONObject jsonObject = new JSONObject(str);
+
+                return new Gson().fromJson(jsonObject.getString(str), ThirdBean.class);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        public static List<ThirdBean> arrayThirdBeanFromThird(String str) {
+
+            Type listType = new TypeToken<ArrayList<ThirdBean>>() {
+            }.getType();
+
+            return new Gson().fromJson(str, listType);
+        }
+
+        public static List<ThirdBean> arrayThirdBeanFromThird(String str, String key) {
+
+            try {
+                JSONObject jsonObject = new JSONObject(str);
+                Type listType = new TypeToken<ArrayList<ThirdBean>>() {
+                }.getType();
+
+                return new Gson().fromJson(jsonObject.getString(str), listType);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return new ArrayList();
+
+
+        }
+
+        @Override
+        public String toString() {
+            return "ThirdBean{" +
+                    "id='" + id + '\'' +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public ThirdBean(String id, String name) {
+            this.id = id;
+            this.name = name;
         }
     }
 }

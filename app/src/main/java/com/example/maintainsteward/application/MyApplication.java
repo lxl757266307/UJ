@@ -2,6 +2,7 @@ package com.example.maintainsteward.application;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.SharedPreferences;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -33,6 +34,7 @@ public class MyApplication extends Application {
     private static UploadManager mUploadManager;
     private static ArrayList<Activity> mActivities;
 
+    public static final String LOCATION = "location";
 
     //声明AMapLocationClient类对象
     public AMapLocationClient mLocationClient = null;
@@ -68,6 +70,12 @@ public class MyApplication extends Application {
 
                     MapBean mapBean = new MapBean(locationType, latitude, longitude, accuracy, address, country, province, city, district, street, streetNum, cityCode, adCode, aoiName, buildingId, floor, gpsAccuracyStatus, format);
 
+                    SharedPreferences sharedPreferences = getSharedPreferences(LOCATION, MODE_PRIVATE);
+                    SharedPreferences.Editor edit = sharedPreferences.edit();
+                    edit.putString("city", mapBean.getCity());
+                    edit.putString("district", mapBean.getDistrict());
+                    edit.commit();
+
                     ToolUitls.print(TAG, mapBean.toString());
 
                 } else {
@@ -100,10 +108,9 @@ public class MyApplication extends Application {
 
         getActivitiesList();
 
-//        initLocation();
+        initLocation();
 
     }
-
 
 
     private void initLocation() {

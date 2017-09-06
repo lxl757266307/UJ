@@ -3,7 +3,7 @@ package com.example.maintainsteward.api;
 import com.example.maintainsteward.bean.AddressBean;
 import com.example.maintainsteward.bean.BannerBean;
 import com.example.maintainsteward.bean.CityListBean;
-import com.example.maintainsteward.bean.KindsBean;
+import com.example.maintainsteward.bean.AppIndexCategoryBean;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -42,10 +42,10 @@ public interface HttpApi {
     /*获取主页面分类*/
     @FormUrlEncoded
     @POST("AppIndexCategory")
-    Call<KindsBean> getKinds(@Field("timestamp") String timestamp,
-                             @Field("sign") String sign,
-                             @Field("key") String key,
-                             @Field("page") int page);
+    Call<AppIndexCategoryBean> getAppIndexCategory(@Field("timestamp") String timestamp,
+                                                   @Field("sign") String sign,
+                                                   @Field("key") String key,
+                                                   @Field("page") int page);
 
 
     /*获取城市列表*/
@@ -53,10 +53,8 @@ public interface HttpApi {
     @POST("CityListsGet")
     Call<CityListBean> getCityList(@Field("timestamp") String timestamp,
                                    @Field("sign") String sign,
-                                   @Field("key") String key,
-                                   @Field("id") int id,
-                                   @Field("city_name") String city,
-                                   @Field("district") String district);
+                                   @Field("key") String key
+    );
 
     /*删除地址*/
     @FormUrlEncoded

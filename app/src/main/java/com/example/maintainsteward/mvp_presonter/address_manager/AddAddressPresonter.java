@@ -3,6 +3,7 @@ package com.example.maintainsteward.mvp_presonter.address_manager;
 import com.example.maintainsteward.api.HttpApi;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.AddressBean;
+import com.example.maintainsteward.bean.CityListBean;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,6 +40,8 @@ public class AddAddressPresonter {
     // &user_phone=13545454545
     // &sign=3D647F1372B16E47849BE3A8F0C439DC
     // &key=idf5nsi5t0qbemwo12hztbftm53tbv6pht
+
+    /*添加地址*/
     public void addAddress(String address, String city, String community, String district,
                            String timestamp, String user_id, String user_name, String user_phone,
                            String sign, String key) {
@@ -70,6 +73,33 @@ public class AddAddressPresonter {
 
     }
 
+    /*获取城市列表*/
+    public void getCityList(String timestamp, String sign, String key) {
+
+        Call<CityListBean> cityList = httpApi.getCityList(timestamp, sign, key);
+        cityList.enqueue(new Callback<CityListBean>() {
+            @Override
+            public void onResponse(Call<CityListBean> call, Response<CityListBean> response) {
+
+                if (response.isSuccessful()) {
+
+                    CityListBean body = response.body();
+
+                    if (onAddAddressListener != null && body != null) {
+                        onAddAddressListener.getCityList(body);
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CityListBean> call, Throwable t) {
+
+            }
+        });
+    }
+
+
     OnAddAddressListener onAddAddressListener;
 
     public void setOnAddAddressListener(OnAddAddressListener onAddAddressListener) {
@@ -79,6 +109,8 @@ public class AddAddressPresonter {
     public interface OnAddAddressListener {
 
         void addAddressSucess(AddressBean body);
+
+        void getCityList(CityListBean body);
 
     }
 }

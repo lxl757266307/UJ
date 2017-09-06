@@ -28,7 +28,7 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"></uses-permission>
 
     <!--读取通讯录-->
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
 
     <application
@@ -47,7 +47,7 @@
             android:value="f954271a02568a9b6749749ca6fc9d18" />
 
 
-        <activity android:name=".main.MainActivity">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -79,13 +79,15 @@
             android:name=".wxapi.WXEntryActivity"
             android:exported="true" />
         <!--登录-->
-        <activity android:name=".activity.LoginActivity" />
+        <!--<activity android:name=".activity.LoginActivity" />-->
 
         <!--添加地址-->
-        <activity android:name=".activity.AddAddressActivity"/>
+        <activity android:name=".activity.AddAddressActivity" />
         <!--地址管理-->
         <activity android:name=".activity.AddressManagerActivity" />
 
+        <!--搜索页面-->
+        <activity android:name=".activity.SearchActivity" />
 
     </application>
 

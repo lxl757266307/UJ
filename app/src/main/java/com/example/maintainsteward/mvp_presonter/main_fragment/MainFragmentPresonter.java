@@ -1,10 +1,20 @@
 package com.example.maintainsteward.mvp_presonter.main_fragment;
 
+import android.util.Log;
+
 import com.example.maintainsteward.api.HttpApi;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.BannerBean;
+import com.example.maintainsteward.bean.AppIndexCategoryBean;
 import com.example.maintainsteward.mvp_view.main_fragement.OnLoadBannerListener;
-import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLConnection;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,6 +65,33 @@ public class MainFragmentPresonter {
         });
 
 
+    }
+
+    public static final String TAG = "MainFragmentPresonter";
+
+    public void getAppIndexCategory(final String timestamp, final String key, final String sign, final int page) {
+
+        final Call<AppIndexCategoryBean> appIndexCategory = httpApi.getAppIndexCategory(timestamp, sign, key, page);
+
+        appIndexCategory.enqueue(new Callback<AppIndexCategoryBean>() {
+            @Override
+            public void onResponse(Call<AppIndexCategoryBean> call, Response<AppIndexCategoryBean> response) {
+
+                if (response.isSuccessful()) {
+                    AppIndexCategoryBean body = response.body();
+
+                    if (onLoadBannerListener != null && body != null) {
+                        onLoadBannerListener.onLoadAppIndexCategory(body);
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AppIndexCategoryBean> call, Throwable t) {
+
+            }
+        });
     }
 
 
