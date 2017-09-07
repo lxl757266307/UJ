@@ -39,9 +39,12 @@
                     android:drawablePadding="5dp"
                     android:gravity="center_vertical"
                     android:hint="搜索服务快速发布需求"
+                    android:imeOptions="actionSearch"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:paddingLeft="10dp"
                     android:paddingRight="5dp"
-                    android:text="#000"
+                    android:textColor="#000000"
                     android:textColorHint="#bbbbbb" />
 
                 <ImageView
@@ -88,7 +91,8 @@
             android:id="@+id/vg_search_activity"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="2dp" />
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp" />
 
 
     </LinearLayout>

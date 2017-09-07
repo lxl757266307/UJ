@@ -1,4 +1,4 @@
-package com.example.maintainsteward.mvp_presonter.address_manager;
+package com.example.maintainsteward.mvp_presonter;
 
 import com.example.maintainsteward.api.HttpApi;
 import com.example.maintainsteward.base.Contacts;

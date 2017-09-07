@@ -47,7 +47,7 @@
             android:value="f954271a02568a9b6749749ca6fc9d18" />
 
 
-        <activity android:name=".activity.LoginActivity">
+        <activity android:name=".activity.LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -79,7 +79,9 @@
             android:name=".wxapi.WXEntryActivity"
             android:exported="true" />
         <!--登录-->
-        <!--<activity android:name=".activity.LoginActivity" />-->
+        <activity android:name=".activity.LoginActivity" />
+
+        <!--<activity android:name=".activity.LoadingActivity"/>-->
 
         <!--添加地址-->
         <activity android:name=".activity.AddAddressActivity" />
@@ -88,6 +90,13 @@
 
         <!--搜索页面-->
         <activity android:name=".activity.SearchActivity" />
+
+        <!--搜索关键字显示页面-->
+        <activity android:name=".activity.SearInfoActivity" />
+
+
+        <!--主页面-->
+        <activity android:name=".main.MainActivity" />
 
     </application>
 

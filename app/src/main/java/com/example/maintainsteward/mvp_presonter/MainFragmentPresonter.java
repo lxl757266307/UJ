@@ -1,20 +1,10 @@
-package com.example.maintainsteward.mvp_presonter.main_fragment;
-
-import android.util.Log;
+package com.example.maintainsteward.mvp_presonter;
 
 import com.example.maintainsteward.api.HttpApi;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.BannerBean;
 import com.example.maintainsteward.bean.AppIndexCategoryBean;
-import com.example.maintainsteward.mvp_view.main_fragement.OnLoadBannerListener;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLConnection;
+import com.example.maintainsteward.mvp_view.OnLoadBannerListener;
 
 import retrofit2.Call;
 import retrofit2.Callback;

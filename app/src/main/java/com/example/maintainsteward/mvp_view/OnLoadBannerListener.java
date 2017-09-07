@@ -1,4 +1,4 @@
-package com.example.maintainsteward.mvp_view.main_fragement;
+package com.example.maintainsteward.mvp_view;
 
 import com.example.maintainsteward.bean.AppIndexCategoryBean;
 import com.example.maintainsteward.bean.BannerBean;

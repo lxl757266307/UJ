@@ -4,10 +4,15 @@ import com.example.maintainsteward.bean.AddressBean;
 import com.example.maintainsteward.bean.BannerBean;
 import com.example.maintainsteward.bean.CityListBean;
 import com.example.maintainsteward.bean.AppIndexCategoryBean;
+import com.example.maintainsteward.bean.HotWordBean;
+import com.example.maintainsteward.bean.LoginCallBackBean;
+import com.example.maintainsteward.bean.SearchKeyWordBean;
+import com.example.maintainsteward.bean.YanZhengMaCallBackBean;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
@@ -64,6 +69,46 @@ public interface HttpApi {
                                    @Field("key") String key,
                                    @Field("id") int id
     );
+
+
+    /*获取验证码*/
+    @FormUrlEncoded
+    @POST("GetVerifyCode")
+    Call<YanZhengMaCallBackBean> getVerifyCode(@Field("phone") String phone,
+                                               @Field("type") String type,
+                                               @Field("timestamp") String timestamp,
+                                               @Field("sign") String sign,
+                                               @Field("key") String key);
+
+    /*登录*/
+    @FormUrlEncoded
+    @POST("GoLoginByCode")
+    Call<LoginCallBackBean> goLoginByCode(@Field("phone") String phone,
+                                          @Field("code") String code,
+                                          @Field("chinaid") String chinaid,
+                                          @Field("ioschinaid") String ioschinaid,
+                                          @Field("login_type") String login_type,
+                                          @Field("timestamp") String timestamp,
+                                          @Field("sign") String sign,
+                                          @Field("key") String key);
+
+
+    /*热门搜素词汇*/
+    @FormUrlEncoded
+    @POST("ServiceKeywordsGet")
+    Call<HotWordBean> getHotWord(@Field("timestamp") String timestamp,
+                                 @Field("sign") String sign,
+                                 @Field("key") String key);
+
+    /*搜素关键字*/
+    @FormUrlEncoded
+    @POST("ServiceSearchByKeywords")
+    Call<SearchKeyWordBean> searchInfo(@Field("keywords") String keyword,
+                                       @Field("page") int page,
+                                       @Field("timestamp") String timestamp,
+                                       @Field("sign") String sign,
+                                       @Field("key") String key);
+
 
     /*我的粉丝*/
     @FormUrlEncoded

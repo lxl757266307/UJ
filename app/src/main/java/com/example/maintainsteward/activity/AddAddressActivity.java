@@ -20,7 +20,7 @@ import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.AddressBean;
 import com.example.maintainsteward.bean.CityListBean;
 import com.example.maintainsteward.fragment.MyDialogFragment;
-import com.example.maintainsteward.mvp_presonter.address_manager.AddAddressPresonter;
+import com.example.maintainsteward.mvp_presonter.AddAddressPresonter;
 import com.example.maintainsteward.utils.ToolUitls;
 
 import java.util.Date;

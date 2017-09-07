@@ -26,5 +26,8 @@ public final class Contacts {
     public static final String KEY = "idf5nsi5t0qbemwo12hztbftm53tbv6pht";
     public static final String SIGN = "idf5nsi5t0qbemwo124213198as";
 
+    /* 保存用户信息的 user文件*/
+    public static final String USER = "USER";
+
 
 }
