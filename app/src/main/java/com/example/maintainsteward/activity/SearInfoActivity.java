@@ -1,12 +1,15 @@
 package com.example.maintainsteward.activity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,6 +29,7 @@ import java.util.TreeMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler2;
@@ -45,6 +49,19 @@ public class SearInfoActivity extends BaseActivity implements PtrHandler2, Searc
     RecyclerView mRecycleView;
     @BindView(R.id.ptr_framelayout_serach_info)
     PtrClassicFrameLayout ptrFramelayoutSerachInfo;
+
+
+    @OnClick({R.id.img_qingkong_search_info_activity, R.id.txt_cancle_search_info_activity})
+    public void click(View view) {
+        switch (view.getId()) {
+            case R.id.img_qingkong_search_info_activity:
+                editSearchInfoActivity.setText("");
+                break;
+            case R.id.txt_cancle_search_info_activity:
+                finish();
+                break;
+        }
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -185,7 +202,7 @@ public class SearInfoActivity extends BaseActivity implements PtrHandler2, Searc
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 
-        if (actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_SEND) {
+        if (actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_GO) {
             if (searchInfoPresonter != null && !"".equals(sign) && !"".equals(timestamp) && !"".equals(keyword)) {
                 list.clear();
                 searchKeyWordAdapter.setList(list);
@@ -199,10 +216,21 @@ public class SearInfoActivity extends BaseActivity implements PtrHandler2, Searc
                 map.put("keywords", searchInfo);
                 map.put("page", page + "");
                 String sign = ToolUitls.getSign(map);
+                hideSoftInput(editSearchInfoActivity.getWindowToken());
                 searchInfoPresonter.serach(searchInfo, page, timeStamp, sign, Contacts.KEY);
             }
         }
 
         return false;
+    }
+
+
+    /*搜索完成 影藏输入法*/
+    private void hideSoftInput(IBinder token) {
+        if (token != null) {
+            InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            manager.hideSoftInputFromWindow(token,
+                    InputMethodManager.HIDE_NOT_ALWAYS);
+        }
     }
 }
