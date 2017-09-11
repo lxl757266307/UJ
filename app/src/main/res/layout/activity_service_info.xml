@@ -189,13 +189,13 @@
                 android:id="@+id/img_kefu_serviceinfo"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_marginLeft="33dp"
+                android:layout_marginStart="33dp"
+                android:src="@mipmap/kefu"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="3dp"
-                android:src="@mipmap/kefu" />
+                android:layout_marginTop="6dp" />
 
             <TextView
                 android:id="@+id/txt_yuyue_serviceinfo"

@@ -6,52 +6,49 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.adapter.FragmentKindsLeftMenuAdapter;
+import com.example.maintainsteward.adapter.SecondKindsAdapter;
+import com.example.maintainsteward.base.Contacts;
+import com.example.maintainsteward.bean.FirstKindsBean;
+import com.example.maintainsteward.bean.SecondKindsBean;
+import com.example.maintainsteward.mvp_presonter.KindsPresonter;
+import com.example.maintainsteward.mvp_view.KindsListener;
+import com.example.maintainsteward.mvp_presonter.SecondKindsPresonter;
+import com.example.maintainsteward.utils.ToolUitls;
+import com.example.maintainsteward.view.MyListView;
+
+import java.util.List;
+import java.util.TreeMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
  * Created by Administrator on 2017/8/17.
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-public class KindsFragment extends Fragment {
+public class KindsFragment extends Fragment implements KindsListener, AdapterView.OnItemClickListener, SecondKindsAdapter.OnSecondeItemClickListener {
+    public static final String TAG = "KindsFragment";
 
     @BindView(R.id.edit_sousuo_fragment_kinds)
     EditText editSousuoFragmentKinds;
     @BindView(R.id.img_tianjia_fragment_kinds)
     ImageView imgTianjiaFragmentKinds;
-    @BindView(R.id.txt_jiadianweixiu_fragment_kinds)
-    TextView txtJiadianweixiuFragmentKinds;
-    @BindView(R.id.txt_dianluweihu_fragment_kinds)
-    TextView txtDianluweihuFragmentKinds;
-    @BindView(R.id.txt_shuiluguanlu_fragment_kinds)
-    TextView txtShuiluguanluFragmentKinds;
-    @BindView(R.id.txt_jiadianqingxi_fragment_kinds)
-    TextView txtJiadianqingxiFragmentKinds;
-    @BindView(R.id.txt_menchuangweihu_fragment_kinds)
-    TextView txtMenchuangweihuFragmentKinds;
-    @BindView(R.id.txt_qiangmiandimian_fragment_kinds)
-    TextView txtQiangmiandimianFragmentKinds;
-    @BindView(R.id.txt_fangwujiance_fragment_kinds)
-    TextView txtFangwujianceFragmentKinds;
-    @BindView(R.id.txt_dengjuanzhuang_fragment_kinds)
-    TextView txtDengjuanzhuangFragmentKinds;
-    @BindView(R.id.txt_chuweijieju_fragment_kinds)
-    TextView txtChuweijiejuFragmentKinds;
-    @BindView(R.id.txt_jiazhengbaojie_fragment_kinds)
-    TextView txtJiazhengbaojieFragmentKinds;
+
     @BindView(R.id.txt_listname_fragment_kinds)
     TextView txtListnameFragmentKinds;
     @BindView(R.id.rv_recycle_fragment_kinds)
@@ -60,6 +57,10 @@ public class KindsFragment extends Fragment {
     TextView[] txtArray = null;
 
     Unbinder unbinder;
+    @BindView(R.id.layout_list)
+    LinearLayout layoutList;
+    @BindView(R.id.lv_fragment_kinds)
+    MyListView lvFragmentKinds;
 
     @Nullable
     @Override
@@ -69,11 +70,75 @@ public class KindsFragment extends Fragment {
         return view;
     }
 
+    FragmentKindsLeftMenuAdapter menuAdapter;
+    SecondKindsPresonter secondKindsPresonter;
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setArray();
+        /*初始化recycleview*/
+        initRv();
 
+        lvFragmentKinds.setOnItemClickListener(this);
+
+        kindsPresonter = new KindsPresonter();
+        kindsPresonter.setFirstKindsListener(this);
+
+        secondKindsPresonter = new SecondKindsPresonter();
+        secondKindsPresonter.setFirstKindsListener(this);
+
+        /*获取一级分类*/
+        getFirstKinds();
+
+
+    }
+
+    SecondKindsAdapter secondKindsAdapter;
+
+    private void initRv() {
+        rvRecycleFragmentKinds.setLayoutManager(new GridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, false));
+//        rvRecycleFragmentKinds.addItemDecoration(new RecyclerView.ItemDecoration() {
+//            @Override
+//            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+//                super.getItemOffsets(outRect, view, parent, state);
+//
+//                outRect.set(10, 10, 0, 0);
+//
+//            }
+//        });
+        secondKindsAdapter = new SecondKindsAdapter(getActivity());
+        secondKindsAdapter.setOnSecondeItemClickListener(this);
+        rvRecycleFragmentKinds.setAdapter(secondKindsAdapter);
+
+    }
+
+    public void getSecondKinds(int index) {
+        if (data != null) {
+            FirstKindsBean.DataBean dataBean = data.get(index);
+            String id = dataBean.getId();
+            String time = System.currentTimeMillis() + "";
+            TreeMap<String, String> map = new TreeMap<>();
+            map.put("timestamp", time);
+            map.put("id", id);
+//            map.put("cat_id", "21");
+            String sign = ToolUitls.getSign(map);
+//            ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL+"ServiceAll?"+"cat_id="+"21"+"&timestamp="+time+"&sign="+sign+"&key="+Contacts.KEY);
+            secondKindsPresonter.getSecondKinds(id, time, sign, Contacts.KEY);
+
+        }
+
+
+    }
+
+    KindsPresonter kindsPresonter;
+
+    private void getFirstKinds() {
+
+        String time = System.currentTimeMillis() + "";
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("timestamp", time);
+        String sign = ToolUitls.getSign(map);
+        kindsPresonter.getFirstKinds(time, sign, Contacts.KEY);
     }
 
     @Override
@@ -82,82 +147,91 @@ public class KindsFragment extends Fragment {
         unbinder.unbind();
     }
 
-    public void setArray() {
-        txtArray = new TextView[10];
-        txtArray[0] = txtJiadianweixiuFragmentKinds;
-        txtArray[1] = txtDianluweihuFragmentKinds;
-        txtArray[2] = txtShuiluguanluFragmentKinds;
-        txtArray[3] = txtJiadianqingxiFragmentKinds;
-        txtArray[4] = txtMenchuangweihuFragmentKinds;
-        txtArray[5] = txtQiangmiandimianFragmentKinds;
-        txtArray[6] = txtFangwujianceFragmentKinds;
-        txtArray[7] = txtDengjuanzhuangFragmentKinds;
-        txtArray[8] = txtChuweijiejuFragmentKinds;
-        txtArray[9] = txtJiazhengbaojieFragmentKinds;
-
-    }
-
-    @OnClick({R.id.txt_jiadianweixiu_fragment_kinds,
-            R.id.txt_dianluweihu_fragment_kinds,
-            R.id.txt_shuiluguanlu_fragment_kinds,
-            R.id.txt_jiadianqingxi_fragment_kinds,
-            R.id.txt_menchuangweihu_fragment_kinds,
-            R.id.txt_qiangmiandimian_fragment_kinds,
-            R.id.txt_fangwujiance_fragment_kinds,
-            R.id.txt_dengjuanzhuang_fragment_kinds,
-            R.id.txt_chuweijieju_fragment_kinds,
-            R.id.txt_jiazhengbaojie_fragment_kinds})
-    public void setListener(View view) {
-        switch (view.getId()) {
-            case R.id.txt_jiadianweixiu_fragment_kinds:
-                setTextViewBackground(0);
-                break;
-            case R.id.txt_dianluweihu_fragment_kinds:
-                setTextViewBackground(1);
-                break;
-            case R.id.txt_shuiluguanlu_fragment_kinds:
-                setTextViewBackground(2);
-                break;
-            case R.id.txt_jiadianqingxi_fragment_kinds:
-                setTextViewBackground(3);
-                break;
-            case R.id.txt_menchuangweihu_fragment_kinds:
-                setTextViewBackground(4);
-                break;
-            case R.id.txt_qiangmiandimian_fragment_kinds:
-                setTextViewBackground(5);
-                break;
-            case R.id.txt_fangwujiance_fragment_kinds:
-                setTextViewBackground(6);
-                break;
-            case R.id.txt_dengjuanzhuang_fragment_kinds:
-                setTextViewBackground(7);
-                break;
-            case R.id.txt_chuweijieju_fragment_kinds:
-                setTextViewBackground(8);
-                break;
-            case R.id.txt_jiazhengbaojie_fragment_kinds:
-                setTextViewBackground(9);
-                break;
-        }
-
-    }
-
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void setTextViewBackground(int index) {
 
-        for (int i = 0; i < txtArray.length; i++) {
+        if (data != null) {
 
-            if (index == i) {
-                txtArray[i].setBackground(getResources().getDrawable(R.drawable.border_left));
-                txtArray[i].setTextColor(getResources().getColor(R.color.red));
-            } else {
-                txtArray[i].setBackground(getResources().getDrawable(R.drawable.text_view_bg));
-                txtArray[i].setTextColor(getResources().getColor(R.color.black));
+            for (int i = 0; i < data.size(); i++) {
+
+                if (i == index) {
+                    data.get(i).setCheck(true);
+                } else {
+                    data.get(i).setCheck(false);
+                }
+
+            }
+            if (menuAdapter != null) {
+                menuAdapter.setData(data);
+                menuAdapter.notifyDataSetChanged();
             }
 
         }
+
+    }
+
+    List<FirstKindsBean.DataBean> data;
+
+    @Override
+    public void getFirstKinds(FirstKindsBean bean) {
+
+        switch (bean.getStatus()) {
+            case "1":
+                data = bean.getData();
+                data.get(0).setCheck(true);
+                menuAdapter = new FragmentKindsLeftMenuAdapter(getActivity(), data);
+                lvFragmentKinds.setAdapter(menuAdapter);
+                menuAdapter.notifyDataSetChanged();
+                getSecondKinds(0);
+                break;
+        }
+
+    }
+
+    @Override
+    public void getSecondKinds(SecondKindsBean bean) {
+
+        switch (bean.getStatus()) {
+            case "1":
+
+
+                SecondKindsBean.DataBean data = bean.getData();
+
+                if (data != null) {
+
+                    String title = data.getTitle();
+                    txtListnameFragmentKinds.setText(title);
+
+                    List<SecondKindsBean.DataBean.ResultBean> result = data.getResult();
+                    secondKindsAdapter.setList(result);
+                    secondKindsAdapter.notifyDataSetChanged();
+
+                }
+
+
+                break;
+        }
+
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        setTextViewBackground(position);
+        getSecondKinds(position);
+    }
+
+
+    @Override
+    public void onItemClick(int position) {
+
 
     }
 }

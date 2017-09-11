@@ -1,6 +1,7 @@
 package com.example.maintainsteward.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import com.example.maintainsteward.adapter.SearchKeyWordAdapter;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.SearchKeyWordBean;
+import com.example.maintainsteward.inter.OnServiceItemClickLitener;
 import com.example.maintainsteward.mvp_presonter.SearchInfoPresonter;
 import com.example.maintainsteward.mvp_view.SearchKeyWordListener;
 import com.example.maintainsteward.utils.ToolUitls;
@@ -38,7 +40,8 @@ import in.srain.cube.views.ptr.PtrHandler2;
  * Created by Administrator on 2017/9/6.
  */
 
-public class SearInfoActivity extends BaseActivity implements PtrHandler2, SearchKeyWordListener, TextView.OnEditorActionListener {
+public class SearInfoActivity extends BaseActivity implements PtrHandler2, SearchKeyWordListener,
+        TextView.OnEditorActionListener, OnServiceItemClickLitener {
     @BindView(R.id.edit_search_info_activity)
     EditText editSearchInfoActivity;
     @BindView(R.id.img_qingkong_search_info_activity)
@@ -99,6 +102,7 @@ public class SearInfoActivity extends BaseActivity implements PtrHandler2, Searc
         ptrFramelayoutSerachInfo.setPtrHandler(this);
         mRecycleView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         searchKeyWordAdapter = new SearchKeyWordAdapter(this, keyword);
+        searchKeyWordAdapter.setOnServiceItemClickLitener(this);
         mRecycleView.setAdapter(searchKeyWordAdapter);
     }
 
@@ -232,5 +236,18 @@ public class SearInfoActivity extends BaseActivity implements PtrHandler2, Searc
             manager.hideSoftInputFromWindow(token,
                     InputMethodManager.HIDE_NOT_ALWAYS);
         }
+    }
+
+    @Override
+    public void onItemClickListener(int position) {
+
+        if (list != null && list.size() > 0) {
+            SearchKeyWordBean.DataBean dataBean = list.get(position);
+            Intent intent = new Intent(this, ServiceInfoActivity.class);
+            intent.putExtra("data", dataBean);
+            startActivity(intent);
+
+        }
+
     }
 }

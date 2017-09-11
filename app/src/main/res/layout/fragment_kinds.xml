@@ -53,178 +53,185 @@
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/layout_list"
                 android:layout_width="@dimen/layout_width_100dp"
                 android:layout_height="match_parent"
                 android:background="@color/navpage"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/txt_jiadianweixiu_fragment_kinds"
+                <com.example.maintainsteward.view.MyListView
+                    android:id="@+id/lv_fragment_kinds"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="@drawable/text_view_bg"
-                    android:gravity="center"
-                    android:text="家电维修"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:layout_height="match_parent"
+                    android:divider="@null" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/view_bg" />
+                <!--<TextView-->
+                <!--android:id="@+id/txt_jiadianweixiu_fragment_kinds"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="60dp"-->
+                <!--android:background="@drawable/text_view_bg"-->
+                <!--android:gravity="center"-->
+                <!--android:text="家电维修"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="15sp" />-->
 
-                <TextView
-                    android:id="@+id/txt_dianluweihu_fragment_kinds"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="@drawable/text_view_bg"
-                    android:gravity="center"
-                    android:text="电路维护"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/view_bg" />-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/view_bg" />
+                <!--<TextView-->
+                <!--android:id="@+id/txt_dianluweihu_fragment_kinds"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="60dp"-->
+                <!--android:background="@drawable/text_view_bg"-->
+                <!--android:gravity="center"-->
+                <!--android:text="电路维护"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="15sp" />-->
 
-                <TextView
-                    android:id="@+id/txt_shuiluguanlu_fragment_kinds"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="@drawable/text_view_bg"
-                    android:gravity="center"
-                    android:text="水路管路"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/view_bg" />-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/view_bg" />
+                <!--<TextView-->
+                <!--android:id="@+id/txt_shuiluguanlu_fragment_kinds"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="60dp"-->
+                <!--android:background="@drawable/text_view_bg"-->
+                <!--android:gravity="center"-->
+                <!--android:text="水路管路"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="15sp" />-->
 
-                <TextView
-                    android:id="@+id/txt_jiadianqingxi_fragment_kinds"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="@drawable/text_view_bg"
-                    android:gravity="center"
-                    android:text="家电清洗"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/view_bg" />-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/view_bg" />
+                <!--<TextView-->
+                <!--android:id="@+id/txt_jiadianqingxi_fragment_kinds"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="60dp"-->
+                <!--android:background="@drawable/text_view_bg"-->
+                <!--android:gravity="center"-->
+                <!--android:text="家电清洗"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="15sp" />-->
 
-                <TextView
-                    android:id="@+id/txt_menchuangweihu_fragment_kinds"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="@drawable/text_view_bg"
-                    android:gravity="center"
-                    android:text="门窗维护"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/view_bg" />-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/view_bg" />
+                <!--<TextView-->
+                <!--android:id="@+id/txt_menchuangweihu_fragment_kinds"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="60dp"-->
+                <!--android:background="@drawable/text_view_bg"-->
+                <!--android:gravity="center"-->
+                <!--android:text="门窗维护"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="15sp" />-->
 
-                <TextView
-                    android:id="@+id/txt_qiangmiandimian_fragment_kinds"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="@drawable/text_view_bg"
-                    android:gravity="center"
-                    android:text="墙面地面"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/view_bg" />-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/view_bg" />
+                <!--<TextView-->
+                <!--android:id="@+id/txt_qiangmiandimian_fragment_kinds"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="60dp"-->
+                <!--android:background="@drawable/text_view_bg"-->
+                <!--android:gravity="center"-->
+                <!--android:text="墙面地面"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="15sp" />-->
 
-                <TextView
-                    android:id="@+id/txt_fangwujiance_fragment_kinds"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="@drawable/text_view_bg"
-                    android:gravity="center"
-                    android:text="房屋检测"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/view_bg" />-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/view_bg" />
+                <!--<TextView-->
+                <!--android:id="@+id/txt_fangwujiance_fragment_kinds"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="60dp"-->
+                <!--android:background="@drawable/text_view_bg"-->
+                <!--android:gravity="center"-->
+                <!--android:text="房屋检测"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="15sp" />-->
 
-                <TextView
-                    android:id="@+id/txt_dengjuanzhuang_fragment_kinds"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="@drawable/text_view_bg"
-                    android:gravity="center"
-                    android:text="灯具安装"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/view_bg" />-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/view_bg" />
+                <!--<TextView-->
+                <!--android:id="@+id/txt_dengjuanzhuang_fragment_kinds"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="60dp"-->
+                <!--android:background="@drawable/text_view_bg"-->
+                <!--android:gravity="center"-->
+                <!--android:text="灯具安装"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="15sp" />-->
 
-                <TextView
-                    android:id="@+id/txt_chuweijieju_fragment_kinds"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="@drawable/text_view_bg"
-                    android:gravity="center"
-                    android:text="厨卫洁具"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/view_bg" />-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/view_bg" />
+                <!--<TextView-->
+                <!--android:id="@+id/txt_chuweijieju_fragment_kinds"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="60dp"-->
+                <!--android:background="@drawable/text_view_bg"-->
+                <!--android:gravity="center"-->
+                <!--android:text="厨卫洁具"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="15sp" />-->
 
-                <TextView
-                    android:id="@+id/txt_jiazhengbaojie_fragment_kinds"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="@drawable/text_view_bg"
-                    android:gravity="center"
-                    android:text="家政保洁"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/view_bg" />-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/view_bg" />
+                <!--<TextView-->
+                <!--android:id="@+id/txt_jiazhengbaojie_fragment_kinds"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="60dp"-->
+                <!--android:background="@drawable/text_view_bg"-->
+                <!--android:gravity="center"-->
+                <!--android:text="家政保洁"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="15sp" />-->
+
+                <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/view_bg" />-->
 
 
             </LinearLayout>
         </ScrollView>
 
         <LinearLayout
-            android:background="#F4F4F4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="#F4F4F4"
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="79dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
                 android:background="@mipmap/banner2" />
 
             <TextView
@@ -242,6 +249,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_width_0dp"
                 android:layout_marginTop="10dp"
+                android:background="#f4f4f4"
                 android:layout_weight="1" />
 
 

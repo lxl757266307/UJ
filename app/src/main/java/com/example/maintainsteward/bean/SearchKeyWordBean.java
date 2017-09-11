@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  * Created by Administrator on 2017/9/7.
  */
 
-public class SearchKeyWordBean {
+public class SearchKeyWordBean implements Serializable {
 
     @Override
     public String toString() {
@@ -92,7 +93,7 @@ public class SearchKeyWordBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable {
 
         @Override
         public String toString() {
@@ -118,6 +119,9 @@ public class SearchKeyWordBean {
         private String logourl;
         private String desc;
         private String min_price;
+
+
+
 
         public static DataBean objectFromData(String str) {
 

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.bean.SearchKeyWordBean;
+import com.example.maintainsteward.inter.OnServiceItemClickLitener;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class SearchKeyWordAdapter extends BaseAbstactRecycleAdapter<SearchKeyWor
     Context context;
     String keyWord;
 
+
     public void setKeyWord(String keyWord) {
         this.keyWord = keyWord;
     }
@@ -36,14 +38,28 @@ public class SearchKeyWordAdapter extends BaseAbstactRecycleAdapter<SearchKeyWor
     }
 
     @Override
-    public void getViewHolder(ViewHolder baseViewHolder, int position, List<SearchKeyWordBean.DataBean> list) {
+    public void getViewHolder(ViewHolder baseViewHolder, final int position, List<SearchKeyWordBean.DataBean> list) {
+        baseViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onServiceItemClickLitener != null) {
+                    onServiceItemClickLitener.onItemClickListener(position);
+                }
+            }
+        });
+
         baseViewHolder.imgSearchInfoItem.setScaleType(ImageView.ScaleType.CENTER_CROP);
         Glide.with(context).load(list.get(position).getLogourl()).into(baseViewHolder.imgSearchInfoItem);
         String name = list.get(position).getName();
+
         boolean contains = name.contains(keyWord);
         if (contains) {
             baseViewHolder.txtNameSearchInfoItem.setText(name.substring(0, keyWord.length()));
             baseViewHolder.txtTypeSearchInfoItem.setText(name.substring(keyWord.length()));
+        }
+        if (name.contains("清洗")) {
+            baseViewHolder.txtBao.setVisibility(View.INVISIBLE);
+            baseViewHolder.imgBao.setVisibility(View.INVISIBLE);
         }
 
         String min_price = list.get(position).getMin_price();
@@ -65,6 +81,13 @@ public class SearchKeyWordAdapter extends BaseAbstactRecycleAdapter<SearchKeyWor
         return new ViewHolder(view);
     }
 
+
+    public OnServiceItemClickLitener onServiceItemClickLitener;
+
+    public void setOnServiceItemClickLitener(OnServiceItemClickLitener onServiceItemClickLitener) {
+        this.onServiceItemClickLitener = onServiceItemClickLitener;
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.img_search_info_item)
         ImageView imgSearchInfoItem;
@@ -75,6 +98,10 @@ public class SearchKeyWordAdapter extends BaseAbstactRecycleAdapter<SearchKeyWor
         @BindView(R.id.txt_price_search_info_item)
         TextView txtPriceSearchInfoItem;
 
+        @BindView(R.id.img_bao)
+        ImageView imgBao;
+        @BindView(R.id.txt_bao)
+        TextView txtBao;
 
         public ViewHolder(View itemView) {
             super(itemView);

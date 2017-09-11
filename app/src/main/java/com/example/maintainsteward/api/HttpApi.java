@@ -4,9 +4,12 @@ import com.example.maintainsteward.bean.AddressBean;
 import com.example.maintainsteward.bean.BannerBean;
 import com.example.maintainsteward.bean.CityListBean;
 import com.example.maintainsteward.bean.AppIndexCategoryBean;
+import com.example.maintainsteward.bean.FirstKindsBean;
 import com.example.maintainsteward.bean.HotWordBean;
 import com.example.maintainsteward.bean.LoginCallBackBean;
 import com.example.maintainsteward.bean.SearchKeyWordBean;
+import com.example.maintainsteward.bean.SecondKindsBean;
+import com.example.maintainsteward.bean.SecondKindsContent;
 import com.example.maintainsteward.bean.YanZhengMaCallBackBean;
 
 import retrofit2.Call;
@@ -108,6 +111,31 @@ public interface HttpApi {
                                        @Field("timestamp") String timestamp,
                                        @Field("sign") String sign,
                                        @Field("key") String key);
+
+
+    /*一级分类*/
+    @FormUrlEncoded
+    @POST("ServiceCategoryListsFirst")
+    Call<FirstKindsBean> getFirstKinds(@Field("timestamp") String timestamp,
+                                       @Field("sign") String sign,
+                                       @Field("key") String key);
+
+    /*二级分类*/
+    @FormUrlEncoded
+    @POST("ServiceCategoryListSecond")
+    Call<SecondKindsBean> getSecondKinds(@Field("id") String id,
+                                         @Field("timestamp") String timestamp,
+                                         @Field("sign") String sign,
+                                         @Field("key") String key);
+
+
+    /*二级分类详细内容*/
+    @FormUrlEncoded
+    @POST("ServiceCategoryListSecondContent")
+    Call<SecondKindsContent> getSecondKindsContent(@Field("id") String id,
+                                                   @Field("timestamp") String timestamp,
+                                                   @Field("sign") String sign,
+                                                   @Field("key") String key);
 
 
     /*我的粉丝*/

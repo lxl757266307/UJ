@@ -66,11 +66,13 @@
                 android:paddingLeft="20dp">
 
                 <ImageView
+                    android:id="@+id/img_bao"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/bao" />
 
                 <TextView
+                    android:id="@+id/txt_bao"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"

@@ -209,7 +209,6 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
         String city = sharedPreferences.getString("city", "null");
         String district = sharedPreferences.getString("district", "null");
 
-        ToolUitls.print(TAG, "CITY=" + city + "district=" + district);
 
         if (!"null".equals(city))
             txtCityMainfragment.setText(city);
