@@ -1,6 +1,7 @@
 package com.example.maintainsteward.bean;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
@@ -135,6 +136,17 @@ public class SearviceInfoBean {
         private String expenses_item;
         private String desc;
         private String add_time;
+
+        @Expose
+        private int number;
+
+        public int getNumber() {
+            return number;
+        }
+
+        public void setNumber(int number) {
+            this.number = number;
+        }
 
         public static DataBean objectFromData(String str) {
 

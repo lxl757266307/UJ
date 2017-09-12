@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.bean.SearchKeyWordBean;
+import com.example.maintainsteward.bean.SearviceInfoBean;
 
 import java.util.List;
 
@@ -23,12 +24,15 @@ import butterknife.ButterKnife;
 public class SearviceInfoAdapter extends BaseAdapter {
 
     Context context;
-    List<SearchKeyWordBean.DataBean> data;
+    List<SearviceInfoBean.DataBean> data;
 
     public SearviceInfoAdapter(Context context) {
         this.context = context;
     }
 
+    public void setData(List<SearviceInfoBean.DataBean> data) {
+        this.data = data;
+    }
 
     @Override
     public int getCount() {
@@ -46,7 +50,7 @@ public class SearviceInfoAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         ViewHolder viewHolder = null;
 
@@ -58,10 +62,47 @@ public class SearviceInfoAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.txtNameServiceInfoItem.setText(data.get(position).getName());
-        viewHolder.txtPriceServiceInfoItem.setText(data.get(position).getMin_price());
-//        viewHolder.txtUnitServiceInfoItem.setText(data.get(position).get);
+        String name = data.get(position).getName();
+        if (name.contains("清洗")) {
+            viewHolder.imgBaoServiceInfoItem.setVisibility(View.INVISIBLE);
+        }
+        int number = data.get(position).getNumber();
+        if (number == 0) {
+            viewHolder.txtNumberServiceInfoItem.setVisibility(View.INVISIBLE);
+            viewHolder.imgReduceServiceInfoItem.setVisibility(View.INVISIBLE);
+        } else {
+            viewHolder.txtNumberServiceInfoItem.setVisibility(View.VISIBLE);
+            viewHolder.imgReduceServiceInfoItem.setVisibility(View.VISIBLE);
+            viewHolder.txtNumberServiceInfoItem.setText(number + "");
+        }
 
+        viewHolder.txtNameServiceInfoItem.setText(data.get(position).getName());
+        viewHolder.txtPriceServiceInfoItem.setText(data.get(position).getExpenses());
+        viewHolder.txtUnitServiceInfoItem.setText(data.get(position).getUnit());
+
+        viewHolder.imgAddServiceInfoItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (onServiceNumberChangeListener != null) {
+
+
+                    onServiceNumberChangeListener.add(position);
+                }
+            }
+        });
+        viewHolder.imgReduceServiceInfoItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onServiceNumberChangeListener != null) {
+                    if (data.get(position).getNumber() > 0) {
+                        onServiceNumberChangeListener.reduce(position);
+                    } else {
+                        return;
+                    }
+                }
+            }
+        });
 
 
         return convertView;
@@ -86,5 +127,19 @@ public class SearviceInfoAdapter extends BaseAdapter {
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
+    }
+
+    OnServiceNumberChangeListener onServiceNumberChangeListener;
+
+    public void setOnServiceNumberChangeListener(OnServiceNumberChangeListener onServiceNumberChangeListener) {
+        this.onServiceNumberChangeListener = onServiceNumberChangeListener;
+    }
+
+    public interface OnServiceNumberChangeListener {
+
+        void add(int postion);
+
+        void reduce(int postion);
+
     }
 }

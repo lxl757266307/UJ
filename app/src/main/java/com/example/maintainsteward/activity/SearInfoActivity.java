@@ -244,7 +244,7 @@ public class SearInfoActivity extends BaseActivity implements PtrHandler2, Searc
         if (list != null && list.size() > 0) {
             SearchKeyWordBean.DataBean dataBean = list.get(position);
             Intent intent = new Intent(this, ServiceInfoActivity.class);
-            intent.putExtra("data", dataBean);
+            intent.putExtra("id", dataBean.getId());
             startActivity(intent);
 
         }

@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  * Created by Administrator on 2017/9/5.
  */
 
-public class CityListBean {
+public class CityListBean implements Serializable {
 
 
     @Override
@@ -94,7 +95,7 @@ public class CityListBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable {
 
         @Override
         public String toString() {
@@ -183,7 +184,7 @@ public class CityListBean {
             this.district = district;
         }
 
-        public static class DistrictBean {
+        public static class DistrictBean implements Serializable {
 
             @Override
             public String toString() {
@@ -272,7 +273,7 @@ public class CityListBean {
                 this.community = community;
             }
 
-            public static class CommunityBean {
+            public static class CommunityBean implements Serializable  {
 
                 @Override
                 public String toString() {

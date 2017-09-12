@@ -1,7 +1,9 @@
 package com.example.maintainsteward.fragment;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -20,6 +22,7 @@ import android.widget.ViewFlipper;
 
 import com.bumptech.glide.Glide;
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.activity.ChooseLocationActivity;
 import com.example.maintainsteward.activity.SearchActivity;
 import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.Contacts;
@@ -145,6 +148,7 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
         switch (view.getId()) {
             case R.id.img_dingwei_mainfragment:
             case R.id.layout_dingwei_mianfragment:
+                startActivity(new Intent(getActivity(), ChooseLocationActivity.class));
                 break;
             case R.id.img_tianjia_mainfragment:
                 break;
@@ -192,6 +196,7 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
         presonter.setOnLoadBannerListener(this);
         sign1();
         sign2();
+        rigesterReceiver();
 
         vfMainfragment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -251,6 +256,7 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        getActivity().unregisterReceiver(locationReciver);
     }
 
     @Override
@@ -374,6 +380,37 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
 
         }
     }
+
+    LocationReciver locationReciver;
+
+    public void rigesterReceiver() {
+        locationReciver = new LocationReciver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Contacts.LOCATION);
+
+        getActivity().registerReceiver(locationReciver, intentFilter);
+
+    }
+
+
+    public class LocationReciver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            String district_name = intent.getStringExtra("district_name");
+            String city = intent.getStringExtra("city");
+
+
+            ToolUitls.print(TAG,"district_name="+district_name);
+            ToolUitls.print(TAG,"city="+city);
+            txtCityMainfragment.setText(city);
+            txtDistrictMainfragment.setText(district_name);
+
+        }
+    }
+
+
 //
 //    @Override
 //    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {

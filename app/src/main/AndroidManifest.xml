@@ -98,6 +98,15 @@
         <!--主页面-->
         <activity android:name=".main.MainActivity" />
 
+        <!--选择位置界面-->
+        <activity android:name=".activity.ChooseLocationActivity" />
+
+        <!--选择区界面-->
+        <activity android:name=".activity.DistrictActivity" />
+
+        <!--服务详情界面-->
+        <activity android:name=".activity.ServiceInfoActivity" />
+
     </application>
 
 </manifest>

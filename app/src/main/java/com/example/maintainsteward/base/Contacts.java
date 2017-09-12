@@ -30,4 +30,8 @@ public final class Contacts {
     public static final String USER = "USER";
 
 
+    /*定位广播*/
+    public static final String LOCATION = "location";
+
+
 }

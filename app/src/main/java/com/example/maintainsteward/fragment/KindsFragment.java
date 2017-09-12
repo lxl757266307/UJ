@@ -1,6 +1,7 @@
 package com.example.maintainsteward.fragment;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.activity.ServiceInfoActivity;
 import com.example.maintainsteward.adapter.FragmentKindsLeftMenuAdapter;
 import com.example.maintainsteward.adapter.SecondKindsAdapter;
 import com.example.maintainsteward.base.Contacts;
@@ -110,6 +112,7 @@ public class KindsFragment extends Fragment implements KindsListener, AdapterVie
         secondKindsAdapter.setOnSecondeItemClickListener(this);
         rvRecycleFragmentKinds.setAdapter(secondKindsAdapter);
 
+
     }
 
     public void getSecondKinds(int index) {
@@ -122,7 +125,7 @@ public class KindsFragment extends Fragment implements KindsListener, AdapterVie
             map.put("id", id);
 //            map.put("cat_id", "21");
             String sign = ToolUitls.getSign(map);
-//            ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL+"ServiceAll?"+"cat_id="+"21"+"&timestamp="+time+"&sign="+sign+"&key="+Contacts.KEY);
+//            ToolUitls.print(Contacts.TEST_BASE_URL+"ServiceAll?"+"cat_id="+"21"+"&timestamp="+time+"&sign="+sign+"&key="+Contacts.KEY);
             secondKindsPresonter.getSecondKinds(id, time, sign, Contacts.KEY);
 
         }
@@ -189,6 +192,8 @@ public class KindsFragment extends Fragment implements KindsListener, AdapterVie
 
     }
 
+    List<SecondKindsBean.DataBean.ResultBean> result;
+
     @Override
     public void getSecondKinds(SecondKindsBean bean) {
 
@@ -203,7 +208,7 @@ public class KindsFragment extends Fragment implements KindsListener, AdapterVie
                     String title = data.getTitle();
                     txtListnameFragmentKinds.setText(title);
 
-                    List<SecondKindsBean.DataBean.ResultBean> result = data.getResult();
+                    result = data.getResult();
                     secondKindsAdapter.setList(result);
                     secondKindsAdapter.notifyDataSetChanged();
 
@@ -232,6 +237,13 @@ public class KindsFragment extends Fragment implements KindsListener, AdapterVie
     @Override
     public void onItemClick(int position) {
 
+        if (result != null && result.size() > 0) {
+            SecondKindsBean.DataBean.ResultBean dataBean = result.get(position);
+            String id = dataBean.getId();
+            Intent intent = new Intent(getActivity(), ServiceInfoActivity.class);
+            intent.putExtra("id", id);
+            startActivity(intent);
+        }
 
     }
 }

@@ -8,8 +8,10 @@ import com.example.maintainsteward.bean.FirstKindsBean;
 import com.example.maintainsteward.bean.HotWordBean;
 import com.example.maintainsteward.bean.LoginCallBackBean;
 import com.example.maintainsteward.bean.SearchKeyWordBean;
+import com.example.maintainsteward.bean.SearviceInfoBean;
 import com.example.maintainsteward.bean.SecondKindsBean;
 import com.example.maintainsteward.bean.SecondKindsContent;
+import com.example.maintainsteward.bean.ServiceGoodsGetBean;
 import com.example.maintainsteward.bean.YanZhengMaCallBackBean;
 
 import retrofit2.Call;
@@ -136,6 +138,24 @@ public interface HttpApi {
                                                    @Field("timestamp") String timestamp,
                                                    @Field("sign") String sign,
                                                    @Field("key") String key);
+
+
+    /*服务项目*/
+    @FormUrlEncoded
+    @POST("ServiceAll")
+    Call<SearviceInfoBean> getSearviceAll(@Field("cat_id") String id,
+                                          @Field("timestamp") String timestamp,
+                                          @Field("sign") String sign,
+                                          @Field("key") String key);
+
+
+    /*服务配件*/
+    @FormUrlEncoded
+    @POST("ServiceGoodsGet")
+    Call<ServiceGoodsGetBean> getServiceGoodsGet(@Field("cat_id") String id,
+                                                 @Field("timestamp") String timestamp,
+                                                 @Field("sign") String sign,
+                                                 @Field("key") String key);
 
 
     /*我的粉丝*/
