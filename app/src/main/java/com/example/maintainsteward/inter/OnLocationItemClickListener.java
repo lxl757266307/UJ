@@ -6,12 +6,10 @@ package com.example.maintainsteward.inter;
 
 public interface OnLocationItemClickListener {
 
-    /*省 对应条目*/
-    void provinceClickListener(String province);
 
     /*市 对应条目*/
-    void cityClickListener(String city);
+    void cityClickListener(String city, int position, String id);
 
     /*区 对应条目*/
-    void districtClickListener(String district);
+    void districtClickListener(String district, String id);
 }

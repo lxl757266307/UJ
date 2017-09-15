@@ -16,6 +16,7 @@ import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.CityListBean;
 import com.example.maintainsteward.mvp_presonter.ChooseLocationPresonter;
 import com.example.maintainsteward.mvp_view.ChooseLocationListener;
+import com.example.maintainsteward.utils.LocationUtils;
 import com.example.maintainsteward.utils.ToolUitls;
 import com.example.maintainsteward.view.MyListView;
 
@@ -80,10 +81,10 @@ public class ChooseLocationActivity extends BaseActivity implements ChooseLocati
     public void getCityList(CityListBean cityListBean) {
 
 
-        ToolUitls.print(TAG, "cityListBean==" + cityListBean);
         switch (cityListBean.getStatus()) {
             case "1":
                 data = cityListBean.getData();
+                LocationUtils.data = data;
                 cityListAdapter = new CityListAdapter(this, data);
                 lvChooselocation.setAdapter(cityListAdapter);
                 cityListAdapter.notifyDataSetChanged();

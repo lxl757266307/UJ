@@ -1,7 +1,12 @@
 package com.example.maintainsteward.activity;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -25,6 +30,8 @@ import com.example.maintainsteward.mvp_view.ServiceInfoListener;
 import com.example.maintainsteward.utils.ToolUitls;
 import com.example.maintainsteward.view.MyListView;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -73,6 +80,12 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
     TextView txtYuyueServiceinfo;
     @BindView(R.id.web_service_info)
     WebView webViewServiceInfo;
+    @BindView(R.id.txt_service_total_serviceinfo)
+    TextView txtServiceTotalServiceinfo;
+    @BindView(R.id.txt_peijian_total_serviceinfo)
+    TextView txtPeijianTotalServiceinfo;
+    @BindView(R.id.txt_title)
+    TextView txtTitle;
 
 
     @OnClick({R.id.layout_back,
@@ -114,9 +127,48 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
             case R.id.layout_huiyuan_serviceinfo:
                 break;
             case R.id.img_kefu_serviceinfo:
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:4008293331"));
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                this.startActivity(intent);
+
+
                 break;
-            case R.id.txt_yuyue_serviceinfo:
-                break;
+            case R.id.txt_yuyue_serviceinfo: {
+
+                List<SearviceInfoBean.DataBean> service = new ArrayList<>();
+                List<ServiceGoodsGetBean.DataBean> material = new ArrayList<>();
+                if (data != null && data.size() > 0) {
+
+
+                    for (int i = 0; i < data.size(); i++) {
+                        if (data.get(i).getNumber() > 0) {
+                            service.add(data.get(i));
+                        }
+                    }
+
+                }
+                if (peiJian != null && peiJian.size() > 0) {
+
+                    for (int i = 0; i < peiJian.size(); i++) {
+
+                        if (peiJian.get(i).getNumber() > 0)
+                            material.add(peiJian.get(i));
+                    }
+                }
+
+
+                if (service.size() > 0) {
+                    Intent intent2 = new Intent(this, LiJiYuYueActivity.class);
+                    intent2.putExtra("service", (Serializable) service);
+                    intent2.putExtra("peijian", (Serializable) material);
+                    intent2.putExtra("title", title);
+                    startActivity(intent2);
+                }
+            }
+            break;
         }
 
     }
@@ -128,6 +180,8 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
         initPresonter();
         setContentView(R.layout.activity_service_info);
         ButterKnife.bind(this);
+        txtTitle.setText(title);
+
         initWebView();
         initAdapter();
         initService();
@@ -218,10 +272,12 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
 
 
     String id = "";
+    String title = "";
 
     private void initData() {
+        title = this.getIntent().getStringExtra("title");
         id = this.getIntent().getStringExtra("id");
-        ToolUitls.print(TAG,"ID==="+id);
+        ToolUitls.print(TAG, "ID===" + id);
     }
 
     List<SearviceInfoBean.DataBean> data;
@@ -235,7 +291,7 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
                 searviceInfoAdapter.setData(data);
                 lvServiceServiceinfo.setAdapter(searviceInfoAdapter);
                 searviceInfoAdapter.notifyDataSetChanged();
-
+                getServiceTotal();
                 break;
 
         }
@@ -269,6 +325,7 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
                 adapter.setOnPeiJianNumberChangeListener(this);
                 lvPeijianServiceinfo.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
+                getPeiJianTotal();
                 break;
         }
     }
@@ -282,6 +339,7 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
             searviceInfoAdapter.notifyDataSetChanged();
         }
 
+        getServiceTotal();
     }
 
     @Override
@@ -303,7 +361,7 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
 
         }
 
-
+        getServiceTotal();
     }
 
     @Override
@@ -325,6 +383,7 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
             adapter.setPeiJian(peiJian);
             adapter.notifyDataSetChanged();
         }
+        getPeiJianTotal();
     }
 
     @Override
@@ -342,5 +401,49 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
             }
         }
 
+        getPeiJianTotal();
+    }
+
+
+    /* 服务总价*/
+    public void getServiceTotal() {
+        double price = 0;
+
+        if (data != null && data.size() > 0) {
+
+            for (int i = 0; i < data.size(); i++) {
+                if ("".equals(data.get(i).getExpenses()) || "面议".equals(data.get(i).getExpenses())) {
+                    continue;
+                }
+                if (data.get(i).getNumber() > 0)
+                    price += Double.parseDouble(data.get(i).getExpenses());
+            }
+
+        }
+        txtServiceTotalServiceinfo.setText(price + "");
+
+    }
+
+    /*材料总价*/
+    public void getPeiJianTotal() {
+
+        double total = 0;
+
+        if (peiJian != null && peiJian.size() > 0) {
+
+            for (int i = 0; i < peiJian.size(); i++) {
+
+                String price = peiJian.get(i).getPrice();
+
+                if ("".equals(price) || "面议".equals(price)) {
+
+                    continue;
+                }
+                if (peiJian.get(i).getNumber() > 0)
+                    total += Double.parseDouble(price);
+            }
+        }
+
+        txtPeijianTotalServiceinfo.setText("包含材料费￥" + total + "元");
     }
 }

@@ -196,8 +196,7 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:hint="银河科技园-唐延路25号A座604"
-                    android:inputType="phone"
-                    android:maxLength="11"
+                    android:maxLines="1"
                     android:textColor="@color/black"
                     android:textColorHint="@color/grey"
                     android:textSize="14sp" />

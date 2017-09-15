@@ -1,6 +1,7 @@
 package com.example.maintainsteward.api;
 
 import com.example.maintainsteward.bean.AddressBean;
+import com.example.maintainsteward.bean.AddressListBean;
 import com.example.maintainsteward.bean.BannerBean;
 import com.example.maintainsteward.bean.CityListBean;
 import com.example.maintainsteward.bean.AppIndexCategoryBean;
@@ -156,6 +157,16 @@ public interface HttpApi {
                                                  @Field("timestamp") String timestamp,
                                                  @Field("sign") String sign,
                                                  @Field("key") String key);
+
+
+    /*获取用户地址*/
+    @FormUrlEncoded
+    @POST("GetAddress")
+    Call<AddressListBean> getAddress(@Field("user_id") String id,
+                                     @Field("page") String page,
+                                     @Field("timestamp") String timestamp,
+                                     @Field("sign") String sign,
+                                     @Field("key") String key);
 
 
     /*我的粉丝*/

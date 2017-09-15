@@ -2,13 +2,20 @@ package com.example.maintainsteward.mvp_presonter;
 
 import com.example.maintainsteward.api.HttpApi;
 import com.example.maintainsteward.base.BaseHttpApi;
+import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.CityListBean;
 import com.example.maintainsteward.mvp_view.ChooseLocationListener;
 import com.example.maintainsteward.utils.ToolUitls;
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Administrator on 2017/9/12.
@@ -21,7 +28,19 @@ public class ChooseLocationPresonter {
     HttpApi api;
 
     public ChooseLocationPresonter() {
-        api = BaseHttpApi.getInstanceof();
+        Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
+            @Override
+            public boolean shouldSkipField(FieldAttributes f) {
+                return f.getName().contains("isCheck");
+            }
+
+            @Override
+            public boolean shouldSkipClass(Class<?> clazz) {
+                return false;
+            }
+        }).create();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Contacts.TEST_BASE_URL).addConverterFactory(GsonConverterFactory.create(gson)).build();
+        api = retrofit.create(HttpApi.class);
     }
 
     public void getCityList(String timestamp, String sign, String key) {
@@ -32,7 +51,6 @@ public class ChooseLocationPresonter {
             @Override
             public void onResponse(Call<CityListBean> call, Response<CityListBean> response) {
 
-                ToolUitls.print(TAG, "response==" + response);
 
                 if (response.isSuccessful()) {
 

@@ -34,4 +34,8 @@ public final class Contacts {
     public static final String LOCATION = "location";
 
 
+    /*添加地址成功*/
+    public static final String ADD_ADDRESS_OK = "add_address_ok";
+
+
 }

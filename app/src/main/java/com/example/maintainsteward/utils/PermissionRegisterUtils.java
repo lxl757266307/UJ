@@ -51,6 +51,7 @@ public final class PermissionRegisterUtils {
 //    <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
     public static final String READ_CONTACTS = "android.permission.READ_CONTACTS";
+    public static final String ACTION_CALL = "android.intent.action.CALL";
 
 
     public final static String[] PERMISSION = {PermissionRegisterUtils.ACCESS_COARSE_LOCATION,
@@ -64,7 +65,8 @@ public final class PermissionRegisterUtils {
             PermissionRegisterUtils.WRITE_EXTERNAL_STORAGE,
             PermissionRegisterUtils.CHANGE_WIFI_STATE,
             PermissionRegisterUtils.ACCESS_LOCATION_EXTRA_COMMANDS,
-            PermissionRegisterUtils.READ_CONTACTS
+            PermissionRegisterUtils.READ_CONTACTS,
+            PermissionRegisterUtils.ACTION_CALL
     };
 
 

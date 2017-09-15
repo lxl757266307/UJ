@@ -12,7 +12,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
-import com.example.maintainsteward.adapter.DialogFragmentListViewAdapter;
+import com.example.maintainsteward.adapter.DialogFragmentCityListViewAdapter;
+import com.example.maintainsteward.bean.CityListBean;
 import com.example.maintainsteward.inter.OnLocationItemClickListener;
 import com.example.maintainsteward.utils.LocationUtils;
 
@@ -28,7 +29,6 @@ import butterknife.Unbinder;
 
 public class CityFragment extends Fragment implements AdapterView.OnItemClickListener {
 
-    List<String> mCity;
     @BindView(R.id.lv_fragment_dialog)
     ListView lvFragmentDialog;
     Unbinder unbinder;
@@ -49,16 +49,28 @@ public class CityFragment extends Fragment implements AdapterView.OnItemClickLis
         return view;
     }
 
-    List<String> list;
+    List<CityListBean.DataBean> list;
+
+    public List<CityListBean.DataBean> getList() {
+        return list;
+    }
+
+    public void setList(List<CityListBean.DataBean> list) {
+        this.list = list;
+    }
+
+    DialogFragmentCityListViewAdapter adapter;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         lvFragmentDialog.setOnItemClickListener(this);
-        list = LocationUtils.getPrivince();
-        DialogFragmentListViewAdapter adapter = new DialogFragmentListViewAdapter(list, getActivity());
-        lvFragmentDialog.setAdapter(adapter);
 
+
+        if (list != null) {
+            adapter = new DialogFragmentCityListViewAdapter(list, getActivity());
+            lvFragmentDialog.setAdapter(adapter);
+        }
     }
 
     @Override
@@ -71,9 +83,16 @@ public class CityFragment extends Fragment implements AdapterView.OnItemClickLis
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         TextView textView = (TextView) view.findViewById(R.id.txt_lv_item);
-        textView.setTextColor(Color.RED);
+
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).setCheck(false);
+        }
+        list.get(position).setCheck(true);
+        adapter.setmData(list);
+        adapter.notifyDataSetChanged();
+
         if (mOnLocationItemClickListener != null && list != null) {
-            mOnLocationItemClickListener.cityClickListener(list.get(position));
+            mOnLocationItemClickListener.cityClickListener(list.get(position).getCity_name(), position,list.get(position).getId());
         }
     }
 

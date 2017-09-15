@@ -24,7 +24,10 @@ import android.widget.TextView;
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.DialogFragmentPagerAdapter;
+import com.example.maintainsteward.bean.CityListBean;
 import com.example.maintainsteward.inter.OnLocationItemClickListener;
+import com.example.maintainsteward.utils.LocationUtils;
+import com.example.maintainsteward.utils.ToolUitls;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +43,8 @@ import butterknife.Unbinder;
 
 public class MyDialogFragment extends DialogFragment implements ViewPager.OnPageChangeListener, OnLocationItemClickListener {
     public static final String TAG = "MyDialogFragment";
-    @BindView(R.id.img_dilaog_dismiss)
-    ImageView imgDilaogDismiss;
+    @BindView(R.id.layout_dilaog_dismiss)
+    LinearLayout imgDilaogDismiss;
     @BindView(R.id.pst_dialog_bottom)
     PagerSlidingTabStrip pstDialogBottom;
     @BindView(R.id.vip_dialog_bottom_pager)
@@ -49,7 +52,15 @@ public class MyDialogFragment extends DialogFragment implements ViewPager.OnPage
     @BindView(R.id.dialog_fragment)
     LinearLayout dialogFragment;
     Unbinder unbinder;
+    List<CityListBean.DataBean> data;
 
+    public List<CityListBean.DataBean> getData() {
+        return data;
+    }
+
+    public void setData(List<CityListBean.DataBean> data) {
+        this.data = data;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -100,10 +111,9 @@ public class MyDialogFragment extends DialogFragment implements ViewPager.OnPage
     }
 
 
-    String[] titleArray = {"请选择", "", ""};
+    String[] titleArray = {"请选择", ""};
     DialogFragmentPagerAdapter pagerAdapter;
 
-    ProvinceFragment provinceFragment;
     CityFragment cityFragment;
     DistrictFragment districtFragment;
 
@@ -111,15 +121,17 @@ public class MyDialogFragment extends DialogFragment implements ViewPager.OnPage
 
     public void initViewPager() {
 
-        provinceFragment = new ProvinceFragment();
-        provinceFragment.setmOnLocationItemClickListener(this);
+
         cityFragment = new CityFragment();
+        if (data != null) {
+            cityFragment.setList(data);
+        }
         cityFragment.setmOnLocationItemClickListener(this);
         districtFragment = new DistrictFragment();
         districtFragment.setmOnLocationItemClickListener(this);
         list = new ArrayList<>();
 
-        list.add(provinceFragment);
+
         list.add(cityFragment);
         list.add(districtFragment);
 
@@ -157,33 +169,32 @@ public class MyDialogFragment extends DialogFragment implements ViewPager.OnPage
 
     }
 
-    @OnClick(R.id.img_dilaog_dismiss)
+    @OnClick(R.id.layout_dilaog_dismiss)
     public void dismiss() {
         getDialog().dismiss();
         if (onAddressChoosedListener != null) {
-            onAddressChoosedListener.onAddressChoosed(titleArray);
+
+
+            onAddressChoosedListener.onAddressChoosed(titleArray, xId);
         }
     }
 
+    String[] xId = new String[2];
+
     @Override
-    public void provinceClickListener(String province) {
+    public void cityClickListener(String city, int position, String id) {
+        xId[0] = id;
         titleArray[1] = "请选择";
         vipDialogBottomPager.setCurrentItem(1);
-        setTitleText(province, 0);
+        districtFragment.setList(data.get(position).getDistrict());
+        setTitleText(city, 0);
 
     }
 
     @Override
-    public void cityClickListener(String city) {
-        titleArray[2] = "请选择";
-        vipDialogBottomPager.setCurrentItem(2);
-        setTitleText(city, 1);
-
-    }
-
-    @Override
-    public void districtClickListener(String district) {
-        setTitleText(district, 2);
+    public void districtClickListener(String district, String id) {
+        xId[1] = id;
+        setTitleText(district, 1);
 //        dismiss();
     }
 
@@ -191,6 +202,7 @@ public class MyDialogFragment extends DialogFragment implements ViewPager.OnPage
         titleArray[index] = location;
         pagerAdapter.setArray(titleArray);
         pstDialogBottom.notifyDataSetChanged();
+
 
     }
 
@@ -206,7 +218,7 @@ public class MyDialogFragment extends DialogFragment implements ViewPager.OnPage
 
     public interface OnAddressChoosedListener {
 
-        void onAddressChoosed(String[] str);
+        void onAddressChoosed(String[] str, String[] id);
 
     }
 }

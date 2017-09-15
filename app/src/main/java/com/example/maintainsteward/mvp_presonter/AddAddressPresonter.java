@@ -4,6 +4,7 @@ import com.example.maintainsteward.api.HttpApi;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.AddressBean;
 import com.example.maintainsteward.bean.CityListBean;
+import com.example.maintainsteward.utils.ToolUitls;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,29 +29,20 @@ public class AddAddressPresonter {
     }
 
 
-    // http://wxtest.cnncsh.com/app_user/index/index/op/
-    // AddAddress?
-    // address=侧时代走
-    // &city=3
-    // &community=0
-    // &district=35
-    // &timestamp=1504083125000
-    // &user_id=442
-    // &user_name=测试
-    // &user_phone=13545454545
-    // &sign=3D647F1372B16E47849BE3A8F0C439DC
-    // &key=idf5nsi5t0qbemwo12hztbftm53tbv6pht
+    public static final String TAG = "AddAddressPresonter";
 
     /*添加地址*/
-    public void addAddress(String address, String city, String community, String district,
+    public void addAddress(String address, String city, String district,
                            String timestamp, String user_id, String user_name, String user_phone,
                            String sign, String key) {
 
 
+        ToolUitls.print(TAG, "city===" + city + "        district==" + district);
         Call<AddressBean> addressBeanCall = httpApi.addAddressCallBack(address, city, district, timestamp, user_id, user_name, user_phone, sign, key);
         addressBeanCall.enqueue(new Callback<AddressBean>() {
             @Override
             public void onResponse(Call<AddressBean> call, Response<AddressBean> response) {
+
 
                 if (response.isSuccessful()) {
 
@@ -86,7 +78,7 @@ public class AddAddressPresonter {
                     CityListBean body = response.body();
 
                     if (onAddAddressListener != null && body != null) {
-                        onAddAddressListener.getCityList(body);
+                        onAddAddressListener.getCityLists(body);
                     }
 
                 }
@@ -110,7 +102,7 @@ public class AddAddressPresonter {
 
         void addAddressSucess(AddressBean body);
 
-        void getCityList(CityListBean body);
+        void getCityLists(CityListBean body);
 
     }
 }

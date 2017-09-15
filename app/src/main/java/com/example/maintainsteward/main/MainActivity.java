@@ -61,10 +61,13 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     LinearLayout layoutMainFour;
 
     RadioButton[] buttonArray;
+    int page = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        page = this.getIntent().getIntExtra("page", -1);
+
         MyApplication.getActivitiesList().add(this);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -75,6 +78,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
         setRadioArray();
         setFragment();
+
 
     }
 
@@ -98,6 +102,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         vipMain.setAdapter(mainFragmentPagerAdapter);
 
         vipMain.addOnPageChangeListener(this);
+
+        if (page != -1) {
+            vipMain.setCurrentItem(page);
+        }
 
     }
 

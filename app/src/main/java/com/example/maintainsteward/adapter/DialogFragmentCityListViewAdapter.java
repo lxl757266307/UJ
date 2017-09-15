@@ -1,6 +1,7 @@
 package com.example.maintainsteward.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.bean.CityListBean;
 
 import java.util.List;
 
@@ -18,13 +20,17 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2017/8/11.
  */
 
-public class DialogFragmentListViewAdapter extends BaseAdapter {
-    List<String> mData;
+public class DialogFragmentCityListViewAdapter extends BaseAdapter {
+    List<CityListBean.DataBean> mData;
     Context mContext;
 
-    public DialogFragmentListViewAdapter(List<String> mData, Context mContext) {
+    public DialogFragmentCityListViewAdapter(List<CityListBean.DataBean> mData, Context mContext) {
         this.mData = mData;
         this.mContext = mContext;
+    }
+
+    public void setmData(List<CityListBean.DataBean> mData) {
+        this.mData = mData;
     }
 
     @Override
@@ -52,7 +58,14 @@ public class DialogFragmentListViewAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.txtLvItem.setText(mData.get(position));
+        viewHolder.txtLvItem.setText(mData.get(position).getCity_name());
+
+        if (mData.get(position).isCheck()) {
+            viewHolder.txtLvItem.setTextColor(Color.parseColor("#da0a0a"));
+        } else {
+            viewHolder.txtLvItem.setTextColor(Color.parseColor("#181818"));
+        }
+
         return convertView;
     }
 

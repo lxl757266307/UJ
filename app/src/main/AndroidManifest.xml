@@ -13,6 +13,7 @@
 
     <!--微信支付权限-->
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -107,6 +108,8 @@
         <!--服务详情界面-->
         <activity android:name=".activity.ServiceInfoActivity" />
 
+        <!--立即预约-->
+        <activity android:name=".activity.LiJiYuYueActivity" />
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.example.maintainsteward.bean;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
@@ -33,6 +34,7 @@ public class CityListBean implements Serializable {
 
 
     private String status;
+
     private List<DataBean> data;
 
     public static CityListBean objectFromData(String str) {
@@ -115,6 +117,16 @@ public class CityListBean implements Serializable {
         private String id;
         private String city_name;
         private List<DistrictBean> district;
+        @Expose
+        private boolean isCheck;
+
+        public boolean isCheck() {
+            return isCheck;
+        }
+
+        public void setCheck(boolean check) {
+            isCheck = check;
+        }
 
         public static DataBean objectFromData(String str) {
 
@@ -204,6 +216,16 @@ public class CityListBean implements Serializable {
             private String id;
             private String district_name;
             private List<CommunityBean> community;
+            @Expose
+            private boolean isCheck;
+
+            public boolean isCheck() {
+                return isCheck;
+            }
+
+            public void setCheck(boolean check) {
+                isCheck = check;
+            }
 
             public static DistrictBean objectFromData(String str) {
 
@@ -273,7 +295,7 @@ public class CityListBean implements Serializable {
                 this.community = community;
             }
 
-            public static class CommunityBean implements Serializable  {
+            public static class CommunityBean implements Serializable {
 
                 @Override
                 public String toString() {

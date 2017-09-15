@@ -2,6 +2,7 @@ package com.example.maintainsteward.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,13 +17,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.adapter.CityListAdapter;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.AddressBean;
+import com.example.maintainsteward.bean.AddressListBean;
 import com.example.maintainsteward.bean.CityListBean;
 import com.example.maintainsteward.fragment.MyDialogFragment;
 import com.example.maintainsteward.mvp_presonter.AddAddressPresonter;
+import com.example.maintainsteward.mvp_presonter.ChooseLocationPresonter;
+import com.example.maintainsteward.mvp_view.ChooseLocationListener;
+import com.example.maintainsteward.utils.LocationUtils;
 import com.example.maintainsteward.utils.ToolUitls;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
@@ -35,7 +42,8 @@ import butterknife.OnClick;
  * Created by Administrator on 2017/8/5.
  */
 
-public class AddAddressActivity extends FragmentActivity implements MyDialogFragment.OnAddressChoosedListener, AddAddressPresonter.OnAddAddressListener {
+public class AddAddressActivity extends FragmentActivity implements MyDialogFragment.OnAddressChoosedListener,
+        AddAddressPresonter.OnAddAddressListener, ChooseLocationListener {
 
     public static final String TAG = "AddAddressActivity";
 
@@ -83,8 +91,47 @@ public class AddAddressActivity extends FragmentActivity implements MyDialogFrag
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initData();
         setContentView(R.layout.activity_add_address);
         ButterKnife.bind(this);
+        initView();
+        initCityAndDistrict();
+    }
+
+    String id = "";
+
+    private void initView() {
+
+        if (dataBean != null) {
+            id = dataBean.getId();
+            mEditUserNameAddAddress.setText(dataBean.getUser_name());
+            mEditUserPhoneAddAddress.setText(dataBean.getTel());
+            mTxtUserDistrictAddAddress.setText(dataBean.getCity_name() + dataBean.getDistrict_name());
+            eDitUserMinuteAddAddress.setText(dataBean.getAddress());
+
+        }
+
+    }
+
+    AddressListBean.DataBean dataBean;
+
+    String flag = "";
+
+    private void initData() {
+        flag = this.getIntent().getStringExtra("flag");
+        dataBean = (AddressListBean.DataBean) this.getIntent().getSerializableExtra("data");
+    }
+
+    private void initCityAndDistrict() {
+
+        ChooseLocationPresonter chooseLocationPresonter = new ChooseLocationPresonter();
+        chooseLocationPresonter.setChooseLocationListener(this);
+        String time = System.currentTimeMillis() + "";
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("timestamp", time);
+        String sign = ToolUitls.getSign(map);
+        chooseLocationPresonter.getCityList(time, sign, Contacts.KEY);
+
     }
 
 
@@ -99,6 +146,9 @@ public class AddAddressActivity extends FragmentActivity implements MyDialogFrag
     /*必须设置在Activity中否则不显示*/
     public void setDialog() {
         MyDialogFragment dialogFragment = new MyDialogFragment();
+        if (data != null) {
+            dialogFragment.setData(data);
+        }
         dialogFragment.setOnAddressChoosedListener(this);
         dialogFragment.show(getSupportFragmentManager(), "");
     }
@@ -189,17 +239,14 @@ public class AddAddressActivity extends FragmentActivity implements MyDialogFrag
 
 
     String location = "";
-    String province = "";
     String city = "";
     String district = "";
-    int userId;
 
     @Override
-    public void onAddressChoosed(String[] str) {
+    public void onAddressChoosed(String[] str, String[] id) {
 
-        province = str[0];
-        city = str[1];
-        district = str[2];
+        city = id[0];
+        district = id[1];
         for (int i = 0; i < str.length; i++) {
             if (str[i].equals("请选择") || str[i].equals("")) {
                 return;
@@ -208,7 +255,6 @@ public class AddAddressActivity extends FragmentActivity implements MyDialogFrag
             }
         }
 
-
         mTxtUserDistrictAddAddress.setText(location);
 
     }
@@ -216,49 +262,67 @@ public class AddAddressActivity extends FragmentActivity implements MyDialogFrag
 
     @OnClick(R.id.btn_submit_add_address)
     public void submit() {
+        SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
+        String id = sharedPreferences.getString("id", null);
 
-        String timeStamp = new Date() + "";
+
+        String timeStamp = System.currentTimeMillis() + "";
         String userName = mEditUserNameAddAddress.getText().toString();
         String userPhone = mEditUserPhoneAddAddress.getText().toString();
 
+        String address = eDitUserMinuteAddAddress.getText().toString();
 
         TreeMap<String, String> map = new TreeMap<>();
-        map.put("address", location);
+        map.put("address", address);
         map.put("city", city);
-        map.put("community", "");
         map.put("district", district);
         map.put("timestamp", timeStamp);
-        map.put("user_id", userId + "");
+        map.put("user_id", id);
         map.put("user_name", userName);
         map.put("user_phone", userPhone);
-        map.put("key", Contacts.KEY);
 
 
-        String sigin = ToolUitls.getSign(map);
+        String sign = ToolUitls.getSign(map);
 
 
         AddAddressPresonter addAddressPresonter = new AddAddressPresonter();
         addAddressPresonter.setOnAddAddressListener(this);
-        addAddressPresonter.addAddress(location, city, "", district, timeStamp, userId + "", userName, userPhone, sigin, Contacts.KEY);
+        addAddressPresonter.addAddress(address, city, district, timeStamp, id, userName, userPhone, sign
+                , Contacts.KEY);
 
 
     }
 
     @Override
     public void addAddressSucess(AddressBean body) {
-        Intent intent = new Intent(this, AddressManagerActivity.class);
 
-        setResult(RESULT_OK, intent);
-    }
-
-    @Override
-    public void getCityList(CityListBean body) {
 
         switch (body.getStatus()) {
             case "1":
+                Intent intent = new Intent(Contacts.ADD_ADDRESS_OK);
+                sendBroadcast(intent);
+                finish();
+                break;
+        }
+
+    }
+
+    @Override
+    public void getCityLists(CityListBean body) {
+        switch (body.getStatus()) {
+            case "1":
                 List<CityListBean.DataBean> data = body.getData();
+                break;
+        }
+    }
 
+    List<CityListBean.DataBean> data;
 
+    @Override
+    public void getCityList(CityListBean body) {
+        switch (body.getStatus()) {
+            case "1":
+                data = body.getData();
                 break;
         }
 
