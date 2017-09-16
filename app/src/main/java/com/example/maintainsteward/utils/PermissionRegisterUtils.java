@@ -51,7 +51,14 @@ public final class PermissionRegisterUtils {
 //    <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
     public static final String READ_CONTACTS = "android.permission.READ_CONTACTS";
+
+    /*电话*/
     public static final String ACTION_CALL = "android.intent.action.CALL";
+
+    //   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+//    <uses-permission android:name="android.permission.CAMERA"/>
+    public static final String READ_EXTERNAL_STORAGE = "android.permission.READ_EXTERNAL_STORAGE";
+    public static final String CAMERA = "android.permission.CAMERA";
 
 
     public final static String[] PERMISSION = {PermissionRegisterUtils.ACCESS_COARSE_LOCATION,
@@ -66,7 +73,9 @@ public final class PermissionRegisterUtils {
             PermissionRegisterUtils.CHANGE_WIFI_STATE,
             PermissionRegisterUtils.ACCESS_LOCATION_EXTRA_COMMANDS,
             PermissionRegisterUtils.READ_CONTACTS,
-            PermissionRegisterUtils.ACTION_CALL
+            PermissionRegisterUtils.ACTION_CALL,
+            PermissionRegisterUtils.READ_EXTERNAL_STORAGE,
+            PermissionRegisterUtils.CAMERA,
     };
 
 

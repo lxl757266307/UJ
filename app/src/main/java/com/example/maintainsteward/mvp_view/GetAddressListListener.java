@@ -1,5 +1,6 @@
 package com.example.maintainsteward.mvp_view;
 
+import com.example.maintainsteward.bean.AddressDeleteBean;
 import com.example.maintainsteward.bean.AddressListBean;
 
 /**
@@ -9,5 +10,7 @@ import com.example.maintainsteward.bean.AddressListBean;
 public interface GetAddressListListener {
 
     void getAddressList(AddressListBean addressListBean);
+
+    void deleteAddressSucess(AddressDeleteBean body, int position);
 
 }

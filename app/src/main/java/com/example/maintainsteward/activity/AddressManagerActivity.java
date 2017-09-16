@@ -5,13 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,11 +17,11 @@ import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.AddressListAdapter;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
+import com.example.maintainsteward.bean.AddressDeleteBean;
 import com.example.maintainsteward.bean.AddressListBean;
 import com.example.maintainsteward.mvp_presonter.AddressManagerPresonter;
 import com.example.maintainsteward.mvp_view.GetAddressListListener;
 import com.example.maintainsteward.utils.ToolUitls;
-import com.example.maintainsteward.view.MyLayoutManager;
 
 import java.util.List;
 import java.util.TreeMap;
@@ -63,9 +61,12 @@ public class AddressManagerActivity extends BaseActivity implements GetAddressLi
         return super.onKeyDown(keyCode, event);
     }
 
+    String flag;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        flag = this.getIntent().getStringExtra("flag");
         setContentView(R.layout.activity_address_manager);
         ButterKnife.bind(this);
         initPresonter();
@@ -105,9 +106,11 @@ public class AddressManagerActivity extends BaseActivity implements GetAddressLi
         presonter.setListListener(this);
     }
 
+    String id;
+
     public void getAddress() {
         SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
-        String id = sharedPreferences.getString("id", null);
+        id = sharedPreferences.getString("id", null);
         TreeMap<String, String> map = new TreeMap<>();
         String timeStamp = System.currentTimeMillis() + "";
         map.put("timestamp", timeStamp);
@@ -156,6 +159,19 @@ public class AddressManagerActivity extends BaseActivity implements GetAddressLi
     }
 
     @Override
+    public void deleteAddressSucess(AddressDeleteBean body, int position) {
+        switch (body.getStatus()) {
+            case "1":
+                data.remove(position);
+                addressListAdapter.setList(data);
+                addressListAdapter.notifyDataSetChanged();
+                String data = body.getData();
+                ToolUitls.toast(this, data);
+                break;
+        }
+    }
+
+    @Override
     public void onEdit(int postion) {
         AddressListBean.DataBean dataBean = data.get(postion);
         Intent intent = new Intent(this, AddAddressActivity.class);
@@ -167,15 +183,35 @@ public class AddressManagerActivity extends BaseActivity implements GetAddressLi
     }
 
     @Override
-    public void onDelete(int postion) {
-
-//        presonter;
-
+    public void onDelete(int position) {
+        TreeMap<String, String> map = new TreeMap<>();
+        String timeStamp = System.currentTimeMillis() + "";
+        map.put("timestamp", timeStamp);
+        map.put("id", data.get(position).getId());
+        String sign = ToolUitls.getSign(map);
+        presonter.deleteAddress(data.get(position).getId(), timeStamp, sign, Contacts.KEY, position);
+//        ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "DelAddress?" +
+//                "id=" + id + "&timestamp="
+//                + timeStamp + "&sign=" + sign
+//                + "&key=" + Contacts.KEY);
 
     }
 
     @Override
     public void onItemClick(int postion) {
+
+        if (flag != null && flag.equals("LiJiYuYueActivity")) {
+
+            AddressListBean.DataBean dataBean = data.get(postion);
+
+            Intent intent = new Intent();
+            intent.putExtra("address", dataBean);
+            setResult(RESULT_OK, intent);
+            finish();
+        } else {
+            return;
+        }
+
 
     }
 

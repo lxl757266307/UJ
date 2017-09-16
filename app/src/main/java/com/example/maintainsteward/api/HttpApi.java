@@ -1,6 +1,7 @@
 package com.example.maintainsteward.api;
 
 import com.example.maintainsteward.bean.AddressBean;
+import com.example.maintainsteward.bean.AddressDeleteBean;
 import com.example.maintainsteward.bean.AddressListBean;
 import com.example.maintainsteward.bean.BannerBean;
 import com.example.maintainsteward.bean.CityListBean;
@@ -8,6 +9,7 @@ import com.example.maintainsteward.bean.AppIndexCategoryBean;
 import com.example.maintainsteward.bean.FirstKindsBean;
 import com.example.maintainsteward.bean.HotWordBean;
 import com.example.maintainsteward.bean.LoginCallBackBean;
+import com.example.maintainsteward.bean.QiNiuBean;
 import com.example.maintainsteward.bean.SearchKeyWordBean;
 import com.example.maintainsteward.bean.SearviceInfoBean;
 import com.example.maintainsteward.bean.SecondKindsBean;
@@ -166,7 +168,42 @@ public interface HttpApi {
                                      @Field("page") String page,
                                      @Field("timestamp") String timestamp,
                                      @Field("sign") String sign,
-                                     @Field("key") String key);
+                                     @Field("key") String key);  /*获取用户地址*/
+
+    /*删除地址*/
+    @FormUrlEncoded
+    @POST("DelAddress")
+    Call<AddressDeleteBean> deleteAddress(@Field("id") String id,
+                                          @Field("timestamp") String timestamp,
+                                          @Field("sign") String sign,
+                                          @Field("key") String key);    /*删除地址*/
+
+    @FormUrlEncoded
+    @POST("ServiceOrderSubmit")
+    Call<AddressDeleteBean> serviceOrderSubmit(@Field("user_id") String id,
+                                               @Field("cat_id") String cat_id,
+                                               @Field("name") String name,
+                                               @Field("address_id") String address_id,
+                                               @Field("service_con") String service_con,
+                                               @Field("material") String material,
+                                               @Field("content") String content,
+                                               @Field("img1") String img1,
+                                               @Field("img2") String img2,
+                                               @Field("img3") String img3,
+                                               @Field("img4") String img4,
+                                               @Field("img5") String img5,
+                                               @Field("img6") String img6,
+                                               @Field("order_time") String order_time,
+                                               @Field("timestamp") String timestamp,
+                                               @Field("sign") String sign,
+                                               @Field("key") String key);
+
+
+    /*获取七牛云 token*/
+    @FormUrlEncoded
+    @POST("index.php")
+    Call<QiNiuBean> getToken(@Field("code") String code
+    );
 
 
     /*我的粉丝*/

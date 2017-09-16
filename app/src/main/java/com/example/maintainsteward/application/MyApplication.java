@@ -164,10 +164,11 @@ public class MyApplication extends Application {
     }
 
 
-    public UploadManager getUploadManager() {
+    public static UploadManager getUploadManager() {
         return mUploadManager;
     }
 
+    public static UploadManager uploadManager;
 
     private void initQINIU() {
         Configuration config = new Configuration.Builder()
@@ -181,7 +182,7 @@ public class MyApplication extends Application {
                 .zone(FixedZone.zone0)        // 设置区域，指定不同区域的上传域名、备用域名、备用IP。
                 .build();
         // 重用uploadManager。一般地，只需要创建一个uploadManager对象
-        UploadManager uploadManager = getUploadManager(config);
+        uploadManager = getUploadManager(config);
 
     }
 

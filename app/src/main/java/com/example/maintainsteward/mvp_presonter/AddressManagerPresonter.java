@@ -2,6 +2,7 @@ package com.example.maintainsteward.mvp_presonter;
 
 import com.example.maintainsteward.api.HttpApi;
 import com.example.maintainsteward.base.BaseHttpApi;
+import com.example.maintainsteward.bean.AddressDeleteBean;
 import com.example.maintainsteward.bean.AddressListBean;
 import com.example.maintainsteward.mvp_view.GetAddressListListener;
 
@@ -50,7 +51,29 @@ public class AddressManagerPresonter {
     }
 
 
-    public void deleteAddress(){
+    public void deleteAddress(String id, String timeStamp, String sign, String key, final int position) {
+        Call<AddressDeleteBean> addressDeleteBeanCall = httpApi.deleteAddress(id, timeStamp, sign, key);
+        addressDeleteBeanCall.enqueue(new Callback<AddressDeleteBean>() {
+            @Override
+            public void onResponse(Call<AddressDeleteBean> call, Response<AddressDeleteBean> response) {
+                if (response.isSuccessful()) {
+
+                    AddressDeleteBean body = response.body();
+
+                    if (listListener != null && body != null) {
+                        listListener.deleteAddressSucess(body,position);
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<AddressDeleteBean> call, Throwable t) {
+
+            }
+        });
+
 
     }
 

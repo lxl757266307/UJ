@@ -2,26 +2,50 @@ package com.example.maintainsteward.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.TimePickerView;
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.OrderPeiJianListAdapter;
 import com.example.maintainsteward.adapter.OrderServiceListAdapter;
+import com.example.maintainsteward.adapter.PhotoListAdapter;
+import com.example.maintainsteward.adapter.PhotoListAdapter.OnPhotoClickListener;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
+import com.example.maintainsteward.bean.AddressListBean;
 import com.example.maintainsteward.bean.SearviceInfoBean;
 import com.example.maintainsteward.bean.ServiceGoodsGetBean;
 import com.example.maintainsteward.main.MainActivity;
+import com.example.maintainsteward.mvp_presonter.UpLoadPhotoPresonter;
+import com.example.maintainsteward.mvp_view.OnUpLoadPhotoListener;
+import com.example.maintainsteward.utils.PhotoUtils;
 import com.example.maintainsteward.utils.ToolUitls;
+import com.example.maintainsteward.view.MyLayoutManager2;
 import com.example.maintainsteward.view.MyListView;
-import com.example.maintainsteward.view.MyViewGroup;
+import com.github.rahatarmanahmed.cpv.CircularProgressView;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -33,7 +57,9 @@ import butterknife.OnClick;
  * Created by Administrator on 2017/9/15.
  */
 
-public class LiJiYuYueActivity extends BaseActivity {
+public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListener, OnUpLoadPhotoListener {
+    private static final int PHOTO_REQEST_CODE = 2;
+    private static final int REQEST_CODE_CROP = 3;
     @BindView(R.id.layout_back)
     LinearLayout layoutBack;
     @BindView(R.id.txt_title)
@@ -60,10 +86,19 @@ public class LiJiYuYueActivity extends BaseActivity {
     LinearLayout layoutChooseRepairTimeLijiyuyue;
     @BindView(R.id.edit_repair_descrription)
     EditText editRepairDescrription;
-    @BindView(R.id.vg_photo_lijiyuyue)
-    MyViewGroup vgPhotoLijiyuyue;
+
 
     public static final int REQUEST_CODE = 1;
+    @BindView(R.id.txt_total_service_lijiyuyue)
+    TextView txtTotalServiceLijiyuyue;
+    @BindView(R.id.txt_total_peijian_lijiyuyue)
+    TextView txtTotalPeijianLijiyuyue;
+    @BindView(R.id.txt_repair_time_lijiyuyue)
+    TextView txtRepairTimeLijiyuyue;
+    @BindView(R.id.rv_photo_lijiyuyue)
+    RecyclerView rvPhotoLijiyuyue;
+    @BindView(R.id.txt_submit_lijiyuyue)
+    TextView txtSubmitLijiyuyue;
 
 
     @Override
@@ -77,9 +112,15 @@ public class LiJiYuYueActivity extends BaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    int page = 1;
 
-    @OnClick({R.id.layout_back, R.id.layout_choose_service_lijiyuyue, R.id.layout_choose_address_lijiyuyue, R.id.layout_choose_repair_time_lijiyuyue})
+    int page = 1;
+    public static final String TAG = "LiJiYuYueActivity";
+
+    @OnClick({R.id.layout_back,
+            R.id.layout_choose_service_lijiyuyue,
+            R.id.layout_choose_address_lijiyuyue,
+            R.id.layout_choose_repair_time_lijiyuyue,
+            R.id.txt_submit_lijiyuyue})
     public void click(View view) {
 
         switch (view.getId()) {
@@ -110,17 +151,57 @@ public class LiJiYuYueActivity extends BaseActivity {
                         + "&key=" + Contacts.KEY);
 
                 Intent intent1 = new Intent(this, AddressManagerActivity.class);
+                intent1.putExtra("flag", TAG);
                 startActivityForResult(intent1, REQUEST_CODE);
 
                 break;
             case R.id.layout_choose_repair_time_lijiyuyue:
+                ToolUitls.print(TAG, "选择时间");
+                initTimePicker();
+                mTimePickerView.show();
                 break;
+            case R.id.txt_submit_lijiyuyue:
+
+                setSureDialog();
+                break;
+
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (RESULT_OK == resultCode) {
+            switch (requestCode) {
+                case REQUEST_CODE:
+                    AddressListBean.DataBean dataBean = (AddressListBean.DataBean) data.getSerializableExtra("address");
+                    if (dataBean != null) {
+                        layoutChooseAddressLijiyuyue.setVisibility(View.GONE);
+                        layoutAddressLijiyuyue.setVisibility(View.VISIBLE);
+                        txtAddressLijiyuyue.setText(dataBean.getAddress());
+                        txtUsernameLijiyuyue.setText(dataBean.getUser_name());
+                        txtPhoneLijiyuyue.setText(dataBean.getTel());
+                    }
+
+                    break;
+
+                case PHOTO_REQEST_CODE:
+                    if (bitmaps.size() <= 6) {
+                        Uri uri = data.getData();
+                        PhotoUtils.crop(uri, this, REQEST_CODE_CROP);
+                    }
+
+                    break;
+                case REQEST_CODE_CROP:
+                    Bitmap bitmap = data.getParcelableExtra("data");
+                    bitmaps.add(0, bitmap);
+                    photoListAdapter.setList(bitmaps);
+                    photoListAdapter.notifyDataSetChanged();
+
+            }
+        }
+
+
     }
 
     @Override
@@ -129,10 +210,37 @@ public class LiJiYuYueActivity extends BaseActivity {
         initData();
         setContentView(R.layout.activity_lijiyuyue);
         ButterKnife.bind(this);
+        txtServiceTitleLijiyuyue.setText(title);
 
         initList();
+        initPhotoList();
 
     }
+
+    PhotoListAdapter photoListAdapter;
+
+    List<Bitmap> bitmaps;
+
+    private void initPhotoList() {
+        bitmaps = new ArrayList<>();
+        bitmaps.add(BitmapFactory.decodeResource(getResources(), R.mipmap.tianjiatupian));
+        rvPhotoLijiyuyue.setLayoutManager(new MyLayoutManager2(this, 4, LinearLayoutManager.VERTICAL, false));
+        rvPhotoLijiyuyue.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+                outRect.set(5, 5, 0, 0);
+            }
+        });
+
+        photoListAdapter = new PhotoListAdapter(this);
+        photoListAdapter.setOnPhotoClickListener(this);
+        photoListAdapter.setList(bitmaps);
+        rvPhotoLijiyuyue.setAdapter(photoListAdapter);
+        photoListAdapter.notifyDataSetChanged();
+
+    }
+
 
     /*服务列表*/
     List<SearviceInfoBean.DataBean> data;
@@ -141,7 +249,6 @@ public class LiJiYuYueActivity extends BaseActivity {
 
     private void initList() {
 
-        txtTitle.setText(title);
 
         if (data != null && data.size() > 0) {
             layoutChooseServiceLijiyuyue.setVisibility(View.GONE);
@@ -155,6 +262,7 @@ public class LiJiYuYueActivity extends BaseActivity {
             orderPeiJianListAdapter.notifyDataSetChanged();
         }
 
+        setTotalPrice();
     }
 
 
@@ -164,5 +272,217 @@ public class LiJiYuYueActivity extends BaseActivity {
         data = (List<SearviceInfoBean.DataBean>) this.getIntent().getSerializableExtra("service");
         peiJian = (List<ServiceGoodsGetBean.DataBean>) this.getIntent().getSerializableExtra("peijian");
         title = this.getIntent().getStringExtra("title");
+
+        ToolUitls.print(TAG, "title=======" + title);
+    }
+
+
+    public void setTotalPrice() {
+
+        double price = 0;
+        if (data != null && data.size() > 0) {
+            for (int i = 0; i < data.size(); i++) {
+
+                SearviceInfoBean.DataBean dataBean = data.get(i);
+                String expenses = dataBean.getExpenses();
+                if (!"".equals(expenses) || !"面议".equals(expenses)) {
+                    price += Double.parseDouble(expenses);
+                }
+
+            }
+        }
+
+        txtTotalServiceLijiyuyue.setText(price + "");
+
+        double materialPrice = 0;
+
+        if (peiJian != null && peiJian.size() > 0) {
+
+            for (int i = 0; i < peiJian.size(); i++) {
+                String material = peiJian.get(i).getPrice();
+                if (!"".equals(material) || !"面议".equals(material)) {
+                    materialPrice += Double.parseDouble(material);
+                }
+
+            }
+        }
+        txtTotalPeijianLijiyuyue.setText("包含材料费" + materialPrice + "元");
+
+
+    }
+
+
+    TimePickerView mTimePickerView;
+
+    /* 初始化时间选择器*/
+    private void initTimePicker() {
+        //控制时间范围(如果不设置范围，则使用默认时间1900-2100年，此段代码可注释)
+        //因为系统Calendar的月份是从0-11的,所以如果是调用Calendar的set方法来设置时间,月份的范围也要是从0-11
+        Calendar selectedDate = Calendar.getInstance();
+        Calendar startDate = Calendar.getInstance();
+        startDate.set(2015, 1, 1);
+        Calendar endDate = Calendar.getInstance();
+        endDate.set(2099, 12, 31);
+        //时间选择器
+        mTimePickerView = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
+
+            @Override
+            public void onTimeSelect(Date date, View v) {//选中事件回调
+                // 这里回调过来的v,就是show()方法里面所添加的 View 参数，如果show的时候没有添加参数，v则为null
+                /*btn_Time.setText(getTime(date));*/
+
+                txtRepairTimeLijiyuyue.setText(getTime(date));
+                /* 按时间查询*/
+
+            }
+        })
+                //年月日时分秒 的显示与否，不设置则默认全部显示
+                .setType(new boolean[]{false, true, true, true, true, false})
+                .setLabel("", "月", "日", "时", "分", "")
+                .isCenterLabel(false)
+                .setDividerColor(Color.DKGRAY)
+                .setContentSize(18)
+                .setCancelColor(Color.parseColor("#fd6b07"))
+                .setSubmitColor(Color.parseColor("#fd6b07"))
+                .setDate(selectedDate)
+                .setRangDate(startDate, endDate)
+                .setBackgroundId(0x00FFFFFF) //设置外部遮罩颜色
+                .setDecorView(null)
+                .build();
+    }
+
+    /* 格式化时间*/
+    private String getTime(Date date) {//可根据需要自行截取数据显示
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return format.format(date);
+    }
+
+    @Override
+    public void onPhotoClick() {
+        if (bitmaps.size() == 7) {
+            return;
+        }
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        LiJiYuYueActivity.this.startActivityForResult(intent, PHOTO_REQEST_CODE);
+
+
+    }
+
+    int count = 0;
+
+    @Override
+    public void getToken(String token) {
+        url = new ArrayList<>();
+        imgArrays = new String[6];
+        for (int i = 0; i < imgArrays.length; i++) {
+            imgArrays[i] = "";
+        }
+        bitmaps.remove(bitmaps.size() - 1);
+        if (bitmaps != null && bitmaps.size() > 0) {
+
+            for (int i = 0; i < bitmaps.size(); i++) {
+                upLoadPhotoPresonter.qiNiuYunUpload(bitmaps.get(i), token);
+            }
+        }
+
+    }
+
+    ArrayList<String> url;
+
+
+    String[] imgArrays;
+
+
+    @Override
+    public void onUpSucess(String key) {
+        url.add(key);
+        count++;
+        if (count == bitmaps.size()) {
+            for (int i = 0; i < url.size(); i++) {
+                imgArrays[i] = url.get(i);
+            }
+
+//          ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL+"ServiceOrderSubmit?"+"user_id="+i);
+
+//            ToolUitls.toast(LiJiYuYueActivity.this, "提交成功");
+//            mWaitingAlertDialog.dismiss();
+        }
+    }
+
+    UpLoadPhotoPresonter upLoadPhotoPresonter;
+
+    /*确认对话框*/
+    public void setSureDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog alertDialog = builder.create();
+
+        alertDialog.show();
+
+        View submitView = View.inflate(LiJiYuYueActivity.this, R.layout.dialog_submit, null);
+        TextView cancle = (TextView) submitView.findViewById(R.id.txt_dialog_submit_cancle);
+        TextView sure = (TextView) submitView.findViewById(R.id.txt_dialog_submit_sure);
+
+        Window window = alertDialog.getWindow();
+        window.setBackgroundDrawable(getResources().getDrawable(R.drawable.write_form_dialog));
+        window.setContentView(submitView);
+        WindowManager windowManager = this.getWindowManager();
+
+        Display defaultDisplay = windowManager.getDefaultDisplay();
+
+        WindowManager.LayoutParams attributes = window.getAttributes();
+        attributes.width = (int) (defaultDisplay.getWidth() * 0.8);
+        window.setAttributes(attributes);
+        alertDialog.setCanceledOnTouchOutside(false);
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+        sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                waittingProgressBar();
+                alertDialog.dismiss();
+
+                upLoadPhotoPresonter = new UpLoadPhotoPresonter();
+                upLoadPhotoPresonter.setListener(LiJiYuYueActivity.this);
+                upLoadPhotoPresonter.getToken();
+
+
+            }
+        });
+    }
+
+    AlertDialog mWaitingAlertDialog;
+
+    /*等待对话框*/
+    public void waittingProgressBar() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        mWaitingAlertDialog = builder.create();
+
+        mWaitingAlertDialog.show();
+
+        View submitView = View.inflate(LiJiYuYueActivity.this, R.layout.dialog_waitting, null);
+        CircularProgressView mCircularProgressView = (CircularProgressView) submitView.findViewById(R.id.progress_view);
+        mCircularProgressView.setVisibility(View.VISIBLE);
+        mCircularProgressView.setIndeterminate(true);
+        mCircularProgressView.startAnimation();
+
+        Window window = mWaitingAlertDialog.getWindow();
+        window.setBackgroundDrawable(getResources().getDrawable(R.drawable.write_form_dialog));
+        window.setContentView(submitView);
+        WindowManager windowManager = this.getWindowManager();
+
+        Display defaultDisplay = windowManager.getDefaultDisplay();
+
+        WindowManager.LayoutParams attributes = window.getAttributes();
+        attributes.width = (int) (defaultDisplay.getWidth() * 0.6);
+        attributes.height = (int) (defaultDisplay.getHeight() * 0.3);
+        window.setAttributes(attributes);
+        mWaitingAlertDialog.setCanceledOnTouchOutside(false);
+
     }
 }

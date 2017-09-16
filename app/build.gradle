@@ -135,4 +135,10 @@ dependencies {
 
     /*圆形图片*/
     compile 'de.hdodenhof:circleimageview:2.1.0'
+
+    /*三级连动 时间选择器*/
+    compile 'com.contrarywind:Android-PickerView:3.2.5'
+
+    /*对话框*/
+    compile 'cn.pedant.sweetalert:library:1.3'
 }
