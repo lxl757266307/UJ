@@ -21,8 +21,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <!--地图定位-->
 
@@ -113,6 +113,13 @@
 
         <!--立即预约-->
         <activity android:name=".activity.LiJiYuYueActivity" />
+
+        <!--快速发布页面-->
+        <activity android:name=".activity.KuaiSuFaBuActivity" />
+
+        <!--下单成功页面-->
+        <activity android:name=".activity.OrderSucessActivity" />
+
     </application>
 
 </manifest>

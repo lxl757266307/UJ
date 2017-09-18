@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -31,16 +33,20 @@ import com.example.maintainsteward.adapter.PhotoListAdapter.OnPhotoClickListener
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.AddressListBean;
+import com.example.maintainsteward.bean.OrderSucessBean;
 import com.example.maintainsteward.bean.SearviceInfoBean;
 import com.example.maintainsteward.bean.ServiceGoodsGetBean;
 import com.example.maintainsteward.main.MainActivity;
+import com.example.maintainsteward.mvp_presonter.LiJiOrderPresonter;
 import com.example.maintainsteward.mvp_presonter.UpLoadPhotoPresonter;
 import com.example.maintainsteward.mvp_view.OnUpLoadPhotoListener;
+import com.example.maintainsteward.mvp_view.OrderListener;
 import com.example.maintainsteward.utils.PhotoUtils;
 import com.example.maintainsteward.utils.ToolUitls;
 import com.example.maintainsteward.view.MyLayoutManager2;
 import com.example.maintainsteward.view.MyListView;
 import com.github.rahatarmanahmed.cpv.CircularProgressView;
+import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -57,7 +63,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2017/9/15.
  */
 
-public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListener, OnUpLoadPhotoListener {
+public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListener, OnUpLoadPhotoListener, OrderListener {
     private static final int PHOTO_REQEST_CODE = 2;
     private static final int REQEST_CODE_CROP = 3;
     @BindView(R.id.layout_back)
@@ -162,11 +168,23 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
                 break;
             case R.id.txt_submit_lijiyuyue:
 
+                if (dataBean == null) {
+                    ToolUitls.toast(this, "地址不能为空");
+                    return;
+                }
+                if (!txtRepairTimeLijiyuyue.getText().toString().matches("\\d{4}.\\d{0,2}.\\d{0,2}.\\d{0,2}.\\d{0,2}")) {
+                    ToolUitls.toast(this, "时间格式错误");
+                    return;
+                }
+
+
                 setSureDialog();
                 break;
 
         }
     }
+
+    AddressListBean.DataBean dataBean;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -174,7 +192,7 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
         if (RESULT_OK == resultCode) {
             switch (requestCode) {
                 case REQUEST_CODE:
-                    AddressListBean.DataBean dataBean = (AddressListBean.DataBean) data.getSerializableExtra("address");
+                    dataBean = (AddressListBean.DataBean) data.getSerializableExtra("address");
                     if (dataBean != null) {
                         layoutChooseAddressLijiyuyue.setVisibility(View.GONE);
                         layoutAddressLijiyuyue.setVisibility(View.VISIBLE);
@@ -267,11 +285,13 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
 
 
     String title = "";
+    String cat_id = "";
 
     private void initData() {
         data = (List<SearviceInfoBean.DataBean>) this.getIntent().getSerializableExtra("service");
         peiJian = (List<ServiceGoodsGetBean.DataBean>) this.getIntent().getSerializableExtra("peijian");
         title = this.getIntent().getStringExtra("title");
+        cat_id = this.getIntent().getStringExtra("cat_id");
 
         ToolUitls.print(TAG, "title=======" + title);
     }
@@ -353,7 +373,7 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
 
     /* 格式化时间*/
     private String getTime(Date date) {//可根据需要自行截取数据显示
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return format.format(date);
     }
 
@@ -374,15 +394,12 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
     @Override
     public void getToken(String token) {
         url = new ArrayList<>();
-        imgArrays = new String[6];
-        for (int i = 0; i < imgArrays.length; i++) {
-            imgArrays[i] = "";
-        }
-        bitmaps.remove(bitmaps.size() - 1);
-        if (bitmaps != null && bitmaps.size() > 0) {
 
-            for (int i = 0; i < bitmaps.size(); i++) {
-                upLoadPhotoPresonter.qiNiuYunUpload(bitmaps.get(i), token);
+        if (bitmaps != null && bitmaps.size() > 0) {
+            List<Bitmap> photos = this.bitmaps.subList(0, this.bitmaps.size() - 1);
+
+            for (int i = 0; i < photos.size(); i++) {
+                upLoadPhotoPresonter.qiNiuYunUpload(photos.get(i), token);
             }
         }
 
@@ -402,15 +419,52 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
             for (int i = 0; i < url.size(); i++) {
                 imgArrays[i] = url.get(i);
             }
-
-//          ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL+"ServiceOrderSubmit?"+"user_id="+i);
+            orderNow();
 
 //            ToolUitls.toast(LiJiYuYueActivity.this, "提交成功");
 //            mWaitingAlertDialog.dismiss();
         }
     }
 
+    private void orderNow() {
+        Gson gson = new Gson();
+        SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
+        String user_id = sharedPreferences.getString("id", null);
+        String time = System.currentTimeMillis() + "";
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("timestamp", time);
+        map.put("user_id", user_id);
+        map.put("cat_id", cat_id);
+        map.put("name", title);
+        map.put("type", "1");
+        map.put("address_id", dataBean.getId());
+        String dataJson = gson.toJson(data);
+        String peiJianJson = gson.toJson(peiJian);
+        String content = editRepairDescrription.getText().toString();
+        String img1 = imgArrays[0];
+        String img2 = imgArrays[1];
+        String img3 = imgArrays[2];
+        String img4 = imgArrays[3];
+        String img5 = imgArrays[4];
+        String img6 = imgArrays[5];
+        String orderTime = txtRepairTimeLijiyuyue.getText().toString();
+
+        map.put("service_con", dataJson);
+        map.put("material", peiJianJson);
+        map.put("content", content);
+        map.put("order_time", orderTime);
+
+        String sign = ToolUitls.getSign(map);
+
+        liJiOrderPresonter.order(user_id, cat_id, title, dataBean.getId(), dataJson, peiJianJson, content, img1, img2, img3, img4, img5, img6, orderTime, time, sign, Contacts.KEY);
+//        ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "ServiceOrderSubmit?" + "user_id=" + user_id + "&cat_id=" + cat_id
+//                + "&name=" + title.trim() + "&address_id=" + dataBean.getId() + "&service_con=" + dataJson + "&material=" + peiJianJson
+//                + "&content=" + content + "&img1=" + img1 + "&img2=" + img2 + "&img3=" + img3 + "&img4=" + img4 + "&img5=" + img5
+//                + "&img6=" + img6 + "&order_time=" + orderTime + "&timestamp=" + time + "&sign=" + sign + "&key=" + Contacts.KEY + "&type=1");
+    }
+
     UpLoadPhotoPresonter upLoadPhotoPresonter;
+    LiJiOrderPresonter liJiOrderPresonter;
 
     /*确认对话框*/
     public void setSureDialog() {
@@ -448,7 +502,19 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
 
                 upLoadPhotoPresonter = new UpLoadPhotoPresonter();
                 upLoadPhotoPresonter.setListener(LiJiYuYueActivity.this);
-                upLoadPhotoPresonter.getToken();
+
+                liJiOrderPresonter = new LiJiOrderPresonter();
+                liJiOrderPresonter.setOrderListener(LiJiYuYueActivity.this);
+                imgArrays = new String[6];
+                for (int i = 0; i < imgArrays.length; i++) {
+                    imgArrays[i] = "";
+                }
+                if (bitmaps != null && bitmaps.size() > 1) {
+                    upLoadPhotoPresonter.getToken();
+                } else {
+                    ToolUitls.print(TAG, "1111111111111111111");
+                    orderNow();
+                }
 
 
             }
@@ -485,4 +551,33 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
         mWaitingAlertDialog.setCanceledOnTouchOutside(false);
 
     }
+
+    @Override
+    public void orderSucess(OrderSucessBean bean) {
+        String status = bean.getStatus();
+        switch (status) {
+            case "1":
+                mWaitingAlertDialog.dismiss();
+                ToolUitls.toast(this, "下单成功");
+                handler.sendEmptyMessageDelayed(1, 2000);
+                break;
+        }
+    }
+
+    @Override
+    public void orderFaild(String message) {
+        ToolUitls.toast(this, message);
+    }
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            Intent intent = new Intent(LiJiYuYueActivity.this, OrderSucessActivity.class);
+            startActivity(intent);
+
+
+        }
+    };
 }

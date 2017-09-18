@@ -165,6 +165,7 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
                     intent2.putExtra("service", (Serializable) service);
                     intent2.putExtra("peijian", (Serializable) material);
                     intent2.putExtra("title", title);
+                    intent2.putExtra("cat_id", id);
                     startActivity(intent2);
                 }
             }

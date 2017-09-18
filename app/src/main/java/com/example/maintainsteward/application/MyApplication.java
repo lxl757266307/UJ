@@ -155,22 +155,22 @@ public class MyApplication extends Application {
      * @param config
      * @return uploadManager  对象唯一
      */
-    public static synchronized UploadManager getUploadManager(Configuration config) {
+    public static synchronized void getUploadManager(Configuration config) {
 
         if (mUploadManager == null) {
-            return new UploadManager(config);
+            mUploadManager = new UploadManager(config);
         }
-        return mUploadManager;
     }
 
 
     public static UploadManager getUploadManager() {
+        initQINIU();
         return mUploadManager;
     }
 
     public static UploadManager uploadManager;
 
-    private void initQINIU() {
+    private static void initQINIU() {
         Configuration config = new Configuration.Builder()
                 .chunkSize(512 * 1024)        // 分片上传时，每片的大小。 默认256K
                 .putThreshhold(1024 * 1024)   // 启用分片上传阀值。默认512K
@@ -182,7 +182,8 @@ public class MyApplication extends Application {
                 .zone(FixedZone.zone0)        // 设置区域，指定不同区域的上传域名、备用域名、备用IP。
                 .build();
         // 重用uploadManager。一般地，只需要创建一个uploadManager对象
-        uploadManager = getUploadManager(config);
+        getUploadManager(config);
+
 
     }
 

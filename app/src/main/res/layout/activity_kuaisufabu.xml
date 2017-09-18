@@ -5,9 +5,13 @@
     android:background="#fff"
     android:orientation="vertical">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:orientation="vertical">
 
         <LinearLayout
@@ -54,82 +58,99 @@
 
         </LinearLayout>
 
-
-        <TextView
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:text="所需服务描述"
-            android:textColor="#515151"
-            android:textSize="18sp" />
+            android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="210dp"
-            android:layout_marginTop="10dp">
-
-            <EditText
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/box_normal"
-                android:gravity="start"
-                android:hint="简单描述你需要的服务，发布成功后请保持电话畅通，小U会与您取得联系"
-                android:padding="5dp"
-                android:textColorHint="#bbbbbb" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="15dp"
-                android:layout_marginRight="20dp"
-                android:text="0/500"
-                android:textColor="#bbbbbb" />
-        </RelativeLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:text="您可以上传6张照片，以便工人师傅快速了解情况！"
-            android:textColor="#515151"
-            android:textSize="15sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="所需服务描述"
+                    android:textColor="#515151"
+                    android:textSize="18sp" />
 
-        <com.example.maintainsteward.view.MyViewGroup
-            android:layout_width="match_parent"
-            android:layout_height="110dp"
-            android:layout_marginTop="10dp"
-            android:padding="10dp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp"
+                    android:layout_marginTop="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/edit_description_kuaisufabu"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/box_normal"
+                        android:gravity="start"
+                        android:hint="简单描述你需要的服务，发布成功后请保持电话畅通，小U会与您取得联系"
+                        android:padding="5dp"
+                        android:textColorHint="#bbbbbb" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="发布需求即代表您同意U匠"
-                android:textColor="#515151"
-                android:textSize="15sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginRight="20dp"
+                        android:text="0/500"
+                        android:textColor="#bbbbbb" />
+                </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="《用户服务协议》"
-                android:textColor="#da0a0a"
-                android:textSize="15sp" />
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="您可以上传6张照片，以便工人师傅快速了解情况！"
+                    android:textColor="#515151"
+                    android:textSize="15sp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_kuaisufabu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="发布需求即代表您同意U匠"
+                        android:textColor="#515151"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="《用户服务协议》"
+                        android:textColor="#da0a0a"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/layout_height_50dp" />
+            </LinearLayout>
+        </ScrollView>
+
     </LinearLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -137,31 +158,48 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="@mipmap/fuwudibu">
+        android:gravity="bottom">
 
-        <ImageView
-            android:id="@+id/img_kefu_serviceinfo"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="3dp"
-            android:src="@mipmap/kefu" />
 
-        <TextView
-            android:id="@+id/txt_yuyue_serviceinfo"
-            android:layout_width="150dp"
-            android:layout_height="55dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:background="#da0a0a"
-            android:gravity="center"
-            android:text="立即预约"
-            android:textColor="#fff"
-            android:textSize="20sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@mipmap/fuwudibu"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="100dp">
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_yuyue_kuaisufabu"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:background="#da0a0a"
+                android:gravity="center"
+                android:text="立即预约"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/img_kefu_kuaisufabu"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="-10dp"
+            android:src="@mipmap/kefu"
+            app:civ_border_color="#FF4218"
+            app:civ_border_width="5dp" />
 
     </RelativeLayout>
 

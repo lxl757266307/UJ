@@ -40,7 +40,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
-                android:text="空调清洗"
+                android:text="提交成功"
                 android:textColor="#fff"
                 android:textSize="20sp" />
 
@@ -105,6 +105,7 @@
 
 
         <TextView
+            android:id="@+id/txt_see_order_ordersucess"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
@@ -115,6 +116,7 @@
             android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/txt_back_main_ordersucess"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
@@ -138,7 +140,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_margin="10dp"
         android:layout_height="110dp"
-        android:background="@mipmap/banner2"/>
+        android:layout_margin="10dp"
+        android:background="@mipmap/banner2" />
 </LinearLayout>

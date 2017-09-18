@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FF6565">
+
+
+            <TextView
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="服务类别" />
+
+
+            <TextView
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="服务内容" />
+
+
+            <TextView
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="套餐价格" />
+
+
+            <TextView
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="套餐次数" />
+
+            <TextView
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="服务期限" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f4f4f4"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_row_name"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="" />
+
+            <TableLayout
+                android:id="@+id/layout_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:stretchColumns="*">
+
+                <TableRow
+                    android:id="@+id/tr_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FF6565">
+
+
+                    <LinearLayout
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:layout_width="15dp"
+                            android:layout_height="15dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:gravity="center"
+                            android:text="柜式" />
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:text="服务内容" />
+
+
+                    <TextView
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:text="套餐价格" />
+
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:text="套餐次数" />
+
+
+                </TableRow>
+
+            </TableLayout>
+
+        </TableRow>
+
+
+    </TableLayout>
+
+</LinearLayout>

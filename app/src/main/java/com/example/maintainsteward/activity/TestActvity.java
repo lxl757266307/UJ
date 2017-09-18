@@ -42,8 +42,7 @@ public class TestActvity extends BaseActivity {
     TextView txtWaitEvaluationFragmentOrder;
     @BindView(R.id.txt_cancled_fragment_order)
     TextView txtCancledFragmentOrder;
-    @BindView(R.id.vip_fragment_order)
-    ViewPager vipFragmentOrder;
+
 
 
     @Override

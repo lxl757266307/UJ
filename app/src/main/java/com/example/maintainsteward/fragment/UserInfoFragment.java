@@ -1,24 +1,22 @@
 package com.example.maintainsteward.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
-import com.example.maintainsteward.activity.AddressManagerActivity;
-import com.example.maintainsteward.view.StrokeCircleImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Administrator on 2017/8/17.
@@ -26,31 +24,43 @@ import butterknife.Unbinder;
 
 public class UserInfoFragment extends Fragment {
 
-    @BindView(R.id.circleview_my_info)
-    StrokeCircleImageView circleviewMyInfo;
+
+    Unbinder unbinder;
+    @BindView(R.id.img_xiaoxi_userinfo)
+    ImageView imgXiaoxiUserinfo;
+    @BindView(R.id.txt_xiaoxi_number_userinfo)
+    TextView txtXiaoxiNumberUserinfo;
     @BindView(R.id.img_my_info_logo)
-    ImageView imgMyInfoLogo;
+    CircleImageView imgMyInfoLogo;
     @BindView(R.id.txt_user_name_infofragment)
     TextView txtUserNameInfofragment;
-    @BindView(R.id.btn_set_info_infofragment)
-    Button btnSetInfoInfofragment;
-    @BindView(R.id.txt_order_infofragment)
-    TextView txtOrderInfofragment;
-    @BindView(R.id.txt_address_infofragment)
-    TextView txtAddressInfofragment;
-    @BindView(R.id.txt_walert_infofragment)
-    TextView txtWalertInfofragment;
-    @BindView(R.id.txt_ka_juan_infofragment)
-    TextView txtKaJuanInfofragment;
-    @BindView(R.id.txt_evelution_infofragment)
-    TextView txtEvelutionInfofragment;
-    @BindView(R.id.txt_service_infofragment)
-    TextView txtServiceInfofragment;
-    @BindView(R.id.txt_message_infofragment)
-    TextView txtMessageInfofragment;
-    @BindView(R.id.txt_setting_infofragment)
-    TextView txtSettingInfofragment;
-    Unbinder unbinder;
+    @BindView(R.id.img_vip_userinfo)
+    ImageView imgVipUserinfo;
+    @BindView(R.id.layout_edit_userinfo)
+    LinearLayout layoutEditUserinfo;
+    @BindView(R.id.layout_see_all_order_userinfo)
+    LinearLayout layoutSeeAllOrderUserinfo;
+    @BindView(R.id.txt_wei_wan_cheng_number)
+    TextView txtWeiWanChengNumber;
+    @BindView(R.id.layout_wei_wan_cheng_userinfo)
+    LinearLayout layoutWeiWanChengUserinfo;
+    @BindView(R.id.txt_yi_wan_cheng_number)
+    TextView txtYiWanChengNumber;
+    @BindView(R.id.layout_yi_wan_cheng_userinfo)
+    LinearLayout layoutYiWanChengUserinfo;
+    @BindView(R.id.txt_yi_qu_xiao_number)
+    TextView txtYiQuXiaoNumber;
+    @BindView(R.id.layout_yi_qu_xiao_userinfo)
+    LinearLayout layoutYiQuXiaoUserinfo;
+    @BindView(R.id.layout_ping_jia_userinfo)
+    LinearLayout layoutPingJiaUserinfo;
+    @BindView(R.id.layout_tao_can_userinfo)
+    LinearLayout layoutTaoCanUserinfo;
+    @BindView(R.id.layout_dizhi_userinfo)
+    LinearLayout layoutDizhiUserinfo;
+    @BindView(R.id.layout_qianbao_userinfo)
+    LinearLayout layoutQianbaoUserinfo;
+
 
     @Nullable
     @Override
@@ -72,36 +82,30 @@ public class UserInfoFragment extends Fragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.txt_order_infofragment,
-            R.id.txt_address_infofragment,
-            R.id.txt_walert_infofragment,
-            R.id.txt_ka_juan_infofragment,
-            R.id.txt_evelution_infofragment,
-            R.id.txt_service_infofragment,
-            R.id.txt_message_infofragment,
-            R.id.txt_setting_infofragment
-    })
-    public void click(View view) {
+
+    @OnClick({R.id.img_xiaoxi_userinfo, R.id.layout_edit_userinfo, R.id.layout_see_all_order_userinfo, R.id.layout_wei_wan_cheng_userinfo, R.id.layout_yi_wan_cheng_userinfo, R.id.layout_yi_qu_xiao_userinfo, R.id.layout_ping_jia_userinfo, R.id.layout_tao_can_userinfo, R.id.layout_dizhi_userinfo, R.id.layout_qianbao_userinfo})
+    public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.txt_order_infofragment:
+            case R.id.img_xiaoxi_userinfo:
                 break;
-            case R.id.txt_address_infofragment:
-                startActivity(new Intent(getActivity(), AddressManagerActivity.class));
+            case R.id.layout_edit_userinfo:
                 break;
-            case R.id.txt_walert_infofragment:
+            case R.id.layout_see_all_order_userinfo:
                 break;
-            case R.id.txt_ka_juan_infofragment:
+            case R.id.layout_wei_wan_cheng_userinfo:
                 break;
-            case R.id.txt_evelution_infofragment:
+            case R.id.layout_yi_wan_cheng_userinfo:
                 break;
-            case R.id.txt_service_infofragment:
+            case R.id.layout_yi_qu_xiao_userinfo:
                 break;
-            case R.id.txt_message_infofragment:
+            case R.id.layout_ping_jia_userinfo:
                 break;
-            case R.id.txt_setting_infofragment:
+            case R.id.layout_tao_can_userinfo:
                 break;
-
-
+            case R.id.layout_dizhi_userinfo:
+                break;
+            case R.id.layout_qianbao_userinfo:
+                break;
         }
     }
 }

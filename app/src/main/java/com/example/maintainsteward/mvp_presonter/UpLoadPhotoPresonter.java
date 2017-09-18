@@ -9,8 +9,10 @@ import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.QiNiuBean;
 import com.example.maintainsteward.mvp_view.OnUpLoadPhotoListener;
 import com.example.maintainsteward.utils.PhotoUtils;
+import com.example.maintainsteward.utils.ToolUitls;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
+import com.qiniu.android.storage.UploadManager;
 import com.qiniu.android.storage.UploadOptions;
 
 import org.json.JSONException;
@@ -45,7 +47,7 @@ public class UpLoadPhotoPresonter {
 
                     QiNiuBean body = response.body();
 
-                    if (body != null) {
+                    if (body != null && listener != null) {
                         String token = body.getToken();
                         listener.getToken(token);
                     }
@@ -65,10 +67,13 @@ public class UpLoadPhotoPresonter {
 
     }
 
+    public static final String TAG = "UpLoadPhotoPresonter";
 
     public void qiNiuYunUpload(Bitmap bitmap, String token) {
+        UploadManager uploadManager = MyApplication.getUploadManager();
+        ToolUitls.print(TAG, "uploadManager===" + uploadManager);
 
-        MyApplication.getUploadManager().put(PhotoUtils.bitmap2Byte(bitmap),
+        uploadManager.put(PhotoUtils.bitmap2Byte(bitmap),
                 PhotoUtils.getTimeStamp() + ".jpg", token,
                 new UpCompletionHandler() {
                     @Override
