@@ -73,13 +73,11 @@ public class ToolUitls {
         for (String key : keySet) {
             if (map.get(key) != null && !map.get(key).isEmpty()) {
 
-                ToolUitls.print("key", "key===" + key);
                 jsonStr += key + "=" + map.get(key) + "&";
             }
         }
         jsonStr = Contacts.SIGN + jsonStr.substring(0, jsonStr.length()) +
                 "key=" + Contacts.KEY + Contacts.SIGN;
-        ToolUitls.print("jsonStr", "jsonStr===" + jsonStr);
         return MD5.getMessageDigest(jsonStr.getBytes()).toUpperCase();
     }
 

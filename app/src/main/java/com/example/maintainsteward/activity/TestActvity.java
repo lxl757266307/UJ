@@ -40,8 +40,7 @@ public class TestActvity extends BaseActivity {
     TextView txtWaitPayFragmentOrder;
     @BindView(R.id.txt_wait_evaluation_fragment_order)
     TextView txtWaitEvaluationFragmentOrder;
-    @BindView(R.id.txt_cancled_fragment_order)
-    TextView txtCancledFragmentOrder;
+
 
 
 
@@ -54,19 +53,17 @@ public class TestActvity extends BaseActivity {
     }
 
     public void setArray() {
-        txtArray = new TextView[5];
+        txtArray = new TextView[4];
         txtArray[0] = txtOrderAllFragmentOrder;
         txtArray[1] = txtCommitFragmentOrder;
         txtArray[2] = txtWaitPayFragmentOrder;
         txtArray[3] = txtWaitEvaluationFragmentOrder;
-        txtArray[4] = txtCancledFragmentOrder;
     }
 
     @OnClick({R.id.txt_order_all_fragment_order,
             R.id.txt_commit_fragment_order,
             R.id.txt_wait_pay_fragment_order,
             R.id.txt_wait_evaluation_fragment_order,
-            R.id.txt_cancled_fragment_order,
     })
     public void setListener(View view) {
         switch (view.getId()) {
@@ -82,9 +79,7 @@ public class TestActvity extends BaseActivity {
             case R.id.txt_wait_evaluation_fragment_order:
                 setTextViewBackground(3);
                 break;
-            case R.id.txt_cancled_fragment_order:
-                setTextViewBackground(4);
-                break;
+
 
         }
 

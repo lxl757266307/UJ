@@ -11,6 +11,7 @@ import com.example.maintainsteward.bean.HotWordBean;
 import com.example.maintainsteward.bean.LoginCallBackBean;
 import com.example.maintainsteward.bean.OrderListBean;
 import com.example.maintainsteward.bean.OrderSucessBean;
+import com.example.maintainsteward.bean.PublicBean;
 import com.example.maintainsteward.bean.QiNiuBean;
 import com.example.maintainsteward.bean.SearchKeyWordBean;
 import com.example.maintainsteward.bean.SearviceInfoBean;
@@ -211,6 +212,16 @@ public interface HttpApi {
                                              @Field("sign") String sign,
                                              @Field("type") String type,
                                              @Field("key") String key);
+
+
+    /*订单列表*/
+    @FormUrlEncoded
+    @POST("OrderCancel")
+    Call<PublicBean> quXiaoOrder(@Field("user_id") String user_id,
+                                 @Field("order_id") String order_id,
+                                 @Field("timestamp") String timestamp,
+                                 @Field("sign") String sign,
+                                 @Field("key") String key);
 
 
     /*获取七牛云 token*/

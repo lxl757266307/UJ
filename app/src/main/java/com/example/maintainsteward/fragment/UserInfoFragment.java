@@ -1,5 +1,6 @@
 package com.example.maintainsteward.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.activity.OrderActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -90,8 +92,12 @@ public class UserInfoFragment extends Fragment {
                 break;
             case R.id.layout_edit_userinfo:
                 break;
-            case R.id.layout_see_all_order_userinfo:
-                break;
+            case R.id.layout_see_all_order_userinfo: {
+                Intent intent = new Intent(getActivity(), OrderActivity.class);
+                startActivity(intent);
+            }
+
+            break;
             case R.id.layout_wei_wan_cheng_userinfo:
                 break;
             case R.id.layout_yi_wan_cheng_userinfo:

@@ -120,6 +120,9 @@
         <!--下单成功页面-->
         <activity android:name=".activity.OrderSucessActivity" />
 
+        <!--订单列表页面-->
+        <activity android:name=".activity.OrderActivity" />
+
     </application>
 
 </manifest>

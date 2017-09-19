@@ -39,4 +39,7 @@ public final class Contacts {
     public static final String ADD_ADDRESS_OK = "add_address_ok";
 
 
+    public static final String ORDER_REFRESH = "order_refresh";
+
+
 }

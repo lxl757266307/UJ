@@ -19,7 +19,7 @@ import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.fragment.KindsFragment;
 import com.example.maintainsteward.fragment.MainFragment;
-import com.example.maintainsteward.fragment.OrerFragment;
+import com.example.maintainsteward.fragment.TuiJianFragment;
 import com.example.maintainsteward.fragment.UserInfoFragment;
 import com.example.maintainsteward.utils.PermissionRegisterUtils;
 import com.example.maintainsteward.utils.ToolUitls;
@@ -88,7 +88,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
         MainFragment mainFragment = new MainFragment();
         KindsFragment kindsFragment = new KindsFragment();
-        OrerFragment orerFragment = new OrerFragment();
+        TuiJianFragment orerFragment = new TuiJianFragment();
         UserInfoFragment userInfoFragment = new UserInfoFragment();
         List<Fragment> list = new ArrayList<>();
         list.add(mainFragment);

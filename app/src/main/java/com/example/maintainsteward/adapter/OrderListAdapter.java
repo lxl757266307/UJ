@@ -55,7 +55,7 @@ public class OrderListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         ViewHolder viewHolder = null;
         if (convertView == null) {
@@ -66,10 +66,9 @@ public class OrderListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        OrderListBean.DataBean.DemandOrderDataBean demandOrderDataBean = demand_order_data.get(position);
+        final OrderListBean.DataBean.DemandOrderDataBean demandOrderDataBean = demand_order_data.get(position);
         List<OrderListBean.DataBean.DemandOrderDataBean.ServiceItemBean> service_item = demandOrderDataBean.getService_item();
 
-        ToolUitls.print(TAG, "service_item===" + service_item.size());
         for (int i = 0; i < service_item.size(); i++) {
 
             if (service_item.get(i) != null) {
@@ -89,6 +88,27 @@ public class OrderListAdapter extends BaseAdapter {
             case "2":
                 viewHolder.txtServieStatus.setText("预约成功");
                 break;
+            case "3":
+                viewHolder.txtServieStatus.setText("已到达");
+                break;
+            case "4":
+                viewHolder.txtServieStatus.setText("待付款");
+                break;
+            case "5":
+                viewHolder.txtServieStatus.setText("已付款");
+                viewHolder.txtQuxiao.setText("联系客服");
+                break;
+            case "6":
+                viewHolder.txtServieStatus.setText("已完成");
+                viewHolder.txtQuxiao.setVisibility(View.INVISIBLE);
+                break;
+            case "7":
+                viewHolder.txtServieStatus.setText("已评价");
+                viewHolder.txtQuxiao.setVisibility(View.INVISIBLE);
+            case "8":
+                viewHolder.txtServieStatus.setText("已取消");
+                viewHolder.txtQuxiao.setVisibility(View.INVISIBLE);
+                break;
         }
 
         viewHolder.txtAddress.setText(demandOrderDataBean.getAddress());
@@ -99,12 +119,28 @@ public class OrderListAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
+                if (onQuXiaoOrderListener != null) {
+                    onQuXiaoOrderListener.quXiaoOrder(demandOrderDataBean.getId(), position);
+                }
             }
         });
 
 
         return convertView;
     }
+
+    public void setOnQuXiaoOrderListenerl(OnQuXiaoOrderListener onQuXiaoOrderListener) {
+        this.onQuXiaoOrderListener = onQuXiaoOrderListener;
+    }
+
+    OnQuXiaoOrderListener onQuXiaoOrderListener;
+
+    public interface OnQuXiaoOrderListener {
+
+        void quXiaoOrder(String orderId, int position);
+
+    }
+
 
     static class ViewHolder {
         @BindView(R.id.layout_service)

@@ -232,7 +232,7 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
             Glide.with(getActivity()).load(slide_posts.get(i).getSlide_pic()).into(imageView);
             imageViews.add(imageView);
         }
-        vipMainFragment.setCanAUTO(true);
+//        vipMainFragment.setCanAUTO(true);
         vipMainFragment.setMarkerLocal(BannerViewPager.CENTER_MARKER);
         vipMainFragment.setOnBannerClick(this);
         vipMainFragment.setViews(imageViews, true);
@@ -309,9 +309,6 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
                 BannerBean.DataBean data = body.getData();
                 information_lists = data.getInformation_lists();
                 slide_posts = data.getSlide_posts();
-                Log.e(TAG, "slide_posts===" + slide_posts.size());
-                Log.e(TAG, "information_lists===" + information_lists.size());
-
 
                 setViewPager(slide_posts);
                 setVfMainfragment(information_lists);
