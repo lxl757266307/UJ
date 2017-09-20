@@ -261,12 +261,39 @@ public interface HttpApi {
     );
 
 
-    /*我的粉丝*/
+    /*修改手机号*/
     @FormUrlEncoded
     @POST("bindNewPhone")
     Call<PublicBean> bindNewPhone(
             @Field("user_id") String id,
             @Field("phone") String phone,
+            @Field("timestamp") String timestamp,
+            @Field("sign") String sign,
+            @Field("key") String key
+    );
+
+
+    /*设置支付密码*/
+    @FormUrlEncoded
+    @POST("bindNewPhone")
+    Call<PublicBean> goSetPayPassword(
+            @Field("user_id") String id,
+            @Field("phone") String phone,
+            @Field("pwd") String pwd,
+            @Field("type") String type,
+            @Field("timestamp") String timestamp,
+            @Field("sign") String sign,
+            @Field("key") String key
+    );
+
+    /*修改支付密码*/
+    @FormUrlEncoded
+    @POST("bindNewPhone")
+    Call<PublicBean> goUpdatePayPassword(
+            @Field("user_id") String id,
+            @Field("phone") String phone,
+            @Field("newpwd") String pwd,
+            @Field("oldpwd") String oldpwd,
             @Field("timestamp") String timestamp,
             @Field("sign") String sign,
             @Field("key") String key
