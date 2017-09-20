@@ -1,31 +1,43 @@
 package com.example.maintainsteward.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.activity.OrderMessageActivity;
 import com.example.maintainsteward.adapter.OrderListAdapter;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.OrderListBean;
 import com.example.maintainsteward.bean.PublicBean;
+import com.example.maintainsteward.main.MainActivity;
+import com.example.maintainsteward.mvp_presonter.OrderListPresonter;
 import com.example.maintainsteward.mvp_presonter.QuXiaoOrderPresonter;
+import com.example.maintainsteward.mvp_view.GetOrderListListener;
 import com.example.maintainsteward.mvp_view.OnOrderCancleListener;
 import com.example.maintainsteward.utils.ToolUitls;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -35,7 +47,7 @@ import in.srain.cube.views.ptr.PtrHandler2;
  * Created by Administrator on 2017/9/19.
  */
 
-public class AllOrderListFragement extends Fragment implements PtrHandler2, OrderListAdapter.OnQuXiaoOrderListener, OnOrderCancleListener {
+public class AllOrderListFragement extends Fragment implements PtrHandler2, OrderListAdapter.OnQuXiaoOrderListener, OnOrderCancleListener, AdapterView.OnItemClickListener, GetOrderListListener {
 
     List<OrderListBean.DataBean.DemandOrderDataBean> demand_order_data;
     @BindView(R.id.lv_order_list)
@@ -43,6 +55,10 @@ public class AllOrderListFragement extends Fragment implements PtrHandler2, Orde
     @BindView(R.id.prt_framelayout)
     PtrClassicFrameLayout prtFramelayout;
     Unbinder unbinder;
+    @BindView(R.id.btn_xiadan_order)
+    Button btnXiadanOrder;
+    @BindView(R.id.layout_xidan_order)
+    LinearLayout layoutXidanOrder;
 
     public void setDemand_order_data(List<OrderListBean.DataBean.DemandOrderDataBean> demand_order_data) {
         this.demand_order_data = demand_order_data;
@@ -50,6 +66,9 @@ public class AllOrderListFragement extends Fragment implements PtrHandler2, Orde
             orderListAdapter.setDemand_order_data(demand_order_data);
             lvOrderList.setAdapter(orderListAdapter);
             orderListAdapter.notifyDataSetChanged();
+        }
+        if (demand_order_data.size() > 0) {
+            layoutXidanOrder.setVisibility(View.INVISIBLE);
         }
 
     }
@@ -74,19 +93,56 @@ public class AllOrderListFragement extends Fragment implements PtrHandler2, Orde
     boolean canLoad;
     boolean canRefresh;
 
+
+    OrderListPresonter orderListPresonter;
+
+    List<OrderListBean.DataBean.DemandOrderDataBean> allOrder;
+
+    public void initPrsonter() {
+        allOrder = new ArrayList<>();
+        orderListPresonter = new OrderListPresonter();
+        orderListPresonter.setOrderListListener(this);
+    }
+
+
+    int page = 1;
+
+    public void getOrderByType(String type) {
+        orderListPresonter.showDialog();
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Contacts.USER, Context.MODE_PRIVATE);
+        String id = sharedPreferences.getString("id", null);
+        String time = System.currentTimeMillis() + "";
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("timestamp", time);
+        map.put("user_id", id);
+        map.put("order_type", type);
+        map.put("page", page + "");
+        String sign = ToolUitls.getSign(map);
+        orderListPresonter.getOrderList(id, type, page + "", time, sign, Contacts.KEY);
+        handler.sendEmptyMessageDelayed(1, 1500);
+
+    }
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            dialog.dismiss();
+        }
+    };
+
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        lvOrderList.setOnItemClickListener(this);
         presonter = new QuXiaoOrderPresonter();
         presonter.setOnOrderCancleListener(this);
         orderListAdapter = new OrderListAdapter();
         orderListAdapter.setContext(getActivity());
         orderListAdapter.setOnQuXiaoOrderListenerl(this);
-        if (demand_order_data != null) {
-            orderListAdapter.setDemand_order_data(demand_order_data);
-        }
-        lvOrderList.setAdapter(orderListAdapter);
-        orderListAdapter.notifyDataSetChanged();
+        initPrsonter();
+        getOrderByType("1");
         prtFramelayout.setPtrHandler(this);
 
         lvOrderList.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -187,11 +243,74 @@ public class AllOrderListFragement extends Fragment implements PtrHandler2, Orde
                 demand_order_data.remove(position);
                 orderListAdapter.setDemand_order_data(demand_order_data);
                 orderListAdapter.notifyDataSetChanged();
-                Intent intent = new Intent(Contacts.ORDER_REFRESH);
-                intent.putExtra("type", "5");
-                getActivity().sendBroadcast(intent);
+//                Intent intent = new Intent(Contacts.ORDER_REFRESH);
+//                intent.putExtra("type", "5");
+//                getActivity().sendBroadcast(intent);
 
                 break;
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        Intent intent = new Intent(getActivity(), OrderMessageActivity.class);
+        String orderId = demand_order_data.get(position).getId();
+        intent.putExtra("id", orderId);
+        startActivity(intent);
+
+    }
+
+    @OnClick(R.id.btn_xiadan_order)
+    public void onViewClicked() {
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.putExtra("page", 1);
+        startActivity(intent);
+    }
+
+    ProgressDialog dialog;
+
+    @Override
+    public void showDialog() {
+        dialog = ProgressDialog.show(getActivity(), "", "正在加载");
+    }
+
+
+    @Override
+    public void getAllList(OrderListBean listBean) {
+        switch (listBean.getStatus()) {
+            case "1":
+
+                OrderListBean.DataBean data = listBean.getData();
+                allOrder.addAll(data.getDemand_order_data());
+                setDemand_order_data(allOrder);
+//                orderListPresonter.dialogDismiss();
+                break;
+            default:
+                ToolUitls.toast(getActivity(), "暂无数据");
+
+                break;
+        }
+
+    }
+
+    @Override
+    public void getWeiWanChengList(OrderListBean listBean) {
+
+    }
+
+    @Override
+    public void getYiWanChengList(OrderListBean listBean) {
+
+    }
+
+    @Override
+    public void getYiQuXiaoList(OrderListBean listBean) {
+
+    }
+
+    @Override
+    public void dialogDismiss() {
+        dialog.dismiss();
     }
 }

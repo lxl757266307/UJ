@@ -18,6 +18,7 @@ import com.example.maintainsteward.bean.SearviceInfoBean;
 import com.example.maintainsteward.bean.SecondKindsBean;
 import com.example.maintainsteward.bean.SecondKindsContent;
 import com.example.maintainsteward.bean.ServiceGoodsGetBean;
+import com.example.maintainsteward.bean.UserInfoBean;
 import com.example.maintainsteward.bean.YanZhengMaCallBackBean;
 
 import retrofit2.Call;
@@ -224,12 +225,52 @@ public interface HttpApi {
                                  @Field("key") String key);
 
 
+    /*获取用户信息*/
+    @FormUrlEncoded
+    @POST("GetUserInfos")
+    Call<UserInfoBean> getUserInfos(@Field("user_id") String user_id,
+                                    @Field("timestamp") String timestamp,
+                                    @Field("sign") String sign,
+                                    @Field("key") String key);
+
+    /*获取用户信息*/
+
+    /**
+     * @param user_id
+     * @param type      avatar(头像), user_nicename(昵称), sex(性别)，birthday(生日)
+     * @param values
+     * @param timestamp
+     * @param sign
+     * @param key
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("GoUpdateUserInfo")
+    Call<PublicBean> goUpdateUserInfo(@Field("user_id") String user_id,
+                                      @Field("type") String type,
+                                      @Field("values") String values,
+                                      @Field("timestamp") String timestamp,
+                                      @Field("sign") String sign,
+                                      @Field("key") String key);
+
+
     /*获取七牛云 token*/
     @FormUrlEncoded
     @POST("index.php")
     Call<QiNiuBean> getToken(@Field("code") String code
     );
 
+
+    /*我的粉丝*/
+    @FormUrlEncoded
+    @POST("bindNewPhone")
+    Call<PublicBean> bindNewPhone(
+            @Field("user_id") String id,
+            @Field("phone") String phone,
+            @Field("timestamp") String timestamp,
+            @Field("sign") String sign,
+            @Field("key") String key
+    );
 
     /*我的粉丝*/
     @FormUrlEncoded

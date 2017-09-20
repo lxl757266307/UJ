@@ -92,6 +92,28 @@ public class PhotoUtils {
         activity.startActivityForResult(intent, REQUEST_CODE);
     }
 
+    public static void crop(File file, Uri uri, Activity activity, int REQUEST_CODE) {
+        // 裁剪图片意图
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(uri, "image/*");
+        intent.putExtra("crop", "true");
+        // 裁剪框的比例，1：1
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        // 裁剪后输出图片的尺寸大小
+        intent.putExtra("outputX", 600);
+        intent.putExtra("outputY", 600);
+
+        intent.putExtra("outputFormat", "JPEG");// 图片格式
+        intent.putExtra("noFaceDetection", true);// 取消人脸识别
+        intent.putExtra("return-data", true);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                Uri.fromFile(file));
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        // 开启一个带有返回值的Activity，请求码为PHOTO_REQUEST_CUT
+        activity.startActivityForResult(intent, REQUEST_CODE);
+    }
+
 
     /*圆形图片*/
 
@@ -135,7 +157,7 @@ public class PhotoUtils {
      * <br>功能详细描述:
      * <br>注意:
      */
-    private void cropImageUri(String path, String name, Activity context, int requestcode) {
+    public static void cropImageUri(File file, Activity context, int requestcode) {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
         intent.setType("image/*");
         intent.putExtra("crop", "true");
@@ -146,7 +168,7 @@ public class PhotoUtils {
         intent.putExtra("scale", true);
         intent.putExtra("return-data", false);
         intent.putExtra(MediaStore.EXTRA_OUTPUT,
-                Uri.fromFile(new File(path, name)));
+                Uri.fromFile(file));
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
         intent.putExtra("noFaceDetection", true); // no face detection
         context.startActivityForResult(intent, requestcode);

@@ -41,8 +41,6 @@ public class LoginPresonter {
                 if (response.isSuccessful()) {
 
                     YanZhengMaCallBackBean body = response.body();
-
-                    ToolUitls.print(TAG, "body=" + body);
                     if (loginListener != null && body != null) {
                         loginListener.getVerifyCode(body);
                     }

@@ -67,14 +67,16 @@ public class OrderActivity extends BaseActivity implements GetOrderListListener 
     @BindView(R.id.txt_yi_qu_xiao_number)
     TextView txtYiQuXiaoNumber;
 
+    int item;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        item = this.getIntent().getIntExtra("page", -1);
         setContentView(R.layout.activity_order);
         ButterKnife.bind(this);
         setArray();
-        registerReciver();
+
         initViewPager();
         initPrsonter();
         initList();
@@ -82,6 +84,7 @@ public class OrderActivity extends BaseActivity implements GetOrderListListener 
         getOrderByType("3");
         getOrderByType("5");
         getOrderByType("7");
+
 
     }
 
@@ -257,11 +260,9 @@ public class OrderActivity extends BaseActivity implements GetOrderListListener 
     public void getAllList(OrderListBean listBean) {
         switch (listBean.getStatus()) {
             case "1":
-                dialog.dismiss();
+
                 OrderListBean.DataBean data = listBean.getData();
                 allOrder.addAll(data.getDemand_order_data());
-                allOrderListFragement.setDemand_order_data(allOrder);
-                vpOrder.setCurrentItem(0);
 
                 break;
             default:
@@ -278,7 +279,11 @@ public class OrderActivity extends BaseActivity implements GetOrderListListener 
             case "1":
                 OrderListBean.DataBean data = listBean.getData();
                 weiWanCheng.addAll(data.getDemand_order_data());
-                weiWanChengOrderListFragement.setDemand_order_data(weiWanCheng);
+                if (weiWanCheng.size() > 0) {
+                    txtWeiWanChengNumber.setVisibility(View.VISIBLE);
+                    txtWeiWanChengNumber.setText(weiWanCheng.size() + "");
+                }
+
                 break;
         }
     }
@@ -289,9 +294,13 @@ public class OrderActivity extends BaseActivity implements GetOrderListListener 
             case "1":
                 OrderListBean.DataBean data = listBean.getData();
                 yiWanCheng.addAll(data.getDemand_order_data());
-                yiWanChengOrderListFragement.setDemand_order_data(yiWanCheng);
+                if (yiWanCheng.size() > 0) {
+                    txtYiWanChengNumber.setVisibility(View.VISIBLE);
+                    txtYiWanChengNumber.setText(yiWanCheng.size() + "");
+                }
                 break;
         }
+
     }
 
     @Override
@@ -300,7 +309,10 @@ public class OrderActivity extends BaseActivity implements GetOrderListListener 
             case "1":
                 OrderListBean.DataBean data = listBean.getData();
                 yiQuXiao.addAll(data.getDemand_order_data());
-                yiQuXiaoOrderListFragement.setDemand_order_data(yiQuXiao);
+                if (yiQuXiao.size() > 0) {
+                    txtYiQuXiaoNumber.setVisibility(View.VISIBLE);
+                    txtYiQuXiaoNumber.setText(yiQuXiao.size() + "");
+                }
                 break;
         }
     }
@@ -310,52 +322,8 @@ public class OrderActivity extends BaseActivity implements GetOrderListListener 
 
     }
 
-    OrderReciver reciver;
-
-    public void registerReciver() {
-
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(Contacts.ORDER_REFRESH);
-        reciver = new OrderReciver();
-        registerReceiver(reciver, intentFilter);
-
-    }
-
-    @OnClick(R.id.layout_back)
-    public void onViewClicked() {
-    }
-
-    public class OrderReciver extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            if (intent.getAction().equals(Contacts.ORDER_REFRESH)) {
 
 
-                switch (intent.getStringExtra("flag")) {
-                    case "fresh":
-//                        allOrder.clear();
-//                        weiWanCheng.clear();
-//                        yiQuXiao.clear();
-//                        yiWanCheng.clear();
-                        getOrderByType("1");
-                        getOrderByType("3");
-                        getOrderByType("5");
-                        getOrderByType("7");
-                        break;
-                    case "load":
-                        page++;
-                        getOrderByType("1");
-                        getOrderByType("3");
-                        getOrderByType("5");
-                        getOrderByType("7");
-                        break;
-                }
 
 
-            }
-
-        }
-    }
 }

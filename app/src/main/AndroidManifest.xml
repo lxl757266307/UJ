@@ -123,6 +123,18 @@
         <!--订单列表页面-->
         <activity android:name=".activity.OrderActivity" />
 
+        <!--订单详情页面-->
+        <activity android:name=".activity.OrderMessageActivity" />
+
+        <!--用户信息页面-->
+        <activity android:name=".activity.UserActivity" />
+
+        <!--修改昵称页面-->
+        <activity android:name=".activity.UpdateUserNameActivity" />
+
+        <!--修改手机号码页面-->
+        <activity android:name=".activity.UpdatePhoneActivity" />
+
     </application>
 
 </manifest>

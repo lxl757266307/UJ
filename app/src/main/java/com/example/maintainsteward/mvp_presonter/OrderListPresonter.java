@@ -25,9 +25,12 @@ public class OrderListPresonter {
         httpApi = BaseHttpApi.getInstanceof();
     }
 
+    public void showDialog() {
+        orderListListener.showDialog();
+    }
+
     public void getOrderList(String id, String order_type, String page, String timestamp, String sign, String key) {
 
-        orderListListener.showDialog();
 
         Call<OrderListBean> orderList = httpApi.getOrderList(id, order_type, page, timestamp, sign, key);
         orderList.enqueue(new Callback<OrderListBean>() {
@@ -50,8 +53,6 @@ public class OrderListPresonter {
 
             @Override
             public void onFailure(Call<OrderListBean> call, Throwable t) {
-
-                dialogDismiss();
             }
         });
     }
@@ -80,7 +81,6 @@ public class OrderListPresonter {
 
             @Override
             public void onFailure(Call<OrderListBean> call, Throwable t) {
-
             }
         });
     }
@@ -110,7 +110,6 @@ public class OrderListPresonter {
 
             @Override
             public void onFailure(Call<OrderListBean> call, Throwable t) {
-
             }
         });
     }
@@ -139,7 +138,6 @@ public class OrderListPresonter {
 
             @Override
             public void onFailure(Call<OrderListBean> call, Throwable t) {
-
             }
         });
     }

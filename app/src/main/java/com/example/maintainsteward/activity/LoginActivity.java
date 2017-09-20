@@ -131,7 +131,6 @@ public class LoginActivity extends BaseActivity implements OnCheckedChangeListen
                 String password = editUserPasswordLogin.getText().toString();
                 if (cbXieyiLogin.isChecked() &&
                         !"".equals(password) && password.length() >= 4) {
-                    ToolUitls.print(TAG, "点击了");
                     String myUUID = ToolUitls.getMyUUID(this);
                     String time = System.currentTimeMillis() + "";
                     TreeMap<String, String> map = new TreeMap<>();
@@ -142,7 +141,6 @@ public class LoginActivity extends BaseActivity implements OnCheckedChangeListen
                     map.put("login_type", "0");
                     map.put("timestamp", time);
                     String sign = ToolUitls.getSign(map);
-                    ToolUitls.print(TAG, "sign2222222222===" + sign);
                     loginPresonter.login(phone, password, myUUID, "1234", "0", time, sign, Contacts.KEY);
                 } else {
                     return;

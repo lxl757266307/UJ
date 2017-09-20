@@ -71,7 +71,6 @@ public class UpLoadPhotoPresonter {
 
     public void qiNiuYunUpload(Bitmap bitmap, String token) {
         UploadManager uploadManager = MyApplication.getUploadManager();
-        ToolUitls.print(TAG, "uploadManager===" + uploadManager);
 
         uploadManager.put(PhotoUtils.bitmap2Byte(bitmap),
                 PhotoUtils.getTimeStamp() + ".jpg", token,

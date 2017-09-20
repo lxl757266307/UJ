@@ -38,8 +38,12 @@ public final class Contacts {
     /*添加地址成功*/
     public static final String ADD_ADDRESS_OK = "add_address_ok";
 
-
+    /*订单刷新*/
     public static final String ORDER_REFRESH = "order_refresh";
+
+
+    /*更新个人信息*/
+    public static final String UPDATE_USER = "user_refresh";
 
 
 }
