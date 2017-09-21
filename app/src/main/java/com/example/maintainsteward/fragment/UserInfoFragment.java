@@ -20,6 +20,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.activity.AddressManagerActivity;
+import com.example.maintainsteward.activity.MyQianBaoActivity;
 import com.example.maintainsteward.activity.OrderActivity;
 import com.example.maintainsteward.activity.UserActivity;
 import com.example.maintainsteward.base.Contacts;
@@ -95,9 +97,12 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
         return view;
     }
 
+    SharedPreferences sharedPreferences;
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        sharedPreferences = getActivity().getSharedPreferences(Contacts.USER, Context.MODE_PRIVATE);
         initPrsonter();
         registerReciver();
         getOrderByType("3");
@@ -111,7 +116,7 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
 
     public void getUserInfo() {
 
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Contacts.USER, Context.MODE_PRIVATE);
+
         String id = sharedPreferences.getString("id", null);
         String time = System.currentTimeMillis() + "";
         TreeMap<String, String> map = new TreeMap<>();
@@ -194,8 +199,10 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
             case R.id.layout_tao_can_userinfo:
                 break;
             case R.id.layout_dizhi_userinfo:
+                startActivity(new Intent(getActivity(), AddressManagerActivity.class));
                 break;
             case R.id.layout_qianbao_userinfo:
+                startActivity(new Intent(getActivity(), MyQianBaoActivity.class));
                 break;
         }
     }
@@ -315,7 +322,13 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
             case "1":
                 data = bean.getData();
 
-                ToolUitls.print(TAG, "data====" + data);
+                String user_balance = data.getUser_balance();
+                String bonus_count = data.getBonus_count();
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+                edit.putString("blance", data.getUser_balance());
+                edit.putString("count", bonus_count);
+                edit.commit();
+
 
                 if (!"".equals(data.getAvatar())) {
                     Glide.with(getActivity()).load(data.getAvatar()).into(imgMyInfoLogo);

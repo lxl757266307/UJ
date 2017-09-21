@@ -35,6 +35,13 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
 
+    <!--微信分享-->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!-- 蓝牙分享所需的权限 -->
+
+
     <application
         android:name=".application.MyApplication"
         android:allowBackup="true"
@@ -78,10 +85,7 @@
             android:name=".base.BaseActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
-        <!--微信支付-->
-        <activity
-            android:name=".wxapi.WXEntryActivity"
-            android:exported="true" />
+
         <!--登录-->
         <activity android:name=".activity.LoginActivity" />
 
@@ -134,6 +138,59 @@
 
         <!--修改手机号码页面-->
         <activity android:name=".activity.UpdatePhoneActivity" />
+
+        <!--设置支付密码页面-->
+        <activity android:name=".activity.SetPayPasswordActivity" />
+
+        <!--修改支付密码页面-->
+        <activity android:name=".activity.UpdatePayPasswordActivity" />
+
+        <!--钱包页面-->
+        <activity android:name=".activity.MyQianBaoActivity" />
+
+        <!--余额页面-->
+        <activity android:name=".activity.MyYueActivity" />
+
+        <!--卡卷页面-->
+        <activity android:name=".activity.MyKaJuanActivity" />
+
+        <!-- 通过AndroidManifest配置AppKey和AppSecret，如果你选择通过代码配置，则不需要配置以下meta-data -->
+        <meta-data
+            android:name="Mob-AppKey"
+            android:value="212b9307b7c18" />
+        <meta-data
+            android:name="Mob-AppSecret"
+            android:value="3bb3906cb8422d556b8a1ca3f5077a04" />
+
+        <activity
+            android:name="com.mob.tools.MobUIShell"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <data android:scheme="tencent1104646053" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+
+            <intent-filter>
+                <data android:scheme="tencent100371282" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
 
     </application>
 

@@ -61,7 +61,25 @@ public final class PermissionRegisterUtils {
     public static final String CAMERA = "android.permission.CAMERA";
 
 
+
+
+/*     <!--微信分享-->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <!-- 蓝牙分享所需的权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />*/
+
+    public static final String GET_TASKS = "android.permission.GET_TASKS";
+    public static final String MANAGE_ACCOUNTS = "android.permission.MANAGE_ACCOUNTS";
+    public static final String GET_ACCOUNTS = "android.permission.GET_ACCOUNTS";
+
+
     public final static String[] PERMISSION = {PermissionRegisterUtils.ACCESS_COARSE_LOCATION,
+            PermissionRegisterUtils.GET_TASKS,
+            PermissionRegisterUtils.MANAGE_ACCOUNTS,
+            PermissionRegisterUtils.GET_ACCOUNTS,
             PermissionRegisterUtils.ACCESS_FINE_LOCATION,
             PermissionRegisterUtils.BLUETOOTH,
             PermissionRegisterUtils.BLUETOOTH_ADMIN,

@@ -8,6 +8,9 @@ import com.example.maintainsteward.bean.CityListBean;
 import com.example.maintainsteward.bean.AppIndexCategoryBean;
 import com.example.maintainsteward.bean.FirstKindsBean;
 import com.example.maintainsteward.bean.HotWordBean;
+import com.example.maintainsteward.bean.KaJuanBean;
+import com.example.maintainsteward.bean.KaJuanCountBean;
+import com.example.maintainsteward.bean.LogListBean;
 import com.example.maintainsteward.bean.LoginCallBackBean;
 import com.example.maintainsteward.bean.OrderListBean;
 import com.example.maintainsteward.bean.OrderSucessBean;
@@ -294,6 +297,41 @@ public interface HttpApi {
             @Field("phone") String phone,
             @Field("newpwd") String pwd,
             @Field("oldpwd") String oldpwd,
+            @Field("timestamp") String timestamp,
+            @Field("sign") String sign,
+            @Field("key") String key
+    );
+
+    /*我的卡卷数量*/
+    @FormUrlEncoded
+    @POST("MyCouponsCount")
+    Call<KaJuanCountBean> myCouponsCount(
+            @Field("user_id") String id,
+            @Field("timestamp") String timestamp,
+            @Field("sign") String sign,
+            @Field("key") String key
+    );
+
+    /*我的钱包余额*/
+    @FormUrlEncoded
+    @POST("MyWalletBalance")
+    Call<LogListBean> myWalletBalance(
+            @Field("user_id") String id,
+            @Field("type") String type,
+            @Field("page") String page,
+            @Field("timestamp") String timestamp,
+            @Field("sign") String sign,
+            @Field("key") String key
+    );
+
+
+    /*我的卡卷*/
+    @FormUrlEncoded
+    @POST("MyCoupons")
+    Call<KaJuanBean> myCoupons(
+            @Field("user_id") String id,
+            @Field("type") String type,
+            @Field("page") String page,
             @Field("timestamp") String timestamp,
             @Field("sign") String sign,
             @Field("key") String key

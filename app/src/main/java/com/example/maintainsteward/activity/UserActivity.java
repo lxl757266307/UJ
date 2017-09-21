@@ -169,10 +169,20 @@ public class UserActivity extends BaseActivity implements UserInfoListener, OnUp
 
 
             break;
-            case R.id.layout_password:
-                break;
-            case R.id.layout_edit_password:
-                break;
+            case R.id.layout_password: {
+
+                Intent intent = new Intent(this, SetPayPasswordActivity.class);
+                intent.putExtra("phone", txtPhone.getText().toString());
+                startActivity(intent);
+
+            }
+            break;
+            case R.id.layout_edit_password: {
+                Intent intent = new Intent(this, UpdatePayPasswordActivity.class);
+                intent.putExtra("phone", txtPhone.getText().toString());
+                startActivity(intent);
+            }
+            break;
         }
     }
 

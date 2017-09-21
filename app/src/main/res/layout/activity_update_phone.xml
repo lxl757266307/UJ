@@ -49,6 +49,14 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#bbbbbb" />
+
+
     <TextView
         android:id="@+id/txt_old_phone"
         android:layout_width="match_parent"
@@ -57,7 +65,6 @@
         android:layout_marginRight="20dp"
         android:background="@null"
         android:gravity="center_vertical"
-        android:hint="请输入您的手机号"
         android:inputType="phone"
         android:maxLength="11"
         android:textColor="#181818"
@@ -70,8 +77,6 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="#bbbbbb" />
-
-
     <EditText
         android:id="@+id/edit_new_phone"
         android:layout_width="match_parent"

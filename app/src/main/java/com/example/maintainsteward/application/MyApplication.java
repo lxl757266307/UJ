@@ -14,6 +14,7 @@ import com.example.maintainsteward.service.DemoPushService;
 import com.example.maintainsteward.utils.PermissionRegisterUtils;
 import com.example.maintainsteward.utils.ToolUitls;
 import com.igexin.sdk.PushManager;
+import com.mob.MobApplication;
 import com.qiniu.android.common.FixedZone;
 import com.qiniu.android.storage.Configuration;
 import com.qiniu.android.storage.UploadManager;
@@ -23,11 +24,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import cn.sharesdk.framework.ShareSDK;
+
 /**
  * Created by Administrator on 2017/8/2.
  */
 
-public class MyApplication extends Application {
+public class MyApplication extends MobApplication {
 
     public static final String TAG = "MyApplication";
 
@@ -97,7 +100,6 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 //        PermissionRegisterUtils.registerPermission(this);
-
 
         /* 初始化个推*/
         PushManager.getInstance().initialize(this.getApplicationContext(), DemoPushService.class);

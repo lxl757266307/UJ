@@ -160,9 +160,9 @@ public class UpdatePhoneActivity extends BaseActivity implements LoginListener, 
 
                 SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
                 String id = sharedPreferences.getString("id", null);
-                String timeStamp = System.currentTimeMillis() + "";
-                TreeMap<String, String> map = new TreeMap<>();
                 String phone = editNewPhone.getText().toString();
+                TreeMap<String, String> map = new TreeMap<>();
+                String timeStamp = System.currentTimeMillis() + "";
                 map.put("user_id", id);
                 map.put("phone", phone);
                 map.put("timestamp", timeStamp);
@@ -191,6 +191,10 @@ public class UpdatePhoneActivity extends BaseActivity implements LoginListener, 
                     Intent intent = new Intent();
                     intent.putExtra("phone", editNewPhone.getText().toString());
                     setResult(RESULT_OK, intent);
+
+                    Intent intent1 = new Intent(Contacts.UPDATE_USER);
+                    sendBroadcast(intent1);
+
                     finish();
                     break;
             }
