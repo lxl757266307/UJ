@@ -9,14 +9,19 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.activity.OrderMessageActivity;
@@ -30,6 +35,7 @@ import com.example.maintainsteward.mvp_presonter.QuXiaoOrderPresonter;
 import com.example.maintainsteward.mvp_view.GetOrderListListener;
 import com.example.maintainsteward.mvp_view.OnOrderCancleListener;
 import com.example.maintainsteward.utils.ToolUitls;
+import com.github.rahatarmanahmed.cpv.CircularProgressView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -224,15 +230,7 @@ public class WeiWanChengOrderListFragement extends Fragment implements PtrHandle
 
     @Override
     public void quXiaoOrder(String orderId, int position) {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Contacts.USER, Context.MODE_PRIVATE);
-        String userId = sharedPreferences.getString("id", null);
-        String time = System.currentTimeMillis() + "";
-        TreeMap<String, String> map = new TreeMap<>();
-        map.put("timestamp", time);
-        map.put("user_id", userId);
-        map.put("order_id", orderId);
-        String sign = ToolUitls.getSign(map);
-        presonter.quXiaoOrder(userId, orderId, time, sign, Contacts.KEY, position);
+        setSureDialog(orderId, position);
     }
 
     @Override
@@ -241,7 +239,10 @@ public class WeiWanChengOrderListFragement extends Fragment implements PtrHandle
 
             case "1":
                 ToolUitls.toast(getActivity(), "取消成功");
-                demand_order_data.remove(position);
+                mWaitingAlertDialog.dismiss();
+//                demand_order_data.remove(position);
+                demand_order_data.get(position).setOrder_status("8");
+
                 orderListAdapter.setDemand_order_data(demand_order_data);
                 orderListAdapter.notifyDataSetChanged();
 //                Intent intent = new Intent(Contacts.ORDER_REFRESH);
@@ -308,5 +309,85 @@ public class WeiWanChengOrderListFragement extends Fragment implements PtrHandle
     @Override
     public void dialogDismiss() {
         dialog.dismiss();
+    }
+
+    /*确认对话框*/
+    public void setSureDialog(final String orderId, final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final AlertDialog alertDialog = builder.create();
+
+        alertDialog.show();
+
+        View submitView = View.inflate(getActivity(), R.layout.dialog_submit, null);
+        TextView cancle = (TextView) submitView.findViewById(R.id.txt_dialog_submit_cancle);
+        TextView sure = (TextView) submitView.findViewById(R.id.txt_dialog_submit_sure);
+        TextView message = (TextView) submitView.findViewById(R.id.txt_messgae);
+        message.setText("确认取消么?");
+
+        Window window = alertDialog.getWindow();
+        window.setBackgroundDrawable(getResources().getDrawable(R.drawable.write_form_dialog));
+        window.setContentView(submitView);
+        WindowManager windowManager = getActivity().getWindowManager();
+
+        Display defaultDisplay = windowManager.getDefaultDisplay();
+
+        WindowManager.LayoutParams attributes = window.getAttributes();
+        attributes.width = (int) (defaultDisplay.getWidth() * 0.8);
+        window.setAttributes(attributes);
+        alertDialog.setCanceledOnTouchOutside(false);
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+        sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                waittingProgressBar();
+                alertDialog.dismiss();
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Contacts.USER, Context.MODE_PRIVATE);
+                String userId = sharedPreferences.getString("id", null);
+                String time = System.currentTimeMillis() + "";
+                TreeMap<String, String> map = new TreeMap<>();
+                map.put("timestamp", time);
+                map.put("user_id", userId);
+                map.put("order_id", orderId);
+                String sign = ToolUitls.getSign(map);
+                presonter.quXiaoOrder(userId, orderId, time, sign, Contacts.KEY, position);
+
+            }
+        });
+    }
+
+    AlertDialog mWaitingAlertDialog;
+
+    /*等待对话框*/
+    public void waittingProgressBar() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        mWaitingAlertDialog = builder.create();
+
+        mWaitingAlertDialog.show();
+
+        View submitView = View.inflate(getActivity(), R.layout.dialog_waitting, null);
+        CircularProgressView mCircularProgressView = (CircularProgressView) submitView.findViewById(R.id.progress_view);
+        mCircularProgressView.setVisibility(View.VISIBLE);
+        mCircularProgressView.setIndeterminate(true);
+        mCircularProgressView.startAnimation();
+
+        Window window = mWaitingAlertDialog.getWindow();
+        window.setBackgroundDrawable(getResources().getDrawable(R.drawable.write_form_dialog));
+        window.setContentView(submitView);
+        WindowManager windowManager = getActivity().getWindowManager();
+
+        Display defaultDisplay = windowManager.getDefaultDisplay();
+
+        WindowManager.LayoutParams attributes = window.getAttributes();
+        attributes.width = (int) (defaultDisplay.getWidth() * 0.6);
+        attributes.height = (int) (defaultDisplay.getHeight() * 0.3);
+        window.setAttributes(attributes);
+        mWaitingAlertDialog.setCanceledOnTouchOutside(false);
+
     }
 }

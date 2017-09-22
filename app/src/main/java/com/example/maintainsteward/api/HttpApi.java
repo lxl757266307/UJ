@@ -195,6 +195,15 @@ public interface HttpApi {
                                      @Field("sign") String sign,
                                      @Field("key") String key);
 
+    /*订单列表*/
+    @FormUrlEncoded
+    @POST("OrderDetails")
+    Call<OrderListBean> getOrderDetails(@Field("user_id") String user_id,
+                                        @Field("id") String id,
+                                        @Field("timestamp") String timestamp,
+                                        @Field("sign") String sign,
+                                        @Field("key") String key);
+
     /*提交订单*/
     @FormUrlEncoded
     @POST("ServiceOrderSubmit")

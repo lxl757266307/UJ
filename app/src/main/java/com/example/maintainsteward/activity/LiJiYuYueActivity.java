@@ -140,21 +140,21 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
                 break;
             case R.id.layout_choose_address_lijiyuyue:
 //
-                SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
-                String id = sharedPreferences.getString("id", null);
+//                SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
+//                String id = sharedPreferences.getString("id", null);
+////
+//                TreeMap<String, String> map = new TreeMap<>();
+//                String timeStamp = System.currentTimeMillis() + "";
+//                map.put("timestamp", timeStamp);
+//                map.put("user_id", id);
+//                map.put("page", page + "");
+//                String sign = ToolUitls.getSign(map);
 //
-                TreeMap<String, String> map = new TreeMap<>();
-                String timeStamp = System.currentTimeMillis() + "";
-                map.put("timestamp", timeStamp);
-                map.put("user_id", id);
-                map.put("page", page + "");
-                String sign = ToolUitls.getSign(map);
-
-                ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "GetAddress?" +
-                        "user_id=" + id + "&timestamp="
-                        + timeStamp + "&page="
-                        + page + "&sign=" + sign
-                        + "&key=" + Contacts.KEY);
+//                ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "GetAddress?" +
+//                        "user_id=" + id + "&timestamp="
+//                        + timeStamp + "&page="
+//                        + page + "&sign=" + sign
+//                        + "&key=" + Contacts.KEY);
 
                 Intent intent1 = new Intent(this, AddressManagerActivity.class);
                 intent1.putExtra("flag", TAG);
@@ -293,7 +293,6 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
         title = this.getIntent().getStringExtra("title");
         cat_id = this.getIntent().getStringExtra("cat_id");
 
-        ToolUitls.print(TAG, "title=======" + title);
     }
 
 
@@ -338,11 +337,13 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
     private void initTimePicker() {
         //控制时间范围(如果不设置范围，则使用默认时间1900-2100年，此段代码可注释)
         //因为系统Calendar的月份是从0-11的,所以如果是调用Calendar的set方法来设置时间,月份的范围也要是从0-11
+
+
         Calendar selectedDate = Calendar.getInstance();
         Calendar startDate = Calendar.getInstance();
-        startDate.set(2015, 1, 1);
+        startDate.set(selectedDate.get(Calendar.YEAR), selectedDate.get(Calendar.MONTH), selectedDate.get(Calendar.DAY_OF_MONTH), 24 - selectedDate.get(Calendar.HOUR), 60 - selectedDate.get(Calendar.MINUTE));
         Calendar endDate = Calendar.getInstance();
-        endDate.set(2099, 12, 31);
+        endDate.set(2099, 12, 31, 24, 59);
         //时间选择器
         mTimePickerView = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
 
@@ -390,15 +391,18 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
     }
 
     int count = 0;
+    List<Bitmap> photos;
 
     @Override
     public void getToken(String token) {
         url = new ArrayList<>();
 
         if (bitmaps != null && bitmaps.size() > 0) {
-            List<Bitmap> photos = this.bitmaps.subList(0, this.bitmaps.size() - 1);
+            photos = bitmaps.subList(0, bitmaps.size() - 1);
 
             for (int i = 0; i < photos.size(); i++) {
+                count++;
+
                 upLoadPhotoPresonter.qiNiuYunUpload(photos.get(i), token);
             }
         }
@@ -414,8 +418,10 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
     @Override
     public void onUpSucess(String key) {
         url.add(key);
-        count++;
-        if (count == bitmaps.size()) {
+
+        ToolUitls.print(TAG, "count==" + count);
+        ToolUitls.print(TAG, "photos==" + photos.size());
+        if (photos != null && count == photos.size() ) {
             for (int i = 0; i < url.size(); i++) {
                 imgArrays[i] = url.get(i);
             }
@@ -456,9 +462,10 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
 
         String sign = ToolUitls.getSign(map);
 
+
         liJiOrderPresonter.order(user_id, cat_id, title, dataBean.getId(), dataJson, peiJianJson, content, img1, img2, img3, img4, img5, img6, orderTime, time, sign, Contacts.KEY);
 //        ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "ServiceOrderSubmit?" + "user_id=" + user_id + "&cat_id=" + cat_id
-//                + "&name=" + title.trim() + "&address_id=" + dataBean.getId() + "&service_con=" + dataJson + "&material=" + peiJianJson
+//                + "&name=" + title + "&address_id=" + dataBean.getId() + "&service_con=" + dataJson + "&material=" + peiJianJson
 //                + "&content=" + content + "&img1=" + img1 + "&img2=" + img2 + "&img3=" + img3 + "&img4=" + img4 + "&img5=" + img5
 //                + "&img6=" + img6 + "&order_time=" + orderTime + "&timestamp=" + time + "&sign=" + sign + "&key=" + Contacts.KEY + "&type=1");
     }
@@ -512,7 +519,6 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
                 if (bitmaps != null && bitmaps.size() > 1) {
                     upLoadPhotoPresonter.getToken();
                 } else {
-                    ToolUitls.print(TAG, "1111111111111111111");
                     orderNow();
                 }
 

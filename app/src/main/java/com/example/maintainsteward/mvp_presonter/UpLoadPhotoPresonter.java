@@ -83,6 +83,7 @@ public class UpLoadPhotoPresonter {
                                 if (listener != null) {
                                     try {
                                         listener.onUpSucess(Contacts.QINIUYUN + response.getString("key"));
+
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }

@@ -47,7 +47,9 @@ import in.srain.cube.views.ptr.PtrHandler2;
  * Created by Administrator on 2017/9/19.
  */
 
-public class YiQuXiaoOrderListFragement extends Fragment implements PtrHandler2, OrderListAdapter.OnQuXiaoOrderListener, OnOrderCancleListener, GetOrderListListener, AdapterView.OnItemClickListener {
+public class YiQuXiaoOrderListFragement extends Fragment implements PtrHandler2,
+        OrderListAdapter.OnQuXiaoOrderListener, OnOrderCancleListener,
+        GetOrderListListener, AdapterView.OnItemClickListener {
     List<OrderListBean.DataBean.DemandOrderDataBean> demand_order_data;
     @BindView(R.id.lv_order_list)
     ListView lvOrderList;

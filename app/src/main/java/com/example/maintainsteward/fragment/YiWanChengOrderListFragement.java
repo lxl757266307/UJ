@@ -238,9 +238,9 @@ public class YiWanChengOrderListFragement extends Fragment implements PtrHandler
 
             case "1":
                 ToolUitls.toast(getActivity(), "取消成功");
-                demand_order_data.remove(position);
-                orderListAdapter.setDemand_order_data(demand_order_data);
-                orderListAdapter.notifyDataSetChanged();
+//                demand_order_data.remove(position);
+//                orderListAdapter.setDemand_order_data(demand_order_data);
+//                orderListAdapter.notifyDataSetChanged();
 //                Intent intent = new Intent(Contacts.ORDER_REFRESH);
 //                intent.putExtra("type", "5");
 //                getActivity().sendBroadcast(intent);

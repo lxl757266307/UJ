@@ -242,6 +242,7 @@ public class KindsFragment extends Fragment implements KindsListener, AdapterVie
             String id = dataBean.getId();
             Intent intent = new Intent(getActivity(), ServiceInfoActivity.class);
             intent.putExtra("id", id);
+            intent.putExtra("title", dataBean.getName());
             startActivity(intent);
         }
 

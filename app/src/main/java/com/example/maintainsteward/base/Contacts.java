@@ -15,10 +15,10 @@ public final class Contacts {
     /**
      * 微信支付所需参数
      */
-    public static final String APP_ID = "wx8be8c309ce37b815";
-    public static final String APP_MCHID = "1485605282";//商户号
-    public static final String APP_KEY = "5ew424Ejkiq763jf4ire91wqp59fpu67";//key
-    public static final String App_Secret = "48d2456a5f306f59338a1e3a7d0f993f";
+    public static final String APP_ID = "wx4c957187aba457ff";
+//    public static final String APP_MCHID = "1485605282";//商户号
+    public static final String APP_KEY = "ljfdEj485Rg96RnPA1W4P6XM4d3gk545";//key
+    public static final String App_Secret = "2a0c8ece80d2a0d18a43f23aee492156";
 
 
     public static final String BASE_URL = "http://wxtest.cnncsh.com/app_user/index/index/op/";

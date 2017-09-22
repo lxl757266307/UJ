@@ -43,8 +43,7 @@ public class OrderSucessActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.txt_see_order_ordersucess:
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.putExtra("page", 2);
+                Intent intent = new Intent(this, OrderActivity.class);
                 startActivity(intent);
                 finish();
                 break;
