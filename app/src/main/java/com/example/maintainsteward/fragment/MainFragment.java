@@ -23,11 +23,13 @@ import android.widget.ViewFlipper;
 import com.bumptech.glide.Glide;
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.activity.ChooseLocationActivity;
+import com.example.maintainsteward.activity.JingXuanPaiHangActivity;
 import com.example.maintainsteward.activity.SearchActivity;
 import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.AppIndexCategoryBean;
 import com.example.maintainsteward.bean.BannerBean;
+import com.example.maintainsteward.inter.OnMainServiceClickListener;
 import com.example.maintainsteward.mvp_presonter.MainFragmentPresonter;
 import com.example.maintainsteward.mvp_view.OnLoadBannerListener;
 import com.example.maintainsteward.utils.ToolUitls;
@@ -156,8 +158,12 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
                 startActivity(new Intent(getActivity(), SearchActivity.class));
                 break;
             case R.id.layout_service_mainfragment:
+                if (onMainServiceClickListener != null) {
+                    onMainServiceClickListener.onServiceClick();
+                }
                 break;
             case R.id.layout_choose_mainfragment:
+                startActivity(new Intent(getActivity(), JingXuanPaiHangActivity.class));
                 break;
             case R.id.layout_combo_mainfragment:
                 break;
@@ -175,6 +181,13 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
                 break;
         }
     }
+
+    public void setOnMainServiceClickListener(OnMainServiceClickListener onMainServiceClickListener) {
+        this.onMainServiceClickListener = onMainServiceClickListener;
+    }
+
+    OnMainServiceClickListener onMainServiceClickListener;
+
 
 
     @Nullable
@@ -201,8 +214,8 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
         vfMainfragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e(TAG, "vfMainfragment.getDisplayedChild()" + vfMainfragment.getDisplayedChild()
-                );
+//                Log.e(TAG, "vfMainfragment.getDisplayedChild()" + vfMainfragment.getDisplayedChild()
+//                );
             }
         });
 
@@ -399,8 +412,8 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
             String city = intent.getStringExtra("city");
 
 
-            ToolUitls.print(TAG,"district_name="+district_name);
-            ToolUitls.print(TAG,"city="+city);
+            ToolUitls.print(TAG, "district_name=" + district_name);
+            ToolUitls.print(TAG, "city=" + city);
             txtCityMainfragment.setText(city);
             txtDistrictMainfragment.setText(district_name);
 

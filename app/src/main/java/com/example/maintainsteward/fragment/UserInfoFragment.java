@@ -123,7 +123,6 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
         map.put("timestamp", time);
         map.put("user_id", id);
         String sign = ToolUitls.getSign(map);
-//        ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "GetUserInfos?" + "user_id=" + id + "&timestamp=" + time + "&sign=" + sign + "&key=" + Contacts.KEY);
         userInfoPresonter.getUserInfo(id, time, sign, Contacts.KEY);
 
     }
@@ -214,7 +213,7 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
         orderListPresonter.setOrderListListener(this);
         userInfoPresonter = new UserInfoPresonter();
         userInfoPresonter.setUserInfoListener(this);
-        orderListPresonter.showDialog();
+//        orderListPresonter.showDialog();
     }
 
 
@@ -249,7 +248,7 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
 
     @Override
     public void showDialog() {
-        dialog = ProgressDialog.show(getActivity(), "", "正在加载");
+//        dialog = ProgressDialog.show(getActivity(), "", "正在加载");
     }
 
     @Override
@@ -309,7 +308,7 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
 
     @Override
     public void dialogDismiss() {
-        dialog.dismiss();
+//        dialog.dismiss();
     }
 
     UserInfoBean.DataBean data;
@@ -334,7 +333,6 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
                     Glide.with(getActivity()).load(data.getAvatar()).into(imgMyInfoLogo);
                 }
 
-                ToolUitls.print(TAG, "name====" + data.getUser_nicename());
 
                 if ("".equals(data.getUser_nicename())) {
                     txtUserNameInfofragment.setText("请设置昵称");

@@ -127,7 +127,6 @@ public class BannerViewPager extends RelativeLayout implements ViewPager.OnPageC
 
     /**
      * @param views 图片数量
-     *
      */
     public void setViews(@NonNull ArrayList<ImageView> views, boolean isNetImage) {
         this.isNetImage = isNetImage;
@@ -247,6 +246,10 @@ public class BannerViewPager extends RelativeLayout implements ViewPager.OnPageC
     @Override
     public void onPageSelected(int position) {
         setMarkerPosition(-1);
+        if (onPageChangeListener != null) {
+            onPageChangeListener.onPageChange(position);
+        }
+
     }
 
     @Override
@@ -430,5 +433,15 @@ public class BannerViewPager extends RelativeLayout implements ViewPager.OnPageC
             case INVISIBLE:
                 break;
         }
+    }
+
+    OnPageChangeListener onPageChangeListener;
+
+    public void setOnPageChangeListener(OnPageChangeListener onPageChangeListener) {
+        this.onPageChangeListener = onPageChangeListener;
+    }
+
+    public interface OnPageChangeListener {
+        void onPageChange(int position);
     }
 }

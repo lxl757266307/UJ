@@ -1,19 +1,36 @@
 package com.example.maintainsteward.activity;
 
+import android.Manifest;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.adapter.OrderInfoPeiJianAdapter;
+import com.example.maintainsteward.adapter.OrderInfoServiceAdapter;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
+import com.example.maintainsteward.bean.KaJuanBean;
+import com.example.maintainsteward.bean.OrderInfoBean;
+import com.example.maintainsteward.mvp_presonter.OrderInfoPresonter;
+import com.example.maintainsteward.mvp_view.OrderInfoListener;
 import com.example.maintainsteward.utils.ToolUitls;
 import com.example.maintainsteward.view.MyListView;
 
+import java.util.List;
 import java.util.TreeMap;
 
 import butterknife.BindView;
@@ -21,13 +38,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.igexin.push.core.g.s;
-
 /**
  * Created by Administrator on 2017/9/20.
  */
 
-public class OrderMessageActivity extends BaseActivity {
+public class OrderMessageActivity extends BaseActivity implements OrderInfoListener, TextWatcher {
 
 
     String orderId;
@@ -108,29 +123,97 @@ public class OrderMessageActivity extends BaseActivity {
     SharedPreferences sharedPreferences;
     String id;
 
+    OrderInfoPresonter orderInfoPresonter;
+    OrderInfoServiceAdapter orderInfoServiceAdapter;
+    OrderInfoPeiJianAdapter orderInfoPeiJianAdapter;
+    @BindView(R.id.layout_365)
+    LinearLayout layout365;
+    @BindView(R.id.layout_youhuiquanxuanze)
+    LinearLayout layoutYouhuiquanxuanze;
+    @BindView(R.id.txt_jiantou)
+    TextView txtJiantou;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         orderId = this.getIntent().getStringExtra("id");
         setContentView(R.layout.activity_order_message);
         ButterKnife.bind(this);
-
+        txtJianmian.addTextChangedListener(this);
         sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
         id = sharedPreferences.getString("id", null);
-
+        orderInfoPresonter = new OrderInfoPresonter();
+        orderInfoPresonter.setOrderInfoListener(this);
+        orderInfoServiceAdapter = new OrderInfoServiceAdapter(this);
+        orderInfoPeiJianAdapter = new OrderInfoPeiJianAdapter(this);
         getOrderInfo();
+
     }
 
-    @OnClick({R.id.layout_back, R.id.txt_worker_phone, R.id.txt_lijiyuyue})
+    @OnClick({R.id.layout_back, R.id.txt_worker_phone, R.id.txt_lijiyuyue, R.id.img_kefu, R.id.layout_youhuiquanxuanze})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.layout_back:
+                finish();
                 break;
             case R.id.txt_worker_phone:
+
+                String phone = txtWorkerPhone.getText().toString();
+
+                if (!phone.matches("\\d{11}"))
+                    return;
+
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:" + phone));
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                this.startActivity(intent);
                 break;
             case R.id.txt_lijiyuyue:
+
+
+                break;
+            case R.id.img_kefu:
+
+                Intent intent2 = new Intent(Intent.ACTION_CALL);
+                intent2.setData(Uri.parse("tel:4008293331"));
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                this.startActivity(intent2);
+                break;
+            case R.id.layout_youhuiquanxuanze:
+
+                Intent intent3 = new Intent(this, YouHuiQuanActivity.class);
+                startActivityForResult(intent3, YOU_HUI_QUAN_CODE);
                 break;
         }
+    }
+
+    public static final int YOU_HUI_QUAN_CODE = 1;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+
+            switch (requestCode) {
+                case YOU_HUI_QUAN_CODE:
+                    KaJuanBean.DataBean.ResultDataBean resultDataBean = resultDataBean = (KaJuanBean.DataBean.ResultDataBean) data.getSerializableExtra("kajuan");
+
+                    if (resultDataBean != null) {
+                        String bonus_amount = resultDataBean.getBonus_amount();
+                        txtJianmian.setText("￥" + bonus_amount);
+                        txtJiantou.setVisibility(View.GONE);
+                    }
+
+
+                    break;
+            }
+        }
+
     }
 
     public void getOrderInfo() {
@@ -140,8 +223,175 @@ public class OrderMessageActivity extends BaseActivity {
         map.put("user_id", id);
         map.put("id", orderId);
         String sign = ToolUitls.getSign(map);
+        orderInfoPresonter.getOrderInfo(id, orderId, time, sign, Contacts.KEY);
+//        ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "OrderDetails?" + "user_id=" + id + "&id=" + orderId + "&timestamp=" + time + "&sign=" + sign + "&key=" + Contacts.KEY);
 
-        ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "OrderDetails?" + "user_id=" + id + "&id=" + orderId + "&timestamp=" + time + "&sign=" + sign + "&key=" + Contacts.KEY);
+    }
+
+    ProgressDialog dialog;
+
+    @Override
+    public void showDialog() {
+        dialog = ProgressDialog.show(this, "", "正在加载...");
+    }
+
+    @Override
+    public void hideDialog() {
+        dialog.dismiss();
+
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    OrderInfoBean.DataBean data;
+
+    @Override
+    public void getOrderInfoSucess(OrderInfoBean orderInfoBean) {
+        switch (orderInfoBean.getStatus()) {
+
+            case "1":
+
+                data = orderInfoBean.getData();
+                switch (data.getOrder_status()) {
+
+                    case "1":
+                        img1.setImageResource(R.mipmap.xiantiao3);
+                        imgYitijiao.setImageResource(R.mipmap.yitijiao2);
+                        txtYitijiao.setTextColor(Color.parseColor("#da0a0a"));
+                        txtTimeYitijiao.setTextColor(Color.parseColor("#da0a0a"));
+                        txtTimeYitijiao.setText(data.getCreate_time().substring(5, 16));
+                        txtStatus.setText("已提交");
+                        break;
+                    case "2":
+                        img1.setImageResource(R.mipmap.xiantiao2);
+                        img2.setImageResource(R.mipmap.xiantiao3);
+                        imgYuyuechenggong.setImageResource(R.mipmap.yuyuechengong2);
+                        txtYuyuechenggong.setTextColor(Color.parseColor("#da0a0a"));
+                        txtTimeYuyuechenggong.setTextColor(Color.parseColor("#da0a0a"));
+                        txtTimeYuyuechenggong.setText(data.getOrder_time().substring(5, 16));
+                        txtTimeYitijiao.setText(data.getCreate_time().substring(5, 16));
+                        txtStatus.setText("预约成功");
+                        break;
+                    case "3":
+                        img2.setImageResource(R.mipmap.xiantiao2);
+                        img3.setImageResource(R.mipmap.xiantiao3);
+                        imgZhengzaiweixiu.setImageResource(R.mipmap.zhengzaiweixiu2);
+                        txtZhengzaiweixiu.setTextColor(Color.parseColor("#da0a0a"));
+                        txtTimeZhengzaiweixiu.setTextColor(Color.parseColor("#da0a0a"));
+                        txtTimeZhengzaiweixiu.setText(data.getArrival_time().substring(5, 16));
+                        txtTimeYuyuechenggong.setText(data.getOrder_time().substring(5, 16));
+                        txtTimeYitijiao.setText(data.getCreate_time().substring(5, 16));
+                        txtStatus.setText("已到达");
+                        break;
+                    case "4":
+                        txtStatus.setText("待付款");
+
+                        break;
+                    case "5":
+                        txtStatus.setText("已付款");
+                        break;
+
+                    case "6":
+                        img3.setImageResource(R.mipmap.xiantiao2);
+                        imgYiwancheng.setImageResource(R.mipmap.yiwancheng2);
+                        txtYiwancheng.setTextColor(Color.parseColor("#da0a0a"));
+                        txtTimeYiwancheng.setTextColor(Color.parseColor("#da0a0a"));
+                        txtTimeZhengzaiweixiu.setText(data.getArrival_time().substring(5, 16));
+                        txtTimeYuyuechenggong.setText(data.getOrder_time().substring(5, 16));
+                        txtTimeYitijiao.setText(data.getCreate_time().substring(5, 16));
+                        txtTimeYiwancheng.setText(data.getFinish_time().substring(5, 16));
+                        txtStatus.setText("已完成");
+                        break;
+
+                    case "7":
+                        txtStatus.setText("已评价");
+                        break;
+                    case "8":
+                        txtStatus.setText("已取消");
+                        break;
+                    default:
+                        txtStatus.setText("待接单");
+                        break;
+
+                }
+
+                txtServiceName.setText(data.getName());
+                txtUserName.setText(data.getUser_name());
+                txtUserPhone.setText(data.getUser_phone());
+                txtUserAddress.setText(data.getAddress());
+                txtYuyueshijian.setText(data.getCreate_time());
+                txtQitafeiyong.setText("￥" + data.getOther_costs());
+                txtWeixianzuoye.setText("￥" + data.getDangerous_work());
+                txtDingdanbianhao.setText(data.getOrder_no());
+                String youhui_fee = data.getYouhui_fee();
+                if (!"0".equals(youhui_fee)) {
+                    txtTaocanjianmian.setText("￥" + data.getSet_meal_costs());
+                    layout365.setVisibility(View.VISIBLE);
+                }
+
+
+                txtYouhuijia.setText("￥" + data.getBonus_price());
+                txtZongjia.setText("￥" + data.getTotal_amount());
+                OrderInfoBean.DataBean.WorkerInfoBean worker_info = data.getWorker_info();
+                txtWorkerName.setText(worker_info.getName());
+                String phone_number = worker_info.getPhone_number();
+                if ("".equals(phone_number)) {
+                    txtWorkerPhone.setText("待接单");
+                } else {
+                    txtWorkerPhone.setText(phone_number);
+                }
+
+
+                List<OrderInfoBean.DataBean.ServiceBean> service = data.getService();
+                orderInfoServiceAdapter.setService(service);
+                lvServicce.setAdapter(orderInfoServiceAdapter);
+                orderInfoServiceAdapter.notifyDataSetChanged();
+
+                List<OrderInfoBean.DataBean.GoodsInfoBean> goods_info = data.getGoods_info();
+                orderInfoPeiJianAdapter.setService(goods_info);
+                lvPeijian.setAdapter(orderInfoPeiJianAdapter);
+                orderInfoPeiJianAdapter.notifyDataSetChanged();
+
+                break;
+        }
+    }
+
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        String str = txtJianmian.getText().toString();
+
+        double taoCan = Double.parseDouble(data.getYouhui_fee());
+
+        double taotal = Double.parseDouble(data.getTotal_amount());
+        if ("".equals(str)) {
+            txtYouhuijia.setText("￥" + (taotal - taoCan));
+
+        } else {
+            double youHuiJuan = Double.parseDouble(str.substring(1));
+            txtYouhuijia.setText("￥" + (taotal - taoCan - youHuiJuan));
+
+        }
+
 
     }
 }

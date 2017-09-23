@@ -245,9 +245,8 @@ public class WeiWanChengOrderListFragement extends Fragment implements PtrHandle
 
                 orderListAdapter.setDemand_order_data(demand_order_data);
                 orderListAdapter.notifyDataSetChanged();
-//                Intent intent = new Intent(Contacts.ORDER_REFRESH);
-//                intent.putExtra("type", "5");
-//                getActivity().sendBroadcast(intent);
+                Intent intent = new Intent(Contacts.UPDATE_USER);
+                getActivity().sendBroadcast(intent);
 
                 break;
         }

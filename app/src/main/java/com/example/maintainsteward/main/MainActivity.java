@@ -21,6 +21,7 @@ import com.example.maintainsteward.fragment.KindsFragment;
 import com.example.maintainsteward.fragment.MainFragment;
 import com.example.maintainsteward.fragment.TuiJianFragment;
 import com.example.maintainsteward.fragment.UserInfoFragment;
+import com.example.maintainsteward.inter.OnMainServiceClickListener;
 import com.example.maintainsteward.utils.PermissionRegisterUtils;
 import com.example.maintainsteward.utils.ToolUitls;
 import com.tencent.mm.opensdk.modelpay.PayReq;
@@ -36,7 +37,8 @@ import butterknife.OnClick;
 import pub.devrel.easypermissions.EasyPermissions;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
-public class MainActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks, OnPageChangeListener {
+public class MainActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks, OnPageChangeListener,
+        OnMainServiceClickListener {
 
     public static final String TAG = "MainFragment";
     @BindView(R.id.vip_main_activity)
@@ -87,6 +89,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     public void setFragment() {
 
         MainFragment mainFragment = new MainFragment();
+        mainFragment.setOnMainServiceClickListener(this);
         KindsFragment kindsFragment = new KindsFragment();
         TuiJianFragment orerFragment = new TuiJianFragment();
         UserInfoFragment userInfoFragment = new UserInfoFragment();
@@ -217,5 +220,11 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         buttonArray[2] = radioThree;
         buttonArray[3] = radioFour;
         buttonArray[0].setChecked(true);
+    }
+
+    @Override
+    public void onServiceClick() {
+
+        vipMain.setCurrentItem(1);
     }
 }

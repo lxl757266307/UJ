@@ -1,4 +1,4 @@
-package com.example.maintainsteward.fragment;
+package com.example.maintainsteward.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -7,15 +7,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.KaJuanListAdapter;
+import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.KaJuanBean;
 import com.example.maintainsteward.bean.KaJuanCountBean;
@@ -30,30 +29,15 @@ import java.util.TreeMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler2;
 
 /**
- * Created by Administrator on 2017/9/21.
+ * Created by Administrator on 2017/9/23.
  */
 
-public class KaJuanWeiShiYongFragment extends Fragment implements PtrHandler2, KaJuanListener, KaJuanListAdapter.OnKaJuanItemClickListener {
-    @BindView(R.id.recycle)
-    RecyclerView recycle;
-    @BindView(R.id.prt_frame)
-    PtrClassicFrameLayout prtFrame;
-    Unbinder unbinder;
-
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.kaujuan_list, container, false);
-        unbinder = ButterKnife.bind(this, view);
-        return view;
-    }
+public class YouHuiQuanActivity extends BaseActivity implements PtrHandler2, KaJuanListener, KaJuanListAdapter.OnKaJuanItemClickListener {
 
     SharedPreferences sharedPreferences;
     String id;
@@ -61,48 +45,63 @@ public class KaJuanWeiShiYongFragment extends Fragment implements PtrHandler2, K
     String type = "1";
     KaJuanPresonter kaJuanPresonter;
     List<KaJuanBean.DataBean.ResultDataBean> resultData;
-
     KaJuanListAdapter kaJuanListAdapter;
 
+    @BindView(R.id.recycle)
+    RecyclerView recycle;
+
+    @BindView(R.id.prt_frame)
+    PtrClassicFrameLayout prtFrame;
+
+
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        sharedPreferences = getActivity().getSharedPreferences(Contacts.USER, Context.MODE_PRIVATE);
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_youhuiquan);
+        ButterKnife.bind(this);
+
+        sharedPreferences = getSharedPreferences(Contacts.USER, Context.MODE_PRIVATE);
         prtFrame.setPtrHandler(this);
         id = sharedPreferences.getString("id", null);
-        recycle.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        recycle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         kaJuanPresonter = new KaJuanPresonter();
         kaJuanPresonter.setKaJuanListener(this);
         resultData = new ArrayList<>();
-        kaJuanListAdapter = new KaJuanListAdapter(getActivity(), 0);
+        kaJuanListAdapter = new KaJuanListAdapter(this, 0);
         kaJuanListAdapter.setOnKaJuanItemClickListener(this);
         getKaJuan();
-
-
     }
 
-
     public void getKaJuan() {
+
         TreeMap<String, String> map = new TreeMap<>();
         String timeStamp = System.currentTimeMillis() + "";
         map.put("user_id", id);
         map.put("page", page + "");
         map.put("type", type);
         map.put("timestamp", timeStamp);
+
+
         String sign = ToolUitls.getSign(map);
-//        ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "MyCoupons?" + "user_id=" + id + "&page=" + page + "&type=1" + "&timestamp=" + timeStamp + "&sign=" + sign + "&key=" + Contacts.KEY);
         kaJuanPresonter.getKaJuan(id, type, page + "", timeStamp, sign, Contacts.KEY);
     }
 
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
-    @Override
     public boolean checkCanDoLoadMore(PtrFrameLayout frame, View content, View footer) {
+
         LinearLayoutManager layoutManager = (LinearLayoutManager) recycle.getLayoutManager();
         //屏幕中最后一个可见子项的position
         int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
@@ -147,7 +146,7 @@ public class KaJuanWeiShiYongFragment extends Fragment implements PtrHandler2, K
 
     @Override
     public void showDialog() {
-        dialog = ProgressDialog.show(getActivity(), "", "正在加载...");
+        dialog = ProgressDialog.show(this, "", "正在加载...");
     }
 
     @Override
@@ -155,7 +154,7 @@ public class KaJuanWeiShiYongFragment extends Fragment implements PtrHandler2, K
         dialog.dismiss();
     }
 
-    public static final String TAG = "KaJuanWeiShiYongFragment";
+    public static final String TAG = "YouHuiQuanActivity";
 
     @Override
     public void onGetKaJuanSucess(KaJuanBean bean) {
@@ -181,12 +180,12 @@ public class KaJuanWeiShiYongFragment extends Fragment implements PtrHandler2, K
     @Override
     public void onItemClickItem(int postion) {
 
-//        KaJuanBean.DataBean.ResultDataBean resultDataBean = resultData.get(postion);
-//
-//        Intent intent = new Intent();
-//        intent.putExtra("kajuan", (Serializable) resultDataBean);
-//        getActivity().setResult(Activity.RESULT_OK, intent);
-//        getActivity().finish();
+        KaJuanBean.DataBean.ResultDataBean resultDataBean = resultData.get(postion);
+
+        Intent intent = new Intent();
+        intent.putExtra("kajuan", (Serializable) resultDataBean);
+        setResult(Activity.RESULT_OK, intent);
+        finish();
 
     }
 }

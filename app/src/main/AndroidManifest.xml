@@ -35,11 +35,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
 
-    <!--&lt;!&ndash;微信分享&ndash;&gt;-->
-    <!--<uses-permission android:name="android.permission.GET_TASKS" />-->
-    <!--<uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />-->
-    <!--<uses-permission android:name="android.permission.GET_ACCOUNTS" />-->
-    <!--&lt;!&ndash; 蓝牙分享所需的权限 &ndash;&gt;-->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
 
     <application
@@ -58,7 +54,7 @@
             android:value="f954271a02568a9b6749749ca6fc9d18" />
 
 
-        <activity android:name=".activity.LoadingActivity">
+        <activity android:name=".activity.GuidActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -89,7 +85,8 @@
         <!--登录-->
         <activity android:name=".activity.LoginActivity" />
 
-        <!--<activity android:name=".activity.LoadingActivity"/>-->
+        <!--加载页-->
+        <activity android:name=".activity.LoadingActivity" />
 
         <!--添加地址-->
         <activity android:name=".activity.AddAddressActivity" />
@@ -158,7 +155,20 @@
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:exported="true"
-            android:label="@string/app_name" />
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|adjustUnspecified|stateHidden" />
+
+        <!--优惠券页面-->
+        <activity android:name=".activity.YouHuiQuanActivity" />
+
+        <!--引导页-->
+        <!--<activity android:name=".activity.GuidActivity" />-->
+        <!--启动页-->
+        <activity android:name=".activity.QiDongActivity" />
+
+        <!--精选排行页面-->
+        <activity android:name=".activity.JingXuanPaiHangActivity" />
 
     </application>
 

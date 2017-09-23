@@ -69,6 +69,8 @@ public class OrderActivity extends BaseActivity implements GetOrderListListener 
 
     int item;
 
+    public static final String TAG = "OrderActivity";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +78,7 @@ public class OrderActivity extends BaseActivity implements GetOrderListListener 
         setContentView(R.layout.activity_order);
         ButterKnife.bind(this);
         setArray();
-
+        ToolUitls.print(TAG, "page===" + page);
         initViewPager();
         initPrsonter();
         initList();
@@ -159,6 +161,7 @@ public class OrderActivity extends BaseActivity implements GetOrderListListener 
 
     public void initViewPager() {
 
+
         vpOrder.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
@@ -194,6 +197,8 @@ public class OrderActivity extends BaseActivity implements GetOrderListListener 
         adapter.notifyDataSetChanged();
 
         vpOrder.setAdapter(adapter);
+
+        vpOrder.setCurrentItem(item);
 
 
     }
@@ -321,9 +326,6 @@ public class OrderActivity extends BaseActivity implements GetOrderListListener 
     public void dialogDismiss() {
 
     }
-
-
-
 
 
 }

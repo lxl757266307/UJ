@@ -8,10 +8,12 @@ import com.example.maintainsteward.bean.CityListBean;
 import com.example.maintainsteward.bean.AppIndexCategoryBean;
 import com.example.maintainsteward.bean.FirstKindsBean;
 import com.example.maintainsteward.bean.HotWordBean;
+import com.example.maintainsteward.bean.JingXuanBean;
 import com.example.maintainsteward.bean.KaJuanBean;
 import com.example.maintainsteward.bean.KaJuanCountBean;
 import com.example.maintainsteward.bean.LogListBean;
 import com.example.maintainsteward.bean.LoginCallBackBean;
+import com.example.maintainsteward.bean.OrderInfoBean;
 import com.example.maintainsteward.bean.OrderListBean;
 import com.example.maintainsteward.bean.OrderSucessBean;
 import com.example.maintainsteward.bean.PublicBean;
@@ -198,7 +200,7 @@ public interface HttpApi {
     /*订单列表*/
     @FormUrlEncoded
     @POST("OrderDetails")
-    Call<OrderListBean> getOrderDetails(@Field("user_id") String user_id,
+    Call<OrderInfoBean> getOrderDetails(@Field("user_id") String user_id,
                                         @Field("id") String id,
                                         @Field("timestamp") String timestamp,
                                         @Field("sign") String sign,
@@ -355,6 +357,16 @@ public interface HttpApi {
                                 @Field("m_id") int id,
                                 @Field("type") int type,
                                 @Field("page") int page
+    );
+
+    /*精选排行*/
+    @FormUrlEncoded
+    @POST("CarefullySelectedSort")
+    Call<JingXuanBean> getCarefullySelectedSort(
+            @Field("page") String page,
+            @Field("timestamp") String timestamp,
+            @Field("sign") String sign,
+            @Field("key") String key
     );
 
 

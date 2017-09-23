@@ -65,7 +65,6 @@ public class OrderListPresonter {
             @Override
             public void onResponse(Call<OrderListBean> call, Response<OrderListBean> response) {
 
-                ToolUitls.print(TAG, "response==" + response + "      response.body==" + response.body());
 
 
                 if (response.isSuccessful()) {
@@ -94,7 +93,6 @@ public class OrderListPresonter {
             @Override
             public void onResponse(Call<OrderListBean> call, Response<OrderListBean> response) {
 
-                ToolUitls.print(TAG, "response==" + response + "      response.body==" + response.body());
 
 
                 if (response.isSuccessful()) {
@@ -122,7 +120,6 @@ public class OrderListPresonter {
             @Override
             public void onResponse(Call<OrderListBean> call, Response<OrderListBean> response) {
 
-                ToolUitls.print(TAG, "response==" + response + "      response.body==" + response.body());
 
 
                 if (response.isSuccessful()) {

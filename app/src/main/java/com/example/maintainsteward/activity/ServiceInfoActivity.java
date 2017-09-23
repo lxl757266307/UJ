@@ -194,7 +194,7 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = String.valueOf(System.currentTimeMillis());
         req.message = mediaMessage;
-        req.scene = SendMessageToWX.Req.WXSceneTimeline;
+        req.scene = SendMessageToWX.Req.WXSceneSession;
 //
         api.sendReq(req);
 
@@ -334,7 +334,6 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
                 SecondKindsContent.DataBean data = bean.getData();
                 String content = data.getContent();
                 String url = data.getUrl();
-                ToolUitls.print(TAG, "URL==========" + url);
                 webViewServiceInfo.loadUrl(url);
                 break;
         }

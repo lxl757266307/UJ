@@ -23,19 +23,33 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     IWXAPI api;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         api = WXAPIFactory.createWXAPI(this, Contacts.APP_ID, false);
         api.registerApp(Contacts.APP_ID);
+        handleIntent(getIntent());
     }
 
     @Override
-    public void onReq(BaseReq baseReq) {
-        api.handleIntent(getIntent(), this);
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+        setIntent(intent);
+        api.handleIntent(intent, this);
     }
 
     @Override
-    public void onResp(BaseResp baseResp) {
-        api.handleIntent(getIntent(), this);
+    public void onReq(BaseReq arg0) {
+    }
+
+    @Override
+    public void onResp(BaseResp resp) {
+        // TODO Auto-generated method stub
+        if (resp.errCode == BaseResp.ErrCode.ERR_OK) {
+            // 用户同意
+        }
     }
 }

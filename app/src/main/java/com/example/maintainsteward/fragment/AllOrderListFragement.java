@@ -249,9 +249,8 @@ public class AllOrderListFragement extends Fragment implements PtrHandler2, Orde
                 demand_order_data.get(position).setOrder_status("8");
                 orderListAdapter.setDemand_order_data(demand_order_data);
                 orderListAdapter.notifyDataSetChanged();
-//                Intent intent = new Intent(Contacts.ORDER_REFRESH);
-//                intent.putExtra("type", "5");
-//                getActivity().sendBroadcast(intent);
+                Intent intent = new Intent(Contacts.UPDATE_USER);
+                getActivity().sendBroadcast(intent);
 
                 break;
         }
