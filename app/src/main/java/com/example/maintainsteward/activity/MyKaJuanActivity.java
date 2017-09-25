@@ -18,6 +18,7 @@ import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.KaJuanFragmentAdapter;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
+import com.example.maintainsteward.bean.CanUseYouHuiQuanBean;
 import com.example.maintainsteward.bean.KaJuanBean;
 import com.example.maintainsteward.bean.KaJuanCountBean;
 import com.example.maintainsteward.fragment.KaJuanWeiShiYongFragment;
@@ -180,6 +181,7 @@ public class MyKaJuanActivity extends BaseActivity implements KaJuanListener {
 
     }
 
+
     @Override
     public void onGetKaJuanCountSucess(KaJuanCountBean bean) {
         switch (bean.getStatus()) {
@@ -194,6 +196,16 @@ public class MyKaJuanActivity extends BaseActivity implements KaJuanListener {
                 txtGuoqi.setText("已过期(" + totalcount3 + ")");
                 break;
         }
+    }
+
+    @Override
+    public void onGetCanUseKaJuan(CanUseYouHuiQuanBean bean) {
+
+    }
+
+    @Override
+    public void showBlank() {
+
     }
 
     @Override

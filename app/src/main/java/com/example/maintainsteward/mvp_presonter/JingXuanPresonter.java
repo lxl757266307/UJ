@@ -2,13 +2,20 @@ package com.example.maintainsteward.mvp_presonter;
 
 import com.example.maintainsteward.api.HttpApi;
 import com.example.maintainsteward.base.BaseHttpApi;
+import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.BannerBean;
 import com.example.maintainsteward.bean.JingXuanBean;
 import com.example.maintainsteward.mvp_view.JingXuanListener;
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Administrator on 2017/9/23.
@@ -19,7 +26,20 @@ public class JingXuanPresonter {
 
     public JingXuanPresonter() {
 
-        httpApi = BaseHttpApi.getInstanceof();
+        Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
+            @Override
+            public boolean shouldSkipField(FieldAttributes f) {
+                return f.getName().contains("index");
+            }
+
+            @Override
+            public boolean shouldSkipClass(Class<?> clazz) {
+                return false;
+            }
+        }).create();
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Contacts.TEST_BASE_URL).addConverterFactory(GsonConverterFactory.create(gson)).build();
+        httpApi = retrofit.create(HttpApi.class);
     }
 
     public void getJingXuan(String page,

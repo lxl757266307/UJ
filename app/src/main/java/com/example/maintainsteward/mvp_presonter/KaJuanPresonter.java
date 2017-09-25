@@ -2,6 +2,7 @@ package com.example.maintainsteward.mvp_presonter;
 
 import com.example.maintainsteward.api.HttpApi;
 import com.example.maintainsteward.base.BaseHttpApi;
+import com.example.maintainsteward.bean.CanUseYouHuiQuanBean;
 import com.example.maintainsteward.bean.KaJuanBean;
 import com.example.maintainsteward.bean.KaJuanCountBean;
 import com.example.maintainsteward.mvp_view.KaJuanListener;
@@ -89,6 +90,41 @@ public class KaJuanPresonter {
         });
 
 
+    }
+
+
+    public void getCanUseKaJuan(
+            String id,
+            String order_no,
+            String count,
+            String timestamp,
+            String sign,
+            String key) {
+
+        Call<CanUseYouHuiQuanBean> serviceOrderUseCoupons = httpApi.getServiceOrderUseCoupons(id, order_no, count, timestamp, sign, key);
+
+        serviceOrderUseCoupons.enqueue(new Callback<CanUseYouHuiQuanBean>() {
+            @Override
+            public void onResponse(Call<CanUseYouHuiQuanBean> call, Response<CanUseYouHuiQuanBean> response) {
+
+                if (response.isSuccessful()) {
+
+                    CanUseYouHuiQuanBean body = response.body();
+
+                    if (kaJuanListener != null) {
+
+                        kaJuanListener.onGetCanUseKaJuan(body);
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<CanUseYouHuiQuanBean> call, Throwable t) {
+               kaJuanListener.showBlank();
+            }
+        });
     }
 
     KaJuanListener kaJuanListener;

@@ -1,5 +1,6 @@
 package com.example.maintainsteward.mvp_view;
 
+import com.example.maintainsteward.bean.CanUseYouHuiQuanBean;
 import com.example.maintainsteward.bean.KaJuanBean;
 import com.example.maintainsteward.bean.KaJuanCountBean;
 
@@ -16,4 +17,9 @@ public interface KaJuanListener {
     void onGetKaJuanSucess(KaJuanBean bean);
 
     void onGetKaJuanCountSucess(KaJuanCountBean bean);
+
+    void onGetCanUseKaJuan(CanUseYouHuiQuanBean bean);
+
+
+    void showBlank();
 }

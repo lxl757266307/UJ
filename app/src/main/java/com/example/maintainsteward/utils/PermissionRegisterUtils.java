@@ -1,6 +1,7 @@
 package com.example.maintainsteward.utils;
 
 import android.content.Context;
+import android.content.Intent;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -76,7 +77,8 @@ public final class PermissionRegisterUtils {
     public static final String GET_ACCOUNTS = "android.permission.GET_ACCOUNTS";
 
 
-    public final static String[] PERMISSION = {PermissionRegisterUtils.ACCESS_COARSE_LOCATION,
+    public final static String[] PERMISSION = {
+            PermissionRegisterUtils.ACCESS_COARSE_LOCATION,
             PermissionRegisterUtils.GET_TASKS,
             PermissionRegisterUtils.MANAGE_ACCOUNTS,
             PermissionRegisterUtils.GET_ACCOUNTS,
@@ -91,7 +93,7 @@ public final class PermissionRegisterUtils {
             PermissionRegisterUtils.CHANGE_WIFI_STATE,
             PermissionRegisterUtils.ACCESS_LOCATION_EXTRA_COMMANDS,
             PermissionRegisterUtils.READ_CONTACTS,
-            PermissionRegisterUtils.ACTION_CALL,
+//            PermissionRegisterUtils.ACTION_CALL,
             PermissionRegisterUtils.READ_EXTERNAL_STORAGE,
             PermissionRegisterUtils.CAMERA,
     };

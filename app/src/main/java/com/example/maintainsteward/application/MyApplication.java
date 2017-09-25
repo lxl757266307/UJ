@@ -95,14 +95,16 @@ public class MyApplication extends Application {
 
     //声明AMapLocationClientOption对象
     public AMapLocationClientOption mLocationOption = null;
-
+   public static IWXAPI api;
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        api = WXAPIFactory.createWXAPI(this, Contacts.APP_ID,true);
+        api.registerApp(Contacts.APP_ID);
+
 //        PermissionRegisterUtils.registerPermission(this);
-        IWXAPI wxapi = WXAPIFactory.createWXAPI(this, Contacts.APP_ID, false);
-        wxapi.registerApp(Contacts.APP_ID);
         /* 初始化个推*/
         PushManager.getInstance().initialize(this.getApplicationContext(), DemoPushService.class);
         PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), DemoIntentService.class);

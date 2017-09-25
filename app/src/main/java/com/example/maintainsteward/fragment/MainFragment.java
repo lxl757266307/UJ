@@ -214,8 +214,8 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
         vfMainfragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Log.e(TAG, "vfMainfragment.getDisplayedChild()" + vfMainfragment.getDisplayedChild()
-//                );
+                Log.e(TAG, "vfMainfragment.getDisplayedChild()" + vfMainfragment.getDisplayedChild()
+                );
             }
         });
 
@@ -283,7 +283,7 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
     }
 
 
-    public static final String TAG = "MainFragment";
+    public  final String TAG = "MainFragment";
 
     public void sign1() {
 

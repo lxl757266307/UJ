@@ -724,6 +724,14 @@ public class OrderInfoBean {
         }
 
         public static class WorkerInfoBean {
+            @Override
+            public String toString() {
+                return "WorkerInfoBean{" +
+                        "phone_number='" + phone_number + '\'' +
+                        ", name='" + name + '\'' +
+                        '}';
+            }
+
             /**
              * phone_number :
              * name :

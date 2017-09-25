@@ -12,6 +12,8 @@ public interface OrderInfoListener {
 
     void hideDialog();
 
+    void quXiaoOrder();
+
     void getOrderInfoSucess(OrderInfoBean orderInfoBean);
 
 

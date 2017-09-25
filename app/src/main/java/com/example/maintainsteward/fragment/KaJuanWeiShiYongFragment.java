@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.KaJuanListAdapter;
 import com.example.maintainsteward.base.Contacts;
+import com.example.maintainsteward.bean.CanUseYouHuiQuanBean;
 import com.example.maintainsteward.bean.KaJuanBean;
 import com.example.maintainsteward.bean.KaJuanCountBean;
 import com.example.maintainsteward.mvp_presonter.KaJuanPresonter;
@@ -155,6 +156,7 @@ public class KaJuanWeiShiYongFragment extends Fragment implements PtrHandler2, K
         dialog.dismiss();
     }
 
+
     public static final String TAG = "KaJuanWeiShiYongFragment";
 
     @Override
@@ -175,6 +177,16 @@ public class KaJuanWeiShiYongFragment extends Fragment implements PtrHandler2, K
 
     @Override
     public void onGetKaJuanCountSucess(KaJuanCountBean bean) {
+
+    }
+
+    @Override
+    public void onGetCanUseKaJuan(CanUseYouHuiQuanBean bean) {
+
+    }
+
+    @Override
+    public void showBlank() {
 
     }
 

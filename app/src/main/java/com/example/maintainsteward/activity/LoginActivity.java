@@ -99,6 +99,7 @@ public class LoginActivity extends BaseActivity implements OnCheckedChangeListen
         cbXieyiLogin.setOnCheckedChangeListener(this);
         btnLogin.setOnClickListener(this);
         txtYanzhengmaLogin.setOnClickListener(this);
+        txtXieyiLogin.setOnClickListener(this);
     }
 
 
@@ -200,7 +201,13 @@ public class LoginActivity extends BaseActivity implements OnCheckedChangeListen
                     return;
                 }
                 break;
+
+            case R.id.txt_xieyi_login:
+                startActivity(new Intent(this, XieYiActivity.class));
+                break;
         }
+
+
     }
 
     int mills = 60;

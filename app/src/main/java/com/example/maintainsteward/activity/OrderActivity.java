@@ -78,7 +78,6 @@ public class OrderActivity extends BaseActivity implements GetOrderListListener 
         setContentView(R.layout.activity_order);
         ButterKnife.bind(this);
         setArray();
-        ToolUitls.print(TAG, "page===" + page);
         initViewPager();
         initPrsonter();
         initList();

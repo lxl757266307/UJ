@@ -7,19 +7,24 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.SearviceInfoAdapter;
 import com.example.maintainsteward.adapter.ServicePeiJianAdapter;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.SearviceInfoBean;
@@ -185,18 +190,50 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
     }
 
     private void share() {
-        WXTextObject object = new WXTextObject();
-        object.text = "hahahahaha";
-        WXMediaMessage mediaMessage = new WXMediaMessage();
-        mediaMessage.mediaObject = object;
-        mediaMessage.description = "hahahahahaa1111111";
 
-        SendMessageToWX.Req req = new SendMessageToWX.Req();
-        req.transaction = String.valueOf(System.currentTimeMillis());
-        req.message = mediaMessage;
-        req.scene = SendMessageToWX.Req.WXSceneSession;
+        View view = LayoutInflater.from(this).inflate(R.layout.popuwindow_fenxiang, null);
+        final PopupWindow popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
+        LinearLayout weiXin = (LinearLayout) view.findViewById(R.id.layout_weixin);
+        LinearLayout pengYouQuan = (LinearLayout) view.findViewById(R.id.layout_pengyouquan);
+        popupWindow.setOutsideTouchable(true);
+        weiXin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WXTextObject object = new WXTextObject();
+                object.text = "hahahahaha";
+                WXMediaMessage mediaMessage = new WXMediaMessage();
+                mediaMessage.mediaObject = object;
+                mediaMessage.description = "hahahahahaa1111111";
+
+                SendMessageToWX.Req req = new SendMessageToWX.Req();
+                req.transaction = String.valueOf(System.currentTimeMillis());
+                req.message = mediaMessage;
+                req.scene = SendMessageToWX.Req.WXSceneSession;
 //
-        api.sendReq(req);
+                api.sendReq(req);
+                popupWindow.dismiss();
+            }
+        });
+        pengYouQuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WXTextObject object = new WXTextObject();
+                object.text = "hahahahaha";
+                WXMediaMessage mediaMessage = new WXMediaMessage();
+                mediaMessage.mediaObject = object;
+                mediaMessage.description = "hahahahahaa1111111";
+
+                SendMessageToWX.Req req = new SendMessageToWX.Req();
+                req.transaction = String.valueOf(System.currentTimeMillis());
+                req.message = mediaMessage;
+                req.scene = SendMessageToWX.Req.WXSceneTimeline;
+//
+                api.sendReq(req);
+                popupWindow.dismiss();
+            }
+        });
+
+        popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
 
     }
 
@@ -205,11 +242,11 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        api = WXAPIFactory.createWXAPI(this, Contacts.APP_ID, false);
-        api.registerApp(Contacts.APP_ID);
+        api = MyApplication.api;
         initData();
         initPresonter();
         setContentView(R.layout.activity_service_info);
+
         ButterKnife.bind(this);
         txtTitle.setText(title);
 

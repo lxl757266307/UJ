@@ -1,6 +1,7 @@
 package com.example.maintainsteward.bean;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
@@ -29,7 +30,6 @@ public class JingXuanBean {
      * status : 1
      * data : [{"id":"2","name":"空调清洗","desc":"暂不提供家用和商用中央空调清洗服务（选购365套餐，价格更优惠）。","parentid":"1","logourl":"http://os18w14e3.bkt.clouddn.com/59755eff6a827.jpg","level":"2","sort":"2","add_time":"1488855820","is_show":"1","content":"<p><\/p><div style=\"color:#72126\"><div style=\"color:#72126\"><p style=\"color:#A72126\">暂不提供家用和商用中央空调清洗服务（加入会员，选购365套餐，价格更优惠）。<\/p><p style=\"color:#A72126\">清洗流程：<\/p><p style=\"color:#A72126\">蒸汽机清洗，高温消毒，臭氧杀菌。<\/p><p style=\"color:#A72126\">服务质保：<\/p><p style=\"color:#A72126\">清洗类无质保。<\/p><p style=\"color:#A72126\"><br><\/p><\/div><\/div><p><\/p>","is_top":"1","min_price":"109"},{"id":"3","name":"冰箱清洗","desc":"","parentid":"1","logourl":"http://os18w14e3.bkt.clouddn.com/5975b88816f2b.jpg","level":"2","sort":"2","add_time":"1488855820","is_show":"1","content":"<p>此价格仅针对于家用型冰箱，冰柜、商用型冰箱价格面议（选购365套餐，价格更优惠）。<\/p>","is_top":"1","min_price":"109"},{"id":"19","name":"水龙头安装","desc":"","parentid":"5","logourl":"http://os18w14e3.bkt.clouddn.com/597af657a60ba.png","level":"2","sort":"1","add_time":"1499343920","is_show":"1","content":"","is_top":"0","min_price":"30"},{"id":"20","name":"洗衣机清洗","desc":"","parentid":"1","logourl":"http://os18w14e3.bkt.clouddn.com/597afe258e985.jpg","level":"2","sort":"3","add_time":"1499392794","is_show":"1","content":"","is_top":"0","min_price":"119"},{"id":"21","name":"油烟机清洗","desc":"","parentid":"1","logourl":"http://os18w14e3.bkt.clouddn.com/597afe381faa7.jpg","level":"2","sort":"2","add_time":"1499392809","is_show":"1","content":"","is_top":"1","min_price":"149"},{"min_price":"80"},{"min_price":"30"},{"min_price":"0"},{"min_price":"30"},{"id":"29","name":"地插安装","desc":"","parentid":"4","logourl":"http://os18w14e3.bkt.clouddn.com/597b07609fba9.jpg","level":"2","sort":"3","add_time":"1499392932","is_show":"1","content":"","is_top":"0","min_price":"30"}]
      */
-
 
 
     private String status;
@@ -142,6 +142,16 @@ public class JingXuanBean {
         private String content;
         private String is_top;
         private String min_price;
+        @Expose
+        private int index;
+
+        public int getIndex() {
+            return index;
+        }
+
+        public void setIndex(int index) {
+            this.index = index;
+        }
 
         public static DataBean objectFromData(String str) {
 

@@ -4,6 +4,7 @@ import com.example.maintainsteward.bean.AddressBean;
 import com.example.maintainsteward.bean.AddressDeleteBean;
 import com.example.maintainsteward.bean.AddressListBean;
 import com.example.maintainsteward.bean.BannerBean;
+import com.example.maintainsteward.bean.CanUseYouHuiQuanBean;
 import com.example.maintainsteward.bean.CityListBean;
 import com.example.maintainsteward.bean.AppIndexCategoryBean;
 import com.example.maintainsteward.bean.FirstKindsBean;
@@ -229,7 +230,7 @@ public interface HttpApi {
                                              @Field("key") String key);
 
 
-    /*订单列表*/
+    /*取消订单*/
     @FormUrlEncoded
     @POST("OrderCancel")
     Call<PublicBean> quXiaoOrder(@Field("user_id") String user_id,
@@ -347,6 +348,17 @@ public interface HttpApi {
             @Field("sign") String sign,
             @Field("key") String key
     );
+    /*订单支付可使用的优惠卷*/
+    @FormUrlEncoded
+    @POST("ServiceOrderUseCoupons")
+    Call<CanUseYouHuiQuanBean> getServiceOrderUseCoupons(
+            @Field("user_id") String id,
+            @Field("order_no") String order_no,
+            @Field("count") String count,
+            @Field("timestamp") String timestamp,
+            @Field("sign") String sign,
+            @Field("key") String key
+    );
 
     /*我的粉丝*/
     @FormUrlEncoded
@@ -367,6 +379,14 @@ public interface HttpApi {
             @Field("timestamp") String timestamp,
             @Field("sign") String sign,
             @Field("key") String key
+    );
+
+
+    /*精选排行*/
+    @FormUrlEncoded
+    @POST("pay")
+    Call<JingXuanBean> wxPay(
+            @Field("order_sn") String page
     );
 
 

@@ -3,6 +3,7 @@ package com.example.maintainsteward.mvp_presonter;
 import com.example.maintainsteward.api.HttpApi;
 import com.example.maintainsteward.base.BaseHttpApi;
 import com.example.maintainsteward.bean.OrderInfoBean;
+import com.example.maintainsteward.bean.PublicBean;
 import com.example.maintainsteward.mvp_view.OrderInfoListener;
 
 import retrofit2.Call;
@@ -57,6 +58,35 @@ public class OrderInfoPresonter {
             }
         });
 
+
+    }
+
+    public void orderCancle(String user_id,
+                            String order_id,
+                            String timestamp,
+                            String sign,
+                            String key) {
+
+
+        Call<PublicBean> publicBeanCall = httpApi.quXiaoOrder(user_id, order_id, timestamp, sign, key);
+        publicBeanCall.enqueue(new Callback<PublicBean>() {
+            @Override
+            public void onResponse(Call<PublicBean> call, Response<PublicBean> response) {
+
+                if (response.isSuccessful()) {
+
+                    if (orderInfoListener != null) {
+                        orderInfoListener.quXiaoOrder();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<PublicBean> call, Throwable t) {
+
+            }
+        });
 
     }
 

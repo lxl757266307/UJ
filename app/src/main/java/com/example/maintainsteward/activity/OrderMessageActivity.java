@@ -10,10 +10,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,12 +27,16 @@ import com.example.maintainsteward.adapter.OrderInfoPeiJianAdapter;
 import com.example.maintainsteward.adapter.OrderInfoServiceAdapter;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
+import com.example.maintainsteward.bean.CanUseYouHuiQuanBean;
 import com.example.maintainsteward.bean.KaJuanBean;
 import com.example.maintainsteward.bean.OrderInfoBean;
+import com.example.maintainsteward.mvp_presonter.LiJiOrderPresonter;
 import com.example.maintainsteward.mvp_presonter.OrderInfoPresonter;
+import com.example.maintainsteward.mvp_presonter.UpLoadPhotoPresonter;
 import com.example.maintainsteward.mvp_view.OrderInfoListener;
 import com.example.maintainsteward.utils.ToolUitls;
 import com.example.maintainsteward.view.MyListView;
+import com.github.rahatarmanahmed.cpv.CircularProgressView;
 
 import java.util.List;
 import java.util.TreeMap;
@@ -171,6 +179,17 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                 this.startActivity(intent);
                 break;
             case R.id.txt_lijiyuyue:
+                switch (data.getOrder_status()) {
+                    case "4":
+                        setSureDialog();
+                        break;
+                    case "1":
+                    case "2":
+                        quXiaoDialog();
+                        break;
+                    default:
+                        break;
+                }
 
 
                 break;
@@ -186,6 +205,8 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
             case R.id.layout_youhuiquanxuanze:
 
                 Intent intent3 = new Intent(this, YouHuiQuanActivity.class);
+                intent3.putExtra("order_no", data.getOrder_no());
+                intent3.putExtra("count", data.getTotal_amount());
                 startActivityForResult(intent3, YOU_HUI_QUAN_CODE);
                 break;
         }
@@ -201,7 +222,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
 
             switch (requestCode) {
                 case YOU_HUI_QUAN_CODE:
-                    KaJuanBean.DataBean.ResultDataBean resultDataBean = resultDataBean = (KaJuanBean.DataBean.ResultDataBean) data.getSerializableExtra("kajuan");
+                    CanUseYouHuiQuanBean.DataBean resultDataBean = (CanUseYouHuiQuanBean.DataBean) data.getSerializableExtra("kajuan");
 
                     if (resultDataBean != null) {
                         String bonus_amount = resultDataBean.getBonus_amount();
@@ -242,6 +263,14 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
     }
 
     @Override
+    public void quXiaoOrder() {
+        Intent intent = new Intent(this, OrderActivity.class);
+        intent.putExtra("page", 0);
+        startActivity(intent);
+
+    }
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -270,6 +299,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                         txtTimeYitijiao.setTextColor(Color.parseColor("#da0a0a"));
                         txtTimeYitijiao.setText(data.getCreate_time().substring(5, 16));
                         txtStatus.setText("已提交");
+                        txtLijiyuyue.setText("取消订单");
                         break;
                     case "2":
                         img1.setImageResource(R.mipmap.xiantiao2);
@@ -280,6 +310,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                         txtTimeYuyuechenggong.setText(data.getOrder_time().substring(5, 16));
                         txtTimeYitijiao.setText(data.getCreate_time().substring(5, 16));
                         txtStatus.setText("预约成功");
+                        txtLijiyuyue.setText("取消订单");
                         break;
                     case "3":
                         img2.setImageResource(R.mipmap.xiantiao2);
@@ -291,13 +322,31 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                         txtTimeYuyuechenggong.setText(data.getOrder_time().substring(5, 16));
                         txtTimeYitijiao.setText(data.getCreate_time().substring(5, 16));
                         txtStatus.setText("已到达");
+                        txtLijiyuyue.setText("已付款");
                         break;
                     case "4":
+                        img1.setImageResource(R.mipmap.xiantiao2);
+                        img2.setImageResource(R.mipmap.xiantiao3);
+                        imgYuyuechenggong.setImageResource(R.mipmap.yuyuechengong2);
+                        txtYuyuechenggong.setTextColor(Color.parseColor("#da0a0a"));
+                        txtTimeYuyuechenggong.setTextColor(Color.parseColor("#da0a0a"));
+                        txtTimeYuyuechenggong.setText(data.getOrder_time().substring(5, 16));
+                        txtTimeYitijiao.setText(data.getCreate_time().substring(5, 16));
                         txtStatus.setText("待付款");
+                        txtLijiyuyue.setText("立即付款");
 
                         break;
                     case "5":
                         txtStatus.setText("已付款");
+                        txtLijiyuyue.setText("已付款");
+
+                        img1.setImageResource(R.mipmap.xiantiao2);
+                        img2.setImageResource(R.mipmap.xiantiao3);
+                        imgYuyuechenggong.setImageResource(R.mipmap.yuyuechengong2);
+                        txtYuyuechenggong.setTextColor(Color.parseColor("#da0a0a"));
+                        txtTimeYuyuechenggong.setTextColor(Color.parseColor("#da0a0a"));
+                        txtTimeYuyuechenggong.setText(data.getOrder_time().substring(5, 16));
+                        txtTimeYitijiao.setText(data.getCreate_time().substring(5, 16));
                         break;
 
                     case "6":
@@ -310,16 +359,20 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                         txtTimeYitijiao.setText(data.getCreate_time().substring(5, 16));
                         txtTimeYiwancheng.setText(data.getFinish_time().substring(5, 16));
                         txtStatus.setText("已完成");
+                        txtLijiyuyue.setText("已完成");
                         break;
 
                     case "7":
                         txtStatus.setText("已评价");
+                        txtLijiyuyue.setText("已评价");
                         break;
                     case "8":
                         txtStatus.setText("已取消");
+                        txtLijiyuyue.setText("已取消");
                         break;
                     default:
-                        txtStatus.setText("待接单");
+//                        txtStatus.setText("待接单");
+//                        txtLijiyuyue.setText("已取消");
                         break;
 
                 }
@@ -327,7 +380,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                 txtServiceName.setText(data.getName());
                 txtUserName.setText(data.getUser_name());
                 txtUserPhone.setText(data.getUser_phone());
-                txtUserAddress.setText(data.getAddress());
+                txtUserAddress.setText(data.getCity() + data.getDistrict() + data.getAddress());
                 txtYuyueshijian.setText(data.getCreate_time());
                 txtQitafeiyong.setText("￥" + data.getOther_costs());
                 txtWeixianzuoye.setText("￥" + data.getDangerous_work());
@@ -393,5 +446,132 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
         }
 
 
+    }
+
+
+    /*确认对话框*/
+    public void setSureDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog alertDialog = builder.create();
+
+        alertDialog.show();
+
+        View submitView = View.inflate(OrderMessageActivity.this, R.layout.dialog_submit, null);
+        TextView cancle = (TextView) submitView.findViewById(R.id.txt_dialog_submit_cancle);
+        TextView sure = (TextView) submitView.findViewById(R.id.txt_dialog_submit_sure);
+
+        Window window = alertDialog.getWindow();
+        window.setBackgroundDrawable(getResources().getDrawable(R.drawable.write_form_dialog));
+        window.setContentView(submitView);
+        WindowManager windowManager = this.getWindowManager();
+
+        Display defaultDisplay = windowManager.getDefaultDisplay();
+
+        WindowManager.LayoutParams attributes = window.getAttributes();
+        attributes.width = (int) (defaultDisplay.getWidth() * 0.8);
+        window.setAttributes(attributes);
+        alertDialog.setCanceledOnTouchOutside(false);
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+        sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                waittingProgressBar();
+                alertDialog.dismiss();
+
+                TreeMap<String, String> map = new TreeMap<String, String>();
+                String time = System.currentTimeMillis() + "";
+                String order_sn = "2017092514443145230";
+                map.put("timestamp", time);
+                map.put("order_sn", order_sn);
+                String sign = ToolUitls.getSign(map);
+                ToolUitls.getCallBackStr(Contacts.WX_PAY_URL + "pay?order_sn=" + order_sn + "&timestamp=" + time + "&sign=" + sign + "&key=" + Contacts.KEY);
+
+
+            }
+        });
+    }
+
+    AlertDialog mWaitingAlertDialog;
+
+    /*等待对话框*/
+    public void waittingProgressBar() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        mWaitingAlertDialog = builder.create();
+
+        mWaitingAlertDialog.show();
+
+        View submitView = View.inflate(OrderMessageActivity.this, R.layout.dialog_waitting, null);
+        CircularProgressView mCircularProgressView = (CircularProgressView) submitView.findViewById(R.id.progress_view);
+        mCircularProgressView.setVisibility(View.VISIBLE);
+        mCircularProgressView.setIndeterminate(true);
+        mCircularProgressView.startAnimation();
+
+        Window window = mWaitingAlertDialog.getWindow();
+        window.setBackgroundDrawable(getResources().getDrawable(R.drawable.write_form_dialog));
+        window.setContentView(submitView);
+        WindowManager windowManager = this.getWindowManager();
+
+        Display defaultDisplay = windowManager.getDefaultDisplay();
+
+        WindowManager.LayoutParams attributes = window.getAttributes();
+        attributes.width = (int) (defaultDisplay.getWidth() * 0.6);
+        attributes.height = (int) (defaultDisplay.getHeight() * 0.3);
+        window.setAttributes(attributes);
+        mWaitingAlertDialog.setCanceledOnTouchOutside(false);
+
+    }
+
+
+    /*确认对话框*/
+    public void quXiaoDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog alertDialog = builder.create();
+
+        alertDialog.show();
+
+        View submitView = View.inflate(OrderMessageActivity.this, R.layout.dialog_submit, null);
+        TextView cancle = (TextView) submitView.findViewById(R.id.txt_dialog_submit_cancle);
+        TextView sure = (TextView) submitView.findViewById(R.id.txt_dialog_submit_sure);
+        TextView message = (TextView) submitView.findViewById(R.id.txt_messgae);
+        message.setText("确认取消该订单？");
+
+        Window window = alertDialog.getWindow();
+        window.setBackgroundDrawable(getResources().getDrawable(R.drawable.write_form_dialog));
+        window.setContentView(submitView);
+        WindowManager windowManager = this.getWindowManager();
+
+        Display defaultDisplay = windowManager.getDefaultDisplay();
+
+        WindowManager.LayoutParams attributes = window.getAttributes();
+        attributes.width = (int) (defaultDisplay.getWidth() * 0.8);
+        window.setAttributes(attributes);
+        alertDialog.setCanceledOnTouchOutside(false);
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+        sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                waittingProgressBar();
+                alertDialog.dismiss();
+
+                String time = System.currentTimeMillis() + "";
+                TreeMap<String, String> map = new TreeMap<>();
+                map.put("timestamp", time);
+                map.put("user_id", id);
+                map.put("id", orderId);
+                String sign = ToolUitls.getSign(map);
+                orderInfoPresonter.orderCancle(id, orderId, time, sign, Contacts.KEY);
+            }
+        });
     }
 }

@@ -28,4 +28,8 @@
     <color name="view_bg">#EBEBEB</color>
 
     <color name="background">#F3F5F7</color>
+
+
+    <color name="sugestion_txt_normal">#F3F3F3</color>
+    <color name="sugestion_txt_pressed">#FD6B06</color>
 </resources>

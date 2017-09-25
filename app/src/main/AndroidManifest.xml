@@ -151,13 +151,6 @@
         <!--卡卷页面-->
         <activity android:name=".activity.MyKaJuanActivity" />
 
-        <!--微信回调-->
-        <activity
-            android:name=".wxapi.WXEntryActivity"
-            android:exported="true"
-            android:launchMode="singleInstance"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|adjustUnspecified|stateHidden" />
 
         <!--优惠券页面-->
         <activity android:name=".activity.YouHuiQuanActivity" />
@@ -169,6 +162,26 @@
 
         <!--精选排行页面-->
         <activity android:name=".activity.JingXuanPaiHangActivity" />
+
+
+        <!--微信回调-->
+        <activity
+            android:name="com.example.maintainsteward.wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="sdksample" />
+            </intent-filter>
+        </activity>
+
+        <!--协议页面-->
+        <activity android:name=".activity.XieYiActivity" />
 
     </application>
 

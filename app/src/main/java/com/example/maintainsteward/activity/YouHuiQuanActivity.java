@@ -11,11 +11,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.maintainsteward.R;
-import com.example.maintainsteward.adapter.KaJuanListAdapter;
+import com.example.maintainsteward.adapter.CanUseJuanListAdapter;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
+import com.example.maintainsteward.bean.CanUseYouHuiQuanBean;
 import com.example.maintainsteward.bean.KaJuanBean;
 import com.example.maintainsteward.bean.KaJuanCountBean;
 import com.example.maintainsteward.mvp_presonter.KaJuanPresonter;
@@ -29,6 +32,7 @@ import java.util.TreeMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler2;
@@ -37,21 +41,25 @@ import in.srain.cube.views.ptr.PtrHandler2;
  * Created by Administrator on 2017/9/23.
  */
 
-public class YouHuiQuanActivity extends BaseActivity implements PtrHandler2, KaJuanListener, KaJuanListAdapter.OnKaJuanItemClickListener {
+public class YouHuiQuanActivity extends BaseActivity implements PtrHandler2, KaJuanListener, CanUseJuanListAdapter.OnKaJuanItemClickListener {
 
     SharedPreferences sharedPreferences;
     String id;
     int page = 1;
     String type = "1";
     KaJuanPresonter kaJuanPresonter;
-    List<KaJuanBean.DataBean.ResultDataBean> resultData;
-    KaJuanListAdapter kaJuanListAdapter;
+    List<CanUseYouHuiQuanBean.DataBean> resultData;
+    CanUseJuanListAdapter kaJuanListAdapter;
 
     @BindView(R.id.recycle)
     RecyclerView recycle;
 
     @BindView(R.id.prt_frame)
     PtrClassicFrameLayout prtFrame;
+    @BindView(R.id.img_youhuiquan)
+    ImageView imgYouhuiquan;
+    @BindView(R.id.txt_youhuijuan)
+    TextView txt_youhuijuan;
 
 
     @Override
@@ -65,10 +73,14 @@ public class YouHuiQuanActivity extends BaseActivity implements PtrHandler2, KaJ
         return super.onKeyDown(keyCode, event);
     }
 
+    String order_no;
+    String count;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        order_no = getIntent().getStringExtra("order_no");
+        count = getIntent().getStringExtra("count");
         setContentView(R.layout.activity_youhuiquan);
         ButterKnife.bind(this);
 
@@ -79,23 +91,29 @@ public class YouHuiQuanActivity extends BaseActivity implements PtrHandler2, KaJ
         kaJuanPresonter = new KaJuanPresonter();
         kaJuanPresonter.setKaJuanListener(this);
         resultData = new ArrayList<>();
-        kaJuanListAdapter = new KaJuanListAdapter(this, 0);
+        kaJuanListAdapter = new CanUseJuanListAdapter(this, 0);
         kaJuanListAdapter.setOnKaJuanItemClickListener(this);
         getKaJuan();
+
+
     }
 
     public void getKaJuan() {
 
+
         TreeMap<String, String> map = new TreeMap<>();
         String timeStamp = System.currentTimeMillis() + "";
         map.put("user_id", id);
-        map.put("page", page + "");
-        map.put("type", type);
+        map.put("order_no", order_no);
+        map.put("count", count);
         map.put("timestamp", timeStamp);
-
-
         String sign = ToolUitls.getSign(map);
-        kaJuanPresonter.getKaJuan(id, type, page + "", timeStamp, sign, Contacts.KEY);
+//        ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "ServiceOrderUseCoupons?"
+//                + "user_id=" + id + "&order_no=" + order_no + "&count=" + 100 + "&timestamp="
+//                + timeStamp + "&sign=" + sign + "&key=" + Contacts.KEY);
+
+
+        kaJuanPresonter.getCanUseKaJuan(id, order_no, count, timeStamp, sign, Contacts.KEY);
     }
 
 
@@ -158,18 +176,18 @@ public class YouHuiQuanActivity extends BaseActivity implements PtrHandler2, KaJ
 
     @Override
     public void onGetKaJuanSucess(KaJuanBean bean) {
-        switch (bean.getStatus()) {
-            case "1":
-                ToolUitls.print(TAG, "KaJuanBean==" + bean);
-                KaJuanBean.DataBean data = bean.getData();
-                resultData.addAll(data.getResultData());
-                kaJuanListAdapter.setList(resultData);
-                recycle.setAdapter(kaJuanListAdapter);
-                kaJuanListAdapter.notifyDataSetChanged();
-
-
-                break;
-        }
+//        switch (bean.getStatus()) {
+//            case "1":
+//                ToolUitls.print(TAG, "KaJuanBean==" + bean);
+//                KaJuanBean.DataBean data = bean.getData();
+//                resultData.addAll(data.getResultData());
+//                kaJuanListAdapter.setList(resultData);
+//                recycle.setAdapter(kaJuanListAdapter);
+//                kaJuanListAdapter.notifyDataSetChanged();
+//
+//
+//                break;
+//        }
     }
 
     @Override
@@ -178,14 +196,47 @@ public class YouHuiQuanActivity extends BaseActivity implements PtrHandler2, KaJ
     }
 
     @Override
+    public void onGetCanUseKaJuan(CanUseYouHuiQuanBean bean) {
+
+        switch (bean.getStatus()) {
+            case "1":
+                List<CanUseYouHuiQuanBean.DataBean> data = bean.getData();
+                resultData.addAll(data);
+                kaJuanListAdapter.setList(resultData);
+                recycle.setAdapter(kaJuanListAdapter);
+                kaJuanListAdapter.notifyDataSetChanged();
+
+
+                break;
+            default:
+                imgYouhuiquan.setVisibility(View.VISIBLE);
+                txt_youhuijuan.setVisibility(View.VISIBLE);
+
+                break;
+        }
+    }
+
+    @Override
+    public void showBlank() {
+        imgYouhuiquan.setVisibility(View.VISIBLE);
+        txt_youhuijuan.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
     public void onItemClickItem(int postion) {
 
-        KaJuanBean.DataBean.ResultDataBean resultDataBean = resultData.get(postion);
+        CanUseYouHuiQuanBean.DataBean resultDataBean = resultData.get(postion);
 
         Intent intent = new Intent();
         intent.putExtra("kajuan", (Serializable) resultDataBean);
         setResult(Activity.RESULT_OK, intent);
         finish();
 
+    }
+
+    @OnClick(R.id.layout_back)
+    public void onViewClicked() {
+        finish();
     }
 }
