@@ -148,7 +148,7 @@ public class WeiWanChengOrderListFragement extends Fragment implements PtrHandle
         orderListAdapter.setContext(getActivity());
         orderListAdapter.setOnQuXiaoOrderListenerl(this);
         initPrsonter();
-        getOrderByType("3");
+        getOrderByType("8");
 
         prtFramelayout.setPtrHandler(this);
 
