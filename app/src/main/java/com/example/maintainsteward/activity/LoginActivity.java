@@ -204,7 +204,7 @@ public class LoginActivity extends BaseActivity implements OnCheckedChangeListen
 
             case R.id.txt_xieyi_login:
                 startActivity(new Intent(this, XieYiActivity.class));
-                finish();
+//                finish();
                 break;
         }
 
@@ -244,7 +244,6 @@ public class LoginActivity extends BaseActivity implements OnCheckedChangeListen
         switch (backBean.getStatus()) {
             case "1":
                 verifycode = backBean.getData();
-                ToolUitls.print(TAG, "code==" + verifycode);
                 break;
         }
 
@@ -265,6 +264,7 @@ public class LoginActivity extends BaseActivity implements OnCheckedChangeListen
                 edit.commit();
 
                 startActivity(new Intent(this, MainActivity.class));
+                finish();
 
                 break;
         }

@@ -9,6 +9,8 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.activity.AddressManagerActivity;
+import com.example.maintainsteward.activity.LoginActivity;
 import com.example.maintainsteward.activity.MyQianBaoActivity;
 import com.example.maintainsteward.activity.OrderActivity;
 import com.example.maintainsteward.activity.UserActivity;
@@ -155,6 +158,15 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
 
     }
 
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+        }
+    };
+
     public static final int UPDATE_USER = 1;
 
     @OnClick({R.id.img_xiaoxi_userinfo, R.id.layout_edit_userinfo, R.id.layout_see_all_order_userinfo, R.id.layout_wei_wan_cheng_userinfo, R.id.layout_yi_wan_cheng_userinfo, R.id.layout_yi_qu_xiao_userinfo, R.id.layout_ping_jia_userinfo, R.id.layout_tao_can_userinfo, R.id.layout_dizhi_userinfo, R.id.layout_qianbao_userinfo})
@@ -163,9 +175,20 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
             case R.id.img_xiaoxi_userinfo:
                 break;
             case R.id.layout_edit_userinfo: {
-                Intent intent = new Intent(getActivity(), UserActivity.class);
-                intent.putExtra("data", (Serializable) data);
-                startActivityForResult(intent, UPDATE_USER);
+
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Contacts.USER, Context.MODE_PRIVATE);
+                boolean online = sharedPreferences.getBoolean("online", false);
+
+                if (online) {
+                    Intent intent = new Intent(getActivity(), UserActivity.class);
+                    intent.putExtra("data", (Serializable) data);
+                    startActivityForResult(intent, UPDATE_USER);
+                } else {
+                    ToolUitls.toast(getActivity(), "您还未，请先登录！");
+                    handler.sendEmptyMessageDelayed(1, 1500);
+                }
+
+
             }
 
             break;

@@ -2,11 +2,14 @@ package com.example.maintainsteward.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.view.Gravity;
@@ -157,41 +160,57 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
                 break;
             case R.id.txt_yuyue_serviceinfo: {
 
-                List<SearviceInfoBean.DataBean> service = new ArrayList<>();
-                List<ServiceGoodsGetBean.DataBean> material = new ArrayList<>();
-                if (data != null && data.size() > 0) {
+                SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
+                boolean online = sharedPreferences.getBoolean("online", false);
 
+                if (online) {
+                    List<SearviceInfoBean.DataBean> service = new ArrayList<>();
+                    List<ServiceGoodsGetBean.DataBean> material = new ArrayList<>();
+                    if (data != null && data.size() > 0) {
+                        for (int i = 0; i < data.size(); i++) {
+                            if (data.get(i).getNumber() > 0) {
+                                service.add(data.get(i));
+                            }
+                        }
+                    }
+                    if (peiJian != null && peiJian.size() > 0) {
 
-                    for (int i = 0; i < data.size(); i++) {
-                        if (data.get(i).getNumber() > 0) {
-                            service.add(data.get(i));
+                        for (int i = 0; i < peiJian.size(); i++) {
+
+                            if (peiJian.get(i).getNumber() > 0)
+                                material.add(peiJian.get(i));
                         }
                     }
 
-                }
-                if (peiJian != null && peiJian.size() > 0) {
-
-                    for (int i = 0; i < peiJian.size(); i++) {
-
-                        if (peiJian.get(i).getNumber() > 0)
-                            material.add(peiJian.get(i));
+                    if (service.size() > 0) {
+                        Intent intent2 = new Intent(this, LiJiYuYueActivity.class);
+                        intent2.putExtra("service", (Serializable) service);
+                        intent2.putExtra("peijian", (Serializable) material);
+                        intent2.putExtra("title", title);
+                        intent2.putExtra("cat_id", id);
+                        startActivity(intent2);
                     }
-                }
+                    }else {
+                    ToolUitls.toast(this, "您还未登录，请先登录");
+                    handler.sendEmptyMessageDelayed(1, 1500);
 
 
-                if (service.size() > 0) {
-                    Intent intent2 = new Intent(this, LiJiYuYueActivity.class);
-                    intent2.putExtra("service", (Serializable) service);
-                    intent2.putExtra("peijian", (Serializable) material);
-                    intent2.putExtra("title", title);
-                    intent2.putExtra("cat_id", id);
-                    startActivity(intent2);
                 }
             }
             break;
         }
 
     }
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            startActivity(new Intent(ServiceInfoActivity.this, LoginActivity.class));
+            finish();
+        }
+    };
+
 
     public static final String MESSAGE = "U匠是一款方便于人们解决日常生活中有关家庭维修、家电清洗等各种家庭中遇到的疑难杂症的APP";
 

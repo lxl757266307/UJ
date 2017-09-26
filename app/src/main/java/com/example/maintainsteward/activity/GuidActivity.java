@@ -116,11 +116,15 @@ public class GuidActivity extends BaseActivity {
         edit.putBoolean("isFirst", false);
         edit.commit();
         startActivity(new Intent(this, QiDongActivity.class));
+        finish();
 
     }
 
     @OnClick(R.id.btn_tiyan)
     public void tiyan() {
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putBoolean("isFirst", false);
+        edit.commit();
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }
