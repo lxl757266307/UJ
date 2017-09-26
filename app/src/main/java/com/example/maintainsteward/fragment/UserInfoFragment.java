@@ -101,11 +101,13 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
     }
 
     SharedPreferences sharedPreferences;
+    String id;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         sharedPreferences = getActivity().getSharedPreferences(Contacts.USER, Context.MODE_PRIVATE);
+        id = sharedPreferences.getString("id", null);
         initPrsonter();
         registerReciver();
         getOrderByType("3");
@@ -118,8 +120,6 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
     UserInfoPresonter userInfoPresonter;
 
     public void getUserInfo() {
-
-
         String id = sharedPreferences.getString("id", null);
         String time = System.currentTimeMillis() + "";
         TreeMap<String, String> map = new TreeMap<>();
@@ -193,27 +193,51 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
 
             break;
             case R.id.layout_see_all_order_userinfo: {
-                Intent intent = new Intent(getActivity(), OrderActivity.class);
-                startActivity(intent);
+                if (id != null) {
+                    Intent intent = new Intent(getActivity(), OrderActivity.class);
+                    startActivity(intent);
+                } else {
+                    ToolUitls.toast(getActivity(), "您还未，请先登录！");
+                    handler.sendEmptyMessageDelayed(1, 1500);
+                }
+
             }
 
             break;
             case R.id.layout_wei_wan_cheng_userinfo: {
-                Intent intent = new Intent(getActivity(), OrderActivity.class);
-                intent.putExtra("page", 1);
-                startActivity(intent);
+                if (id != null) {
+                    Intent intent = new Intent(getActivity(), OrderActivity.class);
+                    intent.putExtra("page", 1);
+                    startActivity(intent);
+                } else {
+                    ToolUitls.toast(getActivity(), "您还未，请先登录！");
+                    handler.sendEmptyMessageDelayed(1, 1500);
+                }
+
             }
             break;
             case R.id.layout_yi_wan_cheng_userinfo: {
-                Intent intent = new Intent(getActivity(), OrderActivity.class);
-                intent.putExtra("page", 2);
-                startActivity(intent);
+                if (id != null) {
+                    Intent intent = new Intent(getActivity(), OrderActivity.class);
+                    intent.putExtra("page", 2);
+                    startActivity(intent);
+                } else {
+                    ToolUitls.toast(getActivity(), "您还未，请先登录！");
+                    handler.sendEmptyMessageDelayed(1, 1500);
+                }
+
             }
             break;
             case R.id.layout_yi_qu_xiao_userinfo: {
-                Intent intent = new Intent(getActivity(), OrderActivity.class);
-                intent.putExtra("page", 3);
-                startActivity(intent);
+                if (id != null) {
+                    Intent intent = new Intent(getActivity(), OrderActivity.class);
+                    intent.putExtra("page", 3);
+                    startActivity(intent);
+                } else {
+                    ToolUitls.toast(getActivity(), "您还未，请先登录！");
+                    handler.sendEmptyMessageDelayed(1, 1500);
+                }
+
             }
             break;
             case R.id.layout_ping_jia_userinfo:
@@ -243,27 +267,29 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
     int page = 1;
 
     public void getOrderByType(String type) {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Contacts.USER, Context.MODE_PRIVATE);
-        String id = sharedPreferences.getString("id", null);
-        String time = System.currentTimeMillis() + "";
-        TreeMap<String, String> map = new TreeMap<>();
-        map.put("timestamp", time);
-        map.put("user_id", id);
-        map.put("order_type", type);
-        map.put("page", page + "");
-        String sign = ToolUitls.getSign(map);
-        switch (type) {
-            case "3":
-                orderListPresonter.getWeiWanChengOrderList(id, type, page + "", time, sign, Contacts.KEY);
-                break;
-            case "5":
-                orderListPresonter.getYiQuXiaoOrderList(id, type, page + "", time, sign, Contacts.KEY);
-                break;
-            case "7":
-                orderListPresonter.getYiWanChengOrderList(id, type, page + "", time, sign, Contacts.KEY);
-                break;
 
+        if (id != null) {
+            String time = System.currentTimeMillis() + "";
+            TreeMap<String, String> map = new TreeMap<>();
+            map.put("timestamp", time);
+            map.put("user_id", id);
+            map.put("order_type", type);
+            map.put("page", page + "");
+            String sign = ToolUitls.getSign(map);
+            switch (type) {
+                case "3":
+                    orderListPresonter.getWeiWanChengOrderList(id, type, page + "", time, sign, Contacts.KEY);
+                    break;
+                case "5":
+                    orderListPresonter.getYiQuXiaoOrderList(id, type, page + "", time, sign, Contacts.KEY);
+                    break;
+                case "7":
+                    orderListPresonter.getYiWanChengOrderList(id, type, page + "", time, sign, Contacts.KEY);
+                    break;
+
+            }
         }
+
 
     }
 
