@@ -37,7 +37,6 @@ public class AddAddressPresonter {
                            String sign, String key) {
 
 
-        ToolUitls.print(TAG, "city===" + city + "        district==" + district);
         Call<AddressBean> addressBeanCall = httpApi.addAddressCallBack(address, city, district, timestamp, user_id, user_name, user_phone, sign, key);
         addressBeanCall.enqueue(new Callback<AddressBean>() {
             @Override

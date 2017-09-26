@@ -29,7 +29,7 @@ public class TaoCanPresonter {
         Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
             @Override
             public boolean shouldSkipField(FieldAttributes f) {
-                return f.getName().contains("isCheck");
+                return f.getName().contains("isCheck")||f.getName().contains("clickAble");
             }
 
             @Override

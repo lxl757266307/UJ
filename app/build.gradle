@@ -27,7 +27,7 @@ android {
         }
     }
     compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    buildToolsVersion "25.0.1"
 
     aaptOptions.cruncherEnabled = false
     aaptOptions.useNewCruncher = false
@@ -60,10 +60,10 @@ android {
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
         }
         debug {
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
         }
 
 

@@ -195,6 +195,9 @@
         <!--365套餐页面-->
         <activity android:name=".activity.TaoCanActivity" />
 
+        <!--填写维修信息页面-->
+        <activity android:name=".activity.WriteTaoCanInfoActivity" />
+
     </application>
 
 </manifest>

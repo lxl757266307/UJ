@@ -313,6 +313,9 @@ public class TaoCanListBean implements Serializable {
                  */
 
                 @Expose
+                private  boolean clickAble;
+
+                @Expose
                 private boolean isCheck;
                 private String item_id;
                 private String meal_id;
@@ -327,6 +330,14 @@ public class TaoCanListBean implements Serializable {
                 private String is_one_come;
                 private String name;
                 private String expenses;
+
+                public boolean isClickAble() {
+                    return clickAble;
+                }
+
+                public void setClickAble(boolean clickAble) {
+                    this.clickAble = clickAble;
+                }
 
                 public boolean isCheck() {
                     return isCheck;

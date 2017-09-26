@@ -92,7 +92,6 @@ public class TaoCanListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        ToolUitls.print("----", "2222222222222222222");
         ChildViewHolder childViewHolder=null;
 
         if (convertView == null) {

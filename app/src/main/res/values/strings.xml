@@ -61,5 +61,6 @@
     <string name="location">所在省市区:</string>
     <string name="address">详细地址:</string>
     <string name="set_default_address">设为默认地址:</string>
+    <string name="description">备注：以上项目只包含工费，不包含任何材料费，房屋维修仅限日常维修项目，漏水、粉刷、瓷砖铺贴、房屋翻新、新房安装、水下疏通等除外</string>
 
 </resources>
