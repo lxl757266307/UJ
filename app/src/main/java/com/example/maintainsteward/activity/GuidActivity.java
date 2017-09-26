@@ -122,6 +122,7 @@ public class GuidActivity extends BaseActivity {
     @OnClick(R.id.btn_tiyan)
     public void tiyan() {
         startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 
 

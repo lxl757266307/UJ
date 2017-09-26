@@ -17,6 +17,7 @@ import com.example.maintainsteward.bean.LoginCallBackBean;
 import com.example.maintainsteward.bean.OrderInfoBean;
 import com.example.maintainsteward.bean.OrderListBean;
 import com.example.maintainsteward.bean.OrderSucessBean;
+import com.example.maintainsteward.bean.PayInfoBean;
 import com.example.maintainsteward.bean.PublicBean;
 import com.example.maintainsteward.bean.QiNiuBean;
 import com.example.maintainsteward.bean.SearchKeyWordBean;
@@ -24,6 +25,7 @@ import com.example.maintainsteward.bean.SearviceInfoBean;
 import com.example.maintainsteward.bean.SecondKindsBean;
 import com.example.maintainsteward.bean.SecondKindsContent;
 import com.example.maintainsteward.bean.ServiceGoodsGetBean;
+import com.example.maintainsteward.bean.TaoCanListBean;
 import com.example.maintainsteward.bean.UserInfoBean;
 import com.example.maintainsteward.bean.YanZhengMaCallBackBean;
 
@@ -348,6 +350,7 @@ public interface HttpApi {
             @Field("sign") String sign,
             @Field("key") String key
     );
+
     /*订单支付可使用的优惠卷*/
     @FormUrlEncoded
     @POST("ServiceOrderUseCoupons")
@@ -359,6 +362,36 @@ public interface HttpApi {
             @Field("sign") String sign,
             @Field("key") String key
     );
+
+
+    /*订单支付可使用的优惠卷*/
+    @FormUrlEncoded
+    @POST("pay")
+    Call<PayInfoBean> getPayInfo(
+            @Field("order_sn") String order_sn
+    );
+
+
+    /*订单支付可使用的优惠卷*/
+    @FormUrlEncoded
+    @POST("payForNowNew")
+    Call<PublicBean> payForNowNew(
+            @Field("out_trade_no") String order_sn,
+            @Field("paytpe") String paytpe,
+            @Field("total_fee") String total_fee
+
+    );
+
+    /*套餐列表*/
+    @FormUrlEncoded
+    @POST("SetMealDetails")
+    Call<TaoCanListBean> getSetMealDetails(
+            @Field("timestamp") String timestamp,
+            @Field("sign") String sign,
+            @Field("key") String key
+
+    );
+
 
     /*我的粉丝*/
     @FormUrlEncoded

@@ -2,39 +2,37 @@ package com.example.maintainsteward.wxapi;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+import android.util.Log;
 
+import com.example.maintainsteward.activity.OrderActivity;
+import com.example.maintainsteward.activity.OrderMessageActivity;
 import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.Contacts;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
-import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
+public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 
-public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
-
+    private static final String TAG = "MicroMsg.SDKSample.WXPayEntryActivity";
 
     private IWXAPI api;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         MyApplication.api.handleIntent(getIntent(), this);
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-
         setIntent(intent);
         api.handleIntent(intent, this);
     }
@@ -45,15 +43,19 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
     @Override
     public void onResp(BaseResp resp) {
-        if (resp.errCode == 0) {
-            finish();
+
+        Log.e(TAG, "resp====" + resp.errCode);
+        if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
+            if (resp.errCode == 0) {
+                Intent intent = new Intent(this, OrderActivity.class);
+
+                Intent intent1 = new Intent(Contacts.PAY_BY_WEI_XIN);
+                sendBroadcast(intent1);
+
+                startActivity(intent);
+                finish();
+            }
+
         }
-
     }
-
-    private void goToGetMsg() {
-
-    }
-
-
 }

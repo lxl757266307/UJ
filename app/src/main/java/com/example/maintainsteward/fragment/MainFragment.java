@@ -25,6 +25,7 @@ import com.example.maintainsteward.R;
 import com.example.maintainsteward.activity.ChooseLocationActivity;
 import com.example.maintainsteward.activity.JingXuanPaiHangActivity;
 import com.example.maintainsteward.activity.SearchActivity;
+import com.example.maintainsteward.activity.TaoCanActivity;
 import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.AppIndexCategoryBean;
@@ -166,6 +167,7 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
                 startActivity(new Intent(getActivity(), JingXuanPaiHangActivity.class));
                 break;
             case R.id.layout_combo_mainfragment:
+                startActivity(new Intent(getActivity(), TaoCanActivity.class));
                 break;
             case R.id.layout_sugestion_mainfragment:
                 break;

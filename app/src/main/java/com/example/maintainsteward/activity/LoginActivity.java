@@ -204,6 +204,7 @@ public class LoginActivity extends BaseActivity implements OnCheckedChangeListen
 
             case R.id.txt_xieyi_login:
                 startActivity(new Intent(this, XieYiActivity.class));
+                finish();
                 break;
         }
 

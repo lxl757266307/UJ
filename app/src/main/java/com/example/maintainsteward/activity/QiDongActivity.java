@@ -44,10 +44,11 @@ public class QiDongActivity extends BaseActivity {
             switch (msg.what) {
                 case 1:
                     startActivity(new Intent(QiDongActivity.this, MainActivity.class));
+                    finish();
                     break;
                 case 2:
                     startActivity(new Intent(QiDongActivity.this, LoginActivity.class));
-
+                    finish();
                     break;
             }
 

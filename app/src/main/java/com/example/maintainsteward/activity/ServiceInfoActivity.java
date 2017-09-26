@@ -3,6 +3,8 @@ package com.example.maintainsteward.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -37,9 +39,11 @@ import com.example.maintainsteward.view.MyListView;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.opensdk.modelmsg.WXTextObject;
+import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
+import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -189,6 +193,8 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
 
     }
 
+    public static final String MESSAGE = "U匠是一款方便于人们解决日常生活中有关家庭维修、家电清洗等各种家庭中遇到的疑难杂症的APP";
+
     private void share() {
 
         View view = LayoutInflater.from(this).inflate(R.layout.popuwindow_fenxiang, null);
@@ -199,11 +205,17 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
         weiXin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WXTextObject object = new WXTextObject();
-                object.text = "hahahahaha";
-                WXMediaMessage mediaMessage = new WXMediaMessage();
-                mediaMessage.mediaObject = object;
+                WXWebpageObject object = new WXWebpageObject();
+                object.webpageUrl = "http://wxtest.cnncsh.com/wx/appstore.html?codeid=0";
+                WXMediaMessage mediaMessage = new WXMediaMessage(object);
                 mediaMessage.description = "hahahahahaa1111111";
+                mediaMessage.title = "多快好准,您的居家能手再此恭候多时了!";
+                mediaMessage.description = MESSAGE;
+
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.logo3);
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream);
+                mediaMessage.thumbData = byteArrayOutputStream.toByteArray();
 
                 SendMessageToWX.Req req = new SendMessageToWX.Req();
                 req.transaction = String.valueOf(System.currentTimeMillis());
@@ -217,11 +229,17 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
         pengYouQuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WXTextObject object = new WXTextObject();
-                object.text = "hahahahaha";
-                WXMediaMessage mediaMessage = new WXMediaMessage();
-                mediaMessage.mediaObject = object;
+                WXWebpageObject object = new WXWebpageObject();
+                object.webpageUrl = "http://wxtest.cnncsh.com/wx/appstore.html?codeid=0";
+                WXMediaMessage mediaMessage = new WXMediaMessage(object);
                 mediaMessage.description = "hahahahahaa1111111";
+                mediaMessage.title = "多快好准,您的居家能手再此恭候多时了!";
+                mediaMessage.description = MESSAGE;
+
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.logo3);
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream);
+                mediaMessage.thumbData = byteArrayOutputStream.toByteArray();
 
                 SendMessageToWX.Req req = new SendMessageToWX.Req();
                 req.transaction = String.valueOf(System.currentTimeMillis());

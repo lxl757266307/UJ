@@ -101,7 +101,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        api = WXAPIFactory.createWXAPI(this, Contacts.APP_ID,true);
+        api = WXAPIFactory.createWXAPI(this, Contacts.APP_ID);
         api.registerApp(Contacts.APP_ID);
 
 //        PermissionRegisterUtils.registerPermission(this);

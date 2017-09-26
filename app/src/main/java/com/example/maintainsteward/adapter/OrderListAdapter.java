@@ -1,7 +1,12 @@
 package com.example.maintainsteward.adapter;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,7 +125,17 @@ public class OrderListAdapter extends BaseAdapter {
             public void onClick(View v) {
 
                 if (onQuXiaoOrderListener != null) {
-                    onQuXiaoOrderListener.quXiaoOrder(demandOrderDataBean.getId(), position);
+                    String order_status = demandOrderDataBean.getOrder_status();
+                    if (order_status.equals("5")) {
+                        Intent intent = new Intent(Intent.ACTION_CALL);
+                        intent.setData(Uri.parse("tel:4008293331"));
+                        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            return;
+                        }
+                        context.startActivity(intent);
+                    } else if (order_status.equals("1") || order_status.equals("2") || order_status.equals("4")) {
+                        onQuXiaoOrderListener.quXiaoOrder(demandOrderDataBean.getId(), position);
+                    }
                 }
             }
         });

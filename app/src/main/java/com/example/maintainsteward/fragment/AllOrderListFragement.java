@@ -1,8 +1,10 @@
 package com.example.maintainsteward.fragment;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +28,7 @@ import android.widget.TextView;
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.activity.LiJiYuYueActivity;
 import com.example.maintainsteward.activity.OrderMessageActivity;
+import com.example.maintainsteward.activity.PayChooseActivity;
 import com.example.maintainsteward.adapter.OrderListAdapter;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.OrderListBean;
@@ -95,6 +98,8 @@ public class AllOrderListFragement extends Fragment implements PtrHandler2, Orde
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        getActivity().unregisterReceiver(reciver);
+
     }
 
     QuXiaoOrderPresonter presonter;
@@ -153,7 +158,7 @@ public class AllOrderListFragement extends Fragment implements PtrHandler2, Orde
         initPrsonter();
         getOrderByType("1");
         prtFramelayout.setPtrHandler(this);
-
+        register();
         lvOrderList.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -398,5 +403,24 @@ public class AllOrderListFragement extends Fragment implements PtrHandler2, Orde
         window.setAttributes(attributes);
         mWaitingAlertDialog.setCanceledOnTouchOutside(false);
 
+    }
+
+    FefreshReciver reciver;
+
+
+    public void register() {
+        reciver = new FefreshReciver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Contacts.PAY_BY_WEI_XIN);
+        getActivity().registerReceiver(reciver, filter);
+    }
+
+
+    class FefreshReciver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            getOrderByType("1");
+
+        }
     }
 }

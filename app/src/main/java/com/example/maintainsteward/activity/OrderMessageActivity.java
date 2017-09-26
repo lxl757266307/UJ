@@ -2,7 +2,10 @@ package com.example.maintainsteward.activity;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -30,9 +33,12 @@ import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.CanUseYouHuiQuanBean;
 import com.example.maintainsteward.bean.KaJuanBean;
 import com.example.maintainsteward.bean.OrderInfoBean;
+import com.example.maintainsteward.bean.PayInfoBean;
 import com.example.maintainsteward.mvp_presonter.LiJiOrderPresonter;
 import com.example.maintainsteward.mvp_presonter.OrderInfoPresonter;
+import com.example.maintainsteward.mvp_presonter.PayPresonter;
 import com.example.maintainsteward.mvp_presonter.UpLoadPhotoPresonter;
+import com.example.maintainsteward.mvp_view.OnPayListener;
 import com.example.maintainsteward.mvp_view.OrderInfoListener;
 import com.example.maintainsteward.utils.ToolUitls;
 import com.example.maintainsteward.view.MyListView;
@@ -50,7 +56,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by Administrator on 2017/9/20.
  */
 
-public class OrderMessageActivity extends BaseActivity implements OrderInfoListener, TextWatcher {
+public class OrderMessageActivity extends BaseActivity implements OrderInfoListener, TextWatcher, OnPayListener {
 
 
     String orderId;
@@ -141,21 +147,28 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
     @BindView(R.id.txt_jiantou)
     TextView txtJiantou;
 
+    PayPresonter payPresonter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         orderId = this.getIntent().getStringExtra("id");
         setContentView(R.layout.activity_order_message);
         ButterKnife.bind(this);
+
+        txtZongjia.addTextChangedListener(this);
         txtJianmian.addTextChangedListener(this);
+
         sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
         id = sharedPreferences.getString("id", null);
         orderInfoPresonter = new OrderInfoPresonter();
         orderInfoPresonter.setOrderInfoListener(this);
         orderInfoServiceAdapter = new OrderInfoServiceAdapter(this);
         orderInfoPeiJianAdapter = new OrderInfoPeiJianAdapter(this);
+        payPresonter = new PayPresonter();
+        payPresonter.setOnPayListener(this);
         getOrderInfo();
-
+        register();
     }
 
     @OnClick({R.id.layout_back, R.id.txt_worker_phone, R.id.txt_lijiyuyue, R.id.img_kefu, R.id.layout_youhuiquanxuanze})
@@ -253,12 +266,12 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
 
     @Override
     public void showDialog() {
-        dialog = ProgressDialog.show(this, "", "正在加载...");
+//        dialog = ProgressDialog.show(this, "", "正在加载...");
     }
 
     @Override
     public void hideDialog() {
-        dialog.dismiss();
+//        dialog.dismiss();
 
     }
 
@@ -433,8 +446,12 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
     public void afterTextChanged(Editable s) {
         String str = txtJianmian.getText().toString();
 
-        double taoCan = Double.parseDouble(data.getYouhui_fee());
+        String youhui_fee = data.getYouhui_fee();
+        double taoCan = 0;
+        if (!"".equals(youhui_fee)) {
+            taoCan = Double.parseDouble(youhui_fee);
 
+        }
         double taotal = Double.parseDouble(data.getTotal_amount());
         if ("".equals(str)) {
             txtYouhuijia.setText("￥" + (taotal - taoCan));
@@ -442,7 +459,6 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
         } else {
             double youHuiJuan = Double.parseDouble(str.substring(1));
             txtYouhuijia.setText("￥" + (taotal - taoCan - youHuiJuan));
-
         }
 
 
@@ -485,12 +501,12 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
 
                 TreeMap<String, String> map = new TreeMap<String, String>();
                 String time = System.currentTimeMillis() + "";
-                String order_sn = "2017092514443145230";
+                String order_sn = data.getOrder_no();
                 map.put("timestamp", time);
                 map.put("order_sn", order_sn);
                 String sign = ToolUitls.getSign(map);
-                ToolUitls.getCallBackStr(Contacts.WX_PAY_URL + "pay?order_sn=" + order_sn + "&timestamp=" + time + "&sign=" + sign + "&key=" + Contacts.KEY);
-
+//                ToolUitls.getCallBackStr(Contacts.WX_PAY_URL + "pay?order_sn=" + order_sn + "&timestamp=" + time + "&sign=" + sign + "&key=" + Contacts.KEY);
+                payPresonter.getPayInfo(order_sn);
 
             }
         });
@@ -574,4 +590,60 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
             }
         });
     }
+
+    @Override
+    public void getYuZhiFuInfo(PayInfoBean bean) {
+
+
+        switch (bean.getStatus()) {
+            case 1:
+
+                Intent intent = new Intent(this, PayChooseActivity.class);
+                intent.putExtra("data", bean);
+                startActivity(intent);
+
+                break;
+        }
+
+
+    }
+
+    @Override
+    public void onPaySucess(String status) {
+        switch (status) {
+            case "1":
+                ToolUitls.toast(this, "支付成功");
+                finish();
+                break;
+        }
+    }
+
+    PaySucessReciver paySucessReciver;
+
+    public void register() {
+        paySucessReciver = new PaySucessReciver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Contacts.PAY_BY_WEI_XIN);
+        registerReceiver(paySucessReciver, filter);
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(paySucessReciver);
+    }
+
+    public class PaySucessReciver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            payPresonter.payForNowNew(data.getOrder_no(), "1", txtYouhuijia.getText().toString().substring(1));
+
+//            ToolUitls.getCallBackStr(Contacts.WX_PAY_URL + "payForNowNew?" + "out_trade_no=" + data.getOrder_no() + "&paytpe=1" + "&total_fee=" + txtYouhuijia.getText().toString());
+        }
+    }
+
+
 }
