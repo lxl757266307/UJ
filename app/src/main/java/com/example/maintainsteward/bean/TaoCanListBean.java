@@ -108,7 +108,7 @@ public class TaoCanListBean implements Serializable {
         }
 
         /**
-         * meal_id : 1
+             * meal_id : 1
          * money : 399.00
          * set_meal_data : [{"group_id":"15","name":"挂机","set_meal":[{"item_id":"7","meal_id":"1","service_id":"1","content_desc":"挂机空调1-3台","limit_num":"1","group_id":"15","sort":"0","end_days":"365","status":"1","number":"0","is_one_come":"0","name":"挂式空调","expenses":"109"}]},{"group_id":"14","name":"柜机","set_meal":[{"item_id":"8","meal_id":"1","service_id":"2","content_desc":"柜机空调1台","limit_num":"1","group_id":"14","sort":"0","end_days":"365","status":"1","number":"0","is_one_come":"0","name":"柜式空调","expenses":"129"}]},{"group_id":"3","name":"分类项","set_meal":[{"item_id":"17","meal_id":"1","service_id":"3","content_desc":"单开门冰箱1台","limit_num":"1","group_id":"3","sort":"0","end_days":"365","status":"1","number":"0","is_one_come":"0","name":"单开门冰箱","expenses":"99"},{"item_id":"18","meal_id":"1","service_id":"12","content_desc":"双开门冰箱1台","limit_num":"1","group_id":"3","sort":"0","end_days":"365","status":"1","number":"0","is_one_come":"0","name":"双开门冰箱","expenses":"109"},{"item_id":"19","meal_id":"1","service_id":"13","content_desc":"三开门冰箱1台","limit_num":"1","group_id":"3","sort":"0","end_days":"365","status":"1","number":"0","is_one_come":"0","name":"三开门冰箱","expenses":"129"},{"item_id":"20","meal_id":"1","service_id":"14","content_desc":"全自动洗衣机1台","limit_num":"1","group_id":"3","sort":"0","end_days":"365","status":"1","number":"0","is_one_come":"0","name":"单波轮洗衣机","expenses":"119"},{"item_id":"21","meal_id":"1","service_id":"15","content_desc":"半自动洗衣机1台","limit_num":"1","group_id":"3","sort":"0","end_days":"365","status":"1","number":"0","is_one_come":"0","name":"双波轮洗衣机","expenses":"99"},{"item_id":"22","meal_id":"1","service_id":"50","content_desc":"换窗纱1次","limit_num":"1","group_id":"3","sort":"0","end_days":"365","status":"1","number":"0","is_one_come":"0","name":"窗纱更换","expenses":"30"}]},{"group_id":"16","name":"油烟机中式","set_meal":[{"item_id":"9","meal_id":"1","service_id":"16","content_desc":"中式/欧式2选1","limit_num":"1","group_id":"16","sort":"0","end_days":"365","status":"1","number":"0","is_one_come":"0","name":"中式油烟机","expenses":"149"}]},{"group_id":"17","name":"房屋检测","set_meal":[{"item_id":"24","meal_id":"1","service_id":"105","content_desc":"整屋检测","limit_num":"-1","group_id":"17","sort":"0","end_days":"365","status":"1","number":"0","is_one_come":"0","name":"房屋检测","expenses":"30"}]},{"group_id":"18","name":"油烟机欧式","set_meal":[{"item_id":"23","meal_id":"1","service_id":"17","content_desc":"中式/欧式油烟机2选1","limit_num":"1","group_id":"18","sort":"0","end_days":"365","status":"1","number":"0","is_one_come":"0","name":"欧式油烟机","expenses":"149"}]}]
          */
@@ -276,6 +276,24 @@ public class TaoCanListBean implements Serializable {
             }
 
             public static class SetMealBean implements Serializable {
+
+                public SetMealBean(boolean clickAble, boolean isCheck, String item_id, String meal_id, String service_id, String content_desc, String limit_num, String group_id, String sort, String end_days, String status, String number, String is_one_come, String name, String expenses) {
+                    this.clickAble = clickAble;
+                    this.isCheck = isCheck;
+                    this.item_id = item_id;
+                    this.meal_id = meal_id;
+                    this.service_id = service_id;
+                    this.content_desc = content_desc;
+                    this.limit_num = limit_num;
+                    this.group_id = group_id;
+                    this.sort = sort;
+                    this.end_days = end_days;
+                    this.status = status;
+                    this.number = number;
+                    this.is_one_come = is_one_come;
+                    this.name = name;
+                    this.expenses = expenses;
+                }
 
                 @Override
                 public String toString() {

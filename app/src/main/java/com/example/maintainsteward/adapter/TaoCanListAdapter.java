@@ -92,7 +92,7 @@ public class TaoCanListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        ChildViewHolder childViewHolder=null;
+        ChildViewHolder childViewHolder = null;
 
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.lv_child_item, parent, false);
@@ -102,20 +102,22 @@ public class TaoCanListAdapter extends BaseExpandableListAdapter {
             childViewHolder.price = (TextView) convertView.findViewById(R.id.txt_price);
             childViewHolder.number = (TextView) convertView.findViewById(R.id.txt_number);
             childViewHolder.days = (TextView) convertView.findViewById(R.id.txt_days);
+            childViewHolder.name = (TextView) convertView.findViewById(R.id.txt_name);
             convertView.setTag(childViewHolder);
         } else {
             childViewHolder = (ChildViewHolder) convertView.getTag();
         }
         TaoCanListBean.DataBean.SetMealDataBean.SetMealBean setMealBean = groupData.get(groupPosition).getSet_meal().get(childPosition);
-        childViewHolder.item_name.setText(setMealBean.getName());
+        childViewHolder.item_name.setText(setMealBean.getContent_desc());
         childViewHolder.price.setText("原价:" + setMealBean.getExpenses() + "元");
-        if (setMealBean.getLimit_num().equals("-1")) {
-            childViewHolder.number.setText("无限次");
-        } else {
-            childViewHolder.number.setText("一户一次");
-        }
+//        if (setMealBean.getLimit_num().equals("-1")) {
+//            childViewHolder.number.setText("无限次");
+//        } else {
+//            childViewHolder.number.setText("一户一次");
+//        }
         childViewHolder.days.setText(setMealBean.getEnd_days() + "天");
         childViewHolder.checkBox.setChecked(setMealBean.isCheck());
+        childViewHolder.name.setText(setMealBean.getName());
 
         return convertView;
     }
@@ -133,6 +135,7 @@ public class TaoCanListAdapter extends BaseExpandableListAdapter {
     static class ChildViewHolder {
         CheckBox checkBox;
         TextView item_name;
+        TextView name;
         TextView price;
         TextView number;
         TextView days;

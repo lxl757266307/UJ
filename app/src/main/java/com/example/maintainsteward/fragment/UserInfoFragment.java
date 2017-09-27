@@ -26,14 +26,19 @@ import com.example.maintainsteward.activity.AddressManagerActivity;
 import com.example.maintainsteward.activity.LoginActivity;
 import com.example.maintainsteward.activity.MyQianBaoActivity;
 import com.example.maintainsteward.activity.OrderActivity;
+import com.example.maintainsteward.activity.TaoCanActivity;
+import com.example.maintainsteward.activity.TaoCanGouMaiSucessActivity;
 import com.example.maintainsteward.activity.UserActivity;
 import com.example.maintainsteward.base.Contacts;
+import com.example.maintainsteward.base.MySetMealBean;
 import com.example.maintainsteward.bean.OrderListBean;
 import com.example.maintainsteward.bean.PublicBean;
 import com.example.maintainsteward.bean.UserInfoBean;
+import com.example.maintainsteward.mvp_presonter.MySetMealPresonter;
 import com.example.maintainsteward.mvp_presonter.OrderListPresonter;
 import com.example.maintainsteward.mvp_presonter.UserInfoPresonter;
 import com.example.maintainsteward.mvp_view.GetOrderListListener;
+import com.example.maintainsteward.mvp_view.MySetMealListener;
 import com.example.maintainsteward.mvp_view.UserInfoListener;
 import com.example.maintainsteward.utils.ToolUitls;
 
@@ -51,7 +56,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by Administrator on 2017/8/17.
  */
 
-public class UserInfoFragment extends Fragment implements GetOrderListListener, UserInfoListener {
+public class UserInfoFragment extends Fragment implements GetOrderListListener, UserInfoListener, MySetMealListener {
 
 
     Unbinder unbinder;
@@ -115,6 +120,7 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
         getOrderByType("7");
 
         getUserInfo();
+        getMySetMeal();
     }
 
     UserInfoPresonter userInfoPresonter;
@@ -243,6 +249,16 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
             case R.id.layout_ping_jia_userinfo:
                 break;
             case R.id.layout_tao_can_userinfo:
+                if (dataBean != null && set_meal != null && set_meal.size() > 0) {
+                    Intent intent = new Intent(getActivity(), TaoCanGouMaiSucessActivity.class);
+                    intent.putExtra("data", dataBean);
+                    intent.putExtra("page", 3);
+                    startActivity(intent);
+                } else {
+                    startActivity(new Intent(getActivity(), TaoCanActivity.class));
+                }
+
+
                 break;
             case R.id.layout_dizhi_userinfo:
                 startActivity(new Intent(getActivity(), AddressManagerActivity.class));
@@ -254,13 +270,30 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
     }
 
     OrderListPresonter orderListPresonter;
+    MySetMealPresonter mySetMealPresonter;
 
     public void initPrsonter() {
         orderListPresonter = new OrderListPresonter();
         orderListPresonter.setOrderListListener(this);
         userInfoPresonter = new UserInfoPresonter();
         userInfoPresonter.setUserInfoListener(this);
+        mySetMealPresonter = new MySetMealPresonter();
+        mySetMealPresonter.setMySetMealListener(this);
 //        orderListPresonter.showDialog();
+    }
+
+    public void getMySetMeal() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Contacts.USER, Activity.MODE_PRIVATE);
+        String id = sharedPreferences.getString("id", null);
+
+        String time = System.currentTimeMillis() + "";
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("user_id", id);
+        map.put("timestamp", time);
+        String sign = ToolUitls.getSign(map);
+
+//        ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "MySetMeal?" + "user_id=" + id + "&timestamp=" + time + "&sign=" + sign + "&key=" + Contacts.KEY);
+        mySetMealPresonter.getMySetMeal(id, time, sign, Contacts.KEY);
     }
 
 
@@ -423,6 +456,21 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
         super.onDestroy();
         getActivity().unregisterReceiver(updateInfoReciver);
 
+    }
+
+    MySetMealBean.DataBean dataBean;
+    List<MySetMealBean.DataBean.SetMealBean> set_meal;
+
+    @Override
+    public void onLoadMySetMeal(MySetMealBean bean) {
+
+        switch (bean.getStatus()) {
+            case "1":
+                dataBean = bean.getData();
+                set_meal = dataBean.getSet_meal();
+
+                break;
+        }
     }
 
     public class UpdateInfoReciver extends BroadcastReceiver {

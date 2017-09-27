@@ -198,6 +198,9 @@
         <!--填写维修信息页面-->
         <activity android:name=".activity.WriteTaoCanInfoActivity" />
 
+        <!--购买套餐成功页面-->
+        <activity android:name=".activity.TaoCanGouMaiSucessActivity" />
+
     </application>
 
 </manifest>

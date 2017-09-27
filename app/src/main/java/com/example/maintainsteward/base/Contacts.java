@@ -22,7 +22,12 @@ public final class Contacts {
     public static final String App_Secret = "2a0c8ece80d2a0d18a43f23aee492156";
 
 
+    /*普通订单支付*/
     public static final String WX_PAY_URL = "http://wxtest.cnncsh.com/app_user/orderpaybywechat/";
+
+    /*365套餐支付*/
+    public static final String WX_PAY365_URL = "http://wxtest.cnncsh.com/app_user/Mealpaybywechat/";
+
 
 
 
@@ -58,6 +63,10 @@ public final class Contacts {
 
     /*微信支付成功*/
     public static final String PAY_BY_WEI_XIN = "pay_sucess";
+
+
+    /*判断是 普通订单支付 还是 套餐支付 的标记*/
+    public static String PAY_FLAG = "normal";
 
 
 }

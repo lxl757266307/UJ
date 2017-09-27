@@ -613,6 +613,8 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
         switch (status) {
             case "1":
                 ToolUitls.toast(this, "支付成功");
+                Intent intent = new Intent(this, OrderActivity.class);
+                startActivity(intent);
                 finish();
                 break;
         }
@@ -639,7 +641,9 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            payPresonter.payForNowNew(data.getOrder_no(), "1", txtYouhuijia.getText().toString().substring(1));
+            if (Contacts.PAY_FLAG.equals("normal")) {
+                payPresonter.payForNowNew(data.getOrder_no(), "1", txtYouhuijia.getText().toString().substring(1));
+            }
 
 //            ToolUitls.getCallBackStr(Contacts.WX_PAY_URL + "payForNowNew?" + "out_trade_no=" + data.getOrder_no() + "&paytpe=1" + "&total_fee=" + txtYouhuijia.getText().toString());
         }

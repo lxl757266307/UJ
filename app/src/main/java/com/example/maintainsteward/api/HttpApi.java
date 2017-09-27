@@ -1,5 +1,6 @@
 package com.example.maintainsteward.api;
 
+import com.example.maintainsteward.base.MySetMealBean;
 import com.example.maintainsteward.bean.AddressBean;
 import com.example.maintainsteward.bean.AddressDeleteBean;
 import com.example.maintainsteward.bean.AddressListBean;
@@ -25,6 +26,7 @@ import com.example.maintainsteward.bean.SearviceInfoBean;
 import com.example.maintainsteward.bean.SecondKindsBean;
 import com.example.maintainsteward.bean.SecondKindsContent;
 import com.example.maintainsteward.bean.ServiceGoodsGetBean;
+import com.example.maintainsteward.bean.TaoCallBackBean;
 import com.example.maintainsteward.bean.TaoCanListBean;
 import com.example.maintainsteward.bean.UserInfoBean;
 import com.example.maintainsteward.bean.YanZhengMaCallBackBean;
@@ -386,6 +388,35 @@ public interface HttpApi {
     @FormUrlEncoded
     @POST("SetMealDetails")
     Call<TaoCanListBean> getSetMealDetails(
+            @Field("timestamp") String timestamp,
+            @Field("sign") String sign,
+            @Field("key") String key
+
+    );
+
+    /*我的以购买过的套餐*/
+    @FormUrlEncoded
+    @POST("MySetMeal")
+    Call<MySetMealBean> getMySetMeal(
+            @Field("user_id") String user_id,
+            @Field("timestamp") String timestamp,
+            @Field("sign") String sign,
+            @Field("key") String key
+
+    );
+
+    /*365套餐购买获取id*/
+    @FormUrlEncoded
+    @POST("SetMealBuyOrder")
+    Call<TaoCallBackBean> getSetMealBuyOrder(
+            @Field("user_id") String user_id,
+            @Field("id") String id,
+            @Field("paytype") String paytype,
+            @Field("city") String city,
+            @Field("district") String district,
+            @Field("address") String address,
+            @Field("msg") String msg,
+            @Field("tel") String tel,
             @Field("timestamp") String timestamp,
             @Field("sign") String sign,
             @Field("key") String key

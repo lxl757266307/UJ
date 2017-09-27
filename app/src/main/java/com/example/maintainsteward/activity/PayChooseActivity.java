@@ -89,6 +89,7 @@ public class PayChooseActivity extends BaseActivity {
                 break;
 
             case R.id.btn_zhifu:
+                Contacts.PAY_FLAG = "normal";
                 String appid = bean.getAppid();
                 String noncestr = bean.getNoncestr();
                 String packageX = bean.getPackageX();
@@ -114,8 +115,14 @@ public class PayChooseActivity extends BaseActivity {
         }
     }
 
-    FefreshReciver reciver;
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(reciver);
+    }
+
+    FefreshReciver reciver;
 
     public void register() {
         reciver = new FefreshReciver();
@@ -124,17 +131,14 @@ public class PayChooseActivity extends BaseActivity {
         registerReceiver(reciver, filter);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(reciver);
-    }
-
     class FefreshReciver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            finish();
+            if (Contacts.PAY_FLAG.equals("normal")) {
+                finish();
+            }
+
         }
     }
 }

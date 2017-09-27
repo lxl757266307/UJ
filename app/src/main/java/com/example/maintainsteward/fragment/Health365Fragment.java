@@ -1,7 +1,9 @@
 package com.example.maintainsteward.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,6 +22,10 @@ import com.example.maintainsteward.mvp_presonter.TaoCanPresonter;
 import com.example.maintainsteward.mvp_view.TaoCanListener;
 import com.example.maintainsteward.utils.ToolUitls;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Serializable;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -63,6 +69,14 @@ public class Health365Fragment extends Fragment implements TaoCanListener {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        TextView textView = new TextView(getActivity());
+        textView.setText(getString(R.string.description));
+        textView.setTextColor(Color.parseColor("#da0a0a"));
+        textView.setTextSize(15);
+        textView.setPadding(10, 10, 10, 10);
+        textView.setBackgroundColor(Color.parseColor("#f4f4f4"));
+        elvList.addFooterView(textView);
+
         presonter = new TaoCanPresonter();
         presonter.setTaoCanListener(this);
         adapter = new TaoCanListAdapter(getActivity());
@@ -137,6 +151,7 @@ public class Health365Fragment extends Fragment implements TaoCanListener {
                         set_meal.get(0).setCheck(true);
                         set_meal.get(0).setClickAble(false);
                     } else {
+                        set_meal.get(0).setCheck(true);
                         for (int x = 0; x < set_meal.size(); x++) {
                             set_meal.get(x).setClickAble(true);
                         }
@@ -154,8 +169,34 @@ public class Health365Fragment extends Fragment implements TaoCanListener {
 
     @OnClick(R.id.txt_goumai)
     public void onViewClicked() {
+        if (groupData == null) {
+            return;
+        }
+        JSONObject jsonObject = new JSONObject();
+
+        for (int i = 0; i < groupData.size(); i++) {
+            TaoCanListBean.DataBean.SetMealDataBean setMealDataBean = groupData.get(i);
+            List<TaoCanListBean.DataBean.SetMealDataBean.SetMealBean> set_meal = setMealDataBean.getSet_meal();
+            for (int x = 0; x < set_meal.size(); x++) {
+
+                TaoCanListBean.DataBean.SetMealDataBean.SetMealBean setMealBean = set_meal.get(x);
+                try {
+                    if (setMealBean.isCheck()) {
+                        String limit_num = setMealBean.getLimit_num();
+                        String item_id = setMealBean.getItem_id();
+                        jsonObject.put(item_id, limit_num);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
 
         Intent intent = new Intent(getActivity(), WriteTaoCanInfoActivity.class);
+        intent.putExtra("msg", jsonObject.toString());
+        intent.putExtra("group", (Serializable) groupData);
         startActivity(intent);
     }
 }

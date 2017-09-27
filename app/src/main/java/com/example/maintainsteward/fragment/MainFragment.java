@@ -1,5 +1,6 @@
 package com.example.maintainsteward.fragment;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -26,17 +27,22 @@ import com.example.maintainsteward.activity.ChooseLocationActivity;
 import com.example.maintainsteward.activity.JingXuanPaiHangActivity;
 import com.example.maintainsteward.activity.SearchActivity;
 import com.example.maintainsteward.activity.TaoCanActivity;
+import com.example.maintainsteward.activity.TaoCanGouMaiSucessActivity;
 import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.Contacts;
+import com.example.maintainsteward.base.MySetMealBean;
 import com.example.maintainsteward.bean.AppIndexCategoryBean;
 import com.example.maintainsteward.bean.BannerBean;
 import com.example.maintainsteward.inter.OnMainServiceClickListener;
 import com.example.maintainsteward.mvp_presonter.MainFragmentPresonter;
+import com.example.maintainsteward.mvp_presonter.MySetMealPresonter;
+import com.example.maintainsteward.mvp_view.MySetMealListener;
 import com.example.maintainsteward.mvp_view.OnLoadBannerListener;
 import com.example.maintainsteward.utils.ToolUitls;
 import com.example.maintainsteward.view.BannerViewPager;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
@@ -51,7 +57,7 @@ import butterknife.Unbinder;
  */
 
 @RequiresApi(api = Build.VERSION_CODES.M)
-public class MainFragment extends Fragment implements View.OnScrollChangeListener, BannerViewPager.OnBannerClick, OnLoadBannerListener {
+public class MainFragment extends Fragment implements View.OnScrollChangeListener, BannerViewPager.OnBannerClick, OnLoadBannerListener, MySetMealListener {
 
     Unbinder unbinder;
     /*定位图标*/
@@ -167,7 +173,14 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
                 startActivity(new Intent(getActivity(), JingXuanPaiHangActivity.class));
                 break;
             case R.id.layout_combo_mainfragment:
-                startActivity(new Intent(getActivity(), TaoCanActivity.class));
+                if (data != null && set_meal != null && set_meal.size() > 0) {
+                    Intent intent = new Intent(getActivity(), TaoCanGouMaiSucessActivity.class);
+                    intent.putExtra("data", data);
+                    intent.putExtra("page", 0);
+                    startActivity(intent);
+                } else {
+                    startActivity(new Intent(getActivity(), TaoCanActivity.class));
+                }
                 break;
             case R.id.layout_sugestion_mainfragment:
                 break;
@@ -191,7 +204,6 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
     OnMainServiceClickListener onMainServiceClickListener;
 
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -202,6 +214,7 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
     }
 
     MainFragmentPresonter presonter;
+    MySetMealPresonter mySetMealPresonter;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -209,6 +222,8 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
         initLocation();
         presonter = new MainFragmentPresonter();
         presonter.setOnLoadBannerListener(this);
+        mySetMealPresonter = new MySetMealPresonter();
+        mySetMealPresonter.setMySetMealListener(this);
         sign1();
         sign2();
         rigesterReceiver();
@@ -216,12 +231,26 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
         vfMainfragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e(TAG, "vfMainfragment.getDisplayedChild()" + vfMainfragment.getDisplayedChild()
-                );
+//                Log.e(TAG, "vfMainfragment.getDisplayedChild()" + vfMainfragment.getDisplayedChild()
+//                );
             }
         });
+        getMySetMeal();
 
+    }
 
+    public void getMySetMeal() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Contacts.USER, Activity.MODE_PRIVATE);
+        String id = sharedPreferences.getString("id", null);
+
+        String time = System.currentTimeMillis() + "";
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("user_id", id);
+        map.put("timestamp", time);
+        String sign = ToolUitls.getSign(map);
+
+//        ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "MySetMeal?" + "user_id=" + id + "&timestamp=" + time + "&sign=" + sign + "&key=" + Contacts.KEY);
+        mySetMealPresonter.getMySetMeal(id, time, sign, Contacts.KEY);
     }
 
     private void initLocation() {
@@ -285,7 +314,7 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
     }
 
 
-    public  final String TAG = "MainFragment";
+    public final String TAG = "MainFragment";
 
     public void sign1() {
 
@@ -402,6 +431,19 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
 
         getActivity().registerReceiver(locationReciver, intentFilter);
 
+    }
+
+    List<MySetMealBean.DataBean.SetMealBean> set_meal;
+    MySetMealBean.DataBean data;
+
+    @Override
+    public void onLoadMySetMeal(MySetMealBean bean) {
+        switch (bean.getStatus()) {
+            case "1":
+                data = bean.getData();
+                set_meal = data.getSet_meal();
+                break;
+        }
     }
 
 

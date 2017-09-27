@@ -47,12 +47,12 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
         Log.e(TAG, "resp====" + resp.errCode);
         if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
             if (resp.errCode == 0) {
-                Intent intent = new Intent(this, OrderActivity.class);
 
                 Intent intent1 = new Intent(Contacts.PAY_BY_WEI_XIN);
                 sendBroadcast(intent1);
 
-                startActivity(intent);
+                finish();
+            } else if (resp.errCode == -2) {
                 finish();
             }
 
