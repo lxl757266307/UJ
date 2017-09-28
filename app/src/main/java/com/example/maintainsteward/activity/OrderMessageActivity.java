@@ -219,7 +219,8 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
 
                 Intent intent3 = new Intent(this, YouHuiQuanActivity.class);
                 intent3.putExtra("order_no", data.getOrder_no());
-                intent3.putExtra("count", data.getTotal_amount());
+                String price = txtYouhuijia.getText().toString().substring(1);
+                intent3.putExtra("count", price);
                 startActivityForResult(intent3, YOU_HUI_QUAN_CODE);
                 break;
         }
@@ -228,19 +229,23 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
     public static final int YOU_HUI_QUAN_CODE = 1;
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent x) {
+        super.onActivityResult(requestCode, resultCode, x);
 
         if (resultCode == RESULT_OK) {
 
             switch (requestCode) {
                 case YOU_HUI_QUAN_CODE:
-                    CanUseYouHuiQuanBean.DataBean resultDataBean = (CanUseYouHuiQuanBean.DataBean) data.getSerializableExtra("kajuan");
+                    CanUseYouHuiQuanBean.DataBean resultDataBean = (CanUseYouHuiQuanBean.DataBean) x.getSerializableExtra("kajuan");
 
                     if (resultDataBean != null) {
                         String bonus_amount = resultDataBean.getBonus_amount();
                         txtJianmian.setText("￥" + bonus_amount);
                         txtJiantou.setVisibility(View.GONE);
+                        String total_amount = data.getTotal_amount();
+                        double shiFuKuan = Double.parseDouble(total_amount) - Double.parseDouble(bonus_amount);
+                        txtYouhuijia.setText("￥" + shiFuKuan);
+
                     }
 
 
@@ -402,7 +407,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                 txtDingdanbianhao.setText(data.getOrder_no());
                 String youhui_fee = data.getYouhui_fee();
                 if (!"0".equals(youhui_fee)) {
-                    txtTaocanjianmian.setText("￥" + data.getSet_meal_costs());
+                    txtTaocanjianmian.setText("￥" + data.getYouhui_fee());
                     layout365.setVisibility(View.VISIBLE);
                 }
 
@@ -501,13 +506,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
 //                waittingProgressBar();
                 alertDialog.dismiss();
 
-                TreeMap<String, String> map = new TreeMap<String, String>();
-                String time = System.currentTimeMillis() + "";
                 String order_sn = data.getOrder_no();
-                map.put("timestamp", time);
-                map.put("order_sn", order_sn);
-                String sign = ToolUitls.getSign(map);
-//                ToolUitls.getCallBackStr(Contacts.WX_PAY_URL + "pay?order_sn=" + order_sn + "&timestamp=" + time + "&sign=" + sign + "&key=" + Contacts.KEY);
                 payPresonter.getPayInfo(order_sn);
 
             }
@@ -600,8 +599,11 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
         switch (bean.getStatus()) {
             case 1:
 
+                String price = txtYouhuijia.getText().toString().substring(1);
                 Intent intent = new Intent(this, PayChooseActivity.class);
                 intent.putExtra("data", bean);
+                intent.putExtra("order_no", data.getOrder_no());
+                intent.putExtra("price", price);
                 startActivity(intent);
 
                 break;
@@ -614,10 +616,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
     public void onPaySucess(String status) {
         switch (status) {
             case "1":
-                ToolUitls.toast(this, "支付成功");
-                Intent intent = new Intent(this, OrderActivity.class);
-                startActivity(intent);
-                finish();
+
                 break;
         }
     }
@@ -643,9 +642,8 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            if (Contacts.PAY_FLAG.equals("normal")) {
-                payPresonter.payForNowNew(data.getOrder_no(), "1", txtYouhuijia.getText().toString().substring(1));
-            }
+//            if (Contacts.PAY_FLAG.equals("normal")) {
+//            }
 
 //            ToolUitls.getCallBackStr(Contacts.WX_PAY_URL + "payForNowNew?" + "out_trade_no=" + data.getOrder_no() + "&paytpe=1" + "&total_fee=" + txtYouhuijia.getText().toString());
         }

@@ -34,9 +34,11 @@ public class PayPresonter {
     public void getPayInfo(String orderNo) {
 
         Call<PayInfoBean> payInfo = httpApi.getPayInfo(orderNo);
+
         payInfo.enqueue(new Callback<PayInfoBean>() {
             @Override
             public void onResponse(Call<PayInfoBean> call, Response<PayInfoBean> response) {
+
                 if (response.isSuccessful()) {
                     PayInfoBean body = response.body();
                     if (onPayListener != null) {
@@ -63,6 +65,8 @@ public class PayPresonter {
         publicBeanCall.enqueue(new Callback<PublicBean>() {
             @Override
             public void onResponse(Call<PublicBean> call, Response<PublicBean> response) {
+
+                ToolUitls.print("---------", "response==" + response + "        response.body==" + response.body());
 
                 if (response.isSuccessful()) {
 

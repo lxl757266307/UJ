@@ -158,13 +158,12 @@ public class WriteTaoCanInfoActivity extends BaseActivity implements MyDialogFra
 //                intent.putExtra("group", (Serializable) groupData);
 //                startActivity(intent);
 
-                ToolUitls.print("-------", "sssssssssssss");
-                String xiangXiDiZhi = editAddress.getText().toString();
-                address = txtJutidizhi.getText().toString() + xiangXiDiZhi;
+                address = editAddress.getText().toString();
+
                 tel = editDianhua.getText().toString();
                 String name = editXingming.getText().toString();
 
-                if ("".equals(address) || "".equals(tel) || "".equals(name) || "".equals(xiangXiDiZhi)) {
+                if ("".equals(address) || "".equals(tel) || "".equals(name) || "".equals(address)) {
                     ToolUitls.toast(this, "信息填写不完整，请填写完整信息");
                     return;
                 }
@@ -184,12 +183,12 @@ public class WriteTaoCanInfoActivity extends BaseActivity implements MyDialogFra
                 String sign = ToolUitls.getSign(map);
 
 
-////                ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "SetMealBuyOrder?" +
-////                        "user_id=" + userId + "&id=" + taoCanId
-////                        + "&paytype=" + payType + "&city=" + city +
-////                        "&district=" + district + "&address=" + address +
-////                        "&msg=" + msg + "&tel=" + tel + "&sign=" + sign + "&timestamp=" + time
-////                        + "&key=" + Contacts.KEY);
+//                ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "SetMealBuyOrder?" +
+//                        "user_id=" + userId + "&id=" + taoCanId
+//                        + "&paytype=" + payType + "&city=" + city +
+//                        "&district=" + district + "&address=" + address +
+//                        "&msg=" + msg + "&tel=" + tel + "&sign=" + sign + "&timestamp=" + time
+//                        + "&key=" + Contacts.KEY);
                 payPresonter.getTaoCanOrderNo(userId, taoCanId, payType, city, district, address, msg, tel, time, sign, Contacts.KEY);
 
                 break;

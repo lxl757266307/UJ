@@ -507,6 +507,7 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
         map.put("total_amount", total_amount);
         String sign = ToolUitls.getSign(map);
 
+        ToolUitls.print("dataBean.getId()","dataBean.getId()=="+dataBean.getId());
         liJiOrderPresonter.order(user_id, cat_id, title, dataBean.getId(), dataJson, peiJianJson, content, img1, img2, img3, img4, img5, img6, orderTime, time, sign, Contacts.KEY, total_amount);
 //        ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "ServiceOrderSubmit?" + "user_id=" + user_id + "&cat_id=" + cat_id
 //                + "&name=" + title + "&address_id=" + dataBean.getId() + "&service_con=" + dataJson + "&material=" + peiJianJson

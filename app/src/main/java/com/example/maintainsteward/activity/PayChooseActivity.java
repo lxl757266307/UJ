@@ -18,6 +18,9 @@ import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.PayInfoBean;
+import com.example.maintainsteward.mvp_presonter.PayPresonter;
+import com.example.maintainsteward.mvp_view.OnPayListener;
+import com.example.maintainsteward.utils.ToolUitls;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 
 import butterknife.BindView;
@@ -28,7 +31,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2017/9/26.
  */
 
-public class PayChooseActivity extends BaseActivity {
+public class PayChooseActivity extends BaseActivity implements OnPayListener {
     @BindView(R.id.layout_back)
     LinearLayout layoutBack;
     @BindView(R.id.txt_title)
@@ -44,14 +47,22 @@ public class PayChooseActivity extends BaseActivity {
     @BindView(R.id.btn_zhifu)
     Button btnZhifu;
     PayInfoBean bean;
+    PayPresonter payPresonter;
+    String order_no;
+    String price;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        order_no = this.getIntent().getStringExtra("order_no");
+        price = this.getIntent().getStringExtra("price");
         bean = (PayInfoBean) this.getIntent().getSerializableExtra("data");
         setContentView(R.layout.activity_choosepay);
         ButterKnife.bind(this);
+        payPresonter = new PayPresonter();
+        payPresonter.setOnPayListener(this);
         register();
+
 
     }
 
@@ -131,12 +142,28 @@ public class PayChooseActivity extends BaseActivity {
         registerReceiver(reciver, filter);
     }
 
+    @Override
+    public void getYuZhiFuInfo(PayInfoBean bean) {
+
+    }
+
+    @Override
+    public void onPaySucess(String status) {
+        switch (status) {
+            case "1":
+                break;
+        }
+    }
+
     class FefreshReciver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
 
             if (Contacts.PAY_FLAG.equals("normal")) {
-                finish();
+                ToolUitls.toast(PayChooseActivity.this, "支付成功");
+                Intent intent1 = new Intent(PayChooseActivity.this, OrderActivity.class);
+                startActivity(intent1);
+                payPresonter.payForNowNew(order_no, "1", price);
             }
 
         }

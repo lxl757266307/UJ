@@ -26,6 +26,7 @@ import com.example.maintainsteward.fragment.AllOrderListFragement;
 import com.example.maintainsteward.fragment.WeiWanChengOrderListFragement;
 import com.example.maintainsteward.fragment.YiQuXiaoOrderListFragement;
 import com.example.maintainsteward.fragment.YiWanChengOrderListFragement;
+import com.example.maintainsteward.main.MainActivity;
 import com.example.maintainsteward.mvp_presonter.OrderListPresonter;
 import com.example.maintainsteward.mvp_view.GetOrderListListener;
 import com.example.maintainsteward.utils.ToolUitls;
@@ -118,7 +119,9 @@ public class OrderActivity extends BaseActivity implements GetOrderListListener 
                 vpOrder.setCurrentItem(3);
                 break;
             case R.id.layout_back:
-                finish();
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("page", 2);
+                startActivity(intent);
                 break;
         }
     }
@@ -127,7 +130,9 @@ public class OrderActivity extends BaseActivity implements GetOrderListListener 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            finish();
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("page", 2);
+            startActivity(intent);
             return true;
         }
 
@@ -325,7 +330,6 @@ public class OrderActivity extends BaseActivity implements GetOrderListListener 
     public void dialogDismiss() {
 
     }
-
 
 
 }
