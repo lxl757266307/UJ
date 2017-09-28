@@ -49,16 +49,16 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     RadioButton radioFirst;
     @BindView(R.id.radio_two)
     RadioButton radioTwo;
-    @BindView(R.id.radio_three)
-    RadioButton radioThree;
+//    @BindView(R.id.radio_three)
+//    RadioButton radioThree;
     @BindView(R.id.radio_four)
     RadioButton radioFour;
     @BindView(R.id.layout_main_first)
     LinearLayout layoutMainFirst;
     @BindView(R.id.layout_main_two)
     LinearLayout layoutMainTwo;
-    @BindView(R.id.layout_main_three)
-    LinearLayout layoutMainThree;
+//    @BindView(R.id.layout_main_three)
+//    LinearLayout layoutMainThree;
     @BindView(R.id.layout_main_four)
     LinearLayout layoutMainFour;
 
@@ -91,12 +91,12 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         MainFragment mainFragment = new MainFragment();
         mainFragment.setOnMainServiceClickListener(this);
         KindsFragment kindsFragment = new KindsFragment();
-        TuiJianFragment orerFragment = new TuiJianFragment();
+//        TuiJianFragment orerFragment = new TuiJianFragment();
         UserInfoFragment userInfoFragment = new UserInfoFragment();
         List<Fragment> list = new ArrayList<>();
         list.add(mainFragment);
         list.add(kindsFragment);
-        list.add(orerFragment);
+//        list.add(orerFragment);
         list.add(userInfoFragment);
 
 
@@ -113,21 +113,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     }
 
 
-    public void pay() {
-        ToolUitls.print(TAG, "ssss");
-        PayReq payReq = new PayReq();
-        payReq.appId = Contacts.APP_ID;
-        payReq.partnerId = "1364879302";
-        payReq.prepayId = "2165161061456121325136";
-        payReq.packageValue = "Sign=2165161061456121325136";
-        payReq.nonceStr = "1101000000140429eb40476f8896f4c9";
-        payReq.partnerId = "1900000109";
-        payReq.timeStamp = String.valueOf(System.currentTimeMillis());
-        payReq.sign = "7FFECB600D7157C5AA49810D2D8F28BC2811827B";
-        wxapi.sendReq(payReq);
 
-
-    }
 
     IWXAPI wxapi;
 
@@ -154,7 +140,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     }
 
 
-    @OnClick({R.id.layout_main_first, R.id.layout_main_two, R.id.layout_main_three, R.id.layout_main_four})
+    @OnClick({R.id.layout_main_first, R.id.layout_main_two, R.id.layout_main_four})
     public void layoutClick(View view) {
         switch (view.getId()) {
             case R.id.layout_main_first:
@@ -163,9 +149,9 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
             case R.id.layout_main_two:
                 setRgRadioGroupType(radioTwo);
                 break;
-            case R.id.layout_main_three:
-                setRgRadioGroupType(radioThree);
-                break;
+//            case R.id.layout_main_three:
+//                setRgRadioGroupType(radioThree);
+//                break;
             case R.id.layout_main_four:
                 setRgRadioGroupType(radioFour);
                 break;
@@ -214,11 +200,11 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     }
 
     public void setRadioArray() {
-        buttonArray = new RadioButton[4];
+        buttonArray = new RadioButton[3];
         buttonArray[0] = radioFirst;
         buttonArray[1] = radioTwo;
-        buttonArray[2] = radioThree;
-        buttonArray[3] = radioFour;
+//        buttonArray[2] = radioThree;
+        buttonArray[2] = radioFour;
         buttonArray[0].setChecked(true);
     }
 

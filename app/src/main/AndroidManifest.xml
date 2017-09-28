@@ -201,6 +201,17 @@
         <!--购买套餐成功页面-->
         <activity android:name=".activity.TaoCanGouMaiSucessActivity" />
 
+        <!--热点头条页面-->
+        <activity android:name=".activity.HotNewsActivity" />
+
+        <!--快速发布页面-->
+        <activity android:name=".activity.KuaiSuFaBuActivity" />
+
+        <!--快速发布成功后的列表页面-->
+        <activity android:name=".activity.KuaiSuFaBuListActivity" />
+
+        <!--热点消息网页页面-->
+        <activity android:name=".activity.NewsWebActivity" />
     </application>
 
 </manifest>

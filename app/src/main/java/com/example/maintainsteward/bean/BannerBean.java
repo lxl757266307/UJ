@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  * Created by Administrator on 2017/9/5.
  */
 
-public class BannerBean {
+public class BannerBean   implements Serializable{
 
 
     @Override
@@ -95,7 +96,7 @@ public class BannerBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean  implements Serializable {
         @Override
         public String toString() {
             return "DataBean{" +
@@ -167,7 +168,7 @@ public class BannerBean {
             this.information_lists = information_lists;
         }
 
-        public static class SlidePostsBean {
+        public static class SlidePostsBean  implements Serializable {
 
             @Override
             public String toString() {
@@ -246,7 +247,7 @@ public class BannerBean {
             }
         }
 
-        public static class InformationListsBean {
+        public static class InformationListsBean  implements Serializable{
 
 
             @Override

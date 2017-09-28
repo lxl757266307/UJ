@@ -42,7 +42,7 @@ public class JingXuanPaiHangActivity extends BaseActivity implements JingXuanLis
     @BindView(R.id.txt_title)
     TextView txtTitle;
     @BindView(R.id.lv_list)
-    ListView lvList;
+    MyListView lvList;
     @BindView(R.id.img_fabu)
     ImageView imgFabu;
     @BindView(R.id.img_huidaodingbu)

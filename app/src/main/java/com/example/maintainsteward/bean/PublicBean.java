@@ -8,6 +8,14 @@ public class PublicBean {
     String status;
     String data;
 
+    @Override
+    public String toString() {
+        return "PublicBean{" +
+                "status='" + status + '\'' +
+                ", data='" + data + '\'' +
+                '}';
+    }
+
     public String getStatus() {
         return status;
     }

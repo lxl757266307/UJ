@@ -84,6 +84,8 @@ public class UserActivity extends BaseActivity implements UserInfoListener, OnUp
 
     UserInfoPresonter userInfoPresonter;
     UpLoadPhotoPresonter upLoadPhotoPresonter;
+    @BindView(R.id.btn_loginOut)
+    Button btnLoginOut;
 
 
     @Override
@@ -401,5 +403,18 @@ public class UserActivity extends BaseActivity implements UserInfoListener, OnUp
     private String getTime(Date date) {//可根据需要自行截取数据显示
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.format(date);
+    }
+
+    @OnClick(R.id.btn_loginOut)
+    public void loginOut() {
+
+        SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putBoolean("online", false);
+        edit.commit();
+
+
+        startActivity(new Intent(this, LoginActivity.class));
+
     }
 }

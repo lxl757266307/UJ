@@ -24,8 +24,11 @@ import android.widget.ViewFlipper;
 import com.bumptech.glide.Glide;
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.activity.ChooseLocationActivity;
+import com.example.maintainsteward.activity.HotNewsActivity;
 import com.example.maintainsteward.activity.JingXuanPaiHangActivity;
+import com.example.maintainsteward.activity.LiJiYuYueActivity;
 import com.example.maintainsteward.activity.SearchActivity;
+import com.example.maintainsteward.activity.ServiceInfoActivity;
 import com.example.maintainsteward.activity.TaoCanActivity;
 import com.example.maintainsteward.activity.TaoCanGouMaiSucessActivity;
 import com.example.maintainsteward.application.MyApplication;
@@ -33,9 +36,12 @@ import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.base.MySetMealBean;
 import com.example.maintainsteward.bean.AppIndexCategoryBean;
 import com.example.maintainsteward.bean.BannerBean;
+import com.example.maintainsteward.bean.HotNewsList;
 import com.example.maintainsteward.inter.OnMainServiceClickListener;
+import com.example.maintainsteward.mvp_presonter.HotNewPresonter;
 import com.example.maintainsteward.mvp_presonter.MainFragmentPresonter;
 import com.example.maintainsteward.mvp_presonter.MySetMealPresonter;
+import com.example.maintainsteward.mvp_view.HotNewsListener;
 import com.example.maintainsteward.mvp_view.MySetMealListener;
 import com.example.maintainsteward.mvp_view.OnLoadBannerListener;
 import com.example.maintainsteward.utils.ToolUitls;
@@ -57,7 +63,7 @@ import butterknife.Unbinder;
  */
 
 @RequiresApi(api = Build.VERSION_CODES.M)
-public class MainFragment extends Fragment implements View.OnScrollChangeListener, BannerViewPager.OnBannerClick, OnLoadBannerListener, MySetMealListener {
+public class MainFragment extends Fragment implements View.OnScrollChangeListener, BannerViewPager.OnBannerClick, OnLoadBannerListener, MySetMealListener, HotNewsListener {
 
     Unbinder unbinder;
     /*定位图标*/
@@ -160,6 +166,8 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
                 startActivity(new Intent(getActivity(), ChooseLocationActivity.class));
                 break;
             case R.id.img_tianjia_mainfragment:
+                startActivity(new Intent(getActivity(), LiJiYuYueActivity.class));
+
                 break;
             case R.id.layout_sousuo_mainfragment:
                 startActivity(new Intent(getActivity(), SearchActivity.class));
@@ -216,14 +224,20 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
     MainFragmentPresonter presonter;
     MySetMealPresonter mySetMealPresonter;
 
+    HotNewPresonter hotNewPresonter;
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initLocation();
         presonter = new MainFragmentPresonter();
         presonter.setOnLoadBannerListener(this);
+        vipMainFragment.setMarkerLocal(BannerViewPager.CENTER_MARKER);
+        vipMainFragment.setOnBannerClick(this);
         mySetMealPresonter = new MySetMealPresonter();
         mySetMealPresonter.setMySetMealListener(this);
+        hotNewPresonter = new HotNewPresonter();
+        hotNewPresonter.setHotNewsListener(this);
         sign1();
         sign2();
         rigesterReceiver();
@@ -231,8 +245,13 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
         vfMainfragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Log.e(TAG, "vfMainfragment.getDisplayedChild()" + vfMainfragment.getDisplayedChild()
-//                );
+                String time = System.currentTimeMillis() + "";
+                TreeMap<String, String> map = new TreeMap<>();
+                map.put("page", "1");
+                map.put("timestamp", time);
+                String sign = ToolUitls.getSign(map);
+                hotNewPresonter.getHotNewList("1", time, sign, Contacts.KEY);
+
             }
         });
         getMySetMeal();
@@ -277,8 +296,7 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
             imageViews.add(imageView);
         }
 //        vipMainFragment.setCanAUTO(true);
-        vipMainFragment.setMarkerLocal(BannerViewPager.CENTER_MARKER);
-        vipMainFragment.setOnBannerClick(this);
+
         vipMainFragment.setViews(imageViews, true);
 
     }
@@ -446,6 +464,19 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
         }
     }
 
+    @Override
+    public void getHotNewsSucess(HotNewsList hotNewsList) {
+
+        switch (hotNewsList.getStatus()) {
+            case "1":
+                List<HotNewsList.DataBean> data = hotNewsList.getData();
+                Intent intent = new Intent(getActivity(), HotNewsActivity.class);
+                intent.putExtra("data", (Serializable)data );
+                startActivity(intent);
+                break;
+        }
+    }
+
 
     public class LocationReciver extends BroadcastReceiver {
 
@@ -463,55 +494,6 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
 
         }
     }
-
-
-//
-//    @Override
-//    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-//
-//        int imageHeight = txtMainTest.getHeight();
-//         /* 使用scorllview  嵌套 动态设置内容的高度 实现滑动效果 因为 内容没有充满 则无法实现 滑动*/
-//
-//         /*注意三种状态 1. 未滑动 2.滑动中没有超过 背景图片的 高度  3，超过背景图片高度后的状态*/
-//
-//        if (scrollY <= 0) {// 未滑动
-//            layoutMainHeader.setBackgroundColor(Color.argb((int) 0, 227, 29, 26));//AGB由相关工具获得，或者美工提供
-//        } else if (scrollY > 0 && scrollY <= imageHeight) {//2.滑动中没有超过 背景图片的 高度
-//            float scale = (float) scrollY / imageHeight;
-//            float alpha = (255 * scale);
-//            // 只是layout背景透明(仿知乎滑动效果)
-//            layoutMainHeader.setBackgroundColor(Color.argb((int) alpha, 227, 29, 26));
-//        } else {//3，超过背景图片高度后的状态
-//            layoutMainHeader.setBackgroundColor(Color.argb((int) 255, 227, 29, 26));
-//        }
-//    }
-
-
-    /*动态设置滑动  如果内容高度 没有超过 屏幕的高度 则无法实现滑动  只需要动态设置 让内容高度 超过屏幕的高度即可*/
-//    public void setContentHeight() {
-//
-//        int screenHeight = ScreenUtils.getScreenHeight(getActivity());
-//        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
-//        layoutParams.height = screenHeight + screenHeight / 3;
-//        layoutMainContent.setLayoutParams(layoutParams);
-//
-//
-//    }
-//
-//    public void addItem() {
-//
-//        for (int i = 0; i < 10; i++) {
-//            TextView textView = new TextView(getActivity());
-//            textView.setText("测试");
-//            layoutContent.addView(textView);
-//        }
-//    }
-//
-//    private void setListener() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            slvMain.setOnScrollChangeListener(this);
-//        }
-//    }
 
 
 }

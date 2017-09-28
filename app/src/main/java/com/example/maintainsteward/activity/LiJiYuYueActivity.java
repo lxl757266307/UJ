@@ -34,7 +34,9 @@ import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.AddressListBean;
 import com.example.maintainsteward.bean.OrderSucessBean;
+import com.example.maintainsteward.bean.PeiJianBean;
 import com.example.maintainsteward.bean.SearviceInfoBean;
+import com.example.maintainsteward.bean.ServiceBean;
 import com.example.maintainsteward.bean.ServiceGoodsGetBean;
 import com.example.maintainsteward.main.MainActivity;
 import com.example.maintainsteward.mvp_presonter.LiJiOrderPresonter;
@@ -215,6 +217,7 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
                     bitmaps.add(0, bitmap);
                     photoListAdapter.setList(bitmaps);
                     photoListAdapter.notifyDataSetChanged();
+                    break;
 
             }
         }
@@ -228,11 +231,23 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
         initData();
         setContentView(R.layout.activity_lijiyuyue);
         ButterKnife.bind(this);
-        txtServiceTitleLijiyuyue.setText(title);
-
+        init();
         initList();
         initPhotoList();
 
+    }
+
+    private void init() {
+        txtServiceTitleLijiyuyue.setText(title);
+        upLoadPhotoPresonter = new UpLoadPhotoPresonter();
+        upLoadPhotoPresonter.setListener(LiJiYuYueActivity.this);
+
+        liJiOrderPresonter = new LiJiOrderPresonter();
+        liJiOrderPresonter.setOrderListener(LiJiYuYueActivity.this);
+        imgArrays = new String[6];
+        for (int i = 0; i < imgArrays.length; i++) {
+            imgArrays[i] = "";
+        }
     }
 
     PhotoListAdapter photoListAdapter;
@@ -390,6 +405,15 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
 
     }
 
+    @Override
+    public void onPhotoDelete(int position) {
+
+        bitmaps.remove(position);
+        photoListAdapter.setList(bitmaps);
+        photoListAdapter.notifyDataSetChanged();
+
+    }
+
     int count = 0;
     List<Bitmap> photos;
 
@@ -421,7 +445,7 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
 
         ToolUitls.print(TAG, "count==" + count);
         ToolUitls.print(TAG, "photos==" + photos.size());
-        if (photos != null && count == photos.size() ) {
+        if (photos != null && count == photos.size()) {
             for (int i = 0; i < url.size(); i++) {
                 imgArrays[i] = url.get(i);
             }
@@ -436,6 +460,24 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
         Gson gson = new Gson();
         SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
         String user_id = sharedPreferences.getString("id", null);
+
+        List<ServiceBean> serviceBeanList = new ArrayList<>();
+        List<PeiJianBean> peiJianBeanList = new ArrayList<>();
+        double serviceTotal = 0;
+
+        for (int i = 0; i < data.size(); i++) {
+            SearviceInfoBean.DataBean dataBean = data.get(i);
+            serviceBeanList.add(new ServiceBean(dataBean.getId(), dataBean.getName(), dataBean.getNumber() + "", dataBean.getExpenses(), dataBean.getUnit(), dataBean.getCover()));
+            serviceTotal += Double.parseDouble(dataBean.getExpenses()) * dataBean.getNumber();
+        }
+        double peiJianTotal = 0;
+        for (int i = 0; i < peiJian.size(); i++) {
+            ServiceGoodsGetBean.DataBean dataBean = peiJian.get(i);
+            peiJianBeanList.add(new PeiJianBean(dataBean.getId(), dataBean.getSmeta(), dataBean.getName(), dataBean.getPrice(), dataBean.getNumber() + ""));
+            peiJianTotal += Double.parseDouble(dataBean.getPrice()) * dataBean.getNumber();
+        }
+        String total_amount = serviceTotal + peiJianTotal + "";
+
         String time = System.currentTimeMillis() + "";
         TreeMap<String, String> map = new TreeMap<>();
         map.put("timestamp", time);
@@ -444,8 +486,8 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
         map.put("name", title);
         map.put("type", "1");
         map.put("address_id", dataBean.getId());
-        String dataJson = gson.toJson(data);
-        String peiJianJson = gson.toJson(peiJian);
+        String dataJson = gson.toJson(serviceBeanList);
+        String peiJianJson = gson.toJson(peiJianBeanList);
         String content = editRepairDescrription.getText().toString();
         String img1 = imgArrays[0];
         String img2 = imgArrays[1];
@@ -456,14 +498,16 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
         String orderTime = txtRepairTimeLijiyuyue.getText().toString();
 
         map.put("service_con", dataJson);
+        if (peiJianJson.equals("[]")) {
+            peiJianJson = "";
+        }
         map.put("material", peiJianJson);
         map.put("content", content);
         map.put("order_time", orderTime);
-
+        map.put("total_amount", total_amount);
         String sign = ToolUitls.getSign(map);
 
-
-        liJiOrderPresonter.order(user_id, cat_id, title, dataBean.getId(), dataJson, peiJianJson, content, img1, img2, img3, img4, img5, img6, orderTime, time, sign, Contacts.KEY);
+        liJiOrderPresonter.order(user_id, cat_id, title, dataBean.getId(), dataJson, peiJianJson, content, img1, img2, img3, img4, img5, img6, orderTime, time, sign, Contacts.KEY, total_amount);
 //        ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "ServiceOrderSubmit?" + "user_id=" + user_id + "&cat_id=" + cat_id
 //                + "&name=" + title + "&address_id=" + dataBean.getId() + "&service_con=" + dataJson + "&material=" + peiJianJson
 //                + "&content=" + content + "&img1=" + img1 + "&img2=" + img2 + "&img3=" + img3 + "&img4=" + img4 + "&img5=" + img5
@@ -507,15 +551,6 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
                 waittingProgressBar();
                 alertDialog.dismiss();
 
-                upLoadPhotoPresonter = new UpLoadPhotoPresonter();
-                upLoadPhotoPresonter.setListener(LiJiYuYueActivity.this);
-
-                liJiOrderPresonter = new LiJiOrderPresonter();
-                liJiOrderPresonter.setOrderListener(LiJiYuYueActivity.this);
-                imgArrays = new String[6];
-                for (int i = 0; i < imgArrays.length; i++) {
-                    imgArrays[i] = "";
-                }
                 if (bitmaps != null && bitmaps.size() > 1) {
                     upLoadPhotoPresonter.getToken();
                 } else {
@@ -566,6 +601,10 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
                 mWaitingAlertDialog.dismiss();
                 ToolUitls.toast(this, "下单成功");
                 handler.sendEmptyMessageDelayed(1, 2000);
+                break;
+            default:
+                mWaitingAlertDialog.dismiss();
+                ToolUitls.toast(this, "下单失败，请重试！");
                 break;
         }
     }

@@ -160,7 +160,7 @@
                     android:background="@null"
                     android:drawableRight="@mipmap/xiayiye"
                     android:gravity="center_vertical"
-                    android:hint="陕西省西安市。。。。"
+                    android:hint="请选择地区"
                     android:textColor="@color/black"
                     android:textColorHint="@color/grey"
                     android:textSize="14sp" />
@@ -195,7 +195,7 @@
                     android:layout_marginRight="@dimen/layout_marginRight_10dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:hint="银河科技园-唐延路25号A座604"
+                    android:hint="请输入详细地址"
                     android:maxLines="1"
                     android:textColor="@color/black"
                     android:textColorHint="@color/grey"

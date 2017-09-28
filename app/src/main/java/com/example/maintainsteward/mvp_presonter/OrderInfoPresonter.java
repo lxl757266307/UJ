@@ -5,6 +5,7 @@ import com.example.maintainsteward.base.BaseHttpApi;
 import com.example.maintainsteward.bean.OrderInfoBean;
 import com.example.maintainsteward.bean.PublicBean;
 import com.example.maintainsteward.mvp_view.OrderInfoListener;
+import com.example.maintainsteward.utils.ToolUitls;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,14 +30,13 @@ public class OrderInfoPresonter {
                              String sign,
                              String key) {
 
-        if (orderInfoListener != null) {
-            orderInfoListener.showDialog();
-        }
 
         Call<OrderInfoBean> orderDetails = httpApi.getOrderDetails(user_id, id, timestamp, sign, key);
         orderDetails.enqueue(new Callback<OrderInfoBean>() {
             @Override
             public void onResponse(Call<OrderInfoBean> call, Response<OrderInfoBean> response) {
+
+                ToolUitls.print("response===", "response=======" + response + "  body=" + response.body());
 
                 if (response.isSuccessful()) {
 
@@ -89,9 +89,6 @@ public class OrderInfoPresonter {
         });
 
     }
-
-
-
 
 
     OrderInfoListener orderInfoListener;

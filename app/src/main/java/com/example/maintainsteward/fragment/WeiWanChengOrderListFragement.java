@@ -258,6 +258,7 @@ public class WeiWanChengOrderListFragement extends Fragment implements PtrHandle
         Intent intent = new Intent(getActivity(), OrderMessageActivity.class);
         String orderId = demand_order_data.get(position).getId();
         intent.putExtra("id", orderId);
+        ToolUitls.print("-----","orderId===="+id);
         startActivity(intent);
 
     }

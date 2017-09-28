@@ -9,6 +9,7 @@ import com.example.maintainsteward.bean.CanUseYouHuiQuanBean;
 import com.example.maintainsteward.bean.CityListBean;
 import com.example.maintainsteward.bean.AppIndexCategoryBean;
 import com.example.maintainsteward.bean.FirstKindsBean;
+import com.example.maintainsteward.bean.HotNewsList;
 import com.example.maintainsteward.bean.HotWordBean;
 import com.example.maintainsteward.bean.JingXuanBean;
 import com.example.maintainsteward.bean.KaJuanBean;
@@ -231,7 +232,8 @@ public interface HttpApi {
                                              @Field("timestamp") String timestamp,
                                              @Field("sign") String sign,
                                              @Field("type") String type,
-                                             @Field("key") String key);
+                                             @Field("key") String key,
+                                             @Field("total_amount") String total_amount);
 
 
     /*取消订单*/
@@ -286,6 +288,34 @@ public interface HttpApi {
     Call<PublicBean> bindNewPhone(
             @Field("user_id") String id,
             @Field("phone") String phone,
+            @Field("timestamp") String timestamp,
+            @Field("sign") String sign,
+            @Field("key") String key
+    );
+
+    /*快速发布*/
+    @FormUrlEncoded
+    @POST("ServiceOrderFastSubmit")
+    Call<PublicBean> serviceOrderFastSubmit(
+            @Field("user_id") String id,
+            @Field("service_des") String service_des,
+            @Field("img1") String img1,
+            @Field("img2") String img2,
+            @Field("img3") String img3,
+            @Field("img4") String img4,
+            @Field("img5") String img5,
+            @Field("img6") String img6,
+            @Field("add_time") String add_time,
+            @Field("timestamp") String timestamp,
+            @Field("sign") String sign,
+            @Field("key") String key
+    );
+
+    /*资讯列表*/
+    @FormUrlEncoded
+    @POST("InformationLists")
+    Call<HotNewsList> hotNewsInformationLists(
+            @Field("page") String page,
             @Field("timestamp") String timestamp,
             @Field("sign") String sign,
             @Field("key") String key

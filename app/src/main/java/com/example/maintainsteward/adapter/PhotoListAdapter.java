@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.maintainsteward.R;
-import com.example.maintainsteward.utils.ToolUitls;
 
 import java.util.List;
 
@@ -39,6 +38,12 @@ public class PhotoListAdapter extends BaseAbstactRecycleAdapter<Bitmap, PhotoLis
             baseViewHolder.imgPhoto.setVisibility(View.GONE);
         }
 
+        if (position == mList.size() - 1) {
+            baseViewHolder.imgDelete.setVisibility(View.GONE);
+        } else {
+            baseViewHolder.imgDelete.setVisibility(View.VISIBLE);
+        }
+
         baseViewHolder.imgPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +55,14 @@ public class PhotoListAdapter extends BaseAbstactRecycleAdapter<Bitmap, PhotoLis
                     return;
                 }
 
+            }
+        });
+        baseViewHolder.imgDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onPhotoClickListener != null) {
+                    onPhotoClickListener.onPhotoDelete(position);
+                }
             }
         });
 
@@ -66,6 +79,8 @@ public class PhotoListAdapter extends BaseAbstactRecycleAdapter<Bitmap, PhotoLis
     static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.img_photo)
         ImageView imgPhoto;
+        @BindView(R.id.img_delete)
+        ImageView imgDelete;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -83,6 +98,8 @@ public class PhotoListAdapter extends BaseAbstactRecycleAdapter<Bitmap, PhotoLis
 
 
         void onPhotoClick();
+
+        void onPhotoDelete(int position);
 
     }
 }

@@ -5,6 +5,7 @@ import com.example.maintainsteward.base.BaseHttpApi;
 import com.example.maintainsteward.bean.AddressDeleteBean;
 import com.example.maintainsteward.bean.AddressListBean;
 import com.example.maintainsteward.mvp_view.GetAddressListListener;
+import com.example.maintainsteward.utils.ToolUitls;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,6 +30,7 @@ public class AddressManagerPresonter {
             @Override
             public void onResponse(Call<AddressListBean> call, Response<AddressListBean> response) {
 
+                ToolUitls.print("response","response==="+response);
                 if (response.isSuccessful()) {
                     AddressListBean body = response.body();
 

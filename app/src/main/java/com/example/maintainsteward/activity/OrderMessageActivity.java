@@ -259,7 +259,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
         String sign = ToolUitls.getSign(map);
         orderInfoPresonter.getOrderInfo(id, orderId, time, sign, Contacts.KEY);
 //        ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "OrderDetails?" + "user_id=" + id + "&id=" + orderId + "&timestamp=" + time + "&sign=" + sign + "&key=" + Contacts.KEY);
-
+//
     }
 
     ProgressDialog dialog;
@@ -298,6 +298,8 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
 
     @Override
     public void getOrderInfoSucess(OrderInfoBean orderInfoBean) {
+
+        ToolUitls.print("=====" + "orderInfoBean===" + orderInfoBean);
         switch (orderInfoBean.getStatus()) {
 
             case "1":

@@ -356,7 +356,7 @@
                                 android:layout_height="match_parent"
                                 android:background="@drawable/circle_box_3r_red"
                                 android:gravity="center"
-                                android:text="18111111111"
+                                android:text=""
                                 android:textColor="#da0a0a"
                                 android:textSize="16sp" />
                         </LinearLayout>

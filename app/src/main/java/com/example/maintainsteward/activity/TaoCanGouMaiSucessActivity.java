@@ -49,12 +49,14 @@ public class TaoCanGouMaiSucessActivity extends BaseActivity implements MySetMea
     TextView txtTuikuan;
 
     int page = 0;
+    String flag;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         data = (MySetMealBean.DataBean) getIntent().getSerializableExtra("data");
         page = this.getIntent().getIntExtra("page", -1);
+        flag = this.getIntent().getStringExtra("flag");
         setContentView(R.layout.activity_taocangoumaichenggong);
         ButterKnife.bind(this);
         MyTableRow myTableRow1 = new MyTableRow(this);
@@ -106,6 +108,12 @@ public class TaoCanGouMaiSucessActivity extends BaseActivity implements MySetMea
 
     @OnClick(R.id.layout_back)
     public void onViewClicked() {
+
+        if (flag != null && flag.equals("ServiceInfoActivity")) {
+            finish();
+            return;
+        }
+
         Intent intent = new Intent(this, MainActivity.class);
         if (page != -1) {
             intent.putExtra("page", page);
@@ -116,6 +124,11 @@ public class TaoCanGouMaiSucessActivity extends BaseActivity implements MySetMea
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            if (flag != null && flag.equals("ServiceInfoActivity")) {
+                finish();
+                return true;
+            }
             Intent intent = new Intent(this, MainActivity.class);
             if (page != -1) {
                 intent.putExtra("page", page);

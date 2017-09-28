@@ -145,6 +145,9 @@ public class AddAddressActivity extends FragmentActivity implements MyDialogFrag
 
     /*必须设置在Activity中否则不显示*/
     public void setDialog() {
+        if (!mTxtUserDistrictAddAddress.getText().toString().equals("")) {
+            mTxtUserDistrictAddAddress.setText("");
+        }
         MyDialogFragment dialogFragment = new MyDialogFragment();
         if (data != null) {
             dialogFragment.setData(data);
@@ -156,6 +159,8 @@ public class AddAddressActivity extends FragmentActivity implements MyDialogFrag
 
     @OnClick(R.id.layout_add_address)
     public void getUserPhoneFromLoacl() {
+
+
         /*声明意图方式一*/
         Intent intent1 = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
         startActivityForResult(intent1, PICK_CONTACT);
@@ -199,7 +204,6 @@ public class AddAddressActivity extends FragmentActivity implements MyDialogFrag
                             }
                             phones.close();
                         }
-                        ToolUitls.print(TAG, "name==" + name + "phoneNumber==" + numberFormat(phoneNumber));
 
                         /*注意 电话号码和 姓名可能为 null*/
 
@@ -262,15 +266,28 @@ public class AddAddressActivity extends FragmentActivity implements MyDialogFrag
 
     @OnClick(R.id.btn_submit_add_address)
     public void submit() {
+        String userName = mEditUserNameAddAddress.getText().toString();
+        if ("".equals(userName)) {
+            ToolUitls.toast(this, "姓名不能为空");
+            return;
+        }
+
+        String userPhone = mEditUserPhoneAddAddress.getText().toString();
+        if ("".equals(userPhone)) {
+            ToolUitls.toast(this, "手机号码不能为空");
+            return;
+        }
+        String address = eDitUserMinuteAddAddress.getText().toString();
+        if ("".equals(address)) {
+            ToolUitls.toast(this, "地址不能为空");
+            return;
+        }
+
+
         SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
         String id = sharedPreferences.getString("id", null);
-
-
         String timeStamp = System.currentTimeMillis() + "";
-        String userName = mEditUserNameAddAddress.getText().toString();
-        String userPhone = mEditUserPhoneAddAddress.getText().toString();
 
-        String address = eDitUserMinuteAddAddress.getText().toString();
 
         TreeMap<String, String> map = new TreeMap<>();
         map.put("address", address);

@@ -65,11 +65,12 @@ public class JingXuanListAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.lv_jingxuan_item, parent, false);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
+            viewHolder.imgLogo.setTag(position);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        int index = data.get(position).getIndex();
+        int index = (int) viewHolder.imgLogo.getTag();
 
         if (index == 0) {
             viewHolder.imgLogo.setImageResource(R.mipmap.x1);

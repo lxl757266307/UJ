@@ -1,6 +1,7 @@
 package com.example.maintainsteward.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -32,10 +33,13 @@ import com.example.maintainsteward.adapter.ServicePeiJianAdapter;
 import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
+import com.example.maintainsteward.base.MySetMealBean;
 import com.example.maintainsteward.bean.SearviceInfoBean;
 import com.example.maintainsteward.bean.SecondKindsContent;
 import com.example.maintainsteward.bean.ServiceGoodsGetBean;
+import com.example.maintainsteward.mvp_presonter.MySetMealPresonter;
 import com.example.maintainsteward.mvp_presonter.SearviceInfoPresonter;
+import com.example.maintainsteward.mvp_view.MySetMealListener;
 import com.example.maintainsteward.mvp_view.ServiceInfoListener;
 import com.example.maintainsteward.utils.ToolUitls;
 import com.example.maintainsteward.view.MyListView;
@@ -64,7 +68,7 @@ import butterknife.OnClick;
 
 public class ServiceInfoActivity extends BaseActivity implements ServiceInfoListener,
         SearviceInfoAdapter.OnServiceNumberChangeListener,
-        ServicePeiJianAdapter.OnPeiJianNumberChangeListener {
+        ServicePeiJianAdapter.OnPeiJianNumberChangeListener, MySetMealListener {
 
     public static final String TAG = "ServiceInfoActivity";
 
@@ -145,7 +149,16 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
 
                 break;
             case R.id.layout_huiyuan_serviceinfo:
-
+                if (dataBean != null && set_meal != null && set_meal.size() > 0) {
+                    Intent intent = new Intent(this, TaoCanGouMaiSucessActivity.class);
+                    intent.putExtra("flag","ServiceInfoActivity");
+                    intent.putExtra("data", dataBean);
+                    intent.putExtra("page", 3);
+                    startActivity(intent);
+                } else {
+                    startActivity(new Intent(this, TaoCanActivity.class));
+                }
+//                startActivity(new Intent(this,TaoCanActivity.class));
 
                 break;
             case R.id.img_kefu_serviceinfo:
@@ -190,7 +203,7 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
                         intent2.putExtra("cat_id", id);
                         startActivity(intent2);
                     }
-                    }else {
+                } else {
                     ToolUitls.toast(this, "您还未登录，请先登录");
                     handler.sendEmptyMessageDelayed(1, 1500);
 
@@ -292,9 +305,22 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
         initService();
         initPeiJian();
         initKindsContent();
+        getMySetMeal();
 
     }
+    public void getMySetMeal() {
+        SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, Activity.MODE_PRIVATE);
+        String id = sharedPreferences.getString("id", null);
 
+        String time = System.currentTimeMillis() + "";
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("user_id", id);
+        map.put("timestamp", time);
+        String sign = ToolUitls.getSign(map);
+
+//        ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "MySetMeal?" + "user_id=" + id + "&timestamp=" + time + "&sign=" + sign + "&key=" + Contacts.KEY);
+        mySetMealPresonter.getMySetMeal(id, time, sign, Contacts.KEY);
+    }
     private void initKindsContent() {
         if (!"".equals(id) && id != null) {
             String time = System.currentTimeMillis() + "";
@@ -367,11 +393,13 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
 
 
     SearviceInfoPresonter searviceInfoPresonter;
+    MySetMealPresonter mySetMealPresonter;
 
     private void initPresonter() {
         searviceInfoPresonter = new SearviceInfoPresonter();
         searviceInfoPresonter.setServiceInfoListener(this);
-
+        mySetMealPresonter = new MySetMealPresonter();
+        mySetMealPresonter.setMySetMealListener(this);
     }
 
 
@@ -547,5 +575,20 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
         }
 
         txtPeijianTotalServiceinfo.setText("包含材料费￥" + total + "元");
+    }
+
+    MySetMealBean.DataBean dataBean;
+    List<MySetMealBean.DataBean.SetMealBean> set_meal;
+
+
+    @Override
+    public void onLoadMySetMeal(MySetMealBean bean) {
+        switch (bean.getStatus()) {
+            case "1":
+                dataBean = bean.getData();
+                set_meal = dataBean.getSet_meal();
+
+                break;
+        }
     }
 }
