@@ -74,8 +74,8 @@ public class AllOrderListFragement extends Fragment implements PtrHandler2, Orde
 
     public void setDemand_order_data(List<OrderListBean.DataBean.DemandOrderDataBean> demand_order_data) {
         this.demand_order_data = demand_order_data;
-        if (demand_order_data != null && orderListAdapter != null) {
-            orderListAdapter.setDemand_order_data(demand_order_data);
+        if (this.demand_order_data != null && orderListAdapter != null) {
+            orderListAdapter.setDemand_order_data(this.demand_order_data);
             lvOrderList.setAdapter(orderListAdapter);
             orderListAdapter.notifyDataSetChanged();
         }
@@ -162,11 +162,12 @@ public class AllOrderListFragement extends Fragment implements PtrHandler2, Orde
         lvOrderList.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-
             }
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                ToolUitls.print("-----","allOrder22222222=="+allOrder.size());
+
                 //首先在onScroll方法中判断listview到达底部：
                 if ((firstVisibleItem + visibleItemCount) == totalItemCount) {
                     View lastVisibleItemView = view.getChildAt(view.getChildCount() - 1);
@@ -203,10 +204,12 @@ public class AllOrderListFragement extends Fragment implements PtrHandler2, Orde
         frame.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(Contacts.ORDER_REFRESH);
-                intent.putExtra("type", "1");
-                intent.putExtra("flag", "load");
-                getActivity().sendBroadcast(intent);
+                page++;
+                getOrderByType("1");
+//                Intent intent = new Intent(Contacts.ORDER_REFRESH);
+//                intent.putExtra("type", "1");
+//                intent.putExtra("flag", "load");
+//                getActivity().sendBroadcast(intent);
                 frame.refreshComplete();
 
             }
@@ -224,10 +227,14 @@ public class AllOrderListFragement extends Fragment implements PtrHandler2, Orde
         frame.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(Contacts.ORDER_REFRESH);
-                intent.putExtra("type", "1");
-                intent.putExtra("flag", "fresh");
-                getActivity().sendBroadcast(intent);
+                allOrder.clear();
+//                orderListAdapter.setDemand_order_data(allOrder);
+//                orderListAdapter.notifyDataSetChanged();
+                getOrderByType("1");
+//                Intent intent = new Intent(Contacts.ORDER_REFRESH);
+//                intent.putExtra("type", "1");
+//                intent.putExtra("flag", "fresh");
+//                getActivity().sendBroadcast(intent);
                 frame.refreshComplete();
 
             }
@@ -296,6 +303,7 @@ public class AllOrderListFragement extends Fragment implements PtrHandler2, Orde
 
                 OrderListBean.DataBean data = listBean.getData();
                 allOrder.addAll(data.getDemand_order_data());
+                ToolUitls.print("-----","allOrder111111=="+allOrder.size());
                 setDemand_order_data(allOrder);
 //                orderListPresonter.dialogDismiss();
                 break;

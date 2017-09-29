@@ -91,12 +91,14 @@ public class PayChooseActivity extends BaseActivity implements OnPayListener {
 
                 break;
             case R.id.layout_yuezhifu:
-                if (imgXuanzhong1.isChecked()) {
-                    imgXuanzhong1.setChecked(false);
-                    imgXuanzhong1.setVisibility(View.INVISIBLE);
-                }
-                imgXuanzhong2.setChecked(true);
-                imgXuanzhong2.setVisibility(View.VISIBLE);
+//                if (imgXuanzhong1.isChecked()) {
+//                    imgXuanzhong1.setChecked(false);
+//                    imgXuanzhong1.setVisibility(View.INVISIBLE);
+//                }
+//                imgXuanzhong2.setChecked(true);
+//                imgXuanzhong2.setVisibility(View.VISIBLE);
+                ToolUitls.toast(this,"拼命开发中....");
+
                 break;
 
             case R.id.btn_zhifu:

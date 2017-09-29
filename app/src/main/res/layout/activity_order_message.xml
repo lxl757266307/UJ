@@ -93,12 +93,12 @@
 
                             <TextView
                                 android:id="@+id/txt_time_yitijiao"
-                                android:layout_width="match_parent"
+                                android:layout_width="150dp"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text=""
                                 android:textColor="#bbbbbb"
-                                android:textSize="12sp" />
+                                android:textSize="10sp" />
 
                             <TextView
                                 android:id="@+id/txt_yitijiao"
@@ -108,13 +108,13 @@
                                 android:gravity="center"
                                 android:text="已提交"
                                 android:textColor="#bbbbbb"
-                                android:textSize="12sp" />
+                                android:textSize="10sp" />
 
                         </LinearLayout>
 
                         <ImageView
                             android:id="@+id/img1"
-                            android:layout_width="40dp"
+                            android:layout_width="20dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="50dp"
                             android:src="@mipmap/xiantiao" />
@@ -135,12 +135,12 @@
 
                             <TextView
                                 android:id="@+id/txt_time_yuyuechenggong"
-                                android:layout_width="match_parent"
+                                android:layout_width="150dp"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text=""
                                 android:textColor="#bbbbbb"
-                                android:textSize="12sp" />
+                                android:textSize="10sp" />
 
                             <TextView
                                 android:id="@+id/txt_yuyuechenggong"
@@ -150,13 +150,13 @@
                                 android:gravity="center"
                                 android:text="预约成功"
                                 android:textColor="#bbbbbb"
-                                android:textSize="12sp" />
+                                android:textSize="10sp" />
 
                         </LinearLayout>
 
                         <ImageView
                             android:id="@+id/img2"
-                            android:layout_width="40dp"
+                            android:layout_width="20dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="50dp"
                             android:src="@mipmap/xiantiao" />
@@ -177,12 +177,12 @@
 
                             <TextView
                                 android:id="@+id/txt_time_zhengzaiweixiu"
-                                android:layout_width="match_parent"
+                                android:layout_width="150dp"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text=""
                                 android:textColor="#bbbbbb"
-                                android:textSize="12sp" />
+                                android:textSize="10sp" />
 
                             <TextView
                                 android:id="@+id/txt_zhengzaiweixiu"
@@ -192,13 +192,13 @@
                                 android:gravity="center"
                                 android:text="正在维修"
                                 android:textColor="#bbbbbb"
-                                android:textSize="12sp" />
+                                android:textSize="10sp" />
 
                         </LinearLayout>
 
                         <ImageView
                             android:id="@+id/img3"
-                            android:layout_width="40dp"
+                            android:layout_width="20dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="50dp"
                             android:src="@mipmap/xiantiao" />
@@ -220,12 +220,12 @@
 
                             <TextView
                                 android:id="@+id/txt_time_yiwancheng"
-                                android:layout_width="match_parent"
+                                android:layout_width="150dp"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text=""
                                 android:textColor="#bbbbbb"
-                                android:textSize="12sp" />
+                                android:textSize="10sp" />
 
                             <TextView
                                 android:id="@+id/txt_yiwancheng"
@@ -235,7 +235,7 @@
                                 android:gravity="center"
                                 android:text="已完成"
                                 android:textColor="#bbbbbb"
-                                android:textSize="12sp" />
+                                android:textSize="10sp" />
 
                         </LinearLayout>
 
@@ -267,7 +267,7 @@
                                 android:gravity="center_vertical"
                                 android:text=""
                                 android:textColor="#bbbbbb"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/txt_status"
@@ -276,7 +276,7 @@
                                 android:gravity="center_vertical"
                                 android:text=""
                                 android:textColor="#da0a0a"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
                         </LinearLayout>
 
                         <View
@@ -301,7 +301,7 @@
                                 android:gravity="center_vertical"
                                 android:text="订单编号"
                                 android:textColor="#bbbbbb"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/txt_dingdanbianhao"
@@ -311,7 +311,7 @@
                                 android:gravity="center_vertical"
                                 android:text=""
                                 android:textColor="#181818"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
                         </LinearLayout>
 
@@ -337,7 +337,7 @@
                                 android:gravity="center_vertical"
                                 android:text="工人信息"
                                 android:textColor="#bbbbbb"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/txt_worker_name"
@@ -348,7 +348,7 @@
                                 android:gravity="center_vertical"
                                 android:text=""
                                 android:textColor="#181818"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/txt_worker_phone"
@@ -358,7 +358,7 @@
                                 android:gravity="center"
                                 android:text=""
                                 android:textColor="#da0a0a"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
                         </LinearLayout>
 
 
@@ -423,7 +423,7 @@
                                 android:gravity="center_vertical"
                                 android:text="我的信息"
                                 android:textColor="#bbbbbb"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/txt_user_name"
@@ -433,7 +433,7 @@
                                 android:gravity="center_vertical"
                                 android:text=""
                                 android:textColor="#181818"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/txt_user_phone"
@@ -442,7 +442,7 @@
                                 android:gravity="center_vertical"
                                 android:text=""
                                 android:textColor="#181818"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
 
                         </LinearLayout>
@@ -468,7 +468,7 @@
                                 android:gravity="center_vertical"
                                 android:text="维修地址"
                                 android:textColor="#bbbbbb"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
                             <TextView
 
@@ -480,7 +480,7 @@
                                 android:maxLines="2"
                                 android:text=""
                                 android:textColor="#181818"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
 
                         </LinearLayout>
@@ -507,7 +507,7 @@
                                 android:gravity="center_vertical"
                                 android:text="预约时间"
                                 android:textColor="#bbbbbb"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/txt_yuyueshijian"
@@ -516,7 +516,7 @@
                                 android:gravity="center_vertical"
                                 android:text=""
                                 android:textColor="#181818"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
 
                         </LinearLayout>
@@ -579,7 +579,7 @@
                                 android:paddingLeft="10dp"
                                 android:text="服务费用"
                                 android:textColor="#bbbbbb"
-                                android:textSize="15sp" />
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/txt_service_total"
@@ -589,7 +589,7 @@
                                 android:paddingLeft="10dp"
                                 android:text=""
                                 android:textColor="#181818"
-                                android:textSize="15sp" />
+                                android:textSize="14sp" />
                         </LinearLayout>
 
 
@@ -626,7 +626,7 @@
                                 android:gravity="center_vertical"
                                 android:text="套餐减免"
                                 android:textColor="#da0a0a"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/txt_taocanjianmian"
@@ -635,7 +635,7 @@
                                 android:gravity="center_vertical"
                                 android:text=""
                                 android:textColor="#da0a0a"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
 
                         </LinearLayout>
@@ -663,7 +663,7 @@
                                 android:paddingLeft="10dp"
                                 android:text="配件费用"
                                 android:textColor="#bbbbbb"
-                                android:textSize="15sp" />
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/txt_peijian_total"
@@ -674,7 +674,7 @@
                                 android:paddingLeft="10dp"
                                 android:text=""
                                 android:textColor="#181818"
-                                android:textSize="15sp" />
+                                android:textSize="14sp" />
                         </LinearLayout>
 
 
@@ -717,7 +717,7 @@
                                 android:gravity="center_vertical"
                                 android:text="其他费用"
                                 android:textColor="#bbbbbb"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
 
                             <TextView
@@ -727,7 +727,7 @@
                                 android:gravity="center_vertical"
                                 android:text=""
                                 android:textColor="#181818"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
 
                         </LinearLayout>
@@ -754,7 +754,7 @@
                                 android:gravity="center_vertical"
                                 android:text="危险作业"
                                 android:textColor="#bbbbbb"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/txt_weixianzuoye"
@@ -763,7 +763,7 @@
                                 android:gravity="center_vertical"
                                 android:text=""
                                 android:textColor="#181818"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
 
                         </LinearLayout>
@@ -791,7 +791,7 @@
                                 android:gravity="center_vertical"
                                 android:text="减免费用"
                                 android:textColor="#bbbbbb"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/txt_jianmian"
@@ -800,7 +800,7 @@
                                 android:gravity="center_vertical"
                                 android:text=""
                                 android:textColor="#da0a0a"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/txt_jiantou"
@@ -810,7 +810,7 @@
                                 android:gravity="center_vertical"
                                 android:text="选择优惠券"
                                 android:textColor="#bbbbbb"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
                         </LinearLayout>
 
@@ -837,7 +837,7 @@
                                 android:gravity="center_vertical"
                                 android:text="总价："
                                 android:textColor="#bbbbbb"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
 
                             <TextView
@@ -847,7 +847,7 @@
                                 android:gravity="center_vertical"
                                 android:text=""
                                 android:textColor="#da0a0a"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
 
                         </LinearLayout>
@@ -875,7 +875,7 @@
                                 android:gravity="center_vertical"
                                 android:text="实付款："
                                 android:textColor="#bbbbbb"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/txt_youhuijia"
@@ -884,7 +884,7 @@
                                 android:gravity="center_vertical"
                                 android:text=""
                                 android:textColor="#da0a0a"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
 
                         </LinearLayout>
@@ -927,7 +927,7 @@
                     android:gravity="center"
                     android:text="立即付款"
                     android:textColor="#fff"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"

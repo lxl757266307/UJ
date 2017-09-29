@@ -9,18 +9,21 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
-import com.example.maintainsteward.base.BaseActivity;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.LoginCallBackBean;
 import com.example.maintainsteward.bean.YanZhengMaCallBackBean;
@@ -41,7 +44,7 @@ import pub.devrel.easypermissions.EasyPermissions;
  * Created by Administrator on 2017/8/5.
  */
 
-public class LoginActivity extends BaseActivity implements OnCheckedChangeListener,
+public class LoginActivity extends FragmentActivity implements OnCheckedChangeListener,
         View.OnClickListener,
         LoginListener,
         EasyPermissions.PermissionCallbacks,
@@ -66,6 +69,8 @@ public class LoginActivity extends BaseActivity implements OnCheckedChangeListen
     public static final String TAG = "LoginActivity";
 
     LoginPresonter loginPresonter;
+    @BindView(R.id.layout_check)
+    LinearLayout layoutCheck;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,12 +101,42 @@ public class LoginActivity extends BaseActivity implements OnCheckedChangeListen
 
     private void initListener() {
         editUserNameLogin.addTextChangedListener(this);
-        cbXieyiLogin.setOnCheckedChangeListener(this);
+//        cbXieyiLogin.setOnCheckedChangeListener(this);
         btnLogin.setOnClickListener(this);
         txtYanzhengmaLogin.setOnClickListener(this);
         txtXieyiLogin.setOnClickListener(this);
+        layoutCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (cbXieyiLogin.isChecked()) {
+                    cbXieyiLogin.setChecked(false);
+                    btnLogin.setBackgroundResource(R.mipmap.denglu_normal);
+
+                } else {
+                    cbXieyiLogin.setChecked(true);
+                    btnLogin.setBackgroundResource(R.mipmap.denglu_press);
+                }
+            }
+        });
     }
 
+    private long exitTime = 0;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+
+            if (System.currentTimeMillis() - exitTime > 2000) {
+                ToolUitls.toast(this, "再按一次退出程序");
+                exitTime = System.currentTimeMillis();
+            } else {
+                MyApplication.finishActivities();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

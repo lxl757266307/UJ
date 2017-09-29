@@ -1,23 +1,17 @@
 package com.example.maintainsteward.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.AbsoluteSizeSpan;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.bean.JingXuanBean;
-import com.example.maintainsteward.utils.ToolUitls;
 
 import java.util.List;
 
@@ -60,7 +54,7 @@ public class JingXuanListAdapter extends BaseAdapter {
     ViewHolder viewHolder = null;
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.lv_jingxuan_item, parent, false);
             viewHolder = new ViewHolder(convertView);
@@ -98,12 +92,28 @@ public class JingXuanListAdapter extends BaseAdapter {
         String min_price = data.get(position).getMin_price();
 
         viewHolder.txtPrice.setText(min_price);
-
+//        viewHolder.layoutView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if (onItemClickListener != null) {
+//                    onItemClickListener.onItemClick(position);
+//                }
+//            }
+//        });
 
         return convertView;
     }
 
+//    OnItemClickListener onItemClickListener;
+//
+//    public interface OnItemClickListener {
+//        void onItemClick(int position);
+//    }
+
     static class ViewHolder {
+        @BindView(R.id.layout_view)
+        LinearLayout layoutView;
         @BindView(R.id.txt_no)
         TextView txtNo;
         @BindView(R.id.img_logo)

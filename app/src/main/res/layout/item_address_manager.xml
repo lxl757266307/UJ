@@ -65,17 +65,25 @@
             android:layout_marginRight="@dimen/layout_marginRight_20dp"
             android:drawableLeft="@mipmap/icon"
             android:text="编辑"
-            android:textColor="@color/grey" />
+            android:textColor="@color/grey"
+            android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/txt_delete_addressmanager"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="@dimen/layout_marginRight_10dp"
-            android:drawableLeft="@mipmap/icon"
-            android:text="删除"
-            android:textColor="@color/grey" />
+        <LinearLayout
+            android:id="@+id/layout_shanchu"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/txt_delete_addressmanager"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/layout_marginRight_10dp"
+                android:drawableLeft="@mipmap/icon"
+                android:text="删除"
+                android:textColor="@color/grey" />
+        </LinearLayout>
 
 
     </LinearLayout>

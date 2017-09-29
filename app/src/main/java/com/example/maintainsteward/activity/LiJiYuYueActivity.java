@@ -128,6 +128,7 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
             R.id.layout_choose_service_lijiyuyue,
             R.id.layout_choose_address_lijiyuyue,
             R.id.layout_choose_repair_time_lijiyuyue,
+            R.id.layout_address_lijiyuyue,
             R.id.txt_submit_lijiyuyue})
     public void click(View view) {
 
@@ -139,6 +140,12 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.putExtra("page", 1);
                 startActivity(intent);
+                break;
+
+            case R.id.layout_address_lijiyuyue:
+                Intent intent2 = new Intent(this, AddressManagerActivity.class);
+                intent2.putExtra("flag", TAG);
+                startActivityForResult(intent2, REQUEST_CODE);
                 break;
             case R.id.layout_choose_address_lijiyuyue:
 //
@@ -319,7 +326,7 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
                 SearviceInfoBean.DataBean dataBean = data.get(i);
                 String expenses = dataBean.getExpenses();
                 if (!"".equals(expenses) || !"面议".equals(expenses)) {
-                    price += Double.parseDouble(expenses);
+                    price += Double.parseDouble(expenses) * dataBean.getNumber();
                 }
 
             }
@@ -334,7 +341,7 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
             for (int i = 0; i < peiJian.size(); i++) {
                 String material = peiJian.get(i).getPrice();
                 if (!"".equals(material) || !"面议".equals(material)) {
-                    materialPrice += Double.parseDouble(material);
+                    materialPrice += Double.parseDouble(material) * peiJian.get(i).getNumber();
                 }
 
             }

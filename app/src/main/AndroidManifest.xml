@@ -54,7 +54,7 @@
             android:value="f954271a02568a9b6749749ca6fc9d18" />
 
 
-        <activity android:name=".activity.GuidActivity">
+        <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -81,6 +81,8 @@
             android:name=".base.BaseActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
+        <!--引导页-->
+        <activity android:name=".activity.GuidActivity" />
 
         <!--登录-->
         <activity android:name=".activity.LoginActivity" />
@@ -101,7 +103,7 @@
 
 
         <!--主页面-->
-        <activity android:name=".main.MainActivity" />
+        <!--<activity android:name=".main.MainActivity" />-->
 
         <!--选择位置界面-->
         <activity android:name=".activity.ChooseLocationActivity" />

@@ -9,16 +9,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/loginlogo" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:background="@mipmap/loginlogo"
+            android:scaleType="centerCrop" />
 
         <EditText
             android:id="@+id/edit_user_name_login"
@@ -33,7 +34,7 @@
             android:maxLength="11"
             android:textColor="#000"
             android:textColorHint="#bbbbbb"
-            android:textSize="18sp" />
+            android:textSize="15sp" />
 
         <View
             android:layout_width="match_parent"
@@ -68,7 +69,7 @@
                     android:maxLength="6"
                     android:textColor="#000"
                     android:textColorHint="#bbbbbb"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
 
             </LinearLayout>
@@ -84,7 +85,7 @@
                 android:padding="5dp"
                 android:text="发送验证码"
                 android:textColor="#da0a0a"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -103,21 +104,29 @@
             android:orientation="horizontal"
             android:paddingLeft="25dp">
 
-            <CheckBox
-                android:id="@+id/cb_xieyi_login"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:background="@drawable/checkbox"
-                android:button="@null" />
-
-            <TextView
-                android:id="@+id/txt_accept_login"
+            <LinearLayout
+                android:id="@+id/layout_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="同意"
-                android:textColor="#bbbbbb"
-                android:textSize="18sp" />
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/cb_xieyi_login"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:background="@drawable/checkbox"
+                    android:button="@null" />
+
+                <TextView
+                    android:id="@+id/txt_accept_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="同意"
+                    android:textColor="#bbbbbb"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/txt_xieyi_login"
@@ -126,7 +135,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="《U匠协议》"
                 android:textColor="#da0a0a"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
     </LinearLayout>

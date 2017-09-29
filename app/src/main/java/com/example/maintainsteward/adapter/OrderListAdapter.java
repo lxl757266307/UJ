@@ -69,19 +69,22 @@ public class OrderListAdapter extends BaseAdapter {
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
+
         }
 
         final OrderListBean.DataBean.DemandOrderDataBean demandOrderDataBean = demand_order_data.get(position);
         List<OrderListBean.DataBean.DemandOrderDataBean.ServiceItemBean> service_item = demandOrderDataBean.getService_item();
 
-        for (int i = 0; i < service_item.size(); i++) {
+        if (viewHolder.layoutService.getChildCount() == 0) {
+            for (int i = 0; i < service_item.size(); i++) {
 
-            if (service_item.get(i) != null) {
-                TextView textView = (TextView) LayoutInflater.from(context).inflate(R.layout.order_item_textview, parent, false);
-                textView.setText(service_item.get(i).getName() + "X" + service_item.get(i).getNum());
-                viewHolder.layoutService.addView(textView);
+                if (service_item.get(i) != null) {
+                    TextView textView = (TextView) LayoutInflater.from(context).inflate(R.layout.order_item_textview, parent, false);
+                    textView.setText(service_item.get(i).getName() + "X" + service_item.get(i).getNum());
+                    viewHolder.layoutService.addView(textView);
+                }
+
             }
-
         }
 
 

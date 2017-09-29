@@ -429,7 +429,8 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 layoutParams.setMargins(5, 0, 0, 0);
                 textView.setLayoutParams(layoutParams);
-                textView.setTextColor(Color.parseColor("#D74040"));
+                textView.setTextSize(13);
+                textView.setTextColor(Color.parseColor("#181818"));
                 textView.setText(thirdBean.getName());
                 linearLayout.addView(textView);
             }
@@ -468,7 +469,7 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
             case "1":
                 List<HotNewsList.DataBean> data = hotNewsList.getData();
                 Intent intent = new Intent(getActivity(), HotNewsActivity.class);
-                intent.putExtra("data", (Serializable)data );
+                intent.putExtra("data", (Serializable) data);
                 startActivity(intent);
                 break;
         }

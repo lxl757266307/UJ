@@ -126,6 +126,7 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
                 break;
             case R.id.laout_peijian_serviceinfo:
 
+
                 if (peiJian != null && peiJian.size() > 0) {
 
                     if (lvPeijianServiceinfo.getVisibility() == View.GONE) {
@@ -143,6 +144,8 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
                     }
 
 
+                } else {
+                    ToolUitls.toast(this, "没有更多材料！");
                 }
 
 
@@ -567,7 +570,7 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
                     continue;
                 }
                 if (data.get(i).getNumber() > 0)
-                    price += Double.parseDouble(data.get(i).getExpenses());
+                    price += Double.parseDouble(data.get(i).getExpenses()) * data.get(i).getNumber();
             }
 
         }
@@ -591,7 +594,7 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
                     continue;
                 }
                 if (peiJian.get(i).getNumber() > 0)
-                    total += Double.parseDouble(price);
+                    total += Double.parseDouble(price) * peiJian.get(i).getNumber();
             }
         }
 

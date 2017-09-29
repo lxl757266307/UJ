@@ -183,6 +183,7 @@ public class JingXuanPaiHangActivity extends BaseActivity implements JingXuanLis
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        ToolUitls.print("------","dddddddd");
 
         String index = data.get(position).getId();
         Intent intent = new Intent(this, ServiceInfoActivity.class);

@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
-import com.example.maintainsteward.adapter.CityListAdapter;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.AddressBean;
 import com.example.maintainsteward.bean.AddressListBean;
@@ -26,11 +25,8 @@ import com.example.maintainsteward.fragment.MyDialogFragment;
 import com.example.maintainsteward.mvp_presonter.AddAddressPresonter;
 import com.example.maintainsteward.mvp_presonter.ChooseLocationPresonter;
 import com.example.maintainsteward.mvp_view.ChooseLocationListener;
-import com.example.maintainsteward.utils.LocationUtils;
 import com.example.maintainsteward.utils.ToolUitls;
 
-import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -47,10 +43,6 @@ public class AddAddressActivity extends FragmentActivity implements MyDialogFrag
 
     public static final String TAG = "AddAddressActivity";
 
-    @BindView(R.id.txt_base_back)
-    ImageView mtxtBaseBack;
-    @BindView(R.id.txt_base_title)
-    TextView mtxtBaseTitle;
 
     /*名字*/
     @BindView(R.id.edit_user_name_add_address)
@@ -75,6 +67,8 @@ public class AddAddressActivity extends FragmentActivity implements MyDialogFrag
     public static final int PICK_CONTACT = 0;
     @BindView(R.id.layout_add_address)
     LinearLayout layoutAddAddress;
+    @BindView(R.id.layout_back)
+    LinearLayout layoutBack;
 
 
     @Override
@@ -344,4 +338,10 @@ public class AddAddressActivity extends FragmentActivity implements MyDialogFrag
         }
 
     }
+
+    @OnClick(R.id.layout_back)
+    public void onViewClicked() {
+        finish();
+    }
+
 }

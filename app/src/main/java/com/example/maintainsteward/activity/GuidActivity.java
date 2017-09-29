@@ -59,56 +59,50 @@ public class GuidActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
-        boolean isFirst = sharedPreferences.getBoolean("isFirst", true);
 
-        if (isFirst) {
-            setContentView(R.layout.activity_guid);
-            ButterKnife.bind(this);
+        setContentView(R.layout.activity_guid);
+        ButterKnife.bind(this);
 
-            textViews = new TextView[4];
-            textViews[0] = txt1;
-            textViews[1] = txt2;
-            textViews[2] = txt3;
-            textViews[3] = txt4;
+        textViews = new TextView[4];
+        textViews[0] = txt1;
+        textViews[1] = txt2;
+        textViews[2] = txt3;
+        textViews[3] = txt4;
 
-            imageViews = new ArrayList<>();
-            for (int i = 0; i < ids.length; i++) {
-                ImageView imageView = new ImageView(this);
+        imageViews = new ArrayList<>();
+        for (int i = 0; i < ids.length; i++) {
+            ImageView imageView = new ImageView(this);
 //                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 //                imageView.setLayoutParams(layoutParams);
-                imageView.setImageResource(ids[i]);
-                imageViews.add(imageView);
-            }
-
-            ImagesPagerAdapter pagerAdapter = new ImagesPagerAdapter(imageViews);
-            vp.setAdapter(pagerAdapter);
-            pagerAdapter.notifyDataSetChanged();
-            vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                @Override
-                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-                }
-
-                @Override
-                public void onPageSelected(int position) {
-                    setTextBackground(position);
-                    if (position == imageViews.size() - 1) {
-                        btnTiyan.setVisibility(View.VISIBLE);
-                    }
-                }
-
-                @Override
-                public void onPageScrollStateChanged(int state) {
-
-                }
-            });
-
-        } else {
-            startActivity(new Intent(this, QiDongActivity.class));
+            imageView.setImageResource(ids[i]);
+            imageViews.add(imageView);
         }
 
+        ImagesPagerAdapter pagerAdapter = new ImagesPagerAdapter(imageViews);
+        vp.setAdapter(pagerAdapter);
+        pagerAdapter.notifyDataSetChanged();
+        vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                setTextBackground(position);
+                if (position == imageViews.size() - 1) {
+                    btnTiyan.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
     }
+
 
     @OnClick(R.id.layout_next)
     public void onViewClicked() {
@@ -122,7 +116,7 @@ public class GuidActivity extends BaseActivity {
 
     @OnClick(R.id.btn_tiyan)
     public void tiyan() {
-        SharedPreferences.Editor edit = sharedPreferences.edit();
+        SharedPreferences.Editor edit = getSharedPreferences(Contacts.USER, MODE_PRIVATE).edit();
         edit.putBoolean("isFirst", false);
         edit.commit();
         startActivity(new Intent(this, MainActivity.class));

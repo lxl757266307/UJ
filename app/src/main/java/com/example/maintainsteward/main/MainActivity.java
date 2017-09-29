@@ -1,5 +1,7 @@
 package com.example.maintainsteward.main;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.activity.GuidActivity;
 import com.example.maintainsteward.adapter.MainFragmentPagerAdapter;
 import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
@@ -49,7 +52,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     RadioButton radioFirst;
     @BindView(R.id.radio_two)
     RadioButton radioTwo;
-//    @BindView(R.id.radio_three)
+    //    @BindView(R.id.radio_three)
 //    RadioButton radioThree;
     @BindView(R.id.radio_four)
     RadioButton radioFour;
@@ -57,7 +60,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     LinearLayout layoutMainFirst;
     @BindView(R.id.layout_main_two)
     LinearLayout layoutMainTwo;
-//    @BindView(R.id.layout_main_three)
+    //    @BindView(R.id.layout_main_three)
 //    LinearLayout layoutMainThree;
     @BindView(R.id.layout_main_four)
     LinearLayout layoutMainFour;
@@ -68,18 +71,25 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        page = this.getIntent().getIntExtra("page", -1);
 
-        MyApplication.getActivitiesList().add(this);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
+        boolean isFirst = sharedPreferences.getBoolean("isFirst", true);
+
+        if (isFirst) {
+            startActivity(new Intent(this, GuidActivity.class));
+        } else {
+            page = this.getIntent().getIntExtra("page", -1);
+            MyApplication.getActivitiesList().add(this);
+            setContentView(R.layout.activity_main);
+            ButterKnife.bind(this);
 //        ToolUitls.debug = false;
 //        setTitleContent("主页面", this);
 //        back(this);
-        PermissionRegisterUtils.registerPermission(this);
+            PermissionRegisterUtils.registerPermission(this);
 
-        setRadioArray();
-        setFragment();
+            setRadioArray();
+            setFragment();
+        }
 
 
     }
@@ -111,8 +121,6 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         }
 
     }
-
-
 
 
     IWXAPI wxapi;

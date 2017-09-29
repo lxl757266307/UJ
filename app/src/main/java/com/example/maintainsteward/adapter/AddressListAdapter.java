@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
@@ -23,6 +24,7 @@ public class AddressListAdapter extends BaseAbstactRecycleAdapter<AddressListBea
 
 
     Context context;
+
 
     public AddressListAdapter(Context context) {
         this.context = context;
@@ -43,7 +45,7 @@ public class AddressListAdapter extends BaseAbstactRecycleAdapter<AddressListBea
                 }
             }
         });
-        baseViewHolder.txtDeleteAddressmanager.setOnClickListener(new View.OnClickListener() {
+        baseViewHolder.layoutShanchu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onAddressListListener != null) {
@@ -69,7 +71,10 @@ public class AddressListAdapter extends BaseAbstactRecycleAdapter<AddressListBea
         return new ViewHolder(view);
     }
 
+
     static class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.layout_shanchu)
+        LinearLayout layoutShanchu;
         @BindView(R.id.txt_user_name_addressmanager)
         TextView txtUserNameAddressmanager;
         @BindView(R.id.txt_user_phone_addressmanager)

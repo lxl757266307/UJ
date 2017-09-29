@@ -17,6 +17,7 @@ import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -334,6 +335,8 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                 String phone_number = worker_info.getPhone_number();
                 if ("".equals(phone_number)) {
                     txtWorkerPhone.setText("待接单");
+                    txtWorkerPhone.setBackground(null);
+                    txtWorkerPhone.setGravity(Gravity.RIGHT);
                 } else {
                     txtWorkerPhone.setText(phone_number);
                 }
