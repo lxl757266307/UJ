@@ -180,7 +180,7 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
                     return;
                 }
 
-                if (dataBean == null) {
+                if (txtAddressLijiyuyue.getText().toString() == "") {
                     ToolUitls.toast(this, "地址不能为空");
                     return;
                 }

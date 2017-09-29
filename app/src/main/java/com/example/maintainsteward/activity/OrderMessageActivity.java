@@ -394,13 +394,15 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                         txtStatus.setText("已付款");
                         txtLijiyuyue.setText("已付款");
                         txtYouhuijia.setText("￥" + data.getFinal_price());
-//                        img1.setImageResource(R.mipmap.xiantiao2);
-//                        img2.setImageResource(R.mipmap.xiantiao3);
-//                        imgYuyuechenggong.setImageResource(R.mipmap.yuyuechengong2);
-//                        txtYuyuechenggong.setTextColor(Color.parseColor("#da0a0a"));
-//                        txtTimeYuyuechenggong.setTextColor(Color.parseColor("#da0a0a"));
-//                        txtTimeYuyuechenggong.setText(data.getOrder_time().substring(5, 16));
-//                        txtTimeYitijiao.setText(data.getCreate_time().substring(5, 16));
+//                        img2.setImageResource(R.mipmap.xiantiao2);
+                        img3.setImageResource(R.mipmap.xiantiao2);
+                        imgYiwancheng.setImageResource(R.mipmap.yiwancheng2);
+                        txtYiwancheng.setTextColor(Color.parseColor("#da0a0a"));
+                        txtTimeYiwancheng.setTextColor(Color.parseColor("#da0a0a"));
+                        txtTimeYiwancheng.setText(data.getFinish_time().substring(5, 16));
+                        txtTimeZhengzaiweixiu.setText(data.getArrival_time().substring(5, 16));
+                        txtTimeYuyuechenggong.setText(data.getOrder_time().substring(5, 16));
+                        txtTimeYitijiao.setText(data.getCreate_time().substring(5, 16));
                         break;
 
                     case "6":

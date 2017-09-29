@@ -143,6 +143,7 @@ public class TaoCanGouMaiSucessActivity extends BaseActivity implements MySetMea
 
     @Override
     public void onLoadMySetMeal(MySetMealBean bean) {
+        MySetMealBean.DataBean data = bean.getData();
         String address = data.getAddress();
         String term = data.getTerm();
 
