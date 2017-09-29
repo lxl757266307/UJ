@@ -30,7 +30,6 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/layout_dilaog_dismiss"
-
             android:layout_alignParentRight="true"
             android:gravity="center">
 

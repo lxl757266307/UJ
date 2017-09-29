@@ -27,6 +27,7 @@ import com.example.maintainsteward.activity.HotNewsActivity;
 import com.example.maintainsteward.activity.JingXuanPaiHangActivity;
 import com.example.maintainsteward.activity.LiJiYuYueActivity;
 import com.example.maintainsteward.activity.SearchActivity;
+import com.example.maintainsteward.activity.ServiceInfoActivity;
 import com.example.maintainsteward.activity.TaoCanActivity;
 import com.example.maintainsteward.activity.TaoCanGouMaiSucessActivity;
 import com.example.maintainsteward.application.MyApplication;
@@ -191,14 +192,36 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
                 break;
             case R.id.txt_gengduo_mainfragment:
                 break;
-            case R.id.layout_kongtiaoqingxi_mainfragment:
-                break;
-            case R.id.layout_bingxiangqingxi_mainfragment:
-                break;
-            case R.id.layout_xiyijiqingxi_mainfragment:
-                break;
-            case R.id.layout_chouyouyanji_mainfragment:
-                break;
+            case R.id.layout_kongtiaoqingxi_mainfragment: {
+                Intent intent = new Intent(getActivity(), ServiceInfoActivity.class);
+                String id = dataBeen.get(0).getId();
+                intent.putExtra("id", id);
+                startActivity(intent);
+            }
+
+            break;
+            case R.id.layout_bingxiangqingxi_mainfragment: {
+                Intent intent = new Intent(getActivity(), ServiceInfoActivity.class);
+                String id = dataBeen.get(1).getId();
+                intent.putExtra("id", id);
+                startActivity(intent);
+            }
+            break;
+            case R.id.layout_xiyijiqingxi_mainfragment: {
+                Intent intent = new Intent(getActivity(), ServiceInfoActivity.class);
+                String id = dataBeen.get(2).getId();
+                intent.putExtra("id", id);
+                startActivity(intent);
+            }
+            break;
+            case R.id.layout_chouyouyanji_mainfragment: {
+                Intent intent = new Intent(getActivity(), ServiceInfoActivity.class);
+                String id = dataBeen.get(3).getId();
+                intent.putExtra("id", id);
+                startActivity(intent);
+            }
+
+            break;
         }
     }
 
@@ -376,37 +399,39 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
         }
     }
 
+    List<AppIndexCategoryBean.DataBean> dataBeen;
+
     @Override
     public void onLoadAppIndexCategory(AppIndexCategoryBean bean) {
 
         switch (bean.getStatus()) {
             case "1":
 
-                List<AppIndexCategoryBean.DataBean> data = bean.getData();
+                dataBeen = bean.getData();
 
 
-                if (data != null && data.size() > 0) {
-                    for (int i = 0; i < data.size(); i++) {
+                if (dataBeen != null && dataBeen.size() > 0) {
+                    for (int i = 0; i < dataBeen.size(); i++) {
                         switch (i) {
                             case 0:
-                                txtTitle1.setText(data.get(0).getName());
-                                Glide.with(getActivity()).load(data.get(0).getLogourl()).into(imgItem1);
-                                setThird(data, 0, layoutItem1);
+                                txtTitle1.setText(dataBeen.get(0).getName());
+                                Glide.with(getActivity()).load(dataBeen.get(0).getLogourl()).into(imgItem1);
+                                setThird(dataBeen, 0, layoutItem1);
                                 break;
                             case 1:
-                                txtTitle2.setText(data.get(1).getName());
-                                Glide.with(getActivity()).load(data.get(1).getLogourl()).into(imgItem2);
-                                setThird(data, 1, layoutItem2);
+                                txtTitle2.setText(dataBeen.get(1).getName());
+                                Glide.with(getActivity()).load(dataBeen.get(1).getLogourl()).into(imgItem2);
+                                setThird(dataBeen, 1, layoutItem2);
                                 break;
                             case 2:
-                                txtTitle3.setText(data.get(2).getName());
-                                Glide.with(getActivity()).load(data.get(2).getLogourl()).into(imgItem3);
-                                setThird(data, 2, layoutItem3);
+                                txtTitle3.setText(dataBeen.get(2).getName());
+                                Glide.with(getActivity()).load(dataBeen.get(2).getLogourl()).into(imgItem3);
+                                setThird(dataBeen, 2, layoutItem3);
                                 break;
                             case 3:
-                                txtTitle4.setText(data.get(3).getName());
-                                Glide.with(getActivity()).load(data.get(3).getLogourl()).into(imgItem3);
-                                setThird(data, 3, layoutItem4);
+                                txtTitle4.setText(dataBeen.get(3).getName());
+                                Glide.with(getActivity()).load(dataBeen.get(3).getLogourl()).into(imgItem3);
+                                setThird(dataBeen, 3, layoutItem4);
                                 break;
                         }
 

@@ -14,12 +14,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.activity.KuaiSuFaBuActivity;
+import com.example.maintainsteward.activity.SearchActivity;
 import com.example.maintainsteward.activity.ServiceInfoActivity;
 import com.example.maintainsteward.adapter.FragmentKindsLeftMenuAdapter;
 import com.example.maintainsteward.adapter.SecondKindsAdapter;
@@ -27,8 +28,8 @@ import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.FirstKindsBean;
 import com.example.maintainsteward.bean.SecondKindsBean;
 import com.example.maintainsteward.mvp_presonter.KindsPresonter;
-import com.example.maintainsteward.mvp_view.KindsListener;
 import com.example.maintainsteward.mvp_presonter.SecondKindsPresonter;
+import com.example.maintainsteward.mvp_view.KindsListener;
 import com.example.maintainsteward.utils.ToolUitls;
 import com.example.maintainsteward.view.MyListView;
 
@@ -37,6 +38,7 @@ import java.util.TreeMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -46,8 +48,8 @@ import butterknife.Unbinder;
 public class KindsFragment extends Fragment implements KindsListener, AdapterView.OnItemClickListener, SecondKindsAdapter.OnSecondeItemClickListener {
     public static final String TAG = "KindsFragment";
 
-    @BindView(R.id.edit_sousuo_fragment_kinds)
-    EditText editSousuoFragmentKinds;
+    @BindView(R.id.txt_sousuo_fragment_kinds)
+    TextView txtSousuoFragmentKinds;
     @BindView(R.id.img_tianjia_fragment_kinds)
     ImageView imgTianjiaFragmentKinds;
 
@@ -246,5 +248,16 @@ public class KindsFragment extends Fragment implements KindsListener, AdapterVie
             startActivity(intent);
         }
 
+    }
+
+    @OnClick(R.id.txt_sousuo_fragment_kinds)
+    public void onViewClicked() {
+        startActivity(new Intent(getActivity(), SearchActivity.class));
+
+    }
+
+    @OnClick(R.id.img_tianjia_fragment_kinds)
+    public void fabu() {
+        startActivity(new Intent(getActivity(), KuaiSuFaBuActivity.class));
     }
 }

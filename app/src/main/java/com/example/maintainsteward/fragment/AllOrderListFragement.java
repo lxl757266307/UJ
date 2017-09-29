@@ -166,7 +166,6 @@ public class AllOrderListFragement extends Fragment implements PtrHandler2, Orde
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                ToolUitls.print("-----","allOrder22222222=="+allOrder.size());
 
                 //首先在onScroll方法中判断listview到达底部：
                 if ((firstVisibleItem + visibleItemCount) == totalItemCount) {

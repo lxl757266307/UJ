@@ -41,7 +41,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
-                android:text="精选排行"
+                android:text="意见反馈"
                 android:textColor="#fff"
                 android:textSize="20sp" />
 

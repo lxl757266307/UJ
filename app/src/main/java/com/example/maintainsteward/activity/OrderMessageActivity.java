@@ -322,6 +322,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                 txtQitafeiyong.setText("￥" + data.getOther_costs());
                 txtWeixianzuoye.setText("￥" + data.getDangerous_work());
                 txtDingdanbianhao.setText(data.getOrder_no());
+                txtYouhuijia.setText("￥" + data.getTotal_amount());
                 String youhui_fee = data.getYouhui_fee();
                 if (!"0".equals(youhui_fee)) {
                     txtTaocanjianmian.setText("￥" + data.getYouhui_fee());
@@ -375,7 +376,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                         txtTimeYuyuechenggong.setText(data.getOrder_time().substring(5, 16));
                         txtTimeYitijiao.setText(data.getCreate_time().substring(5, 16));
                         txtStatus.setText("已到达");
-                        txtLijiyuyue.setText("已付款");
+                        txtLijiyuyue.setText("已到达");
                         break;
                     case "4":
                         img1.setImageResource(R.mipmap.xiantiao2);
@@ -393,13 +394,13 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                         txtStatus.setText("已付款");
                         txtLijiyuyue.setText("已付款");
                         txtYouhuijia.setText("￥" + data.getFinal_price());
-                        img1.setImageResource(R.mipmap.xiantiao2);
-                        img2.setImageResource(R.mipmap.xiantiao3);
-                        imgYuyuechenggong.setImageResource(R.mipmap.yuyuechengong2);
-                        txtYuyuechenggong.setTextColor(Color.parseColor("#da0a0a"));
-                        txtTimeYuyuechenggong.setTextColor(Color.parseColor("#da0a0a"));
-                        txtTimeYuyuechenggong.setText(data.getOrder_time().substring(5, 16));
-                        txtTimeYitijiao.setText(data.getCreate_time().substring(5, 16));
+//                        img1.setImageResource(R.mipmap.xiantiao2);
+//                        img2.setImageResource(R.mipmap.xiantiao3);
+//                        imgYuyuechenggong.setImageResource(R.mipmap.yuyuechengong2);
+//                        txtYuyuechenggong.setTextColor(Color.parseColor("#da0a0a"));
+//                        txtTimeYuyuechenggong.setTextColor(Color.parseColor("#da0a0a"));
+//                        txtTimeYuyuechenggong.setText(data.getOrder_time().substring(5, 16));
+//                        txtTimeYitijiao.setText(data.getCreate_time().substring(5, 16));
                         break;
 
                     case "6":

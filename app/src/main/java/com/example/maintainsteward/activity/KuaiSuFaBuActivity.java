@@ -28,6 +28,7 @@ import com.example.maintainsteward.adapter.PhotoListAdapter;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.PublicBean;
+import com.example.maintainsteward.main.MainActivity;
 import com.example.maintainsteward.mvp_presonter.KuaiSuFaBuPresonter;
 import com.example.maintainsteward.mvp_presonter.LiJiOrderPresonter;
 import com.example.maintainsteward.mvp_presonter.UpLoadPhotoPresonter;
@@ -267,6 +268,8 @@ public class KuaiSuFaBuActivity extends BaseActivity implements OnUpLoadPhotoLis
 //            快速发布的列表
             switch (msg.what) {
                 case 1:
+
+                    startActivity(new Intent(KuaiSuFaBuActivity.this, MainActivity.class));
 
                     break;
                 case 2:

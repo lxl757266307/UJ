@@ -40,7 +40,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
-                android:text="立即预约"
+                android:text="地址管理"
                 android:textColor="#fff"
                 android:textSize="20sp" />
 

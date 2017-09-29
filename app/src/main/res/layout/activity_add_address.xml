@@ -33,12 +33,13 @@
                     android:layout_marginLeft="15dp"
                     android:src="@mipmap/shangyiye" />
             </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
-                android:text="编辑地址"
+                android:text="地址管理"
                 android:textColor="#fff"
                 android:textSize="20sp" />
 
@@ -89,7 +90,8 @@
                             android:layout_height="match_parent"
                             android:layout_marginLeft="@dimen/layout_marginLeft_10dp"
                             android:gravity="center_vertical"
-                            android:text="收货人:"
+                            android:maxLength="5"
+                            android:text="联系人:"
                             android:textColor="@color/black" />
 
                         <EditText

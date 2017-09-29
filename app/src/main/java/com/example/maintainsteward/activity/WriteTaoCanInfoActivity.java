@@ -142,13 +142,14 @@ public class WriteTaoCanInfoActivity extends BaseActivity implements MyDialogFra
                 break;
             case R.id.layout_yuezhifu:
 
-                if (cbWeixin.isChecked()) {
-                    cbWeixin.setChecked(false);
-                    cbWeixin.setVisibility(View.INVISIBLE);
-                }
-                cbYue.setChecked(true);
-                cbYue.setVisibility(View.VISIBLE);
-                payType = "2";
+                ToolUitls.toast(this, "拼命开发中....");
+//                if (cbWeixin.isChecked()) {
+//                    cbWeixin.setChecked(false);
+//                    cbWeixin.setVisibility(View.INVISIBLE);
+//                }
+//                cbYue.setChecked(true);
+//                cbYue.setVisibility(View.VISIBLE);
+//                payType = "2";
                 break;
             case R.id.btn_tijiao:
 
@@ -197,6 +198,7 @@ public class WriteTaoCanInfoActivity extends BaseActivity implements MyDialogFra
     /*必须设置在Activity中否则不显示*/
     public void setDialog() {
         MyDialogFragment dialogFragment = new MyDialogFragment();
+        dialogFragment.setAddress("");
         if (data != null) {
             dialogFragment.setData(data);
         }
@@ -208,22 +210,6 @@ public class WriteTaoCanInfoActivity extends BaseActivity implements MyDialogFra
     String city = "";
     String district = "";
 
-    @Override
-    public void onAddressChoosed(String[] str, String[] id) {
-        city = id[0];
-        district = id[1];
-        for (int i = 0; i < str.length; i++) {
-            if (str[i].equals("请选择") || str[i].equals("")) {
-                return;
-            } else {
-                location += str[i];
-            }
-        }
-        imageView.setVisibility(View.GONE);
-        txtJutidizhi.setText(location);
-
-
-    }
 
     private void initCityAndDistrict() {
 
@@ -343,6 +329,21 @@ public class WriteTaoCanInfoActivity extends BaseActivity implements MyDialogFra
         startActivity(intent);
         finish();
 
+    }
+
+    @Override
+    public void onAddressChoosed(String[] array, String str, String[] id) {
+        city = id[0];
+        district = id[1];
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].equals("请选择") || array[i].equals("")) {
+                return;
+            } else {
+                location += array[i];
+            }
+        }
+        imageView.setVisibility(View.GONE);
+        txtJutidizhi.setText(str);
     }
 
     class FefreshReciver extends BroadcastReceiver {

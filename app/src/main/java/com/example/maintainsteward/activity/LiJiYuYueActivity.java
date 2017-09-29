@@ -175,13 +175,17 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
                 mTimePickerView.show();
                 break;
             case R.id.txt_submit_lijiyuyue:
+                if (data == null || data.size() == 0) {
+                    ToolUitls.toast(this, "服务项不能为空");
+                    return;
+                }
 
                 if (dataBean == null) {
                     ToolUitls.toast(this, "地址不能为空");
                     return;
                 }
                 if (!txtRepairTimeLijiyuyue.getText().toString().matches("\\d{4}.\\d{0,2}.\\d{0,2}.\\d{0,2}.\\d{0,2}")) {
-                    ToolUitls.toast(this, "时间格式错误");
+                    ToolUitls.toast(this, "请选择预约时间");
                     return;
                 }
 

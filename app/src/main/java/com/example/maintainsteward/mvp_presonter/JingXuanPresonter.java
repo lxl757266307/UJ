@@ -6,6 +6,7 @@ import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.BannerBean;
 import com.example.maintainsteward.bean.JingXuanBean;
 import com.example.maintainsteward.mvp_view.JingXuanListener;
+import com.example.maintainsteward.utils.ToolUitls;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;

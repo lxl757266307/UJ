@@ -214,6 +214,11 @@ public class AddressManagerActivity extends BaseActivity implements GetAddressLi
 
     }
 
+    @OnClick(R.id.layout_back)
+    public void onViewClicked() {
+        finish();
+    }
+
     class GetAddressReciver extends BroadcastReceiver {
 
         @Override

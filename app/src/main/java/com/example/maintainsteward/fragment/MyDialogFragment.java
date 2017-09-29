@@ -169,15 +169,23 @@ public class MyDialogFragment extends DialogFragment implements ViewPager.OnPage
 
     }
 
+    String address;
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @OnClick(R.id.layout_dilaog_dismiss)
     public void dismiss() {
+        for (String s : titleArray) {
+            address += s;
+        }
         getDialog().dismiss();
         if (onAddressChoosedListener != null) {
-
-
-            onAddressChoosedListener.onAddressChoosed(titleArray, xId);
+            onAddressChoosedListener.onAddressChoosed(titleArray, address, xId);
         }
     }
+
 
     String[] xId = new String[2];
 
@@ -218,7 +226,7 @@ public class MyDialogFragment extends DialogFragment implements ViewPager.OnPage
 
     public interface OnAddressChoosedListener {
 
-        void onAddressChoosed(String[] str, String[] id);
+        void onAddressChoosed(String[] array, String str, String[] id);
 
     }
 }

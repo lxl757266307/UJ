@@ -92,24 +92,28 @@ public class JingXuanListAdapter extends BaseAdapter {
         String min_price = data.get(position).getMin_price();
 
         viewHolder.txtPrice.setText(min_price);
-//        viewHolder.layoutView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                if (onItemClickListener != null) {
-//                    onItemClickListener.onItemClick(position);
-//                }
-//            }
-//        });
+        viewHolder.layoutView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(position);
+                }
+            }
+        });
 
         return convertView;
     }
 
-//    OnItemClickListener onItemClickListener;
-//
-//    public interface OnItemClickListener {
-//        void onItemClick(int position);
-//    }
+    OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
 
     static class ViewHolder {
         @BindView(R.id.layout_view)

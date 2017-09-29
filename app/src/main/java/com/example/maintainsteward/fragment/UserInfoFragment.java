@@ -182,17 +182,14 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
                 break;
             case R.id.layout_edit_userinfo: {
 
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Contacts.USER, Context.MODE_PRIVATE);
-                boolean online = sharedPreferences.getBoolean("online", false);
 
-                if (online) {
-                    Intent intent = new Intent(getActivity(), UserActivity.class);
-                    intent.putExtra("data", (Serializable) data);
-                    startActivityForResult(intent, UPDATE_USER);
-                } else {
-                    ToolUitls.toast(getActivity(), "您还未，请先登录！");
-                    handler.sendEmptyMessageDelayed(1, 1500);
-                }
+//                if (online) {
+                Intent intent = new Intent(getActivity(), UserActivity.class);
+                intent.putExtra("data", (Serializable) data);
+                startActivityForResult(intent, UPDATE_USER);
+//                } else {
+//
+//                }
 
 
             }
@@ -247,6 +244,7 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
             }
             break;
             case R.id.layout_ping_jia_userinfo:
+                ToolUitls.toast(getActivity(), "拼命开发中...");
                 break;
             case R.id.layout_tao_can_userinfo:
                 if (dataBean != null && set_meal != null && set_meal.size() > 0) {
@@ -423,10 +421,10 @@ public class UserInfoFragment extends Fragment implements GetOrderListListener, 
                 }
                 String is_vip = data.getIs_vip();
                 switch (is_vip) {
-                    case "0":
+                    case "1":
                         imgVipUserinfo.setImageResource(R.mipmap.vip2);
                         break;
-                    case "1":
+                    case "0":
                         imgVipUserinfo.setImageResource(R.mipmap.putogyonghu);
                         break;
                 }

@@ -143,6 +143,7 @@ public class AddAddressActivity extends FragmentActivity implements MyDialogFrag
             mTxtUserDistrictAddAddress.setText("");
         }
         MyDialogFragment dialogFragment = new MyDialogFragment();
+        dialogFragment.setAddress("");
         if (data != null) {
             dialogFragment.setData(data);
         }
@@ -241,7 +242,7 @@ public class AddAddressActivity extends FragmentActivity implements MyDialogFrag
     String district = "";
 
     @Override
-    public void onAddressChoosed(String[] str, String[] id) {
+    public void onAddressChoosed(String[] str, String address, String[] id) {
 
         city = id[0];
         district = id[1];
@@ -253,7 +254,7 @@ public class AddAddressActivity extends FragmentActivity implements MyDialogFrag
             }
         }
 
-        mTxtUserDistrictAddAddress.setText(location);
+        mTxtUserDistrictAddAddress.setText(address);
 
     }
 

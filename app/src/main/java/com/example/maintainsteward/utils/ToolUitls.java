@@ -104,7 +104,7 @@ public class ToolUitls {
 
 
     public static void getCallBackStr(final String path) {
-//        ToolUitls.print("TEST", "path=" + path);
+        ToolUitls.print("TEST", "path=" + path);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -128,7 +128,7 @@ public class ToolUitls {
                             builder.append(new String(bytes, 0, len));
                         }
 
-//                        ToolUitls.print("TEST", "str=" + builder);
+                        ToolUitls.print("TEST", "str=" + builder);
 
 
                     }

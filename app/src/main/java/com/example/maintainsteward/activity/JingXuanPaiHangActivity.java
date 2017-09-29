@@ -36,7 +36,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2017/9/23.
  */
 
-public class JingXuanPaiHangActivity extends BaseActivity implements JingXuanListener, OnScrollListener, AdapterView.OnItemClickListener {
+public class JingXuanPaiHangActivity extends BaseActivity implements JingXuanListener, OnScrollListener, JingXuanListAdapter.OnItemClickListener {
     @BindView(R.id.layout_back)
     LinearLayout layoutBack;
     @BindView(R.id.txt_title)
@@ -56,13 +56,14 @@ public class JingXuanPaiHangActivity extends BaseActivity implements JingXuanLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jingxuan);
         ButterKnife.bind(this);
+        imgHuidaodingbu.setVisibility(View.GONE);
         data = new ArrayList<>();
         lvList.setOnScrollListener(this);
-        lvList.setOnItemClickListener(this);
         presonter = new JingXuanPresonter();
         presonter.setJingXuanListener(this);
         adapter = new JingXuanListAdapter(this);
         lvList.setAdapter(adapter);
+        adapter.setOnItemClickListener(this);
         getList();
     }
 
@@ -181,14 +182,13 @@ public class JingXuanPaiHangActivity extends BaseActivity implements JingXuanLis
         }
     }
 
+
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ToolUitls.print("------","dddddddd");
+    public void onItemClick(int position) {
 
         String index = data.get(position).getId();
         Intent intent = new Intent(this, ServiceInfoActivity.class);
         intent.putExtra("id", index + "");
         startActivity(intent);
-
     }
 }

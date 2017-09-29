@@ -11,8 +11,8 @@
         android:background="@mipmap/red_bg"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/edit_sousuo_fragment_kinds"
+        <TextView
+            android:id="@+id/txt_sousuo_fragment_kinds"
             android:layout_width="@dimen/layout_width_0dp"
             android:layout_height="40dp"
             android:layout_marginLeft="13dp"
@@ -22,6 +22,7 @@
             android:background="@drawable/circle_box_3r"
             android:drawableLeft="@mipmap/sousuo"
             android:drawablePadding="10dp"
+            android:gravity="center"
             android:hint="搜索服务快速发布需求"
             android:paddingLeft="10dp"
             android:textColorHint="#bbbbbb" />
@@ -249,8 +250,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_width_0dp"
                 android:layout_marginTop="10dp"
-                android:background="#f4f4f4"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:background="#f4f4f4" />
 
 
         </LinearLayout>
