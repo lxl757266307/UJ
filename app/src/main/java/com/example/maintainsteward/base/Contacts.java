@@ -68,5 +68,8 @@ public final class Contacts {
     /*判断是 普通订单支付 还是 套餐支付 的标记*/
     public static String PAY_FLAG = "normal";
 
+    /*付款完刷新订单*/
+    public static String STATUS_REFRESH = "status_refresh";
+
 
 }

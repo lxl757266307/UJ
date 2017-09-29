@@ -117,8 +117,8 @@ public class YiWanChengOrderListFragement extends Fragment implements PtrHandler
         map.put("order_type", type);
         map.put("page", page + "");
         String sign = ToolUitls.getSign(map);
-        orderListPresonter.getOrderList(id, type, page + "", time, sign, Contacts.KEY);
-        handler.sendEmptyMessageDelayed(1, 1500);
+        orderListPresonter.getYiWanChengOrderList(id, type, page + "", time, sign, Contacts.KEY);
+//        handler.sendEmptyMessageDelayed(1, 1500);
 
     }
 
@@ -270,7 +270,7 @@ public class YiWanChengOrderListFragement extends Fragment implements PtrHandler
 
     @Override
     public void showDialog() {
-        dialog = ProgressDialog.show(getActivity(), "", "正在加载");
+//        dialog = ProgressDialog.show(getActivity(), "", "正在加载");
     }
 
 
@@ -304,6 +304,6 @@ public class YiWanChengOrderListFragement extends Fragment implements PtrHandler
 
     @Override
     public void dialogDismiss() {
-        dialog.dismiss();
+//        dialog.dismiss();
     }
 }

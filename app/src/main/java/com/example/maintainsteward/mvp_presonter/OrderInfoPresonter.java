@@ -36,7 +36,6 @@ public class OrderInfoPresonter {
             @Override
             public void onResponse(Call<OrderInfoBean> call, Response<OrderInfoBean> response) {
 
-                ToolUitls.print("response===", "response=======" + response + "  body=" + response.body());
 
                 if (response.isSuccessful()) {
 

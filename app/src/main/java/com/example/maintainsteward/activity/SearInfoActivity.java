@@ -121,19 +121,10 @@ public class SearInfoActivity extends BaseActivity implements PtrHandler2, Searc
         map.put("keywords", keyword);
         map.put("page", page + "");
         sign = ToolUitls.getSign(map);
-        ToolUitls.print("sign", "sign===" + sign);
 
         searchInfoPresonter.serach(keyword, page, timestamp, sign, Contacts.KEY);
 
 
-//        String path = Contacts.TEST_BASE_URL + "ServiceSearchByKeywords?"
-//                + "timestamp=" + timestamp
-//                + "&keywords=" + keyword
-//                + "&page=" + page
-//                + "&sign=" + sign
-//                + "&key=" + Contacts.KEY;
-//        ToolUitls.print("path", "path===" + path);
-//        ToolUitls.getCallBackStr(path);
 
     }
 
@@ -187,12 +178,10 @@ public class SearInfoActivity extends BaseActivity implements PtrHandler2, Searc
 
     @Override
     public void onSearchSucess(SearchKeyWordBean hotWordBean) {
-        ToolUitls.print(TAG, "hotWordBean==" + hotWordBean);
         switch (hotWordBean.getStatus()) {
             case "1":
                 List<SearchKeyWordBean.DataBean> data = hotWordBean.getData();
                 list.addAll(data);
-                ToolUitls.print(TAG, "list==" + list.size());
                 searchKeyWordAdapter.setList(list);
                 searchKeyWordAdapter.notifyDataSetChanged();
                 break;
@@ -211,7 +200,6 @@ public class SearInfoActivity extends BaseActivity implements PtrHandler2, Searc
                 list.clear();
                 searchKeyWordAdapter.setList(list);
                 searchKeyWordAdapter.notifyDataSetChanged();
-                ToolUitls.print(TAG, "点击了");
                 String searchInfo = editSearchInfoActivity.getText().toString().trim();
                 searchKeyWordAdapter.setKeyWord(searchInfo);
                 TreeMap<String, String> map = new TreeMap<>();

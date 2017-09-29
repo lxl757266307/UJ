@@ -131,12 +131,12 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     @Override
     public void onPermissionsGranted(int requestCode, List<String> perms) {
-        ToolUitls.print(TAG, "已成功注册权限：" + perms);
+//        ToolUitls.print(TAG, "已成功注册权限：" + perms);
     }
 
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
-        ToolUitls.print(TAG, "已失败注册权限：" + perms);
+//        ToolUitls.print(TAG, "已失败注册权限：" + perms);
     }
 
 

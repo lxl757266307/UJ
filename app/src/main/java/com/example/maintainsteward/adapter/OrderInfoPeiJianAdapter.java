@@ -54,7 +54,7 @@ public class OrderInfoPeiJianAdapter extends BaseAdapter {
 
         ViewHolder viewHolder = null;
         if (convertView == null) {
-            convertView= LayoutInflater.from(context).inflate(R.layout.lv_orderinfo_item, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.lv_orderinfo_item, parent, false);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {
@@ -62,7 +62,12 @@ public class OrderInfoPeiJianAdapter extends BaseAdapter {
         }
         viewHolder.txtServiceName.setText(service.get(position).getGoods_name());
         viewHolder.txtCount.setText("X" + service.get(position).getGoods_num());
-        viewHolder.txtPrice.setText("￥" + service.get(position).getGoods_price());
+        String goods_price = service.get(position).getGoods_price();
+        if (Double.parseDouble(goods_price) == 0) {
+            viewHolder.txtPrice.setText("面议");
+        } else {
+            viewHolder.txtPrice.setText("￥" + goods_price);
+        }
         return convertView;
     }
 

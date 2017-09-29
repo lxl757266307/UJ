@@ -62,7 +62,8 @@ public class ServicePeiJianAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.txtNamePeijianitem.setText(peiJian.get(position).getName());
-        viewHolder.txtPricePeijianitem.setText("￥ "+peiJian.get(position).getPrice());
+
+        viewHolder.txtPricePeijianitem.setText("￥ " + peiJian.get(position).getPrice());
 
         int number = peiJian.get(position).getNumber();
         if (number == 0) {

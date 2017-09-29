@@ -30,7 +30,7 @@ import com.example.maintainsteward.activity.TaoCanActivity;
 import com.example.maintainsteward.activity.TaoCanGouMaiSucessActivity;
 import com.example.maintainsteward.activity.UserActivity;
 import com.example.maintainsteward.base.Contacts;
-import com.example.maintainsteward.base.MySetMealBean;
+import com.example.maintainsteward.bean.MySetMealBean;
 import com.example.maintainsteward.bean.OrderListBean;
 import com.example.maintainsteward.bean.PublicBean;
 import com.example.maintainsteward.bean.UserInfoBean;

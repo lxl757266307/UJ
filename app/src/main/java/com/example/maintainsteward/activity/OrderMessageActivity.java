@@ -31,13 +31,10 @@ import com.example.maintainsteward.adapter.OrderInfoServiceAdapter;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.CanUseYouHuiQuanBean;
-import com.example.maintainsteward.bean.KaJuanBean;
 import com.example.maintainsteward.bean.OrderInfoBean;
 import com.example.maintainsteward.bean.PayInfoBean;
-import com.example.maintainsteward.mvp_presonter.LiJiOrderPresonter;
 import com.example.maintainsteward.mvp_presonter.OrderInfoPresonter;
 import com.example.maintainsteward.mvp_presonter.PayPresonter;
-import com.example.maintainsteward.mvp_presonter.UpLoadPhotoPresonter;
 import com.example.maintainsteward.mvp_view.OnPayListener;
 import com.example.maintainsteward.mvp_view.OrderInfoListener;
 import com.example.maintainsteward.utils.ToolUitls;
@@ -148,6 +145,14 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
     TextView txtJiantou;
 
     PayPresonter payPresonter;
+    @BindView(R.id.txt_service_total)
+    TextView txtServiceTotal;
+    @BindView(R.id.txt_peijian_total)
+    TextView txtPeijianTotal;
+    @BindView(R.id.layout_peijian)
+    LinearLayout layoutPeijian;
+    @BindView(R.id.layout_list)
+    LinearLayout layoutList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -242,9 +247,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                         String bonus_amount = resultDataBean.getBonus_amount();
                         txtJianmian.setText("￥" + bonus_amount);
                         txtJiantou.setVisibility(View.GONE);
-                        String total_amount = data.getTotal_amount();
-                        double shiFuKuan = Double.parseDouble(total_amount) - Double.parseDouble(bonus_amount);
-                        txtYouhuijia.setText("￥" + shiFuKuan);
+                        String total_amount = txtYouhuijia.getText().toString().substring(1);
 
                     }
 
@@ -304,15 +307,40 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
     @Override
     public void getOrderInfoSucess(OrderInfoBean orderInfoBean) {
 
-        ToolUitls.print("=====" + "orderInfoBean===" + orderInfoBean);
         switch (orderInfoBean.getStatus()) {
 
             case "1":
 
                 data = orderInfoBean.getData();
+
+                txtServiceName.setText(data.getName());
+                txtUserName.setText(data.getUser_name());
+                txtUserPhone.setText(data.getUser_phone());
+                txtUserAddress.setText(data.getCity() + data.getDistrict() + data.getAddress());
+                txtYuyueshijian.setText(data.getCreate_time());
+                txtQitafeiyong.setText("￥" + data.getOther_costs());
+                txtWeixianzuoye.setText("￥" + data.getDangerous_work());
+                txtDingdanbianhao.setText(data.getOrder_no());
+                String youhui_fee = data.getYouhui_fee();
+                if (!"0".equals(youhui_fee)) {
+                    txtTaocanjianmian.setText("￥" + data.getYouhui_fee());
+                    layout365.setVisibility(View.VISIBLE);
+                }
+
+
+                txtZongjia.setText("￥" + data.getTotal_amount());
+                OrderInfoBean.DataBean.WorkerInfoBean worker_info = data.getWorker_info();
+                txtWorkerName.setText(worker_info.getName());
+                String phone_number = worker_info.getPhone_number();
+                if ("".equals(phone_number)) {
+                    txtWorkerPhone.setText("待接单");
+                } else {
+                    txtWorkerPhone.setText(phone_number);
+                }
                 switch (data.getOrder_status()) {
 
                     case "1":
+                        txtYouhuijia.setText("￥" + data.getBonus_price());
                         img1.setImageResource(R.mipmap.xiantiao3);
                         imgYitijiao.setImageResource(R.mipmap.yitijiao2);
                         txtYitijiao.setTextColor(Color.parseColor("#da0a0a"));
@@ -322,6 +350,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                         txtLijiyuyue.setText("取消订单");
                         break;
                     case "2":
+                        txtYouhuijia.setText("￥" + data.getBonus_price());
                         img1.setImageResource(R.mipmap.xiantiao2);
                         img2.setImageResource(R.mipmap.xiantiao3);
                         imgYuyuechenggong.setImageResource(R.mipmap.yuyuechengong2);
@@ -333,6 +362,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                         txtLijiyuyue.setText("取消订单");
                         break;
                     case "3":
+                        txtYouhuijia.setText("￥" + data.getFinal_price());
                         img2.setImageResource(R.mipmap.xiantiao2);
                         img3.setImageResource(R.mipmap.xiantiao3);
                         imgZhengzaiweixiu.setImageResource(R.mipmap.zhengzaiweixiu2);
@@ -359,7 +389,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                     case "5":
                         txtStatus.setText("已付款");
                         txtLijiyuyue.setText("已付款");
-
+                        txtYouhuijia.setText("￥" + data.getFinal_price());
                         img1.setImageResource(R.mipmap.xiantiao2);
                         img2.setImageResource(R.mipmap.xiantiao3);
                         imgYuyuechenggong.setImageResource(R.mipmap.yuyuechengong2);
@@ -370,6 +400,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                         break;
 
                     case "6":
+                        txtYouhuijia.setText("￥" + data.getFinal_price());
                         img3.setImageResource(R.mipmap.xiantiao2);
                         imgYiwancheng.setImageResource(R.mipmap.yiwancheng2);
                         txtYiwancheng.setTextColor(Color.parseColor("#da0a0a"));
@@ -383,10 +414,12 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                         break;
 
                     case "7":
+                        txtYouhuijia.setText("￥" + data.getFinal_price());
                         txtStatus.setText("已评价");
                         txtLijiyuyue.setText("已评价");
                         break;
                     case "8":
+                        txtYouhuijia.setText("￥" + data.getFinal_price());
                         txtStatus.setText("已取消");
                         txtLijiyuyue.setText("已取消");
                         break;
@@ -397,42 +430,36 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
 
                 }
 
-                txtServiceName.setText(data.getName());
-                txtUserName.setText(data.getUser_name());
-                txtUserPhone.setText(data.getUser_phone());
-                txtUserAddress.setText(data.getCity() + data.getDistrict() + data.getAddress());
-                txtYuyueshijian.setText(data.getCreate_time());
-                txtQitafeiyong.setText("￥" + data.getOther_costs());
-                txtWeixianzuoye.setText("￥" + data.getDangerous_work());
-                txtDingdanbianhao.setText(data.getOrder_no());
-                String youhui_fee = data.getYouhui_fee();
-                if (!"0".equals(youhui_fee)) {
-                    txtTaocanjianmian.setText("￥" + data.getYouhui_fee());
-                    layout365.setVisibility(View.VISIBLE);
-                }
-
-
-                txtYouhuijia.setText("￥" + data.getBonus_price());
-                txtZongjia.setText("￥" + data.getTotal_amount());
-                OrderInfoBean.DataBean.WorkerInfoBean worker_info = data.getWorker_info();
-                txtWorkerName.setText(worker_info.getName());
-                String phone_number = worker_info.getPhone_number();
-                if ("".equals(phone_number)) {
-                    txtWorkerPhone.setText("待接单");
-                } else {
-                    txtWorkerPhone.setText(phone_number);
-                }
-
 
                 List<OrderInfoBean.DataBean.ServiceBean> service = data.getService();
                 orderInfoServiceAdapter.setService(service);
                 lvServicce.setAdapter(orderInfoServiceAdapter);
                 orderInfoServiceAdapter.notifyDataSetChanged();
+                double service_total = 0;
+                for (int i = 0; i < service.size(); i++) {
+                    service_total += Double.parseDouble(service.get(i).getPrice()) * Double.parseDouble(service.get(i).getCount());
+                }
+                if (service_total == 0) {
+                    txtServiceTotal.setText("面议");
+                } else {
+                    txtServiceTotal.setText("￥" + service_total);
+                }
 
                 List<OrderInfoBean.DataBean.GoodsInfoBean> goods_info = data.getGoods_info();
                 orderInfoPeiJianAdapter.setService(goods_info);
                 lvPeijian.setAdapter(orderInfoPeiJianAdapter);
                 orderInfoPeiJianAdapter.notifyDataSetChanged();
+                double peiJian_total = 0;
+                for (int i = 0; i < goods_info.size(); i++) {
+                    peiJian_total += Double.parseDouble(goods_info.get(i).getGoods_price()) * Double.parseDouble(goods_info.get(i).getGoods_num());
+                }
+                if (peiJian_total == 0) {
+//                    txtPeijianTotal.set
+                    layoutPeijian.setVisibility(View.GONE);
+                    layoutList.setVisibility(View.GONE);
+                } else {
+                    txtPeijianTotal.setText("￥" + peiJian_total);
+                }
 
                 break;
         }

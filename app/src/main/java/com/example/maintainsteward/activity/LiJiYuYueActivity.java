@@ -164,7 +164,6 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
 
                 break;
             case R.id.layout_choose_repair_time_lijiyuyue:
-                ToolUitls.print(TAG, "选择时间");
                 initTimePicker();
                 mTimePickerView.show();
                 break;
@@ -443,8 +442,6 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
     public void onUpSucess(String key) {
         url.add(key);
 
-        ToolUitls.print(TAG, "count==" + count);
-        ToolUitls.print(TAG, "photos==" + photos.size());
         if (photos != null && count == photos.size()) {
             for (int i = 0; i < url.size(); i++) {
                 imgArrays[i] = url.get(i);
@@ -507,7 +504,6 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
         map.put("total_amount", total_amount);
         String sign = ToolUitls.getSign(map);
 
-        ToolUitls.print("dataBean.getId()","dataBean.getId()=="+dataBean.getId());
         liJiOrderPresonter.order(user_id, cat_id, title, dataBean.getId(), dataJson, peiJianJson, content, img1, img2, img3, img4, img5, img6, orderTime, time, sign, Contacts.KEY, total_amount);
 //        ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "ServiceOrderSubmit?" + "user_id=" + user_id + "&cat_id=" + cat_id
 //                + "&name=" + title + "&address_id=" + dataBean.getId() + "&service_con=" + dataJson + "&material=" + peiJianJson

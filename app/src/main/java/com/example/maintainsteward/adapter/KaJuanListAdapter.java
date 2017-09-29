@@ -49,7 +49,6 @@ public class KaJuanListAdapter extends BaseAbstactRecycleAdapter<KaJuanBean.Data
         String cat_id = resultDataBean.getCat_id();
         baseViewHolder.txtTime.setText(start_time_format + "---" + end_time_format);
         baseViewHolder.txtMoney.setText("￥ " + bonus_amount);
-        ToolUitls.print(TAG, "bonus_desc===" + bonus_desc);
         baseViewHolder.txtDesc.setText(bonus_desc);
         if (status.equals("0")) {
 

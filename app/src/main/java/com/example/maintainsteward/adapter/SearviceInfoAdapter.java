@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
-import com.example.maintainsteward.bean.SearchKeyWordBean;
 import com.example.maintainsteward.bean.SearviceInfoBean;
 
 import java.util.List;
@@ -77,7 +76,15 @@ public class SearviceInfoAdapter extends BaseAdapter {
         }
 
         viewHolder.txtNameServiceInfoItem.setText(data.get(position).getName());
-        viewHolder.txtPriceServiceInfoItem.setText(data.get(position).getExpenses());
+        String expenses = data.get(position).getExpenses();
+        if ("0".equals(expenses)) {
+            viewHolder.txtYang.setVisibility(View.INVISIBLE);
+            viewHolder.txtUnitServiceInfoItem.setText("面议");
+            viewHolder.txtUnitServiceInfoItem.setTextSize(18);
+            viewHolder.txtPriceServiceInfoItem.setVisibility(View.GONE);
+        }
+        viewHolder.txtPriceServiceInfoItem.setText(expenses);
+
         viewHolder.txtUnitServiceInfoItem.setText(data.get(position).getUnit());
 
         viewHolder.imgAddServiceInfoItem.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +115,7 @@ public class SearviceInfoAdapter extends BaseAdapter {
         return convertView;
     }
 
+
     static class ViewHolder {
         @BindView(R.id.txt_name_service_info_item)
         TextView txtNameServiceInfoItem;
@@ -123,6 +131,8 @@ public class SearviceInfoAdapter extends BaseAdapter {
         TextView txtNumberServiceInfoItem;
         @BindView(R.id.img_add_service_info_item)
         ImageView imgAddServiceInfoItem;
+        @BindView(R.id.txt_yang)
+        TextView txtYang;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
@@ -142,4 +152,6 @@ public class SearviceInfoAdapter extends BaseAdapter {
         void reduce(int postion);
 
     }
+
+
 }

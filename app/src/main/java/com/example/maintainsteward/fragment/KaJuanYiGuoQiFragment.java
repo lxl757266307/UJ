@@ -162,7 +162,6 @@ public class KaJuanYiGuoQiFragment extends Fragment implements PtrHandler2, KaJu
     public void onGetKaJuanSucess(KaJuanBean bean) {
         switch (bean.getStatus()) {
             case "1":
-                ToolUitls.print(TAG, "KaJuanBean==" + bean);
                 KaJuanBean.DataBean data = bean.getData();
                 resultData.addAll(data.getResultData());
                 kaJuanListAdapter.setList(resultData);

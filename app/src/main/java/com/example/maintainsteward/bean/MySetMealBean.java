@@ -1,4 +1,4 @@
-package com.example.maintainsteward.base;
+package com.example.maintainsteward.bean;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

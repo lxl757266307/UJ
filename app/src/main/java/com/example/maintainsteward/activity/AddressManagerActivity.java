@@ -145,7 +145,6 @@ public class AddressManagerActivity extends BaseActivity implements GetAddressLi
     @Override
     public void getAddressList(AddressListBean addressListBean) {
 
-        ToolUitls.print(TAG, "addressListBean===" + addressListBean);
         switch (addressListBean.getStatus()) {
             case "1":
                 data = addressListBean.getData();

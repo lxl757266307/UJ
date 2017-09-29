@@ -1,8 +1,10 @@
 package com.example.maintainsteward.fragment;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -93,6 +95,7 @@ public class WeiWanChengOrderListFragement extends Fragment implements PtrHandle
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        getActivity().unregisterReceiver(updateReciver);
     }
 
     QuXiaoOrderPresonter presonter;
@@ -125,8 +128,8 @@ public class WeiWanChengOrderListFragement extends Fragment implements PtrHandle
         map.put("order_type", type);
         map.put("page", page + "");
         String sign = ToolUitls.getSign(map);
-        orderListPresonter.getOrderList(id, type, page + "", time, sign, Contacts.KEY);
-        handler.sendEmptyMessageDelayed(1, 1500);
+        orderListPresonter.getWeiWanChengOrderList(id, type, page + "", time, sign, Contacts.KEY);
+//        handler.sendEmptyMessageDelayed(1, 1500);
 
     }
 
@@ -134,7 +137,7 @@ public class WeiWanChengOrderListFragement extends Fragment implements PtrHandle
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            dialog.dismiss();
+//            dialog.dismiss();
         }
     };
 
@@ -148,8 +151,8 @@ public class WeiWanChengOrderListFragement extends Fragment implements PtrHandle
         orderListAdapter.setContext(getActivity());
         orderListAdapter.setOnQuXiaoOrderListenerl(this);
         initPrsonter();
-        getOrderByType("8");
-
+        getOrderByType("3");
+        register();
         prtFramelayout.setPtrHandler(this);
 
         lvOrderList.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -258,7 +261,6 @@ public class WeiWanChengOrderListFragement extends Fragment implements PtrHandle
         Intent intent = new Intent(getActivity(), OrderMessageActivity.class);
         String orderId = demand_order_data.get(position).getId();
         intent.putExtra("id", orderId);
-        ToolUitls.print("-----","orderId===="+id);
         startActivity(intent);
 
     }
@@ -274,7 +276,8 @@ public class WeiWanChengOrderListFragement extends Fragment implements PtrHandle
 
     @Override
     public void showDialog() {
-        dialog = ProgressDialog.show(getActivity(), "", "正在加载");
+
+//        dialog = ProgressDialog.show(getActivity(), "", "正在加载");
     }
 
 
@@ -285,6 +288,7 @@ public class WeiWanChengOrderListFragement extends Fragment implements PtrHandle
 
     @Override
     public void getWeiWanChengList(OrderListBean listBean) {
+
         switch (listBean.getStatus()) {
             case "1":
                 OrderListBean.DataBean data = listBean.getData();
@@ -308,7 +312,7 @@ public class WeiWanChengOrderListFragement extends Fragment implements PtrHandle
 
     @Override
     public void dialogDismiss() {
-        dialog.dismiss();
+//        dialog.dismiss();
     }
 
     /*确认对话框*/
@@ -389,5 +393,24 @@ public class WeiWanChengOrderListFragement extends Fragment implements PtrHandle
         window.setAttributes(attributes);
         mWaitingAlertDialog.setCanceledOnTouchOutside(false);
 
+    }
+
+    UpdateReciver updateReciver;
+
+    public void register() {
+        updateReciver = new UpdateReciver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Contacts.STATUS_REFRESH);
+        getActivity().registerReceiver(updateReciver, intentFilter);
+    }
+
+    class UpdateReciver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            allOrder.clear();
+            getOrderByType("3");
+        }
     }
 }

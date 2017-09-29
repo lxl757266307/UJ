@@ -1,6 +1,6 @@
 package com.example.maintainsteward.api;
 
-import com.example.maintainsteward.base.MySetMealBean;
+import com.example.maintainsteward.bean.MySetMealBean;
 import com.example.maintainsteward.bean.AddressBean;
 import com.example.maintainsteward.bean.AddressDeleteBean;
 import com.example.maintainsteward.bean.AddressListBean;
@@ -35,7 +35,6 @@ import com.example.maintainsteward.bean.YanZhengMaCallBackBean;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**

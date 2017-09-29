@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,12 +27,11 @@ import com.example.maintainsteward.activity.HotNewsActivity;
 import com.example.maintainsteward.activity.JingXuanPaiHangActivity;
 import com.example.maintainsteward.activity.LiJiYuYueActivity;
 import com.example.maintainsteward.activity.SearchActivity;
-import com.example.maintainsteward.activity.ServiceInfoActivity;
 import com.example.maintainsteward.activity.TaoCanActivity;
 import com.example.maintainsteward.activity.TaoCanGouMaiSucessActivity;
 import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.Contacts;
-import com.example.maintainsteward.base.MySetMealBean;
+import com.example.maintainsteward.bean.MySetMealBean;
 import com.example.maintainsteward.bean.AppIndexCategoryBean;
 import com.example.maintainsteward.bean.BannerBean;
 import com.example.maintainsteward.bean.HotNewsList;
@@ -62,7 +60,6 @@ import butterknife.Unbinder;
  * Created by Administrator on 2017/8/15.
  */
 
-@RequiresApi(api = Build.VERSION_CODES.M)
 public class MainFragment extends Fragment implements View.OnScrollChangeListener, BannerViewPager.OnBannerClick, OnLoadBannerListener, MySetMealListener, HotNewsListener {
 
     Unbinder unbinder;
@@ -487,8 +484,6 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
             String city = intent.getStringExtra("city");
 
 
-            ToolUitls.print(TAG, "district_name=" + district_name);
-            ToolUitls.print(TAG, "city=" + city);
             txtCityMainfragment.setText(city);
             txtDistrictMainfragment.setText(district_name);
 

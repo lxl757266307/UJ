@@ -160,6 +160,10 @@ public class PayChooseActivity extends BaseActivity implements OnPayListener {
         public void onReceive(Context context, Intent intent) {
 
             if (Contacts.PAY_FLAG.equals("normal")) {
+                Intent intent2 = new Intent();
+                intent2.setAction(Contacts.STATUS_REFRESH);
+                sendBroadcast(intent2);
+
                 ToolUitls.toast(PayChooseActivity.this, "支付成功");
                 Intent intent1 = new Intent(PayChooseActivity.this, OrderActivity.class);
                 startActivity(intent1);

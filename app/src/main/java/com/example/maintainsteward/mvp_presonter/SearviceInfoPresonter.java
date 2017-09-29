@@ -118,7 +118,6 @@ public class SearviceInfoPresonter {
         serviceGoodsGet.enqueue(new Callback<ServiceGoodsGetBean>() {
             @Override
             public void onResponse(Call<ServiceGoodsGetBean> call, Response<ServiceGoodsGetBean> response) {
-                ToolUitls.print(TAG, "getServiceGoodsGet==" + response + "   body=" + response.body());
                 if (response.isSuccessful()) {
 
 

@@ -10,8 +10,7 @@ import android.widget.TextView;
 
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.activity.ServiceInfoActivity;
-import com.example.maintainsteward.base.MySetMealBean;
-import com.example.maintainsteward.bean.TaoCanListBean;
+import com.example.maintainsteward.bean.MySetMealBean;
 import com.example.maintainsteward.utils.ToolUitls;
 
 /**
@@ -60,6 +59,7 @@ public class MyTableRow extends TableRow {
         xiaDan.setText("立即下单");
 
         String sta = bean.getNot_use_num();
+
 
         if ("0".equals(sta)) {
             status.setText("已使用");

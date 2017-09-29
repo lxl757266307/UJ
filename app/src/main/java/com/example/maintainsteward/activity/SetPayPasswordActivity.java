@@ -171,7 +171,6 @@ public class SetPayPasswordActivity extends BaseActivity implements OnUpdatePayP
                 String newPassword = MD5.getMessageDigest(editPassword.getText().toString().getBytes());
                 TreeMap<String, String> map = new TreeMap<>();
                 String phone = txtOldPhone.getText().toString();
-                ToolUitls.print(TAG,"phone==="+phone);
 
                 map.put("user_id", id);
                 map.put("phone", phone);

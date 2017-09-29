@@ -25,7 +25,6 @@ public class DialogFragmentPagerAdapter extends FragmentPagerAdapter {
         super(fm);
         this.list = list;
 
-        ToolUitls.print(TAG, "size==" + list.size());
     }
 
 
@@ -38,7 +37,6 @@ public class DialogFragmentPagerAdapter extends FragmentPagerAdapter {
 
     public void setList(List<Fragment> list) {
         this.list = list;
-        ToolUitls.print(TAG, "list.size=" + list.size());
     }
 
     public String[] getArray() {

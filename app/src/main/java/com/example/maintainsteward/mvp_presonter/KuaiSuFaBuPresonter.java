@@ -41,7 +41,6 @@ public class KuaiSuFaBuPresonter {
             @Override
             public void onResponse(Call<PublicBean> call, Response<PublicBean> response) {
 
-                ToolUitls.print("--------", "response==" + response + "    response.body==" + response.body());
 
                 if (response.isSuccessful()) {
 

@@ -47,7 +47,6 @@ public class LiJiOrderPresonter {
             @Override
             public void onResponse(Call<OrderSucessBean> call, Response<OrderSucessBean> response) {
 
-                ToolUitls.print("------","response=="+response+"   response.body="+response.body());
                 if (response.isSuccessful()) {
                     OrderSucessBean body = response.body();
 

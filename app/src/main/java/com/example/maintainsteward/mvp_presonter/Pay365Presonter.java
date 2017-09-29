@@ -29,12 +29,10 @@ public class Pay365Presonter {
 
     public void getPayInfo(String orderNo) {
 
-        ToolUitls.print("-------", "getPayInfo1111111111111==="+orderNo);
         Call<PayInfoBean> payInfo = httpApi.getPayInfo(orderNo);
         payInfo.enqueue(new Callback<PayInfoBean>() {
             @Override
             public void onResponse(Call<PayInfoBean> call, Response<PayInfoBean> response) {
-                ToolUitls.print("-------", "onResponse=" + response.body());
 
                 if (response.isSuccessful()) {
                     PayInfoBean body = response.body();

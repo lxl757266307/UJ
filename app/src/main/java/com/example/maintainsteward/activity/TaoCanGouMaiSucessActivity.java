@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
-import com.example.maintainsteward.base.MySetMealBean;
+import com.example.maintainsteward.bean.MySetMealBean;
 import com.example.maintainsteward.bean.TaoCanListBean;
 import com.example.maintainsteward.main.MainActivity;
 import com.example.maintainsteward.mvp_presonter.MySetMealPresonter;

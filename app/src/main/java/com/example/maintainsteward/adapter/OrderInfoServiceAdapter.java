@@ -62,7 +62,12 @@ public class OrderInfoServiceAdapter extends BaseAdapter {
         }
         viewHolder.txtServiceName.setText(service.get(position).getName());
         viewHolder.txtCount.setText("X" + service.get(position).getCount());
-        viewHolder.txtPrice.setText("￥" + service.get(position).getPrice());
+        String price = service.get(position).getPrice();
+        if (Double.parseDouble(price) == 0) {
+            viewHolder.txtPrice.setText("面议");
+        } else {
+            viewHolder.txtPrice.setText("￥" + price);
+        }
         return convertView;
     }
 

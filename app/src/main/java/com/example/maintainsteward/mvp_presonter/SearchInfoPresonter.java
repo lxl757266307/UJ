@@ -43,7 +43,6 @@ public class SearchInfoPresonter {
             @Override
             public void onResponse(Call<SearchKeyWordBean> call, Response<SearchKeyWordBean> response) {
 
-                ToolUitls.print(TAG, "response==" + response.body());
 
                 if (response.isSuccessful()) {
 

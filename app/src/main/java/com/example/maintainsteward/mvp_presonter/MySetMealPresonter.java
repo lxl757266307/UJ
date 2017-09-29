@@ -2,13 +2,12 @@ package com.example.maintainsteward.mvp_presonter;
 
 import com.example.maintainsteward.api.HttpApi;
 import com.example.maintainsteward.base.BaseHttpApi;
-import com.example.maintainsteward.base.MySetMealBean;
+import com.example.maintainsteward.bean.MySetMealBean;
 import com.example.maintainsteward.mvp_view.MySetMealListener;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Field;
 
 /**
  * Created by Administrator on 2017/9/27.

@@ -2,6 +2,7 @@ package com.example.maintainsteward.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -33,7 +34,7 @@ import com.example.maintainsteward.adapter.ServicePeiJianAdapter;
 import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
-import com.example.maintainsteward.base.MySetMealBean;
+import com.example.maintainsteward.bean.MySetMealBean;
 import com.example.maintainsteward.bean.SearviceInfoBean;
 import com.example.maintainsteward.bean.SecondKindsContent;
 import com.example.maintainsteward.bean.ServiceGoodsGetBean;
@@ -45,10 +46,8 @@ import com.example.maintainsteward.utils.ToolUitls;
 import com.example.maintainsteward.view.MyListView;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
-import com.tencent.mm.opensdk.modelmsg.WXTextObject;
 import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
-import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
@@ -151,7 +150,7 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
             case R.id.layout_huiyuan_serviceinfo:
                 if (dataBean != null && set_meal != null && set_meal.size() > 0) {
                     Intent intent = new Intent(this, TaoCanGouMaiSucessActivity.class);
-                    intent.putExtra("flag","ServiceInfoActivity");
+                    intent.putExtra("flag", "ServiceInfoActivity");
                     intent.putExtra("data", dataBean);
                     intent.putExtra("page", 3);
                     startActivity(intent);
@@ -205,7 +204,7 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
                     }
                 } else {
                     ToolUitls.toast(this, "您还未登录，请先登录");
-                    handler.sendEmptyMessageDelayed(1, 1500);
+                    handler.sendEmptyMessageDelayed(2, 1500);
 
 
                 }
@@ -215,12 +214,34 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
 
     }
 
+    ProgressDialog dialog;
+
+    public void showDialog() {
+        dialog = ProgressDialog.show(this, "", "正在加载....");
+        handler.sendEmptyMessageDelayed(1, 1000);
+
+    }
+
+    public void hideDialog() {
+        dialog.dismiss();
+    }
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            startActivity(new Intent(ServiceInfoActivity.this, LoginActivity.class));
-            finish();
+
+            switch (msg.what) {
+                case 1:
+                    hideDialog();
+
+                    break;
+                case 2:
+                    startActivity(new Intent(ServiceInfoActivity.this, LoginActivity.class));
+                    finish();
+                    break;
+            }
+
         }
     };
 
@@ -299,7 +320,7 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
 
         ButterKnife.bind(this);
         txtTitle.setText(title);
-
+        showDialog();
         initWebView();
         initAdapter();
         initService();
@@ -308,6 +329,7 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
         getMySetMeal();
 
     }
+
     public void getMySetMeal() {
         SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, Activity.MODE_PRIVATE);
         String id = sharedPreferences.getString("id", null);
@@ -321,6 +343,7 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
 //        ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "MySetMeal?" + "user_id=" + id + "&timestamp=" + time + "&sign=" + sign + "&key=" + Contacts.KEY);
         mySetMealPresonter.getMySetMeal(id, time, sign, Contacts.KEY);
     }
+
     private void initKindsContent() {
         if (!"".equals(id) && id != null) {
             String time = System.currentTimeMillis() + "";
@@ -329,7 +352,6 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
             map.put("id", id);
             String sign = ToolUitls.getSign(map);
 
-            ToolUitls.print(TAG, "sign333333===" + sign);
 
 //            ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "ServiceCategoryListSecondContent?id=" + id + "&timestamp=" + time + "&sign=" + sign + "&key=" + Contacts.KEY);
 
@@ -381,7 +403,6 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
             map.put("cat_id", id);
             String sign = ToolUitls.getSign(map);
 
-            ToolUitls.print(TAG, "sign===" + sign);
 
 //            ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "ServiceAll?cat_id=" + id + "&timestamp=" + time + "&sign=" + sign + "&key=" + Contacts.KEY);
 

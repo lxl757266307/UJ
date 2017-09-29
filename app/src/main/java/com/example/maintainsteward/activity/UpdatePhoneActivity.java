@@ -112,7 +112,6 @@ public class UpdatePhoneActivity extends BaseActivity implements LoginListener, 
                 String timeStamp = System.currentTimeMillis() + "";
                 TreeMap<String, String> map = new TreeMap<>();
                 String phone = editNewPhone.getText().toString().trim();
-                ToolUitls.print(TAG, "phone===" + phone);
                 map.put("phone", phone);
                 map.put("type", "6");
                 map.put("timestamp", timeStamp);

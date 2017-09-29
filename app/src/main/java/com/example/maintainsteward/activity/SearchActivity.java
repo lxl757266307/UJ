@@ -142,7 +142,6 @@ public class SearchActivity extends BaseActivity implements SearchHotWordListene
                     }
                 }
 
-                ToolUitls.print(TAG, "length===" + btnArray.length);
                 if (btnArray != null && btnArray.length > 0) {
                     initListener();
                 }

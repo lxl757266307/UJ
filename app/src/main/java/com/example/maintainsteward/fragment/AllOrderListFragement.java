@@ -133,7 +133,7 @@ public class AllOrderListFragement extends Fragment implements PtrHandler2, Orde
         map.put("page", page + "");
         String sign = ToolUitls.getSign(map);
         orderListPresonter.getOrderList(id, type, page + "", time, sign, Contacts.KEY);
-        handler.sendEmptyMessageDelayed(1, 1500);
+//        handler.sendEmptyMessageDelayed(1, 1500);
 
     }
 
@@ -256,6 +256,9 @@ public class AllOrderListFragement extends Fragment implements PtrHandler2, Orde
                 orderListAdapter.notifyDataSetChanged();
                 Intent intent = new Intent(Contacts.UPDATE_USER);
                 getActivity().sendBroadcast(intent);
+                Intent intent1 = new Intent(Contacts.ORDER_REFRESH);
+                getActivity().sendBroadcast(intent1);
+
 
                 break;
         }
@@ -282,7 +285,7 @@ public class AllOrderListFragement extends Fragment implements PtrHandler2, Orde
 
     @Override
     public void showDialog() {
-        dialog = ProgressDialog.show(getActivity(), "", "正在加载");
+//        dialog = ProgressDialog.show(getActivity(), "", "正在加载");
     }
 
 
@@ -321,7 +324,7 @@ public class AllOrderListFragement extends Fragment implements PtrHandler2, Orde
 
     @Override
     public void dialogDismiss() {
-        dialog.dismiss();
+//        dialog.dismiss();
     }
 
 

@@ -253,7 +253,6 @@ public class LoginActivity extends BaseActivity implements OnCheckedChangeListen
     public void getLoginCallBack(LoginCallBackBean body) {
         switch (body.getStatus()) {
             case "1":
-                ToolUitls.print(TAG, "BODY==" + body);
                 LoginCallBackBean.DataBean data = body.getData();
                 String id = data.getId();
                 String user_phone = data.getUser_phone();

@@ -30,7 +30,6 @@ public class AddressManagerPresonter {
             @Override
             public void onResponse(Call<AddressListBean> call, Response<AddressListBean> response) {
 
-                ToolUitls.print("response","response==="+response);
                 if (response.isSuccessful()) {
                     AddressListBean body = response.body();
 

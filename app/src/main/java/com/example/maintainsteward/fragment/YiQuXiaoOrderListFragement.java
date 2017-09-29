@@ -1,8 +1,10 @@
 package com.example.maintainsteward.fragment;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -86,6 +88,7 @@ public class YiQuXiaoOrderListFragement extends Fragment implements PtrHandler2,
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        getActivity().unregisterReceiver(updateReciver);
     }
 
     QuXiaoOrderPresonter presonter;
@@ -118,8 +121,8 @@ public class YiQuXiaoOrderListFragement extends Fragment implements PtrHandler2,
         map.put("order_type", type);
         map.put("page", page + "");
         String sign = ToolUitls.getSign(map);
-        orderListPresonter.getOrderList(id, type, page + "", time, sign, Contacts.KEY);
-        handler.sendEmptyMessageDelayed(1, 1500);
+        orderListPresonter.getYiQuXiaoOrderList(id, type, page + "", time, sign, Contacts.KEY);
+//        handler.sendEmptyMessageDelayed(1, 1500);
 
     }
 
@@ -143,7 +146,7 @@ public class YiQuXiaoOrderListFragement extends Fragment implements PtrHandler2,
         initPrsonter();
         getOrderByType("5");
         prtFramelayout.setPtrHandler(this);
-
+        register();
         lvOrderList.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -235,19 +238,7 @@ public class YiQuXiaoOrderListFragement extends Fragment implements PtrHandler2,
 
     @Override
     public void onOrderCancle(PublicBean bean, int position) {
-        switch (bean.getStatus()) {
 
-            case "1":
-                ToolUitls.toast(getActivity(), "取消成功");
-                demand_order_data.remove(position);
-                orderListAdapter.setDemand_order_data(demand_order_data);
-                orderListAdapter.notifyDataSetChanged();
-//                Intent intent = new Intent(Contacts.ORDER_REFRESH);
-//                intent.putExtra("type", "5");
-//                getActivity().sendBroadcast(intent);
-
-                break;
-        }
     }
 
     @Override
@@ -271,27 +262,27 @@ public class YiQuXiaoOrderListFragement extends Fragment implements PtrHandler2,
 
     @Override
     public void showDialog() {
-        dialog = ProgressDialog.show(getActivity(), "", "正在加载");
+//        dialog = ProgressDialog.show(getActivity(), "", "正在加载");
     }
 
 
     @Override
     public void getAllList(OrderListBean listBean) {
-        switch (listBean.getStatus()) {
-            case "1":
-
-                OrderListBean.DataBean data = listBean.getData();
-                allOrder.addAll(data.getDemand_order_data());
-                setDemand_order_data(allOrder);
-
-
-                break;
-            default:
-                ToolUitls.toast(getActivity(), "暂无数据");
-                orderListPresonter.dialogDismiss();
-
-                break;
-        }
+//        switch (listBean.getStatus()) {
+//            case "1":
+//
+//                OrderListBean.DataBean data = listBean.getData();
+//                allOrder.addAll(data.getDemand_order_data());
+//                setDemand_order_data(allOrder);
+//
+//
+//                break;
+//            default:
+//                ToolUitls.toast(getActivity(), "暂无数据");
+//                orderListPresonter.dialogDismiss();
+//
+//                break;
+//        }
     }
 
     @Override
@@ -314,11 +305,36 @@ public class YiQuXiaoOrderListFragement extends Fragment implements PtrHandler2,
 //                orderListPresonter.dialogDismiss();
 
                 break;
+            default:
+                ToolUitls.toast(getActivity(), "暂无数据");
+                orderListPresonter.dialogDismiss();
+
+                break;
         }
     }
 
     @Override
     public void dialogDismiss() {
-        dialog.dismiss();
+//        dialog.dismiss();
+    }
+
+    UpdateReciver updateReciver;
+
+    public void register() {
+        updateReciver = new UpdateReciver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Contacts.ORDER_REFRESH);
+        getActivity().registerReceiver(updateReciver, intentFilter);
+
+    }
+
+    class UpdateReciver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            allOrder.clear();
+            getOrderByType("5");
+
+        }
     }
 }

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.View;
@@ -21,7 +20,7 @@ import com.example.maintainsteward.R;
 import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
-import com.example.maintainsteward.base.MySetMealBean;
+import com.example.maintainsteward.bean.MySetMealBean;
 import com.example.maintainsteward.bean.CityListBean;
 import com.example.maintainsteward.bean.PayInfoBean;
 import com.example.maintainsteward.bean.TaoCallBackBean;
@@ -259,7 +258,6 @@ public class WriteTaoCanInfoActivity extends BaseActivity implements MyDialogFra
     @Override
     public void orderTaoCan(TaoCallBackBean backBean) {
 
-        ToolUitls.print("-----", "backBean=" + backBean);
         switch (backBean.getStatus()) {
             case "1":
                 TaoCallBackBean.DataBean data = backBean.getData();
