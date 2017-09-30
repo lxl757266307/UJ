@@ -602,7 +602,7 @@
                             android:orientation="horizontal"
                             android:padding="10dp">
 
-                            <com.example.maintainsteward.view.MyListView
+                            <com.example.maintainsteward2.view.MyListView
                                 android:id="@+id/lv_servicce"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
@@ -688,7 +688,7 @@
                             android:orientation="horizontal"
                             android:padding="10dp">
 
-                            <com.example.maintainsteward.view.MyListView
+                            <com.example.maintainsteward2.view.MyListView
                                 android:id="@+id/lv_peijian"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />

@@ -61,7 +61,7 @@
                 android:background="@color/navpage"
                 android:orientation="vertical">
 
-                <com.example.maintainsteward.view.MyListView
+                <com.example.maintainsteward2.view.MyListView
                     android:id="@+id/lv_fragment_kinds"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

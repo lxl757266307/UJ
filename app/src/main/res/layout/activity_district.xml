@@ -47,7 +47,7 @@
 
     </LinearLayout>
 
-    <com.example.maintainsteward.view.MyListView
+    <com.example.maintainsteward2.view.MyListView
         android:id="@+id/lv_district"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

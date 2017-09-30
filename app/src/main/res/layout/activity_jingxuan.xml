@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.example.maintainsteward.view.MyListView
+            <com.example.maintainsteward2.view.MyListView
                 android:id="@+id/lv_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

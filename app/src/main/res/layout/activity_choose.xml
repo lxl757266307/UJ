@@ -117,7 +117,7 @@
             android:layout_height="1dp"
             android:background="#dfdfdf" />
 
-        <com.example.maintainsteward.view.MyListView
+        <com.example.maintainsteward2.view.MyListView
             android:id="@+id/lv_chooselocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

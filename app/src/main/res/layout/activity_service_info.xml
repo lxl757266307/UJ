@@ -92,7 +92,7 @@
                     android:orientation="vertical">
 
 
-                    <com.example.maintainsteward.view.MyListView
+                    <com.example.maintainsteward2.view.MyListView
                         android:id="@+id/lv_service_serviceinfo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
                             android:src="@mipmap/xiayiye" />
                     </LinearLayout>
 
-                    <com.example.maintainsteward.view.MyListView
+                    <com.example.maintainsteward2.view.MyListView
                         android:id="@+id/lv_peijian_serviceinfo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

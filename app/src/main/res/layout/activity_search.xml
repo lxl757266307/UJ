@@ -87,7 +87,7 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <com.example.maintainsteward.view.MyViewGroup
+        <com.example.maintainsteward2.view.MyViewGroup
             android:id="@+id/vg_search_activity"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

@@ -184,7 +184,7 @@
 
                 </LinearLayout>
 
-                <com.example.maintainsteward.view.BannerViewPager
+                <com.example.maintainsteward2.view.BannerViewPager
                     android:id="@+id/vip_main_fragment"
                     android:layout_width="match_parent"
                     android:layout_height="140dp"
