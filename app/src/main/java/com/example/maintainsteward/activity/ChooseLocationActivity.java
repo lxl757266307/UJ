@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.CityListAdapter;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.CityListBean;
@@ -44,6 +45,7 @@ public class ChooseLocationActivity extends BaseActivity implements ChooseLocati
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         setContentView(R.layout.activity_choose);
         ButterKnife.bind(this);
         lvChooselocation.setOnItemClickListener(this);

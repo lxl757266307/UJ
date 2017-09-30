@@ -10,6 +10,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.MySetMealBean;
@@ -54,6 +55,8 @@ public class TaoCanGouMaiSucessActivity extends BaseActivity implements MySetMea
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
+
         data = (MySetMealBean.DataBean) getIntent().getSerializableExtra("data");
         page = this.getIntent().getIntExtra("page", -1);
         flag = this.getIntent().getStringExtra("flag");

@@ -59,7 +59,12 @@ public class OrderServiceListAdapter extends BaseAdapter {
 
         viewHolder.txtNameLijiyuyue.setText(data.get(position).getName());
         viewHolder.txtCountLijiyuyue.setText("×" + data.get(position).getNumber());
-        viewHolder.txtPriceLijiyuyue.setText("￥" + data.get(position).getExpenses());
+        String expenses = data.get(position).getExpenses();
+        if (Double.parseDouble(expenses) == 0) {
+            viewHolder.txtPriceLijiyuyue.setText("面议");
+        } else {
+            viewHolder.txtPriceLijiyuyue.setText("￥" + data.get(position).getExpenses());
+        }
         return convertView;
     }
 

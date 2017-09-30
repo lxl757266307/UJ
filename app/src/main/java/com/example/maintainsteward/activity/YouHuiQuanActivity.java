@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.CanUseJuanListAdapter;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.CanUseYouHuiQuanBean;
@@ -79,6 +80,7 @@ public class YouHuiQuanActivity extends BaseActivity implements PtrHandler2, KaJ
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         order_no = getIntent().getStringExtra("order_no");
         count = getIntent().getStringExtra("count");
         setContentView(R.layout.activity_youhuiquan);

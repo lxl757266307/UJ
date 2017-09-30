@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.LoginCallBackBean;
@@ -72,6 +73,7 @@ public class SetPayPasswordActivity extends BaseActivity implements OnUpdatePayP
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         phone = this.getIntent().getStringExtra("phone");
         setContentView(R.layout.activity_set_pay_password);
         ButterKnife.bind(this);
@@ -179,15 +181,27 @@ public class SetPayPasswordActivity extends BaseActivity implements OnUpdatePayP
                 map.put("timestamp", timeStamp);
                 String sign = ToolUitls.getSign(map);
                 payPasswordPresonter.setPayPassword(id, phone, newPassword, "1", timeStamp, sign, Contacts.KEY);
+
+//                ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "GoSetPayPassword?" + "user_id=" + id
+//                        + "&phone=" + phone + "&pwd=" + newPassword + "&type=" + "1" + "&timestamp=" + timeStamp +
+//                        "&sign=" + sign + "&key=" + Contacts.KEY);
+
             }
+
             break;
         }
     }
 
     @Override
     public void onSetPasswordSucess(PublicBean bean) {
+
         switch (bean.getStatus()) {
             case "1":
+                SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
+                boolean passwordSet = sharedPreferences.getBoolean("passwordSet", false);
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+                edit.putBoolean("passwordSet", true);
+                edit.commit();
                 ToolUitls.toast(this, "修改成功");
                 handler.sendEmptyMessageDelayed(3, 1000);
                 break;
@@ -200,7 +214,6 @@ public class SetPayPasswordActivity extends BaseActivity implements OnUpdatePayP
 
     @Override
     public void onUpdatePasswordSucess(PublicBean bean) {
-
 
 
     }

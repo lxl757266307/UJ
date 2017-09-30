@@ -32,4 +32,6 @@
 
     <color name="sugestion_txt_normal">#F3F3F3</color>
     <color name="sugestion_txt_pressed">#FD6B06</color>
+
+    <color name="status_bar_color">#ED0605</color>
 </resources>

@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 
@@ -39,6 +40,7 @@ public class MyQianBaoActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         setContentView(R.layout.activity_qianbao);
         ButterKnife.bind(this);
         sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);

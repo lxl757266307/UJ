@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.SearchKeyWordAdapter;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.SearchKeyWordBean;
@@ -69,6 +70,7 @@ public class SearInfoActivity extends BaseActivity implements PtrHandler2, Searc
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         initData();
         setContentView(R.layout.activity_search_info);
         ButterKnife.bind(this);

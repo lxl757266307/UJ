@@ -29,6 +29,7 @@ import android.widget.TextView;
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.OrderInfoPeiJianAdapter;
 import com.example.maintainsteward.adapter.OrderInfoServiceAdapter;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.CanUseYouHuiQuanBean;
@@ -158,6 +159,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         orderId = this.getIntent().getStringExtra("id");
         setContentView(R.layout.activity_order_message);
         ButterKnife.bind(this);
@@ -233,6 +235,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
     }
 
     public static final int YOU_HUI_QUAN_CODE = 1;
+    String bonus_id;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent x) {
@@ -246,6 +249,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
 
                     if (resultDataBean != null) {
                         String bonus_amount = resultDataBean.getBonus_amount();
+                        bonus_id = resultDataBean.getBonus_id();
                         txtJianmian.setText("￥" + bonus_amount);
                         txtJiantou.setVisibility(View.GONE);
                         String total_amount = txtYouhuijia.getText().toString().substring(1);
@@ -344,6 +348,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                 switch (data.getOrder_status()) {
 
                     case "1":
+
                         txtYouhuijia.setText("￥" + data.getBonus_price());
                         img1.setImageResource(R.mipmap.xiantiao3);
                         imgYitijiao.setImageResource(R.mipmap.yitijiao2);
@@ -379,6 +384,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                         txtLijiyuyue.setText("已到达");
                         break;
                     case "4":
+                        txtJiantou.setVisibility(View.VISIBLE);
                         img1.setImageResource(R.mipmap.xiantiao2);
                         img2.setImageResource(R.mipmap.xiantiao3);
                         imgYuyuechenggong.setImageResource(R.mipmap.yuyuechengong2);
@@ -540,7 +546,7 @@ public class OrderMessageActivity extends BaseActivity implements OrderInfoListe
                 alertDialog.dismiss();
 
                 String order_sn = data.getOrder_no();
-                payPresonter.getPayInfo(order_sn);
+                payPresonter.getPayInfo(order_sn, bonus_id);
 
             }
         });

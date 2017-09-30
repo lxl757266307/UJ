@@ -399,7 +399,8 @@ public interface HttpApi {
     @FormUrlEncoded
     @POST("pay")
     Call<PayInfoBean> getPayInfo(
-            @Field("order_sn") String order_sn
+            @Field("order_sn") String order_sn,
+            @Field("bonus_id") String bonus_id
     );
 
 

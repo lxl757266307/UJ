@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.main.MainActivity;
@@ -21,7 +22,7 @@ public class LoadingActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+//        MyApplication.getActivitiesList().add(this);
         sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
         boolean online = sharedPreferences.getBoolean("online", false);
 

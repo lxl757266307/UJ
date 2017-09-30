@@ -38,6 +38,7 @@ public class DistrictActivity extends BaseActivity implements AdapterView.OnItem
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         initData();
         setContentView(R.layout.activity_district);
         ButterKnife.bind(this);

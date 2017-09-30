@@ -23,10 +23,12 @@ public final class Contacts {
 
 
     /*普通订单支付*/
-    public static final String WX_PAY_URL = "http://wxtest.cnncsh.com/app_user/orderpaybywechat/";
+//    public static final String WX_PAY_URL = "http://wxtest.cnncsh.com/app_user/orderpaybywechat/";
+    public static final String WX_PAY_URL = "http://wx.cnncsh.com/app_user/orderpaybywechat/";
 
     /*365套餐支付*/
-    public static final String WX_PAY365_URL = "http://wxtest.cnncsh.com/app_user/Mealpaybywechat/";
+//    public static final String WX_PAY365_URL = "http://wxtest.cnncsh.com/app_user/Mealpaybywechat/";
+    public static final String WX_PAY365_URL = "http://wx.cnncsh.com/app_user/Mealpaybywechat/";
 
 
 
@@ -70,6 +72,10 @@ public final class Contacts {
 
     /*付款完刷新订单*/
     public static String STATUS_REFRESH = "status_refresh";
+
+
+    /*是否修改过密码*/
+    public static boolean PASSWORD_HASE_UPDATE = true;
 
 
 }

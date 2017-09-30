@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.TaoCanFragmentAdapter;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.fragment.Health365Fragment;
 
@@ -40,6 +41,7 @@ public class TaoCanActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         setContentView(R.layout.activity_365);
         ButterKnife.bind(this);
         fragments = new ArrayList<>();

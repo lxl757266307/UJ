@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.bumptech.glide.Glide;
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.PublicBean;
@@ -91,6 +92,7 @@ public class UserActivity extends BaseActivity implements UserInfoListener, OnUp
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         data = (UserInfoBean.DataBean) this.getIntent().getSerializableExtra("data");
         setContentView(R.layout.activity_user);
         ButterKnife.bind(this);
@@ -172,6 +174,13 @@ public class UserActivity extends BaseActivity implements UserInfoListener, OnUp
 
             break;
             case R.id.layout_password: {
+                SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
+                boolean passwordSet = sharedPreferences.getBoolean("passwordSet", false);
+
+                if (passwordSet) {
+                    ToolUitls.toast(this, "您已设置过密码！");
+                    return;
+                }
 
                 Intent intent = new Intent(this, SetPayPasswordActivity.class);
                 intent.putExtra("phone", txtPhone.getText().toString());

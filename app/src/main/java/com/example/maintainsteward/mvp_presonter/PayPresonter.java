@@ -31,9 +31,9 @@ public class PayPresonter {
     }
 
 
-    public void getPayInfo(String orderNo) {
+    public void getPayInfo(String orderNo,String bonus_id) {
 
-        Call<PayInfoBean> payInfo = httpApi.getPayInfo(orderNo);
+        Call<PayInfoBean> payInfo = httpApi.getPayInfo(orderNo,bonus_id);
 
         payInfo.enqueue(new Callback<PayInfoBean>() {
             @Override

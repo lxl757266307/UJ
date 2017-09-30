@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.HotNewListAdapter;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.HotNewsList;
@@ -63,6 +64,7 @@ public class HotNewsActivity extends BaseActivity implements HotNewsListener, Ho
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         data = (List<HotNewsList.DataBean>) this.getIntent().getSerializableExtra("data");
         setContentView(R.layout.activity_hotnew);
         ButterKnife.bind(this);

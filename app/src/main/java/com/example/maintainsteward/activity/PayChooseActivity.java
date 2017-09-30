@@ -54,6 +54,7 @@ public class PayChooseActivity extends BaseActivity implements OnPayListener {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         order_no = this.getIntent().getStringExtra("order_no");
         price = this.getIntent().getStringExtra("price");
         bean = (PayInfoBean) this.getIntent().getSerializableExtra("data");

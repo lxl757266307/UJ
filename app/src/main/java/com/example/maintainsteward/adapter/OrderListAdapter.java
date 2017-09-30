@@ -88,6 +88,7 @@ public class OrderListAdapter extends BaseAdapter {
         }
 
 
+
         viewHolder.txtServiceName.setText(demandOrderDataBean.getName());
         switch (demandOrderDataBean.getOrder_status()) {
             case "1":

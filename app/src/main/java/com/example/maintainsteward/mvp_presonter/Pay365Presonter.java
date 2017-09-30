@@ -29,7 +29,7 @@ public class Pay365Presonter {
 
     public void getPayInfo(String orderNo) {
 
-        Call<PayInfoBean> payInfo = httpApi.getPayInfo(orderNo);
+        Call<PayInfoBean> payInfo = httpApi.getPayInfo(orderNo, "0");
         payInfo.enqueue(new Callback<PayInfoBean>() {
             @Override
             public void onResponse(Call<PayInfoBean> call, Response<PayInfoBean> response) {

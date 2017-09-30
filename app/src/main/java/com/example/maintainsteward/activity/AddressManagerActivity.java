@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.AddressListAdapter;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.AddressDeleteBean;
@@ -66,6 +67,7 @@ public class AddressManagerActivity extends BaseActivity implements GetAddressLi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         flag = this.getIntent().getStringExtra("flag");
         setContentView(R.layout.activity_address_manager);
         ButterKnife.bind(this);

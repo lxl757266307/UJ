@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.AddressBean;
 import com.example.maintainsteward.bean.AddressListBean;
@@ -85,6 +86,7 @@ public class AddAddressActivity extends FragmentActivity implements MyDialogFrag
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         initData();
         setContentView(R.layout.activity_add_address);
         ButterKnife.bind(this);

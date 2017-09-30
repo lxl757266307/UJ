@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.KaJuanFragmentAdapter;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.CanUseYouHuiQuanBean;
@@ -68,6 +69,7 @@ public class MyKaJuanActivity extends BaseActivity implements KaJuanListener {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         setContentView(R.layout.activity_kajuan);
         ButterKnife.bind(this);
         textViews = new TextView[3];

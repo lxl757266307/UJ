@@ -14,6 +14,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -71,18 +72,49 @@ public class LoginActivity extends FragmentActivity implements OnCheckedChangeLi
     LoginPresonter loginPresonter;
     @BindView(R.id.layout_check)
     LinearLayout layoutCheck;
+    String flag;
+    View decorView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        flag = this.getIntent().getStringExtra("flag");
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
+        decorView = getWindow().getDecorView();
         PermissionRegisterUtils.registerPermission(this);
 
         initSharedPrefence();
         initListener();
         initPresonter();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        hideBottomUIMenu();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        hideBottomUIMenu();
+    }
+
+    protected void hideBottomUIMenu() {
+        //隐藏虚拟按键，并且全屏
+        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
+            View v = this.getWindow().getDecorView();
+            v.setSystemUiVisibility(View.GONE);
+        } else if (Build.VERSION.SDK_INT >= 19) {
+            //for new api versions.
+            View decorView = getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
+            decorView.setSystemUiVisibility(uiOptions);
+        }
     }
 
     SharedPreferences sharedPreferences;
@@ -126,6 +158,12 @@ public class LoginActivity extends FragmentActivity implements OnCheckedChangeLi
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+
+            if ("MainActivity".equals(flag)) {
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+                return true;
+            }
 
             if (System.currentTimeMillis() - exitTime > 2000) {
                 ToolUitls.toast(this, "再按一次退出程序");

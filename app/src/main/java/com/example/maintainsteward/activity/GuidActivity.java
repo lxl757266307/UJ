@@ -1,5 +1,6 @@
 package com.example.maintainsteward.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.ImagesPagerAdapter;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.main.MainActivity;
@@ -28,7 +30,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2017/9/23.
  */
 
-public class GuidActivity extends BaseActivity {
+public class GuidActivity extends Activity {
 
 
     @BindView(R.id.vp)
@@ -59,7 +61,7 @@ public class GuidActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        MyApplication.getActivitiesList().add(this);
         setContentView(R.layout.activity_guid);
         ButterKnife.bind(this);
 
@@ -75,6 +77,7 @@ public class GuidActivity extends BaseActivity {
 //                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 //                imageView.setLayoutParams(layoutParams);
             imageView.setImageResource(ids[i]);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageViews.add(imageView);
         }
 

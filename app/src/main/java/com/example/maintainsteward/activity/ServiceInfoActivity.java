@@ -17,6 +17,7 @@ import android.support.v4.app.ActivityCompat;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -106,6 +107,8 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
     TextView txtPeijianTotalServiceinfo;
     @BindView(R.id.txt_title)
     TextView txtTitle;
+    @BindView(R.id.txt_yang)
+    TextView txtYang;
 
 
     @OnClick({R.id.layout_back,
@@ -251,13 +254,25 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
 
     public static final String MESSAGE = "U匠是一款方便于人们解决日常生活中有关家庭维修、家电清洗等各种家庭中遇到的疑难杂症的APP";
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (popupWindow != null && popupWindow.isShowing()) {
+            return false;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    PopupWindow popupWindow;
+
     private void share() {
 
         View view = LayoutInflater.from(this).inflate(R.layout.popuwindow_fenxiang, null);
-        final PopupWindow popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
+        popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
         LinearLayout weiXin = (LinearLayout) view.findViewById(R.id.layout_weixin);
         LinearLayout pengYouQuan = (LinearLayout) view.findViewById(R.id.layout_pengyouquan);
         popupWindow.setOutsideTouchable(true);
+        popupWindow.setFocusable(false);
+
         weiXin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -307,19 +322,23 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
             }
         });
 
-        popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+        popupWindow.showAtLocation(parentView, Gravity.BOTTOM, 0, 0);
 
     }
 
     IWXAPI api;
+    View parentView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         api = MyApplication.api;
         initData();
         initPresonter();
-        setContentView(R.layout.activity_service_info);
+        parentView = LayoutInflater.from(this).inflate(R.layout.activity_service_info, null);
+        setContentView(parentView);
+
 
         ButterKnife.bind(this);
         txtTitle.setText(title);
@@ -446,7 +465,7 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
                 searviceInfoAdapter.setData(data);
                 lvServiceServiceinfo.setAdapter(searviceInfoAdapter);
                 searviceInfoAdapter.notifyDataSetChanged();
-                getServiceTotal();
+//                getServiceTotal();
                 break;
 
         }
@@ -479,7 +498,7 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
                 adapter.setOnPeiJianNumberChangeListener(this);
                 lvPeijianServiceinfo.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
-                getPeiJianTotal();
+//                getPeiJianTotal();
                 break;
         }
     }
@@ -522,6 +541,12 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            if (popupWindow != null && popupWindow.isShowing()) {
+                popupWindow.dismiss();
+                return true;
+            }
+
             finish();
             return true;
         }
@@ -574,7 +599,13 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
             }
 
         }
-        txtServiceTotalServiceinfo.setText(price + "");
+        if (price == 0) {
+            txtYang.setVisibility(View.INVISIBLE);
+            txtServiceTotalServiceinfo.setText("面议");
+        } else {
+            txtYang.setVisibility(View.VISIBLE);
+            txtServiceTotalServiceinfo.setText(price + "");
+        }
 
     }
 
@@ -597,6 +628,7 @@ public class ServiceInfoActivity extends BaseActivity implements ServiceInfoList
                     total += Double.parseDouble(price) * peiJian.get(i).getNumber();
             }
         }
+
 
         txtPeijianTotalServiceinfo.setText("包含材料费￥" + total + "元");
     }

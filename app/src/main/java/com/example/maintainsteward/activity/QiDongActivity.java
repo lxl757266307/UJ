@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.main.MainActivity;
@@ -20,6 +21,7 @@ public class QiDongActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         setContentView(R.layout.activity_qidong);
 
         SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);

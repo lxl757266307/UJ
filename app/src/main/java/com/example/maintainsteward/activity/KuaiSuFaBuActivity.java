@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.PhotoListAdapter;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.PublicBean;
@@ -76,6 +77,7 @@ public class KuaiSuFaBuActivity extends BaseActivity implements OnUpLoadPhotoLis
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         setContentView(R.layout.activity_kuaisufabu);
         ButterKnife.bind(this);
         initPresonter();

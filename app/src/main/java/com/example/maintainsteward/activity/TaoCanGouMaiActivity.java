@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.TaoCanFragementPagerAdapter;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.fragment.Health365Fragment;
 import com.example.maintainsteward.fragment.HelpSelfQingXiTaoCanFragment;
@@ -45,6 +46,7 @@ public class TaoCanGouMaiActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         setContentView(R.layout.activity_taocan);
         ButterKnife.bind(this);
         initViewPage();

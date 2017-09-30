@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.JingXuanListAdapter;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.JingXuanBean;
@@ -54,6 +55,7 @@ public class JingXuanPaiHangActivity extends BaseActivity implements JingXuanLis
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         setContentView(R.layout.activity_jingxuan);
         ButterKnife.bind(this);
         imgHuidaodingbu.setVisibility(View.GONE);
@@ -189,6 +191,7 @@ public class JingXuanPaiHangActivity extends BaseActivity implements JingXuanLis
         String index = data.get(position).getId();
         Intent intent = new Intent(this, ServiceInfoActivity.class);
         intent.putExtra("id", index + "");
+        intent.putExtra("title",data.get(position).getName());
         startActivity(intent);
     }
 }

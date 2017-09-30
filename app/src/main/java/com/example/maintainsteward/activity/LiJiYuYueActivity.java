@@ -30,6 +30,7 @@ import com.example.maintainsteward.adapter.OrderPeiJianListAdapter;
 import com.example.maintainsteward.adapter.OrderServiceListAdapter;
 import com.example.maintainsteward.adapter.PhotoListAdapter;
 import com.example.maintainsteward.adapter.PhotoListAdapter.OnPhotoClickListener;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.AddressListBean;
@@ -238,6 +239,7 @@ public class LiJiYuYueActivity extends BaseActivity implements OnPhotoClickListe
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         initData();
         setContentView(R.layout.activity_lijiyuyue);
         ButterKnife.bind(this);

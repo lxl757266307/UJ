@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -74,7 +75,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
         boolean isFirst = sharedPreferences.getBoolean("isFirst", true);
 
@@ -170,7 +171,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
                     setRgRadioGroupType(radioFour);
                 } else {
                     ToolUitls.toast(this, "您还未，请先登录！");
-                    handler.sendEmptyMessageDelayed(1, 1000);
+                    handler.sendEmptyMessageDelayed(1, 200);
                 }
 
 
@@ -183,7 +184,9 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.putExtra("flag", "MainActivity");
+            startActivity(intent);
         }
     };
 

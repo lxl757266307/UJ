@@ -352,11 +352,12 @@
 
                             <TextView
                                 android:id="@+id/txt_worker_phone"
-                                android:layout_width="120dp"
-                                android:layout_height="match_parent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:background="@drawable/circle_box_3r_red"
                                 android:gravity="center"
                                 android:text=""
+                                android:padding="5dp"
                                 android:textColor="#da0a0a"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -474,13 +475,13 @@
 
                                 android:id="@+id/txt_user_address"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_marginLeft="20dp"
                                 android:gravity="right"
                                 android:maxLines="2"
                                 android:text=""
                                 android:textColor="#181818"
-                                android:textSize="14sp" />
+                                android:textSize="13sp" />
 
 
                         </LinearLayout>
@@ -803,6 +804,7 @@
                                 android:textSize="14sp" />
 
                             <TextView
+                                android:visibility="invisible"
                                 android:id="@+id/txt_jiantou"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"

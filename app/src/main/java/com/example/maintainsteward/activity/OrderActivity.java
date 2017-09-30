@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.adapter.OrderFragmentsAdapter;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.OrderListBean;
@@ -75,6 +76,7 @@ public class OrderActivity extends BaseActivity implements GetOrderListListener 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         item = this.getIntent().getIntExtra("page", -1);
         setContentView(R.layout.activity_order);
         ButterKnife.bind(this);

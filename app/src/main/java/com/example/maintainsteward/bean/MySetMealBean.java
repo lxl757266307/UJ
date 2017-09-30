@@ -234,7 +234,7 @@ public class MySetMealBean implements Serializable {
                         ", content_desc='" + content_desc + '\'' +
                         ", end_days='" + end_days + '\'' +
                         ", name='" + name + '\'' +
-                        ", second_id='" + second_id + '\'' +
+                        ", second_id='" + second_name + '\'' +
                         '}';
             }
 
@@ -270,7 +270,16 @@ public class MySetMealBean implements Serializable {
             private String content_desc;
             private String end_days;
             private String name;
+            private String second_name;
             private String second_id;
+
+            public String getSecond_id() {
+                return second_id;
+            }
+
+            public void setSecond_id(String second_id) {
+                this.second_id = second_id;
+            }
 
             public static SetMealBean objectFromData(String str) {
 
@@ -428,12 +437,12 @@ public class MySetMealBean implements Serializable {
                 this.name = name;
             }
 
-            public String getSecond_id() {
-                return second_id;
+            public String getSecond_name() {
+                return second_name;
             }
 
-            public void setSecond_id(String second_id) {
-                this.second_id = second_id;
+            public void setSecond_name(String second_name) {
+                this.second_name = second_name;
             }
         }
     }

@@ -196,6 +196,7 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
                 Intent intent = new Intent(getActivity(), ServiceInfoActivity.class);
                 String id = dataBeen.get(0).getId();
                 intent.putExtra("id", id);
+                intent.putExtra("title", dataBeen.get(0).getName());
                 startActivity(intent);
             }
 
@@ -204,12 +205,14 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
                 Intent intent = new Intent(getActivity(), ServiceInfoActivity.class);
                 String id = dataBeen.get(1).getId();
                 intent.putExtra("id", id);
+                intent.putExtra("title", dataBeen.get(1).getName());
                 startActivity(intent);
             }
             break;
             case R.id.layout_xiyijiqingxi_mainfragment: {
                 Intent intent = new Intent(getActivity(), ServiceInfoActivity.class);
                 String id = dataBeen.get(2).getId();
+                intent.putExtra("title", dataBeen.get(2).getName());
                 intent.putExtra("id", id);
                 startActivity(intent);
             }
@@ -217,6 +220,7 @@ public class MainFragment extends Fragment implements View.OnScrollChangeListene
             case R.id.layout_chouyouyanji_mainfragment: {
                 Intent intent = new Intent(getActivity(), ServiceInfoActivity.class);
                 String id = dataBeen.get(3).getId();
+                intent.putExtra("title", dataBeen.get(3).getName());
                 intent.putExtra("id", id);
                 startActivity(intent);
             }

@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.maintainsteward.R;
+import com.example.maintainsteward.application.MyApplication;
 import com.example.maintainsteward.base.BaseActivity;
 import com.example.maintainsteward.base.Contacts;
 import com.example.maintainsteward.bean.LoginCallBackBean;
@@ -75,6 +76,7 @@ public class UpdatePayPasswordActivity extends BaseActivity implements OnUpdateP
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         phone = this.getIntent().getStringExtra("phone");
         setContentView(R.layout.activity_update_pay_password);
         ButterKnife.bind(this);

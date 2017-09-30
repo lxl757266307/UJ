@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.example.maintainsteward.R;
 import com.example.maintainsteward.activity.KuaiSuFaBuActivity;
+import com.example.maintainsteward.activity.LiJiYuYueActivity;
 import com.example.maintainsteward.activity.SearchActivity;
 import com.example.maintainsteward.activity.ServiceInfoActivity;
 import com.example.maintainsteward.adapter.FragmentKindsLeftMenuAdapter;
@@ -258,6 +259,6 @@ public class KindsFragment extends Fragment implements KindsListener, AdapterVie
 
     @OnClick(R.id.img_tianjia_fragment_kinds)
     public void fabu() {
-        startActivity(new Intent(getActivity(), KuaiSuFaBuActivity.class));
+        startActivity(new Intent(getActivity(), LiJiYuYueActivity.class));
     }
 }

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="60dp"
     android:background="@android:color/white"
+    android:fitsSystemWindows="true"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -24,10 +25,10 @@
             android:id="@+id/txt_base_title"
             android:layout_width="@dimen/layout_width_0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/title"
-            android:gravity="center"
             android:layout_marginRight="@dimen/layout_marginRight_40dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/title"
             android:textColor="@android:color/white"
             android:textSize="@dimen/textSize_18sp" />
     </LinearLayout>

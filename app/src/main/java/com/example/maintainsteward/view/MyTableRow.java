@@ -72,6 +72,7 @@ public class MyTableRow extends TableRow {
                 public void onClick(View v) {
                     Intent intent = new Intent(context, ServiceInfoActivity.class);
                     intent.putExtra("id", bean.getSecond_id());
+                    intent.putExtra("title", bean.getSecond_name());
                     context.startActivity(intent);
 
                 }

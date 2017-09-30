@@ -37,16 +37,32 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
         setIntent(intent);
         api.handleIntent(intent, this);
+        finish();
     }
 
     @Override
     public void onReq(BaseReq req) {
+        finish();
     }
 
     @Override
     public void onResp(BaseResp resp) {
-        if (resp.errCode == 0) {
-            finish();
+        switch (resp.errCode) {
+            case BaseResp.ErrCode.ERR_OK:
+                Toast.makeText(this, "发送成功", Toast.LENGTH_LONG).show();
+                finish();
+                break;
+            case BaseResp.ErrCode.ERR_USER_CANCEL:
+                Toast.makeText(this, "分享取消", Toast.LENGTH_LONG).show();
+                finish();
+                break;
+            case BaseResp.ErrCode.ERR_AUTH_DENIED:
+                Toast.makeText(this, "分享被拒绝", Toast.LENGTH_LONG).show();
+                finish();
+                break;
+            default:
+                Toast.makeText(this, "分享返回", Toast.LENGTH_LONG).show();
+                break;
         }
 
     }

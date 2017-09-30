@@ -99,6 +99,8 @@ public class WriteTaoCanInfoActivity extends BaseActivity implements MyDialogFra
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
+
         msg = this.getIntent().getStringExtra("msg");
         groupData = (List<TaoCanListBean.DataBean.SetMealDataBean>) this.getIntent().getSerializableExtra("group");
         SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
@@ -152,7 +154,7 @@ public class WriteTaoCanInfoActivity extends BaseActivity implements MyDialogFra
 //                payType = "2";
                 break;
             case R.id.btn_tijiao:
-
+                Contacts.PAY_FLAG = "taoCan";
 
 //                Intent intent = new Intent(this, TaoCanGouMaiSucessActivity.class);
 //                intent.putExtra("group", (Serializable) groupData);
@@ -258,7 +260,7 @@ public class WriteTaoCanInfoActivity extends BaseActivity implements MyDialogFra
 
         switch (bean.getStatus()) {
             case 1:
-                Contacts.PAY_FLAG = "taoCan";
+
                 String appid = bean.getAppid();
                 String noncestr = bean.getNoncestr();
                 String packageX = bean.getPackageX();
@@ -323,11 +325,11 @@ public class WriteTaoCanInfoActivity extends BaseActivity implements MyDialogFra
     @Override
     public void onLoadMySetMeal(MySetMealBean bean) {
 
-        MySetMealBean.DataBean data = bean.getData();
-        Intent intent = new Intent(this, TaoCanGouMaiSucessActivity.class);
-        intent.putExtra("data", (Serializable) data);
-        startActivity(intent);
-        finish();
+//        MySetMealBean.DataBean data = bean.getData();
+//        Intent intent = new Intent(this, TaoCanGouMaiSucessActivity.class);
+//        intent.putExtra("data", (Serializable) data);
+//        startActivity(intent);
+//        finish();
 
     }
 
@@ -351,6 +353,8 @@ public class WriteTaoCanInfoActivity extends BaseActivity implements MyDialogFra
         public void onReceive(Context context, Intent intent) {
             if (Contacts.PAY_FLAG.equals("taoCan")) {
                 pay365Presonter.payForNowNew(order_sn, payType, "399");
+                Intent intent2 = new Intent(WriteTaoCanInfoActivity.this, TaoCanGouMaiSucessActivity.class);
+                startActivity(intent2);
             }
         }
     }
