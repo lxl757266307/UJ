@@ -103,33 +103,33 @@
 
             </LinearLayout>
 
-            <!--<LinearLayout-->
-            <!--android:id="@+id/layout_main_three"-->
-            <!--android:layout_width="@dimen/layout_width_0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:gravity="center"-->
-            <!--android:orientation="vertical"-->
-            <!--android:padding="5dp">-->
+            <LinearLayout
+            android:id="@+id/layout_main_three"
+            android:layout_width="@dimen/layout_width_0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="5dp">
 
-            <!--<RadioButton-->
-            <!--android:id="@+id/radio_three"-->
-            <!--android:layout_width="25dp"-->
-            <!--android:layout_height="25dp"-->
-            <!--android:background="@drawable/main_three"-->
-            <!--android:button="@null"-->
-            <!--android:clickable="false" />-->
+            <RadioButton
+            android:id="@+id/radio_three"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/main_three"
+            android:button="@null"
+            android:clickable="false" />
 
-            <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:gravity="center"-->
-            <!--android:paddingTop="5dp"-->
-            <!--android:text="推荐"-->
-            <!--android:textColor="@color/black"-->
-            <!--android:textSize="13sp" />-->
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="推荐"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
 
-            <!--</LinearLayout>-->
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="@dimen/layout_width_0dp"

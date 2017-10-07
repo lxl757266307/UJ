@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="123dp"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txt_zong"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_height_40dp"
+        android:gravity="center"
+        android:text="总粉丝"
+        android:textColor="#181818" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#dfdfdf" />
+
+    <TextView
+        android:id="@+id/txt_yue"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_height_40dp"
+        android:gravity="center"
+        android:text="月粉丝"
+        android:textColor="#181818" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#dfdfdf" />
+
+    <TextView
+        android:id="@+id/txt_ri"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_height_40dp"
+        android:gravity="center"
+        android:text="日排行"
+        android:textColor="#181818" />
+
+
+</LinearLayout>
