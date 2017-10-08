@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -91,8 +94,8 @@ public class MyPaiHangActivity extends BaseActivity implements OnPaiHangBangList
         ButterKnife.bind(this);
         initUserInfo();
         initRecycle();
-        initPopuWindow();
-//        initInfo();
+//        initPopuWindow();
+        initInfo();
     }
 
     PaiHangBangPresonter paiHangBangPresonter;
@@ -145,6 +148,8 @@ public class MyPaiHangActivity extends BaseActivity implements OnPaiHangBangList
 
         paiHangBangPresonter.getExtendSort(id, type, page + "", timeStamp, sign, Contacts.KEY);
     }
+
+    List<PaiHangBean.DataBeanX.DataBean> dataBeen;
 
     @Override
     public void getPaiHangBang(PaiHangBean bean) {
@@ -216,7 +221,22 @@ public class MyPaiHangActivity extends BaseActivity implements OnPaiHangBangList
                 }
 
                 if (dlist != null && dlist.size() > 3) {
-                    List<PaiHangBean.DataBeanX.DataBean> dataBeen = dlist.subList(3, dlist.size());
+                    dataBeen = dlist.subList(3, dlist.size());
+                    for (int i = 0; i < dataBeen.size(); i++) {
+
+                        if (type.equals("1")) {
+                            dataBeen.get(i).setType(1);
+                        }
+                        if (type.equals("2")) {
+                            dataBeen.get(i).setType(2);
+                        }
+                        if (type.equals("3")) {
+                            dataBeen.get(i).setType(3);
+                        }
+
+                    }
+
+
                     paiHangBangAdapter.setList(dataBeen);
                     paiHangBangAdapter.notifyDataSetChanged();
                 }
@@ -226,51 +246,80 @@ public class MyPaiHangActivity extends BaseActivity implements OnPaiHangBangList
         }
     }
 
-    PopupWindow popupWindow;
 
-    public void initPopuWindow() {
-        View view = LayoutInflater.from(MyPaiHangActivity.this).inflate(R.layout.popu_fensi_type, null);
-        popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
+    @OnClick(R.id.txt_type_choose)
+    public void onTypeChoose() {
+        showDialog();
+    }
+
+
+    /*获取粉丝类型*/
+    public void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog alertDialog = builder.create();
+
+        alertDialog.show();
+
+        View view = View.inflate(this, R.layout.popu_fensi_type, null);
         TextView txtZong = (TextView) view.findViewById(R.id.txt_zong);
         TextView txtYue = (TextView) view.findViewById(R.id.txt_yue);
         TextView txtRi = (TextView) view.findViewById(R.id.txt_ri);
 
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.setFocusable(false);
+        Window window = alertDialog.getWindow();
+        window.setBackgroundDrawable(getResources().getDrawable(R.drawable.write_form_dialog2));
+        window.setContentView(view);
+        WindowManager windowManager = this.getWindowManager();
 
+        Display defaultDisplay = windowManager.getDefaultDisplay();
+
+        WindowManager.LayoutParams attributes = window.getAttributes();
+        attributes.width = (int) (defaultDisplay.getWidth() * 1.0);
+        attributes.gravity = Gravity.BOTTOM;
+        window.setAttributes(attributes);
+        alertDialog.setCanceledOnTouchOutside(true);
         txtZong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (dataBeen != null) {
+                    dataBeen.clear();
+                    paiHangBangAdapter.setList(dataBeen);
+                    paiHangBangAdapter.notifyDataSetChanged();
+                }
+
+                txtTypeChoose.setText("总粉丝");
                 type = "3";
                 initInfo();
-                popupWindow.dismiss();
+                alertDialog.dismiss();
             }
         });
         txtYue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (dataBeen != null) {
+                    dataBeen.clear();
+                    paiHangBangAdapter.setList(dataBeen);
+                    paiHangBangAdapter.notifyDataSetChanged();
+                }
+                txtTypeChoose.setText("月粉丝");
                 type = "1";
                 initInfo();
-                popupWindow.dismiss();
+                alertDialog.dismiss();
             }
         });
 
         txtRi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (dataBeen != null) {
+                    dataBeen.clear();
+                    paiHangBangAdapter.setList(dataBeen);
+                    paiHangBangAdapter.notifyDataSetChanged();
+                }
+                txtTypeChoose.setText("日粉丝");
                 type = "2";
                 initInfo();
-                popupWindow.dismiss();
+                alertDialog.dismiss();
             }
         });
-
-    }
-
-    @OnClick(R.id.txt_type_choose)
-    public void onTypeChoose() {
-        ToolUitls.print("-------","aaaaaaaaaaaaaaaa");
-        popupWindow.showAtLocation(parentView, 0, 0, Gravity.BOTTOM);
-
     }
 }
