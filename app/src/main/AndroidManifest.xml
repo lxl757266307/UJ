@@ -228,6 +228,15 @@
 
         <!--下级粉丝页面-->
         <activity android:name=".activity.NextFenSiActivity" />
+
+        <!--自选套餐页面-->
+        <activity android:name=".activity.ZiXuanTaoCanActivity" />
+
+        <!--套餐选择页面-->
+        <activity android:name=".activity.TaoCanChooseActivity" />
+
+        <!--填写自选套餐购买信息页面-->
+        <activity android:name=".activity.ZiXuanXinXiActivity" />
     </application>
 
 </manifest>
