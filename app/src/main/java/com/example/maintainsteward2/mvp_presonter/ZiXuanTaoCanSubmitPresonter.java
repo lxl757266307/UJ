@@ -3,6 +3,7 @@ package com.example.maintainsteward2.mvp_presonter;
 import com.example.maintainsteward2.api.HttpApi;
 import com.example.maintainsteward2.base.BaseHttpApi;
 import com.example.maintainsteward2.bean.PublicBean;
+import com.example.maintainsteward2.bean.ZiXuanGouMaiCallBackBean;
 import com.example.maintainsteward2.mvp_view.OnOrderZiXuanTaoCanListener;
 import com.example.maintainsteward2.utils.ToolUitls;
 
@@ -44,17 +45,15 @@ public class ZiXuanTaoCanSubmitPresonter {
             String key
     ) {
 
-
-        Call<PublicBean> publicBeanCall = httpApi.orderSelfServiceBuy(user_id, address_id, order_time, service_item, counts, discount, total_price, final_price, details, img1, img2, img3, img4, img5, img6
+        Call<ZiXuanGouMaiCallBackBean> publicBeanCall = httpApi.orderSelfServiceBuy(user_id, address_id, order_time, service_item, counts, discount, total_price, final_price, details, img1, img2, img3, img4, img5, img6
                 , timestamp, sign, key);
-        publicBeanCall.enqueue(new Callback<PublicBean>() {
+        publicBeanCall.enqueue(new Callback<ZiXuanGouMaiCallBackBean>() {
             @Override
-            public void onResponse(Call<PublicBean> call, Response<PublicBean> response) {
+            public void onResponse(Call<ZiXuanGouMaiCallBackBean> call, Response<ZiXuanGouMaiCallBackBean> response) {
 
-                ToolUitls.print("response","response=="+response+" boyd=="+response.body());
                 if (response.isSuccessful()) {
 
-                    PublicBean body = response.body();
+                    ZiXuanGouMaiCallBackBean body = response.body();
 
                     if (onOrderZiXuanTaoCanListener != null) {
 
@@ -66,7 +65,7 @@ public class ZiXuanTaoCanSubmitPresonter {
             }
 
             @Override
-            public void onFailure(Call<PublicBean> call, Throwable t) {
+            public void onFailure(Call<ZiXuanGouMaiCallBackBean> call, Throwable t) {
 
             }
         });

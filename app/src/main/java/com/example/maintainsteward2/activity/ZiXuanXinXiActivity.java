@@ -1,6 +1,9 @@
 package com.example.maintainsteward2.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,16 +32,21 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.example.maintainsteward2.R;
 import com.example.maintainsteward2.adapter.PhotoListAdapter;
 import com.example.maintainsteward2.adapter.ZiXuanXinXiListAdapter;
+import com.example.maintainsteward2.application.MyApplication;
 import com.example.maintainsteward2.base.BaseActivity;
 import com.example.maintainsteward2.base.Contacts;
 import com.example.maintainsteward2.bean.AddressListBean;
+import com.example.maintainsteward2.bean.PayInfoBean;
 import com.example.maintainsteward2.bean.PublicBean;
+import com.example.maintainsteward2.bean.ZiXuanGouMaiCallBackBean;
 import com.example.maintainsteward2.bean.ZiXuanListBean;
 import com.example.maintainsteward2.bean.ZiXuanServiceBean;
 import com.example.maintainsteward2.mvp_presonter.UpLoadPhotoPresonter;
+import com.example.maintainsteward2.mvp_presonter.ZiXuanPayPresonter;
 import com.example.maintainsteward2.mvp_presonter.ZiXuanTaoCanSubmitPresonter;
 import com.example.maintainsteward2.mvp_view.OnOrderZiXuanTaoCanListener;
 import com.example.maintainsteward2.mvp_view.OnUpLoadPhotoListener;
+import com.example.maintainsteward2.service.OnZiXuanPayListener;
 import com.example.maintainsteward2.utils.PhotoUtils;
 import com.example.maintainsteward2.utils.ToolUitls;
 import com.example.maintainsteward2.view.MyLayoutManager;
@@ -46,6 +54,7 @@ import com.example.maintainsteward2.view.MyLayoutManager2;
 import com.example.maintainsteward2.view.MyListView;
 import com.github.rahatarmanahmed.cpv.CircularProgressView;
 import com.google.gson.Gson;
+import com.tencent.mm.opensdk.modelpay.PayReq;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -62,7 +71,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2017/10/8.
  */
 
-public class ZiXuanXinXiActivity extends BaseActivity implements PhotoListAdapter.OnPhotoClickListener, OnUpLoadPhotoListener, OnOrderZiXuanTaoCanListener {
+public class ZiXuanXinXiActivity extends BaseActivity implements PhotoListAdapter.OnPhotoClickListener, OnUpLoadPhotoListener, OnOrderZiXuanTaoCanListener, OnZiXuanPayListener {
     @BindView(R.id.layout_back)
     LinearLayout layoutBack;
     @BindView(R.id.txt_title)
@@ -108,13 +117,16 @@ public class ZiXuanXinXiActivity extends BaseActivity implements PhotoListAdapte
         ButterKnife.bind(this);
         initViews();
         initTimePicker();
+        registerReciver();
     }
 
     ZiXuanXinXiListAdapter ziXuanXinXiListAdapter;
     PhotoListAdapter photoListAdapter;
     List<Bitmap> bitmaps;
+    String[] imgArrays;
     UpLoadPhotoPresonter upLoadPhotoPresonter;
     ZiXuanTaoCanSubmitPresonter ziXuanTaoCanSubmitPresonter;
+    ZiXuanPayPresonter ziXuanPayPresonter;
 
     private void initViews() {
         bitmaps = new ArrayList<>();
@@ -146,7 +158,8 @@ public class ZiXuanXinXiActivity extends BaseActivity implements PhotoListAdapte
         photoListAdapter.notifyDataSetChanged();
         upLoadPhotoPresonter = new UpLoadPhotoPresonter();
         upLoadPhotoPresonter.setListener(this);
-
+        ziXuanPayPresonter = new ZiXuanPayPresonter();
+        ziXuanPayPresonter.setZiXuanPayListener(this);
 
     }
 
@@ -274,6 +287,17 @@ public class ZiXuanXinXiActivity extends BaseActivity implements PhotoListAdapte
             case 2:
                 /*支付*/
 
+                Contacts.PAY_FLAG = "ziXuan";
+                PayReq payReq = new PayReq();
+                payReq.appId = appid;
+                payReq.partnerId = partnerid;
+                payReq.prepayId = prepayid;
+                payReq.packageValue = packageX;
+                payReq.nonceStr = noncestr;
+                payReq.timeStamp = timestamp + "";
+                payReq.sign = sign;
+                MyApplication.api.sendReq(payReq);
+
                 break;
         }
 
@@ -359,7 +383,6 @@ public class ZiXuanXinXiActivity extends BaseActivity implements PhotoListAdapte
     ArrayList<String> url;
 
 
-    String[] imgArrays;
 
 
     @Override
@@ -426,12 +449,17 @@ public class ZiXuanXinXiActivity extends BaseActivity implements PhotoListAdapte
 
     }
 
+    String order_sn;
+
     @Override
-    public void orderSucess(PublicBean bean) {
+    public void orderSucess(ZiXuanGouMaiCallBackBean bean) {
         switch (bean.getStatus()) {
             case "1":
                 mWaitingAlertDialog.dismiss();
-                ToolUitls.toast(this, "下单成功");
+                ToolUitls.toast(this, "下单成功,请立即支付！");
+                /*提交订单成功获取的订单编号*/
+                order_sn = bean.getData().getOrder_sn();
+                ziXuanPayPresonter.getZiXuanPayInfo(order_sn);
                 status = 2;
                 txtGoumai.setText("立即支付");
                 break;
@@ -517,5 +545,68 @@ public class ZiXuanXinXiActivity extends BaseActivity implements PhotoListAdapte
         window.setAttributes(attributes);
         mWaitingAlertDialog.setCanceledOnTouchOutside(false);
 
+    }
+
+    String appid;
+    String noncestr;
+    String packageX;
+    String partnerid;
+    String prepayid;
+    String sign;
+    int timestamp;
+
+    @Override
+    public void getZiXuanPayInfo(PayInfoBean payInfoBean) {
+
+        switch (payInfoBean.getStatus()) {
+            case 1:
+                appid = payInfoBean.getAppid();
+                noncestr = payInfoBean.getNoncestr();
+                packageX = payInfoBean.getPackageX();
+                partnerid = payInfoBean.getPartnerid();
+                prepayid = payInfoBean.getPrepayid();
+                sign = payInfoBean.getSign();
+                timestamp = payInfoBean.getTimestamp();
+                break;
+        }
+    }
+
+    @Override
+    public void payForNow(PublicBean publicBean) {
+
+        switch (publicBean.getStatus()) {
+            case "1":
+                ToolUitls.toast(this, "购买成功！");
+                break;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(ziXuanReciver);
+    }
+
+    ZiXuanReciver ziXuanReciver;
+
+    public void registerReciver() {
+        ziXuanReciver = new ZiXuanReciver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Contacts.PAY_BY_WEI_XIN);
+        registerReceiver(ziXuanReciver, intentFilter);
+
+    }
+
+    class ZiXuanReciver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (Contacts.PAY_FLAG.equals("ziXuan")) {
+                ToolUitls.toast(ZiXuanXinXiActivity.this, "购买成功！");
+                ziXuanPayPresonter.payForNow(order_sn, "1", taoCanJia + "");
+                startActivity(new Intent(ZiXuanXinXiActivity.this, OrderActivity.class));
+            }
+
+        }
     }
 }

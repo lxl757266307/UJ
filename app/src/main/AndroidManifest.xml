@@ -237,6 +237,12 @@
 
         <!--填写自选套餐购买信息页面-->
         <activity android:name=".activity.ZiXuanXinXiActivity" />
+
+        <!--意见反馈页面-->
+        <activity android:name=".activity.SugestionActivity" />
+
+        <!--填写评价页面-->
+        <activity android:name=".activity.PingJiaActivity" />
     </application>
 
 </manifest>
