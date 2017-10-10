@@ -212,7 +212,6 @@
         <activity android:name=".activity.KuaiSuFaBuActivity" />
 
         <!--快速发布成功后的列表页面-->
-        <activity android:name=".activity.KuaiSuFaBuListActivity" />
 
         <!--热点消息网页页面-->
         <activity android:name=".activity.NewsWebActivity" />
@@ -243,6 +242,20 @@
 
         <!--填写评价页面-->
         <activity android:name=".activity.PingJiaActivity" />
+
+        <!--我的评价页面-->
+        <activity android:name=".activity.MyPingJiaActivity" />
+
+        <!--评价列表照片预览页面-->
+        <activity
+            android:name=".activity.PhotoShowActivity"
+            android:theme="@android:style/Theme.Dialog" />
+
+        <!--快速发布列表-->
+        <activity android:name=".activity.MyFaBuListActivity" />
+
+        <!--轮播图条目页面-->
+        <activity android:name=".activity.BannerWebActivity" />
     </application>
 
 </manifest>

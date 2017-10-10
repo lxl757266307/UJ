@@ -356,13 +356,46 @@
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/circle_box_3r_red"
                                 android:gravity="center"
-                                android:text=""
                                 android:padding="5dp"
+                                android:text=""
                                 android:textColor="#da0a0a"
                                 android:textSize="14sp" />
                         </LinearLayout>
 
+                    </LinearLayout>
 
+
+                    <LinearLayout
+                        android:id="@+id/layout_xianchang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#fff"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp"
+                            android:background="#f4f4f4" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="20dp"
+                            android:text="现场照片"
+                            android:textColor="#bbbbbb" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:padding="10dp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -656,11 +689,11 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:gravity="center_vertical"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="10dp"
                                 android:layout_weight="1"
+                                android:gravity="center_vertical"
                                 android:paddingLeft="10dp"
                                 android:text="配件费用"
                                 android:textColor="#bbbbbb"
@@ -804,7 +837,6 @@
                                 android:textSize="14sp" />
 
                             <TextView
-                                android:visibility="invisible"
                                 android:id="@+id/txt_jiantou"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
@@ -812,7 +844,8 @@
                                 android:gravity="center_vertical"
                                 android:text="选择优惠券"
                                 android:textColor="#bbbbbb"
-                                android:textSize="14sp" />
+                                android:textSize="14sp"
+                                android:visibility="invisible" />
 
                         </LinearLayout>
 

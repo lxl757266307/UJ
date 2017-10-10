@@ -443,6 +443,7 @@ public class ZiXuanXinXiActivity extends BaseActivity implements PhotoListAdapte
 //                + "&img2=" + imgArrays[1] + "&img3=" + imgArrays[2] + "&img4=" + imgArrays[3] + "&img5=" + imgArrays[4] + "&img6=" + imgArrays[5]
 //                + "&timestamp=" + time + "&sign=" + sign + "&key=" + Contacts.KEY
 //        );
+//        ToolUitls.print("-----------"," imgArrays[0]=="+ imgArrays[0]+" imgArrays[1]="+ imgArrays[1]);
         ziXuanTaoCanSubmitPresonter.orderNow(user_id, address_id, order_time, service_item, counts + "", discount + "", yuanJia + "",
                 taoCanJia + "", description, imgArrays[0], imgArrays[1], imgArrays[2], imgArrays[3], imgArrays[4], imgArrays[5], time, sign, Contacts.KEY);
 

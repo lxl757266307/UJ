@@ -456,11 +456,11 @@ public class PingJiaActivity extends BaseActivity implements TextWatcher, PhotoL
         String sign = ToolUitls.getSign(map);
 
 
-        ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "OrderEvaluate?" + "user_id=" + id + "&order_id=" + order_id + "&worker_id=" + worker_id
-                + "&star_level=" + star_level + "&level1=" + level1 + "&level2=" + level2 + "&level3=" + level3 + "&content=" + content
-                + "&fromtype=" + fromtype + "&img1=" + imgArrays[0] + "&img2=" + imgArrays[1] + "&img2=" + imgArrays[2] + "&timestamp=" + time + "&sign=" + sign
-                + "&key=" + Contacts.KEY);
-//        submitPingJiaPresonter.submit(id, order_id, worker_id, star_level, level1, level2, level3, content, imgArrays[0], imgArrays[1], imgArrays[2], time, sign, Contacts.KEY);
+//        ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "OrderEvaluate?" + "user_id=" + id + "&order_id=" + order_id + "&worker_id=" + worker_id
+//                + "&star_level=" + star_level + "&level1=" + level1 + "&level2=" + level2 + "&level3=" + level3 + "&content=" + content
+//                + "&fromtype=" + fromtype + "&img1=" + imgArrays[0] + "&img2=" + imgArrays[1] + "&img2=" + imgArrays[2] + "&timestamp=" + time + "&sign=" + sign
+//                + "&key=" + Contacts.KEY);
+        submitPingJiaPresonter.submit(id, order_id, worker_id, star_level, level1, level2, level3, content, imgArrays[0], imgArrays[1], imgArrays[2], time, sign, Contacts.KEY);
 
     }
 
@@ -586,6 +586,8 @@ public class PingJiaActivity extends BaseActivity implements TextWatcher, PhotoL
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
 
+            Intent intent2 = new Intent(PingJiaActivity.this, MyPingJiaActivity.class);
+            startActivity(intent2);
 
         }
     };
