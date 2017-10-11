@@ -30,8 +30,10 @@ public class BannerWebActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String url = getIntent().getStringExtra("url");
+        String name = getIntent().getStringExtra("name");
         setContentView(R.layout.activity_bannerweb);
         ButterKnife.bind(this);
+        txtTitle.setText(name);
         WebSettings settings = webview.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setUseWideViewPort(true);
