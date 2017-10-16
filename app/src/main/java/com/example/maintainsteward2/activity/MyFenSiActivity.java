@@ -5,19 +5,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.widget.AbsListView;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.maintainsteward2.R;
-import com.example.maintainsteward2.adapter.FenSiAdapter;
+import com.example.maintainsteward2.adapter.FensSiAdapter2;
 import com.example.maintainsteward2.base.BaseActivity;
 import com.example.maintainsteward2.base.Contacts;
-import com.example.maintainsteward2.bean.FensiBean;
+import com.example.maintainsteward2.bean.FenSiBean2;
 import com.example.maintainsteward2.mvp_presonter.FenSiPresonter;
 import com.example.maintainsteward2.mvp_view.OnFenSiListener;
 import com.example.maintainsteward2.utils.ToolUitls;
@@ -37,15 +38,15 @@ import in.srain.cube.views.ptr.PtrHandler2;
  * Created by Administrator on 2017/10/7.
  */
 
-public class MyFenSiActivity extends BaseActivity implements PtrHandler2, OnFenSiListener, FenSiAdapter.OnFenSiClickListener {
+public class MyFenSiActivity extends BaseActivity implements PtrHandler2, OnFenSiListener,
+        ExpandableListView.OnGroupClickListener {
     @BindView(R.id.layout_back)
     LinearLayout layoutBack;
     @BindView(R.id.txt_title)
     TextView txtTitle;
     @BindView(R.id.txt_count)
     TextView txtCount;
-    @BindView(R.id.recycle)
-    RecyclerView recycle;
+
     @BindView(R.id.ptr_frame)
     PtrClassicFrameLayout ptrFrame;
     @BindView(R.id.txt_sanji_numner)
@@ -54,10 +55,20 @@ public class MyFenSiActivity extends BaseActivity implements PtrHandler2, OnFenS
     ImageView imgWufensi;
     @BindView(R.id.txt_wufensi)
     TextView txtWufensi;
+    @BindView(R.id.txt_tixian)
+    TextView txtTixian;
+    @BindView(R.id.txt_numnber_erji)
+    TextView txtNumnberErji;
+    @BindView(R.id.txt_jiangli_money)
+    TextView txtJiangliMoney;
+    @BindView(R.id.elv_list)
+    ExpandableListView elvList;
+    String jiangLiJin;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        jiangLiJin = this.getIntent().getStringExtra("jiangLiJin");
         setContentView(R.layout.activity_fensi);
         ButterKnife.bind(this);
         initUserInfo();
@@ -65,17 +76,35 @@ public class MyFenSiActivity extends BaseActivity implements PtrHandler2, OnFenS
         initInfo();
     }
 
-    FenSiAdapter fenSiAdapter;
+    boolean canLoad;
 
     private void initRecycle() {
 
-        recycle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        fenSiAdapter = new FenSiAdapter(this);
-        fenSiAdapter.setOnFenSiClickListener(this);
-        fenSiPresonter.setOnFenSiListener(this);
-        recycle.setAdapter(fenSiAdapter);
-        ptrFrame.setPtrHandler(this);
 
+        elvList.setOnGroupClickListener(this);
+
+        elvList.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if ((firstVisibleItem + visibleItemCount) == totalItemCount) {
+                    View lastVisibleItemView = elvList.getChildAt(elvList.getChildCount() - 1);
+                    if (lastVisibleItemView != null && lastVisibleItemView.getBottom() == elvList.getHeight()) {
+                        canLoad = true;
+
+                    } else {
+                        canLoad = false;
+
+                    }
+                }
+            }
+        });
+        ptrFrame.setPtrHandler(this);
     }
 
     @OnClick(R.id.layout_back)
@@ -102,43 +131,25 @@ public class MyFenSiActivity extends BaseActivity implements PtrHandler2, OnFenS
 
     String id;
     FenSiPresonter fenSiPresonter;
-    List<FensiBean.DataBeanX.DataBean> dataBeanList;
+    List<FenSiBean2.DataBeanX.DataBean> dataBeanList;
+    FensSiAdapter2 fenSiAdapter;
 
     private void initUserInfo() {
+        txtJiangliMoney.setText("奖励金额：￥" + jiangLiJin + "元");
         SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, Context.MODE_PRIVATE);
         id = sharedPreferences.getString("id", null);
         fenSiPresonter = new FenSiPresonter();
         fenSiPresonter.setOnFenSiListener(this);
         dataBeanList = new ArrayList<>();
+        fenSiAdapter = new FensSiAdapter2(this);
+        elvList.setAdapter(fenSiAdapter);
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            finish();
-            return true;
-        }
-
-        return super.onKeyDown(keyCode, event);
-    }
 
     @Override
     public boolean checkCanDoLoadMore(PtrFrameLayout frame, View content, View footer) {
-        LinearLayoutManager layoutManager = (LinearLayoutManager) recycle.getLayoutManager();
-        //屏幕中最后一个可见子项的position
-        int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
-        //当前屏幕所看到的子项个数
-        int visibleItemCount = layoutManager.getChildCount();
-        //当前RecyclerView的所有子项个数
-        int totalItemCount = layoutManager.getItemCount();
-        //RecyclerView的滑动状态
-        int state = recycle.getScrollState();
-        if (visibleItemCount > 0 && lastVisibleItemPosition == totalItemCount - 1 && state == recycle.SCROLL_STATE_IDLE) {
-            return true;
-        } else {
-            return false;
-        }
+
+        return canLoad;
     }
 
     @Override
@@ -166,24 +177,29 @@ public class MyFenSiActivity extends BaseActivity implements PtrHandler2, OnFenS
 
 
     @Override
-    public void getFenSiBean(FensiBean bean) {
+    public void getFenSiBean(FenSiBean2 bean) {
         switch (bean.getStatus()) {
             case "1":
-                FensiBean.DataBeanX data = bean.getData();
-                String count = data.getCount();
-                txtCount.setText(count);
-                String next_child = data.getNext_child();
-                txtSanjiNumner.setText("(三级:" + next_child + "位)");
-                List<FensiBean.DataBeanX.DataBean> list = data.getData();
-                dataBeanList.addAll(list);
-                if (dataBeanList.size() > 0) {
+                List<FenSiBean2.DataBeanX.DataBean> data = bean.getData().getData();
+                dataBeanList.addAll(data);
 
-                    fenSiAdapter.setList(dataBeanList);
-                    fenSiAdapter.notifyDataSetChanged();
-                } else {
+                if (dataBeanList.size() == 0) {
                     txtWufensi.setVisibility(View.VISIBLE);
                     imgWufensi.setVisibility(View.VISIBLE);
+
+                } else {
+                    fenSiAdapter.setDataBeanList(dataBeanList);
+                    fenSiAdapter.notifyDataSetChanged();
                 }
+
+                int count = 0;
+
+                for (int i = 0; i < data.size(); i++) {
+                    count += Integer.parseInt(data.get(i).getChild_count());
+                }
+
+                txtCount.setText(bean.getData().getCount());
+                txtNumnberErji.setText("(二级粉丝:" + count + "位)");
 
 
                 break;
@@ -194,17 +210,35 @@ public class MyFenSiActivity extends BaseActivity implements PtrHandler2, OnFenS
         }
     }
 
+
     @Override
-    public void onFenSiClick(int position) {
+    public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
 
-        FensiBean.DataBeanX.DataBean dataBean = dataBeanList.get(position);
+        ImageView imageView = (ImageView) v.findViewById(R.id.img_open);
 
-        String id = dataBean.getId();
+        if (dataBeanList.get(groupPosition).getChild() != null && dataBeanList.get(groupPosition).getChild().size() > 0) {
+            if (elvList.isGroupExpanded(groupPosition)) {
+                RotateAnimation rotateAnimation = new RotateAnimation(90f, 0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                rotateAnimation.setDuration(500);
+                rotateAnimation.setFillAfter(true);
+                imageView.startAnimation(rotateAnimation);
 
-        Intent intent = new Intent(this, NextFenSiActivity.class);
-        intent.putExtra("id", id);
-        startActivity(intent);
+            } else {
+                RotateAnimation rotateAnimation = new RotateAnimation(0f, 90f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                rotateAnimation.setDuration(500);
+                rotateAnimation.setFillAfter(true);
+                imageView.startAnimation(rotateAnimation);
+            }
+        } else {
+            return true;
+        }
+        return false;
+    }
 
+    @OnClick(R.id.txt_tixian)
+    public void onTiXianClicked() {
+
+        startActivity(new Intent(this, TiXianActivity.class));
 
     }
 }

@@ -1,5 +1,6 @@
 package com.example.maintainsteward2.mvp_view;
 
+import com.example.maintainsteward2.bean.FenSiBean2;
 import com.example.maintainsteward2.bean.FensiBean;
 
 /**
@@ -7,5 +8,5 @@ import com.example.maintainsteward2.bean.FensiBean;
  */
 
 public interface OnFenSiListener {
-    void getFenSiBean(FensiBean bean);
+    void getFenSiBean(FenSiBean2 bean);
 }

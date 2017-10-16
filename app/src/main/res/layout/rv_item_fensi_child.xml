@@ -8,7 +8,6 @@
     android:paddingRight="10dp">
 
     <LinearLayout
-        android:id="@+id/layout_group_item"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
@@ -23,11 +22,11 @@
 
             <ImageView
                 android:id="@+id/img_fensijibie"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:scaleType="center"
-                android:src="@mipmap/yijifensi" />
+                android:src="@mipmap/erjinfensi" />
 
             <TextView
                 android:id="@+id/txt_name"
@@ -63,11 +62,6 @@
                 android:gravity="center"
                 android:textColor="#da0a0a" />
 
-            <ImageView
-                android:id="@+id/img_open"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:src="@mipmap/xiayiye" />
         </LinearLayout>
 
 

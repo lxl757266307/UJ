@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:background="@mipmap/red_bg"
         android:orientation="vertical">
 
@@ -41,9 +41,21 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
-                android:text="推荐"
+                android:text="我的粉丝"
                 android:textColor="#fff"
                 android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txt_tixian"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="15dp"
+                android:gravity="center"
+                android:text="金额提现"
+                android:textColor="#fff"
+                android:textSize="15sp" />
 
 
         </RelativeLayout>
@@ -58,7 +70,9 @@
                 android:id="@+id/txt_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="25"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="0"
                 android:textColor="#fff"
                 android:textSize="22sp" />
 
@@ -84,6 +98,24 @@
                 android:textSize="12sp" />
 
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txt_numnber_erji"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txt_jiangli_money"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textSize="15sp" />
 
 
     </LinearLayout>
@@ -111,20 +143,13 @@
             android:text="订单数"
             android:textColor="#181818" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="订单总金额(元)"
-            android:textColor="#181818" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="粉丝数"
+            android:text="关注时间"
             android:textColor="#181818" />
 
 
@@ -146,10 +171,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+          <ExpandableListView
+              android:id="@+id/elv_list"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"/>
         </in.srain.cube.views.ptr.PtrClassicFrameLayout>
 
         <ImageView

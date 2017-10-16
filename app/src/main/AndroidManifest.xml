@@ -256,6 +256,9 @@
 
         <!--轮播图条目页面-->
         <activity android:name=".activity.BannerWebActivity" />
+
+        <!--提现页面-->
+        <activity android:name=".activity.TiXianActivity" />
     </application>
 
 </manifest>

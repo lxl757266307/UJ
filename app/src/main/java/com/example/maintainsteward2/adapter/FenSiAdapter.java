@@ -34,7 +34,6 @@ public class FenSiAdapter extends BaseAbstactRecycleAdapter<FensiBean.DataBeanX.
 
         FensiBean.DataBeanX.DataBean dataBean = mList.get(position);
         baseViewHolder.txtName.setText(dataBean.getUser_nicename());
-        baseViewHolder.txtMoney.setText("￥" + dataBean.getTotal_money());
         baseViewHolder.txtNumber.setText(dataBean.getCount());
         baseViewHolder.txtFensiNumber.setText(dataBean.getChild_count());
         baseViewHolder.txtFensiNumber.setOnClickListener(new View.OnClickListener() {
@@ -75,8 +74,7 @@ public class FenSiAdapter extends BaseAbstactRecycleAdapter<FensiBean.DataBeanX.
         TextView txtName;
         @BindView(R.id.txt_number)
         TextView txtNumber;
-        @BindView(R.id.txt_money)
-        TextView txtMoney;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
