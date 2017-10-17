@@ -53,11 +53,12 @@ public class TiXianPresonter {
     public void updateUnionid(
             String user_id,
             String open_id,
+            String unionid,
             String timestamp,
             String sign,
             String key
     ) {
-        Call<PublicBean> publicBeanCall = httpApi.updateOpendId(user_id, open_id, timestamp, sign, key);
+        Call<PublicBean> publicBeanCall = httpApi.updateOpendId(user_id, open_id, unionid, timestamp, sign, key);
         publicBeanCall.enqueue(new Callback<PublicBean>() {
             @Override
             public void onResponse(Call<PublicBean> call, Response<PublicBean> response) {
@@ -91,7 +92,6 @@ public class TiXianPresonter {
             @Override
             public void onResponse(Call<PublicBean> call, Response<PublicBean> response) {
 
-                ToolUitls.print("----------","response=="+response+"  body="+response.body());
                 if (response.isSuccessful()) {
 
                     PublicBean body = response.body();

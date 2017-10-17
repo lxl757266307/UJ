@@ -11,65 +11,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f8f19c7-992c-4ba0-93c1-9cae722b04fe" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/res/mipmap-hdpi/jiantou5.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/res/mipmap-hdpi/tishi.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/res/mipmap-hdpi/tishianniu.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/activity/TiXianActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/adapter/FensSiAdapter2.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/adapter/YongJinJiLuAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/bean/FenSiBean2.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/bean/WXAccessTokenInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/bean/WXErrorInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/bean/WXUserInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/bean/YongJinJiLuBean.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/mvp_presonter/TiXianPresonter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/mvp_view/OnGetYongJinStroryListener.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/res/drawable/circle_white_bg.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/res/drawable/write_form_dialog3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_tixian.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/res/layout/dialog_zhishi.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/res/layout/lv_yongjijinlu.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/res/layout/rv_item_fensi_child.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/location_3_5_0.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Android_PickerView_3_2_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Android_PickerView_3_2_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/butterknife_8_8_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/butterknife_8_8_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/circleimageview_2_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/circleimageview_2_1_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/circularprogressview_2_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/circularprogressview_2_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/easypermissions_0_1_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/easypermissions_0_1_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/espresso_core_2_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/espresso_core_2_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/espresso_idling_resource_2_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/espresso_idling_resource_2_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/exposed_instrumentation_api_publish_0_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/exposed_instrumentation_api_publish_0_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/library_1_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/library_1_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/library_1_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/library_1_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/materialish_progress_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/materialish_progress_1_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/pagerslidingtabstrip_1_0_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/pagerslidingtabstrip_1_0_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/ptr_load_more_1_0_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/ptr_load_more_1_0_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_22_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_22_2_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/rules_0_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/rules_0_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/runner_0_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/runner_0_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/sdk_2_10_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/sdk_2_10_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_compat_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_compat_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_core_ui_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_core_ui_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_core_utils_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_core_utils_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_fragment_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_fragment_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_media_compat_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_media_compat_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_25_3_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/zxing-3.3.0.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/res/mipmap-hdpi/gongzhonghao.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/zxing_3_3_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/res/layout/dialog_gongzhonghao.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/activity/MyFenSiActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/activity/MyFenSiActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/adapter/FenSiAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/adapter/FenSiAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/mvp_presonter/FenSiPresonter.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/mvp_presonter/FenSiPresonter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/mvp_view/OnFenSiListener.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/mvp_view/OnFenSiListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/activity_fensi.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_fensi.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_first.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_first.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/fragmnet_tuijian.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/fragmnet_tuijian.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/rv_item_fensi.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/rv_item_fensi.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../build.gradle" afterPath="$PROJECT_DIR$/../build.gradle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/res/drawable-xxhdpi/circle_bg.xml" afterPath="$PROJECT_DIR$/src/main/res/drawable/circle_bg.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/activity/TiXianActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/activity/TiXianActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/mvp_presonter/TiXianPresonter.java" afterPath="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/mvp_presonter/TiXianPresonter.java" />
     </list>
     <ignored path="UJ.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -108,62 +57,63 @@
       <file leaf-file-name="TiXianActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/activity/TiXianActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-441">
-              <caret line="115" column="81" selection-start-line="115" selection-start-column="81" selection-end-line="115" selection-end-column="81" />
+            <state relative-caret-position="338">
+              <caret line="402" column="44" selection-start-line="402" selection-start-column="44" selection-end-line="402" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4760#4985#0" expanded="true" />
-                <element signature="e#4984#4985#0" expanded="true" />
-                <element signature="e#5921#6116#0" expanded="true" />
-                <element signature="e#6115#6116#0" expanded="true" />
+                <element signature="e#10174#11413#0" expanded="true" />
+                <element signature="e#11412#11413#0" expanded="true" />
+                <element signature="e#11673#12093#0" expanded="true" />
+                <element signature="e#12092#12093#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FragmentBaseActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/base/FragmentBaseActivity.java">
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+            <state relative-caret-position="-622">
+              <caret line="103" column="46" selection-start-line="103" selection-start-column="46" selection-end-line="103" selection-end-column="46" />
+              <folding>
+                <marker date="1508221517561" expanded="true" signature="2336:4410" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dialog_gongzhonghao.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/dialog_gongzhonghao.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="203">
+              <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="activity_tixian.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_tixian.xml">
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
+            <state relative-caret-position="2565">
               <caret line="95" column="29" selection-start-line="95" selection-start-column="29" selection-end-line="95" selection-end-column="29" />
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="TiXianPresonter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/mvp_presonter/TiXianPresonter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="86" column="22" selection-start-line="86" selection-start-column="22" selection-end-line="86" selection-end-column="22" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OnGetYongJinStroryListener.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/mvp_view/OnGetYongJinStroryListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="314">
+              <caret line="56" column="29" selection-start-line="56" selection-start-column="29" selection-end-line="56" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -171,26 +121,9 @@
       <file leaf-file-name="WXEntryActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/wxapi/WXEntryActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="346">
-              <caret line="296" column="13" selection-start-line="296" selection-start-column="13" selection-end-line="296" selection-end-column="13" />
-              <folding>
-                <element signature="e#4406#4407#0" expanded="true" />
-                <element signature="e#4457#4458#0" expanded="true" />
-                <element signature="e#7486#7487#0" expanded="true" />
-                <element signature="e#7537#7538#0" expanded="true" />
-                <element signature="e#8750#8751#0" expanded="true" />
-                <element signature="e#8790#8791#0" expanded="true" />
-                <element signature="e#9764#9765#0" expanded="true" />
-                <element signature="e#9819#9820#0" expanded="true" />
-                <element signature="e#10866#11101#0" expanded="true" />
-                <element signature="e#11100#11101#0" expanded="true" />
-                <element signature="e#11389#11680#0" expanded="true" />
-                <element signature="e#11679#11680#0" expanded="true" />
-                <element signature="e#11758#12572#0" expanded="true" />
-                <element signature="e#12207#12480#0" expanded="true" />
-                <element signature="e#12479#12480#0" expanded="true" />
-                <element signature="e#12571#12572#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="166">
+              <caret line="293" column="39" selection-start-line="293" selection-start-column="33" selection-end-line="293" selection-end-column="39" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -198,8 +131,8 @@
       <file leaf-file-name="Contacts.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/base/Contacts.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="71" column="57" selection-start-line="71" selection-start-column="57" selection-end-line="71" selection-end-column="57" />
+            <state relative-caret-position="729">
+              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -207,22 +140,22 @@
       </file>
       <file leaf-file-name="lv_yongjijinlu.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/res/layout/lv_yongjijinlu.xml">
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
+            <state relative-caret-position="1134">
               <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="HttpApi.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/api/HttpApi.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="681" column="22" selection-start-line="681" selection-start-column="22" selection-end-line="681" selection-end-column="22" />
+            <state relative-caret-position="233">
+              <caret line="672" column="45" selection-start-line="672" selection-start-column="45" selection-end-line="672" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -233,8 +166,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="layoutResourceFile_vertical" />
         <option value="Class" />
+        <option value="layoutResourceFile_vertical" />
       </list>
     </option>
   </component>
@@ -2585,7 +2518,7 @@
         <entry key="$PROJECT_DIR$/../../../WeChatSDK_sample_Android/app" value="4500835492723" />
         <entry key="$PROJECT_DIR$/../../../repairmanager" value="6001971543599" />
         <entry key="$PROJECT_DIR$/../../../repairmanager/Repair" value="6004498702451" />
-        <entry key="E:\work\U\UJ\app" value="6031470202910" />
+        <entry key="E:\work\U\UJ\app" value="6031817732375" />
         <entry key="F:/AndroidSearch(jb51.net)/app" value="4484967962900" />
         <entry key="F:/repairmanager/Repair" value="6000339727870" />
         <entry key="F:/testWxPay-master/app" value="4485033199512" />
@@ -3111,12 +3044,13 @@
         <option value="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/bean/WXAccessTokenInfo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/bean/WXErrorInfo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/bean/WXUserInfo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/base/Contacts.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/api/HttpApi.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/mvp_view/OnGetYongJinStroryListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/wxapi/WXEntryActivity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/mvp_presonter/TiXianPresonter.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/activity_tixian.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/base/Contacts.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/dialog_gongzhonghao.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/mvp_presonter/TiXianPresonter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/api/HttpApi.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/wxapi/WXEntryActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/activity/TiXianActivity.java" />
       </list>
     </option>
@@ -3152,10 +3086,12 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane />
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -3268,144 +3204,31 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maintainsteward2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wxapi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UJ" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UJ" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maintainsteward2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UJ" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UJ" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maintainsteward2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="base" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UJ" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UJ" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maintainsteward2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="api" />
+              <option name="myItemId" value="libs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="E:/SDK" />
     <property name="settings.editor.selected.configurable" value="com.genymobile.genymotion.ide.idea.GdmSettings" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="device.picker.selection" value="6&amp;1b75a85&amp;0&amp;0001" />
-    <property name="android.project.structure.last.selected" value="SDK Location" />
+    <property name="device.picker.selection" value="f97bf9e1" />
+    <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/zxing-3.3.0.jar" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\work\U\UJ\app\src\main\res\layout" />
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\work\U\UJ\app\src\main\res\drawable" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\work\U\UJ\app\src\main\res\mipmap-hdpi" />
+      <recent name="E:\work\U\UJ\app\libs" />
+      <recent name="E:\work\U\UJ\app\src\main\res\layout" />
       <recent name="E:\work\U\UJ\app\src\main\res\drawable" />
     </key>
   </component>
@@ -3721,6 +3544,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="2f8f19c7-992c-4ba0-93c1-9cae722b04fe" name="Default" comment="" />
@@ -3750,7 +3576,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506435661519</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="10-16">
+      <created>1508145972598</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1508145972598</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3763,7 +3596,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11928651" sideWeight="0.5053305" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38127092" sideWeight="0.4946695" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33667782" sideWeight="0.4946695" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34061834" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -3802,7 +3635,8 @@
     <MESSAGE value="9-26-2" />
     <MESSAGE value="9-26-3" />
     <MESSAGE value="9-26-4" />
-    <option name="LAST_COMMIT_MESSAGE" value="9-26-4" />
+    <MESSAGE value="10-16" />
+    <option name="LAST_COMMIT_MESSAGE" value="10-16" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3818,27 +3652,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/res/drawable/circle_box.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/drawable/checkbox.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/drawable/circle_bg.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3846,7 +3663,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="106" column="35" selection-start-line="106" selection-start-column="35" selection-end-line="106" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3854,7 +3670,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
           <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3862,7 +3677,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3870,7 +3684,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="164">
           <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3878,28 +3691,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
           <caret line="10" column="32" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/rv_item_fensi——child.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-27">
-          <caret line="11" column="36" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/rv_item_fensi——child.xml" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/mvp_presonter/SearviceInfoPresonter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1294">
           <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3907,10 +3706,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1051">
           <caret line="27" column="11" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
-          <folding>
-            <element signature="e#676#677#0" expanded="false" />
-            <element signature="e#714#715#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3918,26 +3713,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="51" column="68" selection-start-line="51" selection-start-column="68" selection-end-line="51" selection-end-column="68" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/rv_item_fensi.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
-          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/adapter/ServicePeiJianAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="164">
           <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3945,29 +3737,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-79">
           <caret line="732" column="40" selection-start-line="732" selection-start-column="40" selection-end-line="732" selection-end-column="40" />
-          <folding>
-            <element signature="e#28804#28805#0" expanded="false" />
-            <element signature="e#28854#28855#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/rv_item_fensi_child.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="372">
           <caret line="58" column="51" selection-start-line="58" selection-start-column="51" selection-end-line="58" selection-end-column="51" />
-          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://E:/SDK/sources/android-25/java/util/List.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="164">
           <caret line="436" column="6" selection-start-line="436" selection-start-column="6" selection-end-line="436" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3975,7 +3761,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="218">
           <caret line="40" column="45" selection-start-line="28" selection-start-column="5" selection-end-line="40" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3983,10 +3768,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-62">
           <caret line="61" column="48" selection-start-line="61" selection-start-column="48" selection-end-line="61" selection-end-column="48" />
-          <folding>
-            <element signature="e#832#833#0" expanded="false" />
-            <element signature="e#870#871#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4002,7 +3783,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="341">
           <caret line="332" column="44" selection-start-line="332" selection-start-column="44" selection-end-line="332" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4018,9 +3798,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="52">
           <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding>
-            <element signature="e#865#866#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4028,29 +3805,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="467">
           <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#773#774#0" expanded="true" />
-            <element signature="e#811#812#0" expanded="true" />
-            <element signature="e#934#935#0" expanded="true" />
-            <element signature="e#969#970#0" expanded="true" />
-            <element signature="e#1150#1151#0" expanded="true" />
-            <element signature="e#1219#1220#0" expanded="true" />
-            <element signature="e#1479#1480#0" expanded="true" />
-            <element signature="e#1533#1534#0" expanded="true" />
-            <element signature="e#1762#1763#0" expanded="true" />
-            <element signature="e#1798#1799#0" expanded="true" />
-            <element signature="e#1880#1881#0" expanded="true" />
-            <element signature="e#1916#1917#0" expanded="true" />
-            <element signature="e#1967#1968#0" expanded="true" />
-            <element signature="e#1995#1996#0" expanded="true" />
-            <element signature="e#3802#3803#0" expanded="true" />
-            <element signature="e#3830#3831#0" expanded="true" />
-            <element signature="e#4312#4313#0" expanded="true" />
-            <element signature="e#4364#4365#0" expanded="true" />
-            <element signature="e#4718#4719#0" expanded="true" />
-            <element signature="e#4777#4778#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4058,131 +3812,45 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2715#2716#0" expanded="false" />
-            <element signature="e#2744#2745#0" expanded="false" />
-            <element signature="e#2788#2789#0" expanded="false" />
-            <element signature="e#2824#2825#0" expanded="false" />
-            <element signature="e#2858#2859#0" expanded="false" />
-            <element signature="e#2885#2886#0" expanded="false" />
-            <element signature="e#2928#2929#0" expanded="false" />
-            <element signature="e#2960#2961#0" expanded="false" />
-            <element signature="e#5530#5531#0" expanded="false" />
-            <element signature="e#5566#5567#0" expanded="false" />
-            <element signature="e#5612#5613#0" expanded="false" />
-            <element signature="e#5654#5655#0" expanded="false" />
-            <element signature="e#5695#5696#0" expanded="false" />
-            <element signature="e#5736#5737#0" expanded="false" />
-            <element signature="e#5792#5793#0" expanded="false" />
-            <element signature="e#5844#5845#0" expanded="false" />
-            <element signature="e#5887#5888#0" expanded="false" />
-            <element signature="e#5922#5923#0" expanded="false" />
-            <element signature="e#5974#5975#0" expanded="false" />
-            <element signature="e#6014#6015#0" expanded="false" />
-            <element signature="e#8208#8209#0" expanded="false" />
-            <element signature="e#8249#8250#0" expanded="false" />
-            <element signature="e#8293#8294#0" expanded="false" />
-            <element signature="e#8337#8338#0" expanded="false" />
-            <element signature="e#8385#8386#0" expanded="false" />
-            <element signature="e#8437#8438#0" expanded="false" />
-            <element signature="e#8612#8613#0" expanded="false" />
-            <element signature="e#8659#8660#0" expanded="false" />
-            <element signature="e#8715#8716#0" expanded="false" />
-            <element signature="e#8771#8772#0" expanded="false" />
-            <element signature="e#8811#8812#0" expanded="false" />
-            <element signature="e#8855#8856#0" expanded="false" />
-            <element signature="e#8905#8906#0" expanded="false" />
-            <element signature="e#8955#8956#0" expanded="false" />
-            <element signature="e#9001#9002#0" expanded="false" />
-            <element signature="e#9051#9052#0" expanded="false" />
-            <element signature="e#9113#9114#0" expanded="false" />
-            <element signature="e#9175#9176#0" expanded="false" />
-            <element signature="e#9215#9216#0" expanded="false" />
-            <element signature="e#9259#9260#0" expanded="false" />
-            <element signature="e#9309#9310#0" expanded="false" />
-            <element signature="e#9359#9360#0" expanded="false" />
-            <element signature="e#9405#9406#0" expanded="false" />
-            <element signature="e#9455#9456#0" expanded="false" />
-            <element signature="e#9517#9518#0" expanded="false" />
-            <element signature="e#9579#9580#0" expanded="false" />
-            <element signature="e#9625#9626#0" expanded="false" />
-            <element signature="e#9675#9676#0" expanded="false" />
-            <element signature="e#9737#9738#0" expanded="false" />
-            <element signature="e#9799#9800#0" expanded="false" />
-            <element signature="e#9848#9849#0" expanded="false" />
-            <element signature="e#9892#9893#0" expanded="false" />
-            <element signature="e#9951#9952#0" expanded="false" />
-            <element signature="e#10001#10002#0" expanded="false" />
-            <element signature="e#12119#12120#0" expanded="false" />
-            <element signature="e#12168#12169#0" expanded="false" />
-            <element signature="e#12216#12217#0" expanded="false" />
-            <element signature="e#12268#12269#0" expanded="false" />
-            <element signature="e#12320#12321#0" expanded="false" />
-            <element signature="e#12380#12381#0" expanded="false" />
-            <element signature="e#12571#12572#0" expanded="false" />
-            <element signature="e#12626#12627#0" expanded="false" />
-            <element signature="e#12686#12687#0" expanded="false" />
-            <element signature="e#12750#12751#0" expanded="false" />
-            <element signature="e#12794#12795#0" expanded="false" />
-            <element signature="e#12846#12847#0" expanded="false" />
-            <element signature="e#12900#12901#0" expanded="false" />
-            <element signature="e#12958#12959#0" expanded="false" />
-            <element signature="e#13008#13009#0" expanded="false" />
-            <element signature="e#13066#13067#0" expanded="false" />
-            <element signature="e#13132#13133#0" expanded="false" />
-            <element signature="e#13202#13203#0" expanded="false" />
-            <element signature="e#13246#13247#0" expanded="false" />
-            <element signature="e#13298#13299#0" expanded="false" />
-            <element signature="e#13352#13353#0" expanded="false" />
-            <element signature="e#13410#13411#0" expanded="false" />
-            <element signature="e#13460#13461#0" expanded="false" />
-            <element signature="e#13518#13519#0" expanded="false" />
-            <element signature="e#13584#13585#0" expanded="false" />
-            <element signature="e#13654#13655#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragmnet_tuijian.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="321" column="62" selection-start-line="321" selection-start-column="62" selection-end-line="321" selection-end-column="62" />
-          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/fragment/TuiJianFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="310">
           <caret line="152" column="69" selection-start-line="152" selection-start-column="69" selection-end-line="152" selection-end-column="69" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_fensi.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="327">
           <caret line="116" column="27" selection-start-line="116" selection-start-column="27" selection-end-line="116" selection-end-column="27" />
-          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="259" column="16" selection-start-line="259" selection-start-column="16" selection-end-line="259" selection-end-column="16" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/activity/MyFenSiActivity.java">
@@ -4190,7 +3858,7 @@
         <state relative-caret-position="349">
           <caret line="126" column="205" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="205" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -4199,10 +3867,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="125" column="21" selection-start-line="125" selection-start-column="21" selection-end-line="125" selection-end-column="21" />
-          <folding>
-            <element signature="e#4218#4219#0" expanded="false" />
-            <element signature="e#4239#4240#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4210,9 +3874,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-85">
           <caret line="175" column="26" selection-start-line="175" selection-start-column="26" selection-end-line="175" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4220,7 +3881,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="116">
           <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4229,7 +3889,7 @@
         <state relative-caret-position="62">
           <caret line="55" column="48" selection-start-line="55" selection-start-column="48" selection-end-line="55" selection-end-column="48" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -4238,7 +3898,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="810">
           <caret line="51" column="89" selection-start-line="51" selection-start-column="89" selection-end-line="51" selection-end-column="89" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4246,16 +3905,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding>
-            <element signature="e#1630#1631#0" expanded="false" />
-            <element signature="e#1660#1661#0" expanded="false" />
-            <element signature="e#1703#1704#0" expanded="false" />
-            <element signature="e#1741#1742#0" expanded="false" />
-            <element signature="e#1774#1775#0" expanded="false" />
-            <element signature="e#1803#1804#0" expanded="false" />
-            <element signature="e#1847#1848#0" expanded="false" />
-            <element signature="e#1883#1884#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4263,15 +3912,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="450" column="26" selection-start-line="450" selection-start-column="26" selection-end-line="450" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-81">
-          <caret line="111" column="47" selection-start-line="111" selection-start-column="47" selection-end-line="111" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4295,11 +3935,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2480#2481#0" expanded="false" />
-            <element signature="e#2509#2510#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4307,149 +3942,118 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2678#2679#0" expanded="false" />
-            <element signature="e#2707#2708#0" expanded="false" />
-            <element signature="e#2751#2752#0" expanded="false" />
-            <element signature="e#2787#2788#0" expanded="false" />
-            <element signature="e#2822#2823#0" expanded="false" />
-            <element signature="e#2853#2854#0" expanded="false" />
-            <element signature="e#2901#2902#0" expanded="false" />
-            <element signature="e#2941#2942#0" expanded="false" />
-            <element signature="e#2968#2969#0" expanded="false" />
-            <element signature="e#2994#2995#0" expanded="false" />
-            <element signature="e#3029#3030#0" expanded="false" />
-            <element signature="e#3059#3060#0" expanded="false" />
-            <element signature="e#3094#3095#0" expanded="false" />
-            <element signature="e#3125#3126#0" expanded="false" />
-            <element signature="e#3173#3174#0" expanded="false" />
-            <element signature="e#3213#3214#0" expanded="false" />
-            <element signature="e#3244#3245#0" expanded="false" />
-            <element signature="e#3271#3272#0" expanded="false" />
-            <element signature="e#3311#3312#0" expanded="false" />
-            <element signature="e#3343#3344#0" expanded="false" />
-            <element signature="e#3377#3378#0" expanded="false" />
-            <element signature="e#3407#3408#0" expanded="false" />
-            <element signature="e#3453#3454#0" expanded="false" />
-            <element signature="e#3491#3492#0" expanded="false" />
-            <element signature="e#3528#3529#0" expanded="false" />
-            <element signature="e#3561#3562#0" expanded="false" />
-            <element signature="e#3613#3614#0" expanded="false" />
-            <element signature="e#3657#3658#0" expanded="false" />
-            <element signature="e#3691#3692#0" expanded="false" />
-            <element signature="e#3721#3722#0" expanded="false" />
-            <element signature="e#3767#3768#0" expanded="false" />
-            <element signature="e#3805#3806#0" expanded="false" />
-            <element signature="e#3847#3848#0" expanded="false" />
-            <element signature="e#3879#3880#0" expanded="false" />
-            <element signature="e#3935#3936#0" expanded="false" />
-            <element signature="e#3977#3978#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/lv_yongjijinlu.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
+        <state relative-caret-position="1134">
           <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/api/HttpApi.java">
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_tixian.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="681" column="22" selection-start-line="681" selection-start-column="22" selection-end-line="681" selection-end-column="22" />
+        <state relative-caret-position="2565">
+          <caret line="95" column="29" selection-start-line="95" selection-start-column="29" selection-end-line="95" selection-end-column="29" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/mvp_view/OnGetYongJinStroryListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/base/Contacts.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="71" column="57" selection-start-line="71" selection-start-column="57" selection-end-line="71" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/wxapi/WXEntryActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="296" column="13" selection-start-line="296" selection-start-column="13" selection-end-line="296" selection-end-column="13" />
-          <folding>
-            <element signature="e#4406#4407#0" expanded="true" />
-            <element signature="e#4457#4458#0" expanded="true" />
-            <element signature="e#7486#7487#0" expanded="true" />
-            <element signature="e#7537#7538#0" expanded="true" />
-            <element signature="e#8750#8751#0" expanded="true" />
-            <element signature="e#8790#8791#0" expanded="true" />
-            <element signature="e#9764#9765#0" expanded="true" />
-            <element signature="e#9819#9820#0" expanded="true" />
-            <element signature="e#10866#11101#0" expanded="true" />
-            <element signature="e#11100#11101#0" expanded="true" />
-            <element signature="e#11389#11680#0" expanded="true" />
-            <element signature="e#11679#11680#0" expanded="true" />
-            <element signature="e#11758#12572#0" expanded="true" />
-            <element signature="e#12207#12480#0" expanded="true" />
-            <element signature="e#12479#12480#0" expanded="true" />
-            <element signature="e#12571#12572#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/mvp_presonter/TiXianPresonter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="86" column="22" selection-start-line="86" selection-start-column="22" selection-end-line="86" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_tixian.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="95" column="29" selection-start-line="95" selection-start-column="29" selection-end-line="95" selection-end-column="29" />
+        <state relative-caret-position="729">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/base/FragmentBaseActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
+        <state relative-caret-position="27">
           <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/mvp_view/OnGetYongJinStroryListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/activity/LiJiYuYueActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="571" column="5" selection-start-line="528" selection-start-column="4" selection-end-line="571" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/dialog_gongzhonghao.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-622">
+          <caret line="103" column="46" selection-start-line="103" selection-start-column="46" selection-end-line="103" selection-end-column="46" />
+          <folding>
+            <marker date="1508221517561" expanded="true" signature="2336:4410" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/api/HttpApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="672" column="45" selection-start-line="672" selection-start-column="45" selection-end-line="672" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/mvp_presonter/TiXianPresonter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="56" column="29" selection-start-line="56" selection-start-column="29" selection-end-line="56" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/wxapi/WXEntryActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="293" column="39" selection-start-line="293" selection-start-column="33" selection-end-line="293" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/maintainsteward2/activity/TiXianActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-441">
-          <caret line="115" column="81" selection-start-line="115" selection-start-column="81" selection-end-line="115" selection-end-column="81" />
+        <state relative-caret-position="338">
+          <caret line="402" column="44" selection-start-line="402" selection-start-column="44" selection-end-line="402" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4760#4985#0" expanded="true" />
-            <element signature="e#4984#4985#0" expanded="true" />
-            <element signature="e#5921#6116#0" expanded="true" />
-            <element signature="e#6115#6116#0" expanded="true" />
+            <element signature="e#10174#11413#0" expanded="true" />
+            <element signature="e#11412#11413#0" expanded="true" />
+            <element signature="e#11673#12093#0" expanded="true" />
+            <element signature="e#12092#12093#0" expanded="true" />
           </folding>
         </state>
       </provider>

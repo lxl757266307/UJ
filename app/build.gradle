@@ -137,4 +137,5 @@ dependencies {
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.1.6'
     /*引导页*/
     compile 'com.github.iammert:MaterialIntroView:1.6.0'
+    compile files('libs/zxing-3.3.0.jar')
 }

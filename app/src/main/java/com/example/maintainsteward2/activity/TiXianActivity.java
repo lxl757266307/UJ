@@ -2,21 +2,31 @@ package com.example.maintainsteward2.activity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextWatcher;
+import android.view.Display;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,9 +43,23 @@ import com.example.maintainsteward2.mvp_view.OnGetYongJinStroryListener;
 import com.example.maintainsteward2.utils.ToolUitls;
 import com.example.maintainsteward2.view.MyListView;
 import com.example.maintainsteward2.wxapi.WXEntryActivity;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.ChecksumException;
+import com.google.zxing.FormatException;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.RGBLuminanceSource;
+import com.google.zxing.Result;
+import com.google.zxing.common.HybridBinarizer;
+import com.google.zxing.qrcode.QRCodeReader;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
@@ -151,13 +175,13 @@ public class TiXianActivity extends BaseActivity implements PtrHandler2, OnGetYo
     public void onBtnSureClicked() {
 
 
-        if (!(Integer.parseInt(commission) > 0)) {
-            ToolUitls.toast(this, "您当前余额为0，无法为您提现！");
-            return;
-        }
-
+//        if (!(Integer.parseInt(commission) > 0)) {
+//            ToolUitls.toast(this, "您当前余额为0，无法为您提现！");
+//            return;
+//        }
+// && Integer.parseInt(money) < Integer.parseInt(commission)
         money = editOutMoney.getText().toString();
-        if (money.matches("\\d*") && Integer.parseInt(money) > 0 && Integer.parseInt(money) < Integer.parseInt(commission)) {
+        if (money.matches("\\d*") && Integer.parseInt(money) > 0) {
             WXEntryActivity.loginWeixin(this, MyApplication.api);
         } else {
             ToolUitls.toast(this, "输入有误，请重新输入！");
@@ -235,21 +259,110 @@ public class TiXianActivity extends BaseActivity implements PtrHandler2, OnGetYo
     public void onUpdateUnionidScucess(PublicBean publicBean) {
         switch (publicBean.getStatus()) {
             case "1":
-                TreeMap<String, String> map = new TreeMap<>();
-                String timeStamp = System.currentTimeMillis() + "";
-                map.put("timestamp", timeStamp);
-                map.put("user_id", id);
-                map.put("out_money", money);
-                String sign = ToolUitls.getSign(map);
-                tiXianPresonter.tiXian(id, money, timeStamp, sign, Contacts.KEY);
+                ToolUitls.print("------", "publicBean==" + publicBean);
+
+                /* 弹出二维码*/
+                setSureDialog();
+
+//                TreeMap<String, String> map = new TreeMap<>();
+//                String timeStamp = System.currentTimeMillis() + "";
+//                map.put("timestamp", timeStamp);
+//                map.put("user_id", id);
+//                map.put("out_money", money);
+//                String sign = ToolUitls.getSign(map);
+//                tiXianPresonter.tiXian(id, money, timeStamp, sign, Contacts.KEY);
 
                 break;
         }
     }
 
+    /*确认对话框*/
+    public void setSureDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog alertDialog = builder.create();
+
+        alertDialog.show();
+
+        View submitView = View.inflate(TiXianActivity.this, R.layout.dialog_gongzhonghao, null);
+        final ImageView erWeiMa = (ImageView) submitView.findViewById(R.id.img_erweima);
+        Window window = alertDialog.getWindow();
+        window.setBackgroundDrawable(getResources().getDrawable(R.drawable.write_form_dialog));
+        window.setContentView(submitView);
+        WindowManager windowManager = this.getWindowManager();
+
+        Display defaultDisplay = windowManager.getDefaultDisplay();
+
+        WindowManager.LayoutParams attributes = window.getAttributes();
+        attributes.width = (int) (defaultDisplay.getWidth() * 0.8);
+        attributes.height = (int) (defaultDisplay.getHeight() * 0.5);
+        window.setAttributes(attributes);
+        alertDialog.setCanceledOnTouchOutside(false);
+
+        erWeiMa.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Bitmap obmp = ((BitmapDrawable) (erWeiMa).getDrawable()).getBitmap();
+                int width = obmp.getWidth();
+                int height = obmp.getHeight();
+                int[] data = new int[width * height];
+                obmp.getPixels(data, 0, width, 0, 0, width, height);
+                RGBLuminanceSource source = new RGBLuminanceSource(width, height, data);
+                BinaryBitmap bitmap1 = new BinaryBitmap(new HybridBinarizer(source));
+                QRCodeReader reader = new QRCodeReader();
+                Result re = null;
+                try {
+                    re = reader.decode(bitmap1);
+                } catch (NotFoundException e) {
+                    e.printStackTrace();
+                } catch (ChecksumException e) {
+                    e.printStackTrace();
+                } catch (FormatException e) {
+                    e.printStackTrace();
+                }
+
+                Uri uri = Uri.parse(re.getText());
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+                return false;
+            }
+        });
+
+
+    }
+
+
+    private void showSelectAlert(final Bitmap bitmap, final String url) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("请选择");
+        String str[] = {"保存图片", "扫二维码"};
+        builder.setItems(str, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterfacem, int i) {
+                switch (i) {
+                    case 0: {
+//                        saveImageToGallery(bitmap);
+                    }
+                    break;
+                    case 1: {
+
+                    }
+                    break;
+                }
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterfacem, int i) {
+
+
+            }
+        });
+        builder.show();
+    }
+
+
     @Override
     public void onTiXianScucess(PublicBean bean) {
-
         switch (bean.getStatus()) {
 
             case "1":
@@ -280,15 +393,17 @@ public class TiXianActivity extends BaseActivity implements PtrHandler2, OnGetYo
         public void onReceive(Context context, Intent intent) {
 
             if (intent.getAction().equals(Contacts.TI_XIAN)) {
-
                 String unionid = intent.getStringExtra("unionid");
+                String openid = intent.getStringExtra("openid");
+
                 TreeMap<String, String> map = new TreeMap<>();
                 String timeStamp = System.currentTimeMillis() + "";
                 map.put("timestamp", timeStamp);
                 map.put("user_id", id);
-                map.put("open_id", unionid);
+                map.put("unionid", unionid);
+                map.put("open_id", openid);
                 String sign = ToolUitls.getSign(map);
-                tiXianPresonter.updateUnionid(id, unionid, timeStamp, sign, Contacts.KEY);
+                tiXianPresonter.updateUnionid(id, openid, unionid, timeStamp, sign, Contacts.KEY);
 
             }
 
