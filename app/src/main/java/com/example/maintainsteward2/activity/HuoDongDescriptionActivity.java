@@ -42,7 +42,7 @@ public class HuoDongDescriptionActivity extends BaseActivity {
         settings.setJavaScriptEnabled(true);
         settings.setUseWideViewPort(true);
         settings.setLoadWithOverviewMode(true);
-        webview.loadUrl("http://wxtest.cnncsh.com/app_user/appweb/onepage/id/4.html");
+        webview.loadUrl("http://wx.cnncsh.com/app_user/appweb/onepage/id/4.html");
     }
 
     @OnClick(R.id.layout_back)

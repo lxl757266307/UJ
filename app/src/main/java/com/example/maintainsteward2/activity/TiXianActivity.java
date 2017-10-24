@@ -1,6 +1,7 @@
 package com.example.maintainsteward2.activity;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -175,13 +176,12 @@ public class TiXianActivity extends BaseActivity implements PtrHandler2, OnGetYo
     public void onBtnSureClicked() {
 
 
-//        if (!(Integer.parseInt(commission) > 0)) {
-//            ToolUitls.toast(this, "您当前余额为0，无法为您提现！");
-//            return;
-//        }
-// && Integer.parseInt(money) < Integer.parseInt(commission)
+        if (!(Integer.parseInt(commission) > 0)) {
+            ToolUitls.toast(this, "您当前余额为0，无法为您提现！");
+            return;
+        }
         money = editOutMoney.getText().toString();
-        if (money.matches("\\d*") && Integer.parseInt(money) > 0) {
+        if (money.matches("\\d*") && Integer.parseInt(money) > 0 && Integer.parseInt(money) < Integer.parseInt(commission)) {
             WXEntryActivity.loginWeixin(this, MyApplication.api);
         } else {
             ToolUitls.toast(this, "输入有误，请重新输入！");
@@ -259,7 +259,6 @@ public class TiXianActivity extends BaseActivity implements PtrHandler2, OnGetYo
     public void onUpdateUnionidScucess(PublicBean publicBean) {
         switch (publicBean.getStatus()) {
             case "1":
-                ToolUitls.print("------", "publicBean==" + publicBean);
 
                 /* 弹出二维码*/
                 setSureDialog();
@@ -301,28 +300,41 @@ public class TiXianActivity extends BaseActivity implements PtrHandler2, OnGetYo
         erWeiMa.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Bitmap obmp = ((BitmapDrawable) (erWeiMa).getDrawable()).getBitmap();
-                int width = obmp.getWidth();
-                int height = obmp.getHeight();
-                int[] data = new int[width * height];
-                obmp.getPixels(data, 0, width, 0, 0, width, height);
-                RGBLuminanceSource source = new RGBLuminanceSource(width, height, data);
-                BinaryBitmap bitmap1 = new BinaryBitmap(new HybridBinarizer(source));
-                QRCodeReader reader = new QRCodeReader();
-                Result re = null;
-                try {
-                    re = reader.decode(bitmap1);
-                } catch (NotFoundException e) {
-                    e.printStackTrace();
-                } catch (ChecksumException e) {
-                    e.printStackTrace();
-                } catch (FormatException e) {
-                    e.printStackTrace();
-                }
 
-                Uri uri = Uri.parse(re.getText());
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
+                // ComponentName（组件名称）是用来打开其他应用程序中的Activity或服务的
+                Intent intent = new Intent();
+                ComponentName cmp = new ComponentName("com.tencent.mm", "com.tencent.mm.ui.LauncherUI");// 报名该有activity
+
+                intent.setAction(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setComponent(cmp);
+
+                startActivityForResult(intent, 0);
+
+
+//                Bitmap obmp = ((BitmapDrawable) (erWeiMa).getDrawable()).getBitmap();
+//                int width = obmp.getWidth();
+//                int height = obmp.getHeight();
+//                int[] data = new int[width * height];
+//                obmp.getPixels(data, 0, width, 0, 0, width, height);
+//                RGBLuminanceSource source = new RGBLuminanceSource(width, height, data);
+//                BinaryBitmap bitmap1 = new BinaryBitmap(new HybridBinarizer(source));
+//                QRCodeReader reader = new QRCodeReader();
+//                Result re = null;
+//                try {
+//                    re = reader.decode(bitmap1);
+//                } catch (NotFoundException e) {
+//                    e.printStackTrace();
+//                } catch (ChecksumException e) {
+//                    e.printStackTrace();
+//                } catch (FormatException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                Uri uri = Uri.parse(re.getText());
+//                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                startActivity(intent);
                 return false;
             }
         });
@@ -396,6 +408,7 @@ public class TiXianActivity extends BaseActivity implements PtrHandler2, OnGetYo
                 String unionid = intent.getStringExtra("unionid");
                 String openid = intent.getStringExtra("openid");
 
+
                 TreeMap<String, String> map = new TreeMap<>();
                 String timeStamp = System.currentTimeMillis() + "";
                 map.put("timestamp", timeStamp);
@@ -404,6 +417,11 @@ public class TiXianActivity extends BaseActivity implements PtrHandler2, OnGetYo
                 map.put("open_id", openid);
                 String sign = ToolUitls.getSign(map);
                 tiXianPresonter.updateUnionid(id, openid, unionid, timeStamp, sign, Contacts.KEY);
+
+//                ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL+"UpdateOpenid?"+
+//                        "user_id="+id+"&open_id="
+//                        +openid+"&unionid="+unionid+
+//                        "&timestamp="+timeStamp+"&sign="+sign+"&key="+Contacts.KEY);
 
             }
 

@@ -54,7 +54,9 @@
             android:value="f954271a02568a9b6749749ca6fc9d18" />
 
 
-        <activity android:name=".main.MainActivity">
+        <activity
+            android:name=".main.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -79,13 +81,16 @@
         <!--所有的activty 的父类-->
         <activity
             android:name=".base.BaseActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <!--引导页-->
         <activity android:name=".activity.GuidActivity" />
 
         <!--登录-->
-        <activity android:name=".activity.LoginActivity" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait" />
 
         <!--加载页-->
         <activity android:name=".activity.LoadingActivity" />
@@ -259,6 +264,15 @@
 
         <!--提现页面-->
         <activity android:name=".activity.TiXianActivity" />
+
+        <!--提现成功-->
+        <activity android:name=".activity.TiXianSucessActivity" />
+
+        <!--支付成功-->
+        <activity android:name=".activity.PaySucessActivity" />
+
+        <!--我的红包-->
+        <activity android:name=".activity.MyHongBaoActivity" />
     </application>
 
 </manifest>

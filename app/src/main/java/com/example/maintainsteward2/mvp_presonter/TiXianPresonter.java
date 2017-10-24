@@ -59,6 +59,7 @@ public class TiXianPresonter {
             String key
     ) {
         Call<PublicBean> publicBeanCall = httpApi.updateOpendId(user_id, open_id, unionid, timestamp, sign, key);
+
         publicBeanCall.enqueue(new Callback<PublicBean>() {
             @Override
             public void onResponse(Call<PublicBean> call, Response<PublicBean> response) {
