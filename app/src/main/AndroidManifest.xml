@@ -273,6 +273,9 @@
 
         <!--我的红包-->
         <activity android:name=".activity.MyHongBaoActivity" />
+
+        <!--选择红包-->
+        <activity android:name=".activity.ChooseHongBaoActivity" />
     </application>
 
 </manifest>

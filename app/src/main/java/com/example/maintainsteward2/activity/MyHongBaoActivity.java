@@ -1,5 +1,6 @@
 package com.example.maintainsteward2.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import com.example.maintainsteward2.adapter.MyHongBaoListAdapter;
 import com.example.maintainsteward2.base.BaseActivity;
 import com.example.maintainsteward2.base.Contacts;
 import com.example.maintainsteward2.bean.MyHongBaoListBean;
+import com.example.maintainsteward2.main.MainActivity;
 import com.example.maintainsteward2.mvp_presonter.MyHongBaoPresonter;
 import com.example.maintainsteward2.mvp_view.MyHongBaoListListener;
 import com.example.maintainsteward2.utils.ToolUitls;
@@ -98,6 +100,7 @@ public class MyHongBaoActivity extends BaseActivity implements PtrHandler2, MyHo
     @OnClick(R.id.layout_back)
     public void onViewClicked() {
 
+        finish();
 
     }
 
@@ -122,6 +125,14 @@ public class MyHongBaoActivity extends BaseActivity implements PtrHandler2, MyHo
     @Override
     public void onLoadMoreBegin(PtrFrameLayout frame) {
 
+        ptrFrame.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                page++;
+                myHongBaoList();
+                ptrFrame.refreshComplete();
+            }
+        }, 1500);
     }
 
     @Override
@@ -152,7 +163,13 @@ public class MyHongBaoActivity extends BaseActivity implements PtrHandler2, MyHo
     public void onUseClick(int position) {
 
         MyHongBaoListBean.DataBean dataBean = data.get(position);
-        ToolUitls.print("--------", "databean=" + dataBean);
+//        ToolUitls.print("--------", "databean=" + dataBean);
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("page", 1);
+        startActivity(intent);
+
+
 
     }
 }
