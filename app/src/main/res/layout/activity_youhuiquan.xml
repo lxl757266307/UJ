@@ -53,17 +53,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <in.srain.cube.views.ptr.PtrClassicFrameLayout
-            android:id="@+id/prt_frame"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_can_use"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="可用卡卷"
+                android:textColor="#bbbbbb" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycle"
+                android:id="@+id/recycle_can_use"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:id="@+id/txt_can_not_use"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="不可用卡卷"
+                android:textColor="#bbbbbb" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle_can_not_use"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:padding="10dp" />
-        </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+
+        </LinearLayout>
+
 
         <ImageView
             android:id="@+id/img_youhuiquan"
@@ -75,15 +103,15 @@
             android:visibility="invisible" />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/txt_youhuijuan"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/img_youhuiquan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/img_youhuiquan"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="暂无优惠卷"
-            android:textColor="#bbbbbb" />
+            android:textColor="#bbbbbb"
+            android:visibility="gone" />
     </RelativeLayout>
 
 
