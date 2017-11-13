@@ -55,7 +55,7 @@
 
 
         <activity
-            android:name=".main.MainActivity"
+            android:name=".activity.LoadingActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -92,8 +92,8 @@
             android:name=".activity.LoginActivity"
             android:screenOrientation="portrait" />
 
-        <!--加载页-->
-        <activity android:name=".activity.LoadingActivity" />
+        <!--主页面-->
+        <activity android:name=".main.MainActivity" />
 
         <!--添加地址-->
         <activity android:name=".activity.AddAddressActivity" />

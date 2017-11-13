@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="70dp"
         android:background="@mipmap/red_bg"
         android:orientation="horizontal">
 
@@ -94,7 +94,7 @@
                 android:layout_marginTop="5dp"
                 android:text="家电维修"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="15sp" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_recycle_fragment_kinds"

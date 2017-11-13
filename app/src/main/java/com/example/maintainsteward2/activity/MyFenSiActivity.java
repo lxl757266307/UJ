@@ -241,4 +241,8 @@ public class MyFenSiActivity extends BaseActivity implements PtrHandler2, OnFenS
         startActivity(new Intent(this, TiXianActivity.class));
 
     }
+
+
+
+
 }
