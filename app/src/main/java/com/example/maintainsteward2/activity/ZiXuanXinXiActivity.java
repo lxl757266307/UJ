@@ -112,6 +112,7 @@ public class ZiXuanXinXiActivity extends BaseActivity implements PhotoListAdapte
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         initInfo();
         setContentView(R.layout.activity_zixuanxinxi);
         ButterKnife.bind(this);
@@ -381,8 +382,6 @@ public class ZiXuanXinXiActivity extends BaseActivity implements PhotoListAdapte
     }
 
     ArrayList<String> url;
-
-
 
 
     @Override

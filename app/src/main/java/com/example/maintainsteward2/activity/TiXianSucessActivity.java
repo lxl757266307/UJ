@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.maintainsteward2.R;
+import com.example.maintainsteward2.application.MyApplication;
 import com.example.maintainsteward2.base.BaseActivity;
 import com.example.maintainsteward2.main.MainActivity;
 
@@ -29,6 +30,7 @@ public class TiXianSucessActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         setContentView(R.layout.activity_tixiansucess);
         ButterKnife.bind(this);
     }

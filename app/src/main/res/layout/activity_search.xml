@@ -7,14 +7,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:background="@mipmap/red_bg"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -41,6 +40,7 @@
                     android:hint="搜索服务快速发布需求"
                     android:imeOptions="actionSearch"
                     android:maxLines="1"
+                    android:textSize="14sp"
                     android:singleLine="true"
                     android:paddingLeft="10dp"
                     android:paddingRight="5dp"
@@ -64,7 +64,7 @@
                 android:gravity="center"
                 android:text="取消"
                 android:textColor="#fff"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -84,7 +84,7 @@
             android:layout_marginLeft="10dp"
             android:text="热门搜索"
             android:textColor="#000"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <com.example.maintainsteward2.view.MyViewGroup

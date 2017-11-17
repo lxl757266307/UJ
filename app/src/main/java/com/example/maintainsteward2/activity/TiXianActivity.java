@@ -98,6 +98,7 @@ public class TiXianActivity extends BaseActivity implements PtrHandler2, OnGetYo
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         setContentView(R.layout.activity_tixian);
         ButterKnife.bind(this);
         initViews();

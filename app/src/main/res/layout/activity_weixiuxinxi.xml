@@ -7,14 +7,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:background="@mipmap/red_bg"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -42,7 +41,7 @@
                 android:gravity="center"
                 android:text="填写信息"
                 android:textColor="#fff"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
 
         </RelativeLayout>
@@ -88,7 +87,7 @@
                         android:layout_marginRight="10dp"
                         android:text="填写维修信息"
                         android:textColor="#181818"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -119,7 +118,7 @@
                         android:gravity="center_vertical"
                         android:text="具体地址："
                         android:textColor="#181818"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/txt_jutidizhi"
@@ -129,7 +128,7 @@
                         android:gravity="right"
                         android:text=""
                         android:textColor="#181818"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <ImageView
                         android:id="@+id/imageView"
@@ -160,7 +159,7 @@
                         android:gravity="center_vertical"
                         android:text="详细地址："
                         android:textColor="#181818"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <EditText
                         android:id="@+id/edit_address"
@@ -198,7 +197,7 @@
                         android:gravity="center_vertical"
                         android:text="姓        名："
                         android:textColor="#181818"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <EditText
                         android:id="@+id/edit_xingming"
@@ -236,7 +235,7 @@
                         android:gravity="center_vertical"
                         android:text="联系电话："
                         android:textColor="#181818"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
 
                     <EditText
@@ -245,10 +244,10 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@null"
-                        android:inputType="phone"
-                        android:maxLength="11"
                         android:gravity="right"
                         android:hint="请填写您的联系电话"
+                        android:inputType="phone"
+                        android:maxLength="11"
                         android:textColor="#181818"
                         android:textColorHint="#bbbbbb"
                         android:textSize="14sp" />
@@ -303,7 +302,7 @@
                         android:layout_marginRight="10dp"
                         android:text="选择支付方式"
                         android:textColor="#181818"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -321,8 +320,8 @@
                     android:padding="10dp">
 
                     <ImageView
-                        android:layout_width="@dimen/layout_height_40dp"
-                        android:layout_height="@dimen/layout_height_40dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:src="@mipmap/weixin" />
 
                     <TextView
@@ -333,7 +332,7 @@
                         android:paddingLeft="10dp"
                         android:text="微信支付"
                         android:textColor="#181818"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <CheckBox
                         android:id="@+id/cb_weixin"
@@ -361,8 +360,8 @@
                     android:padding="10dp">
 
                     <ImageView
-                        android:layout_width="@dimen/layout_height_40dp"
-                        android:layout_height="@dimen/layout_height_40dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:src="@mipmap/yuezhifu" />
 
                     <TextView
@@ -373,7 +372,7 @@
                         android:paddingLeft="10dp"
                         android:text="余额支付"
                         android:textColor="#181818"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <CheckBox
                         android:id="@+id/cb_yue"

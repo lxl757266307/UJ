@@ -8,14 +8,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="160dp"
         android:background="@mipmap/red_bg"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -43,7 +42,7 @@
                 android:gravity="center"
                 android:text="我的粉丝"
                 android:textColor="#fff"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txt_tixian"
@@ -55,7 +54,7 @@
                 android:gravity="center"
                 android:text="金额提现"
                 android:textColor="#fff"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
 
         </RelativeLayout>
@@ -133,6 +132,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="粉丝"
+            android:textSize="14sp"
             android:textColor="#181818" />
 
         <TextView
@@ -141,6 +141,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="订单数"
+            android:textSize="14sp"
             android:textColor="#181818" />
 
 
@@ -150,6 +151,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="关注时间"
+            android:textSize="14sp"
             android:textColor="#181818" />
 
 

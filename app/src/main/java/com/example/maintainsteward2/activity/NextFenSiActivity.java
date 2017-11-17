@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.maintainsteward2.R;
 import com.example.maintainsteward2.adapter.NextFenSiAdapter;
+import com.example.maintainsteward2.application.MyApplication;
 import com.example.maintainsteward2.base.BaseActivity;
 import com.example.maintainsteward2.base.Contacts;
 import com.example.maintainsteward2.bean.NextFenSiBean;
@@ -53,6 +54,7 @@ public class NextFenSiActivity extends BaseActivity implements PtrHandler2, OnNe
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         id = this.getIntent().getStringExtra("id");
         setContentView(R.layout.activity_next_fensi);
         ButterKnife.bind(this);

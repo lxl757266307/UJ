@@ -30,6 +30,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.maintainsteward2.R;
 import com.example.maintainsteward2.adapter.PhotoListAdapter2;
+import com.example.maintainsteward2.application.MyApplication;
 import com.example.maintainsteward2.base.BaseActivity;
 import com.example.maintainsteward2.base.Contacts;
 import com.example.maintainsteward2.bean.PublicBean;
@@ -120,6 +121,8 @@ public class PingJiaActivity extends BaseActivity implements TextWatcher, PhotoL
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
+
         setContentView(R.layout.activity_pingjia);
         ButterKnife.bind(this);
         initInfo();

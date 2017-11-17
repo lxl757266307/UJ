@@ -7,14 +7,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="175dp"
+        android:layout_height="160dp"
         android:background="#E60808"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -42,7 +41,7 @@
                 android:gravity="center"
                 android:text="我的卡卷"
                 android:textColor="#fff"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
 
         </RelativeLayout>
@@ -95,7 +94,7 @@
                 android:gravity="center"
                 android:text="未使用(0)"
                 android:textColor="#bbbbbb"
-                android:textSize="18sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -113,7 +112,7 @@
                 android:gravity="center"
                 android:text="已使用(0)"
                 android:textColor="#bbbbbb"
-                android:textSize="18sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -131,7 +130,7 @@
                 android:gravity="center"
                 android:text="已过期(0)"
                 android:textColor="#bbbbbb"
-                android:textSize="18sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
 

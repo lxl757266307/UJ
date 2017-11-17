@@ -7,14 +7,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:background="@mipmap/red_bg"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -42,7 +41,7 @@
                 android:gravity="center"
                 android:text="下级粉丝"
                 android:textColor="#fff"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
 
         </RelativeLayout>
@@ -61,7 +60,7 @@
             android:gravity="center"
             android:text="粉丝昵称"
             android:textColor="#515151"
-            android:textSize="15sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -70,7 +69,7 @@
             android:gravity="center"
             android:text="关注时间"
             android:textColor="#515151"
-            android:textSize="15sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <View

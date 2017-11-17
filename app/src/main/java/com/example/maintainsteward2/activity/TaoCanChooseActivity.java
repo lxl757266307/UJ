@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.maintainsteward2.R;
+import com.example.maintainsteward2.application.MyApplication;
 import com.example.maintainsteward2.base.BaseActivity;
 import com.example.maintainsteward2.base.Contacts;
 import com.example.maintainsteward2.bean.MySetMealBean;
@@ -42,6 +43,7 @@ public class TaoCanChooseActivity extends BaseActivity implements MySetMealListe
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         setContentView(R.layout.activity_taocanchoose);
         ButterKnife.bind(this);
         mySetMealPresonter = new MySetMealPresonter();

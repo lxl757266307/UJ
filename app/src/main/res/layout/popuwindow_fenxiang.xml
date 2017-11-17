@@ -11,7 +11,7 @@
         android:gravity="center"
         android:text="分享到"
         android:textColor="#181818"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
     <View
         android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                 android:gravity="center"
                 android:text="微信好友"
                 android:textColor="#181818"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -67,7 +67,7 @@
                 android:gravity="center"
                 android:text="微信朋友圈"
                 android:textColor="#181818"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
     </LinearLayout>

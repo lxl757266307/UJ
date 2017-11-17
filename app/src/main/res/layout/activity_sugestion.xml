@@ -8,14 +8,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:background="@mipmap/red_bg"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -43,7 +42,7 @@
                 android:gravity="center"
                 android:text="意见反馈"
                 android:textColor="#fff"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
 
         </RelativeLayout>
@@ -102,7 +101,8 @@
                             android:background="@drawable/sugestion_txt_normal"
                             android:gravity="center"
                             android:text="功能异常"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/txt_experience_exception_sugestion_activity"
@@ -113,7 +113,8 @@
                             android:background="@drawable/sugestion_txt_normal"
                             android:gravity="center"
                             android:text="体验问题"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/txt_new_function_sugestion_activity"
@@ -124,7 +125,8 @@
                             android:background="@drawable/sugestion_txt_normal"
                             android:gravity="center"
                             android:text="新功能建议"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/txt_other_sugestion_activity"
@@ -136,7 +138,8 @@
                             android:background="@drawable/sugestion_txt_normal"
                             android:gravity="center"
                             android:text="其他"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 

@@ -7,14 +7,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:background="@mipmap/red_bg"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -42,7 +41,7 @@
                 android:gravity="center"
                 android:text="提交成功"
                 android:textColor="#fff"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
 
         </RelativeLayout>
@@ -67,7 +66,7 @@
             android:layout_marginLeft="10dp"
             android:text="成功提交订单！"
             android:textColor="#E35B09"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -85,7 +84,7 @@
             android:layout_marginLeft="10dp"
             android:text="请保持手机畅通，"
             android:textColor="#181818"
-            android:textSize="18sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -93,7 +92,7 @@
             android:layout_marginLeft="10dp"
             android:text="U匠工人会尽快与您联系，谢谢！"
             android:textColor="#181818"
-            android:textSize="18sp" />
+            android:textSize="15sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -113,7 +112,7 @@
             android:gravity="center"
             android:text="查看订单"
             android:textColor="#da0a0a"
-            android:textSize="18sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txt_back_main_ordersucess"
@@ -124,7 +123,7 @@
             android:gravity="center"
             android:text="返回首页"
             android:textColor="#fff"
-            android:textSize="18sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
 
@@ -136,7 +135,7 @@
         android:gravity="center"
         android:text="如需帮助请拨打：400-829-3331"
         android:textColor="#bbbbbb"
-        android:textSize="15sp" />
+        android:textSize="14sp" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -8,8 +8,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:background="@mipmap/red_bg"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
@@ -18,7 +19,6 @@
             android:layout_height="40dp"
             android:layout_marginLeft="13dp"
             android:layout_marginRight="13dp"
-            android:layout_marginTop="25dp"
             android:layout_weight="1"
             android:background="@drawable/circle_box_3r"
             android:drawableLeft="@mipmap/sousuo"
@@ -33,7 +33,6 @@
             android:layout_width="@dimen/layout_height_30dp"
             android:layout_height="@dimen/layout_height_30dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="30dp"
             android:src="@mipmap/tianjia2" />
 
     </LinearLayout>
@@ -51,12 +50,12 @@
         android:orientation="horizontal">
 
         <ScrollView
-            android:layout_width="@dimen/layout_width_100dp"
+            android:layout_width="75dp"
             android:layout_height="match_parent">
 
             <LinearLayout
                 android:id="@+id/layout_list"
-                android:layout_width="@dimen/layout_width_100dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/navpage"
                 android:orientation="vertical">

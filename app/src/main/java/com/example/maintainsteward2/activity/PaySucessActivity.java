@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.maintainsteward2.R;
+import com.example.maintainsteward2.application.MyApplication;
 import com.example.maintainsteward2.base.BaseActivity;
 import com.example.maintainsteward2.bean.OrderInfoBean;
 import com.example.maintainsteward2.main.MainActivity;
@@ -36,6 +37,7 @@ public class PaySucessActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         data = (OrderInfoBean.DataBean) getIntent().getSerializableExtra("data");
         setContentView(R.layout.activity_pay_sucess);
         ButterKnife.bind(this);

@@ -16,14 +16,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:background="@mipmap/red_bg"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="20dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -51,7 +50,7 @@
                     android:gravity="center"
                     android:text="快速发布"
                     android:textColor="#fff"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
 
             </RelativeLayout>
@@ -75,7 +74,7 @@
                     android:layout_marginTop="10dp"
                     android:text="所需服务描述"
                     android:textColor="#515151"
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -93,6 +92,7 @@
                         android:gravity="start"
                         android:hint="简单描述你需要的服务，发布成功后请保持电话畅通，小U会与您取得联系"
                         android:padding="5dp"
+                        android:textSize="14sp"
                         android:textColorHint="#bbbbbb" />
 
                     <TextView
@@ -113,7 +113,7 @@
                     android:layout_marginTop="10dp"
                     android:text="您可以上传6张照片，以便工人师傅快速了解情况！"
                     android:textColor="#515151"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_kuaisufabu"
@@ -132,7 +132,7 @@
                         android:layout_marginTop="10dp"
                         android:text="发布需求即代表您同意U匠"
                         android:textColor="#515151"
-                        android:textSize="15sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/txt_xieyi"
@@ -142,7 +142,7 @@
                         android:layout_marginTop="10dp"
                         android:text="《用户服务协议》"
                         android:textColor="#da0a0a"
-                        android:textSize="15sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <TextView
@@ -189,7 +189,7 @@
                 android:gravity="center"
                 android:text="立即发布"
                 android:textColor="#fff"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"

@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.maintainsteward2.R;
 import com.example.maintainsteward2.adapter.PaiHangBangAdapter;
+import com.example.maintainsteward2.application.MyApplication;
 import com.example.maintainsteward2.base.BaseActivity;
 import com.example.maintainsteward2.base.Contacts;
 import com.example.maintainsteward2.bean.PaiHangBean;
@@ -89,6 +90,7 @@ public class MyPaiHangActivity extends BaseActivity implements OnPaiHangBangList
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         parentView = LayoutInflater.from(this).inflate(R.layout.activity_fensipaihang2, null);
         setContentView(parentView);
         ButterKnife.bind(this);

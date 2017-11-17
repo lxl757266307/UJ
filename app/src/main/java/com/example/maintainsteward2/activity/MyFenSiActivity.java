@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.maintainsteward2.R;
 import com.example.maintainsteward2.adapter.FensSiAdapter2;
+import com.example.maintainsteward2.application.MyApplication;
 import com.example.maintainsteward2.base.BaseActivity;
 import com.example.maintainsteward2.base.Contacts;
 import com.example.maintainsteward2.bean.FenSiBean2;
@@ -68,6 +69,7 @@ public class MyFenSiActivity extends BaseActivity implements PtrHandler2, OnFenS
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         jiangLiJin = this.getIntent().getStringExtra("jiangLiJin");
         setContentView(R.layout.activity_fensi);
         ButterKnife.bind(this);

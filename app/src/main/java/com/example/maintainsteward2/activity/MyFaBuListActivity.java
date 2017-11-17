@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.maintainsteward2.R;
 import com.example.maintainsteward2.adapter.KuaiSuFaBuListAdapter;
+import com.example.maintainsteward2.application.MyApplication;
 import com.example.maintainsteward2.base.BaseActivity;
 import com.example.maintainsteward2.base.Contacts;
 import com.example.maintainsteward2.bean.MyFaBuListBean;
@@ -46,6 +47,7 @@ public class MyFaBuListActivity extends BaseActivity implements PtrHandler2, OnM
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         setContentView(R.layout.activity_myfabu);
         ButterKnife.bind(this);
         ptrFrame.setPtrHandler(this);

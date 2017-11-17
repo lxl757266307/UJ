@@ -41,7 +41,7 @@
                 android:gravity="center"
                 android:text="我的评价"
                 android:textColor="#fff"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
 
         </RelativeLayout>
@@ -87,7 +87,7 @@
                         android:paddingLeft="20dp"
                         android:text="空调清洗"
                         android:textColor="#181818"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -116,7 +116,7 @@
                                 android:layout_marginLeft="10dp"
                                 android:text="很满意"
                                 android:textColor="#181818"
-                                android:textSize="15sp" />
+                                android:textSize="14sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -139,7 +139,7 @@
                                 android:layout_marginLeft="10dp"
                                 android:text="满意"
                                 android:textColor="#181818"
-                                android:textSize="15sp" />
+                                android:textSize="14sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -162,7 +162,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="不满意"
                                 android:textColor="#181818"
-                                android:textSize="15sp" />
+                                android:textSize="14sp" />
                         </LinearLayout>
 
 
@@ -197,6 +197,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:text="服务质量"
+                        android:textSize="14sp"
                         android:textColor="#181818" />
 
                     <LinearLayout
@@ -270,6 +271,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:text="专业技能"
+                        android:textSize="14sp"
                         android:textColor="#181818" />
 
                     <LinearLayout
@@ -340,6 +342,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:text="穿着整齐"
+                        android:textSize="14sp"
                         android:textColor="#181818" />
 
                     <LinearLayout

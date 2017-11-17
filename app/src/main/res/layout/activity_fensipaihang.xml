@@ -13,14 +13,13 @@
         <LinearLayout
             android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="160dp"
             android:background="@mipmap/red_bg"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="20dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -48,7 +47,7 @@
                     android:gravity="center"
                     android:text="我的排行"
                     android:textColor="#fff"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
 
             </RelativeLayout>
@@ -65,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:text="25"
                     android:textColor="#fff"
-                    android:textSize="22sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txt_wei"

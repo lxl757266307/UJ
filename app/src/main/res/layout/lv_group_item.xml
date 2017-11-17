@@ -19,7 +19,7 @@
         android:layout_marginLeft="10dp"
         android:gravity="center_vertical"
         android:textColor="#181818"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
 
     <View
         android:layout_width="match_parent"

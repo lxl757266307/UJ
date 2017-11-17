@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.maintainsteward2.R;
+import com.example.maintainsteward2.application.MyApplication;
 import com.example.maintainsteward2.base.BaseActivity;
 
 import butterknife.BindView;
@@ -29,6 +30,7 @@ public class BannerWebActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         String url = getIntent().getStringExtra("url");
         String name = getIntent().getStringExtra("name");
         setContentView(R.layout.activity_bannerweb);

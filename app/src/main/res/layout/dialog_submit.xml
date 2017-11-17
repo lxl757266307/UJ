@@ -12,7 +12,7 @@
         android:gravity="center"
         android:text="信息确认"
         android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/txt_messgae"
@@ -22,7 +22,7 @@
         android:gravity="center"
         android:text="您确认要提交么？"
         android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:textSize="14sp" />
 
     <View
         android:layout_width="match_parent"
@@ -44,7 +44,7 @@
             android:gravity="center"
             android:text="取消"
             android:textColor="@color/blue"
-            android:textSize="20sp" />
+            android:textSize="14sp" />
 
         <View
             android:layout_width="1dp"
@@ -59,7 +59,7 @@
             android:gravity="center"
             android:text="确定"
             android:textColor="@color/blue"
-            android:textSize="20sp" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 

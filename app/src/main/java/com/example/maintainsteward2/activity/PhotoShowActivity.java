@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.maintainsteward2.R;
+import com.example.maintainsteward2.application.MyApplication;
 import com.example.maintainsteward2.base.BaseActivity;
 import com.example.maintainsteward2.utils.ToolUitls;
 
@@ -29,6 +30,7 @@ public class PhotoShowActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getActivitiesList().add(this);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         String url = this.getIntent().getStringExtra("url");
         setContentView(R.layout.activity_photoshow);

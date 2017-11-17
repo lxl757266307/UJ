@@ -13,8 +13,8 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_marginLeft="10dp"
             android:src="@mipmap/weixinzhifu" />
 
@@ -25,7 +25,7 @@
             android:layout_weight="1"
             android:text="微信支付"
             android:textColor="#181818"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <CheckBox
             android:id="@+id/img_xuanzhong"
