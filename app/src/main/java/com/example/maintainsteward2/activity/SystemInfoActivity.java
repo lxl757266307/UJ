@@ -5,21 +5,20 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.maintainsteward2.R;
-import com.example.maintainsteward2.adapter.KuaiSuFaBuListAdapter;
-import com.example.maintainsteward2.application.MyApplication;
+import com.example.maintainsteward2.adapter.SystemInfoAdapter;
 import com.example.maintainsteward2.base.BaseActivity;
 import com.example.maintainsteward2.base.Contacts;
-import com.example.maintainsteward2.bean.MyFaBuListBean;
-import com.example.maintainsteward2.mvp_presonter.MyFaBuListPresonter;
-import com.example.maintainsteward2.mvp_view.OnMyFastFaBuListener;
+import com.example.maintainsteward2.bean.SystemInfoBean;
+import com.example.maintainsteward2.mvp_presonter.SystemInfoPresonter;
+import com.example.maintainsteward2.mvp_view.SystemInfoView;
 import com.example.maintainsteward2.utils.ToolUitls;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -31,10 +30,10 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler2;
 
 /**
- * Created by Administrator on 2017/10/10.
+ * Created by Administrator on 2017/11/21.
  */
 
-public class MyFaBuListActivity extends BaseActivity implements PtrHandler2, OnMyFastFaBuListener {
+public class SystemInfoActivity extends BaseActivity implements PtrHandler2, SystemInfoView {
     @BindView(R.id.layout_back)
     LinearLayout layoutBack;
     @BindView(R.id.txt_title)
@@ -43,60 +42,63 @@ public class MyFaBuListActivity extends BaseActivity implements PtrHandler2, OnM
     RecyclerView recycle;
     @BindView(R.id.ptr_frame)
     PtrClassicFrameLayout ptrFrame;
-    @BindView(R.id.layout_wushuju)
-    LinearLayout layoutWushuju;
+
+    int page = 1;
+    String id;
+
+    SystemInfoPresonter systemInfoPresonter;
+    List<SystemInfoBean.DataBean> systemData;
+
+    SharedPreferences sharedPreferences;
+    SystemInfoAdapter systemInfoAdapter;
+    @BindView(R.id.layout_xiaoxi)
+    LinearLayout layoutXiaoxi;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MyApplication.getActivitiesList().add(this);
-        setContentView(R.layout.activity_myfabu);
+        setContentView(R.layout.activity_system_info);
         ButterKnife.bind(this);
-        ptrFrame.setPtrHandler(this);
-        initViews();
-        initUserInfo();
-    }
 
-    MyFaBuListPresonter myFaBuListPresonter;
-    List<MyFaBuListBean.DataBean> list;
-    KuaiSuFaBuListAdapter kuaiSuFaBuListAdapter;
-
-    private void initViews() {
-        SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
-        id = sharedPreferences.getString("id", "");
-        myFaBuListPresonter = new MyFaBuListPresonter();
-        myFaBuListPresonter.setOnMyFastFaBuListener(this);
-        list = new ArrayList<>();
+        sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
+        id = sharedPreferences.getString("id", null);
         recycle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        kuaiSuFaBuListAdapter = new KuaiSuFaBuListAdapter(this);
-        recycle.setAdapter(kuaiSuFaBuListAdapter);
+        ptrFrame.setPtrHandler(this);
+
+        systemData = (List<SystemInfoBean.DataBean>) getIntent().getSerializableExtra("systemInfo");
+
+        if (systemData != null && systemData.size() > 0) {
+            systemInfoAdapter = new SystemInfoAdapter();
+            systemInfoAdapter.setList(systemData);
+            recycle.setAdapter(systemInfoAdapter);
+            systemInfoAdapter.notifyDataSetChanged();
+            layoutXiaoxi.setVerticalGravity(View.GONE);
+        }
+
+        systemInfoPresonter = new SystemInfoPresonter();
+        systemInfoPresonter.setSystemInfoView(this);
 
     }
 
-    String id;
-    int page = 1;
-
-    private void initUserInfo() {
-
-
+    public void getSystemInfos() {
         String time = System.currentTimeMillis() + "";
         TreeMap<String, String> map = new TreeMap<>();
-        map.put("timestamp", time);
-        map.put("user_id", id);
         map.put("page", page + "");
+        map.put("user_id", id);
+        map.put("timestamp", time);
         String sign = ToolUitls.getSign(map);
-//        ToolUitls.getCallBackStr(Contacts.TEST_BASE_URL + "FastOrder?" + "user_id=" + id + "&page=" + page + "&timestamp=" + time + "&sign=" + sign + "&key=" + Contacts.KEY);
-        myFaBuListPresonter.getFastOrder(id, page + "", time, sign, Contacts.KEY);
+
+        systemInfoPresonter = new SystemInfoPresonter();
+        systemInfoPresonter.setSystemInfoView(this);
+
+        systemInfoPresonter.getSystemInfo(id, page + "", time, sign, Contacts.KEY);
 
     }
 
-    @OnClick(R.id.layout_back)
-    public void onViewClicked() {
-        finish();
-    }
 
     @Override
     public boolean checkCanDoLoadMore(PtrFrameLayout frame, View content, View footer) {
+
         LinearLayoutManager layoutManager = (LinearLayoutManager) recycle.getLayoutManager();
         //屏幕中最后一个可见子项的position
         int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
@@ -111,6 +113,8 @@ public class MyFaBuListActivity extends BaseActivity implements PtrHandler2, OnM
         } else {
             return false;
         }
+
+
     }
 
     @Override
@@ -121,11 +125,12 @@ public class MyFaBuListActivity extends BaseActivity implements PtrHandler2, OnM
             public void run() {
 
                 page++;
-                initUserInfo();
+                getSystemInfos();
                 frame.refreshComplete();
 
             }
-        }, 1000);
+        }, 1500);
+
     }
 
     @Override
@@ -139,21 +144,25 @@ public class MyFaBuListActivity extends BaseActivity implements PtrHandler2, OnM
     }
 
     @Override
-    public void getFastFaBuList(MyFaBuListBean listBean) {
-        switch (listBean.getStatus()) {
+    public void getUserMsgList(SystemInfoBean systemInfoBean) {
 
+        switch (systemInfoBean.getStatus()) {
             case "1":
-                List<MyFaBuListBean.DataBean> data = listBean.getData();
-                if (data != null) {
-                    layoutWushuju.setVisibility(View.GONE);
-                    list.addAll(data);
-                    kuaiSuFaBuListAdapter.setList(list);
-                    kuaiSuFaBuListAdapter.notifyDataSetChanged();
-
+                List<SystemInfoBean.DataBean> data = systemInfoBean.getData();
+                if (systemData != null && data != null) {
+                    systemData.addAll(data);
+                    systemInfoAdapter.setList(systemData);
+                    systemInfoAdapter.notifyDataSetChanged();
                 }
 
-                break;
 
+                break;
         }
     }
+
+    @OnClick(R.id.layout_back)
+    public void onViewClicked() {
+        finish();
+    }
+
 }

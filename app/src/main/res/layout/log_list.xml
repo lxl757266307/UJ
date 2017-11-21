@@ -5,15 +5,46 @@
     android:background="#fff"
     android:orientation="vertical">
 
-    <in.srain.cube.views.ptr.PtrClassicFrameLayout
-        android:id="@+id/ptr_frame"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycle"
+        <in.srain.cube.views.ptr.PtrClassicFrameLayout
+            android:id="@+id/ptr_frame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_wushuju"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/wudingdan" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="暂无消费记录"
+                android:textColor="#515151" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
 
 </LinearLayout>

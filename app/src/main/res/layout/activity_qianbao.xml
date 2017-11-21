@@ -146,7 +146,8 @@
             android:layout_height="50dp"
             android:background="#fff"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="0dp"

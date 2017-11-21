@@ -49,13 +49,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="110dp"
         android:background="#E60808"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -73,7 +73,7 @@
                 android:padding="3dp"
                 android:text="100.00"
                 android:textColor="#fff"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -82,6 +82,34 @@
                 android:text="元"
                 android:textColor="#fff"
                 android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_chongzhi_anniu"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/circle_white_box"
+                android:gravity="center"
+                android:paddingBottom="3dp"
+                android:paddingTop="3dp"
+                android:text="充值"
+                android:textColor="#fff"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="点击充值，有优惠哦！"
+                android:textColor="#FD6B06" />
 
         </LinearLayout>
 
@@ -115,7 +143,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/txt_chongzhi"
@@ -133,7 +162,7 @@
 
     </LinearLayout>
 
-    <android.support.v4.view.ViewPager
+    <com.example.maintainsteward2.view.NoScrollViewPager
         android:id="@+id/vp_yue"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

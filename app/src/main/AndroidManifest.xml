@@ -276,6 +276,9 @@
 
         <!--选择红包-->
         <activity android:name=".activity.ChooseHongBaoActivity" />
+
+        <!--系统消息-->
+        <activity android:name=".activity.SystemInfoActivity" />
     </application>
 
 </manifest>

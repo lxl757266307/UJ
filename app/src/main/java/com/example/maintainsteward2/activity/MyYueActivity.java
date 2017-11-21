@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.maintainsteward2.R;
 import com.example.maintainsteward2.adapter.BlanceFragmentAdapter;
@@ -19,6 +19,8 @@ import com.example.maintainsteward2.base.BaseActivity;
 import com.example.maintainsteward2.base.Contacts;
 import com.example.maintainsteward2.fragment.ChongZhiJiluFragment;
 import com.example.maintainsteward2.fragment.XiaoFeiJiluFragment;
+import com.example.maintainsteward2.utils.ToolUitls;
+import com.example.maintainsteward2.view.NoScrollViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +45,9 @@ public class MyYueActivity extends BaseActivity {
     @BindView(R.id.txt_chongzhi)
     TextView txtChongzhi;
     @BindView(R.id.vp_yue)
-    ViewPager vpYue;
+    NoScrollViewPager vpYue;
+    @BindView(R.id.txt_chongzhi_anniu)
+    TextView txtChongzhiAnniu;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -64,29 +68,14 @@ public class MyYueActivity extends BaseActivity {
         MyApplication.getActivitiesList().add(this);
         setContentView(R.layout.activity_yue);
         ButterKnife.bind(this);
+        vpYue.setNoScroll(true);
         txtArray = new TextView[2];
         txtArray[0] = txtXiaofei;
         txtArray[1] = txtChongzhi;
         SharedPreferences sharedPreferences = getSharedPreferences(Contacts.USER, MODE_PRIVATE);
         String blance = sharedPreferences.getString("blance", null);
         txtMoney.setText(blance);
-        vpYue.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                setTextViewBackground(position);
-            }
 
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
 
         BlanceFragmentAdapter fragmentAdapter = new BlanceFragmentAdapter(getSupportFragmentManager());
 
@@ -138,4 +127,9 @@ public class MyYueActivity extends BaseActivity {
 
     }
 
+    @OnClick(R.id.txt_chongzhi_anniu)
+    public void onViewClicked() {
+
+        ToolUitls.toast(this,"拼命开发中~");
+    }
 }

@@ -5,15 +5,47 @@
     android:background="#fff"
     android:orientation="vertical">
 
-    <in.srain.cube.views.ptr.PtrClassicFrameLayout
-        android:id="@+id/prt_frame"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycle"
+        <in.srain.cube.views.ptr.PtrClassicFrameLayout
+            android:id="@+id/prt_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp" />
+        </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_wushuju"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp" />
-    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:src="@mipmap/wuyouhuiquan" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="暂无优惠券"
+                android:textColor="#bbbbbb" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
 </LinearLayout>
